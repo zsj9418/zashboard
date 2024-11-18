@@ -6,12 +6,15 @@ export const logs = ref<LogWithSeq[]>([])
 export const logFilter = ref('')
 export const isPaused = ref(false)
 
-export const initLogs = () => {
-  const ws = fetchLogsAPI<string>()
-  let idx = 1
+let cancel: () => void
 
+export const initLogs = () => {
+  cancel?.()
   logs.value = []
-  watch(ws.data, (data) => {
+
+  let idx = 1
+  const ws = fetchLogsAPI<string>()
+  const unwatch = watch(ws.data, (data) => {
     if (!data) return
 
     const parsedData = JSON.parse(data) as Log
@@ -28,4 +31,9 @@ export const initLogs = () => {
 
     logs.value = logs.value.slice(0, 1000)
   })
+
+  cancel = () => {
+    unwatch()
+    ws.close()
+  }
 }

@@ -17,14 +17,10 @@
 <script setup lang="ts">
 import ProxyGroup from '@/components/ProxyGroup.vue';
 import { isLargeScreen } from '@/helper';
-import { fetchProxies, proxyGroups } from '@/store/proxies';
+import { proxyGroups } from '@/store/proxies';
 
 const filterContent: <T>(all: T[], target: number) => T[] = (all, target) => {
   return all.filter((_, index: number) => index % 2 === target)
 }
-
-
-fetchProxies()
-
 
 </script>

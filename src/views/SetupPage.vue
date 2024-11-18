@@ -32,12 +32,16 @@
       <button class="btn btn-primary w-full mt-4" @click="handleSubmit">
         {{ $t('submit') }}
       </button>
+      <button class="btn btn-xs w-full mt-2" v-for="backend in backendList" :key="backend.uuid"
+        @click="activeUuid = backend.uuid">
+        {{ backend.protocol }}://{{ backend.host }}:{{ backend.port }}
+      </button>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { addBackend } from '@/store/setup'
+import { activeUuid, addBackend, backendList } from '@/store/setup'
 import { reactive } from 'vue'
 import router from '@/router';
 
@@ -45,7 +49,7 @@ const form = reactive({
   protocol: 'http',
   host: '127.0.0.1',
   port: 9090,
-  password: '',  
+  password: '',
 })
 
 const handleSubmit = async () => {

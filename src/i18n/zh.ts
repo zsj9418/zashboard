@@ -17,4 +17,12 @@ export default {
   uploadSpeed: '上传速度',
   memoryUsage: '内存使用',
   version: '版本',
+  quickFilter: '快速过滤',
+  noContent: '无内容',
+  flushFakeIP: '清空Fake IP',
+  compactCard: '紧凑卡片',
+  chains: '代理链',
+  sortBy: '排序方式',
+  rule: '规则',
+  sourceIP: '源IP',
 }

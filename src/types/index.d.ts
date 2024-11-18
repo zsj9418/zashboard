@@ -1,6 +1,9 @@
 declare module '*.vue' {
 }
 
+declare module '*.tsx' {
+}
+
 export type Proxy = {
   name: string
   type: string

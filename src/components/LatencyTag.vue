@@ -1,5 +1,5 @@
 <template>
-  <div class="w-12 badge flex items-center justify-center">
+  <div class="w-12 badge shadow-sm flex items-center justify-center">
     <div :class="twMerge('text-xs', color)" v-if="latency > 0">
       {{ latency }}ms
     </div>

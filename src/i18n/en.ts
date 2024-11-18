@@ -17,4 +17,12 @@ export default {
   uploadSpeed: 'Upload Speed',
   memoryUsage: 'Memory Usage',
   version: 'Version',
+  quickFilter: 'Quick Filter',
+  noContent: 'No Content',
+  flushFakeIP: 'Flush Fake IP',
+  compactCard: 'Compact Card',
+  chains: 'Chains',
+  sortBy: 'Sort By',
+  rule: 'Rule',
+  sourceIP: 'Source IP',
 }

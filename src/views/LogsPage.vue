@@ -1,9 +1,15 @@
 <template>
   <div class="p-2 flex flex-col gap-2 h-full overflow-x-hidden overflow-y-auto">
+    <template v-if="!renderLogs.length">  
+      <div class="card bg-base-100 w-full p-2 shadow-xl gap-1 text-sm flex-row">
+        {{ $t('noContent') }}
+      </div>
+    </template>
     <div 
       v-for="log in renderLogs" 
       :key="log.seq" 
-      class="card bg-base-100 w-full p-2 shadow-xl gap-1 text-sm flex-row">
+      class="card bg-base-100 w-full p-2 shadow-xl gap-1 text-sm flex-row"
+    >
       <span>{{ log.seq }}</span>
       <span class="text-primary">{{ log.type }}</span>
       <span>{{ log.payload }}</span>

@@ -35,15 +35,19 @@ import { initLogs } from '@/store/logs';
 import { RouterView, useRoute } from 'vue-router'
 import CommonSidebar from '@/components/sidebar/CommonCtrl.vue';
 import { ROUTE_NAME } from '@/router';
-import { computed } from 'vue';
-import { Square3Stack3DIcon } from '@heroicons/vue/24/outline';
+import { computed, watch } from 'vue';
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue';
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue';
-
+import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue';
+import { activeUuid } from '@/store/setup';
+import { fetchProxies } from '@/store/proxies';
+import { fetchRules } from '@/store/rules';
+import { fetchConfigs } from '@/store/config';
 
 const sidebarCompMap = {
   [ROUTE_NAME.connections]: ConnectionCtrl,
-  [ROUTE_NAME.logs]: LogsCtrl
+  [ROUTE_NAME.logs]: LogsCtrl,
+  [ROUTE_NAME.proxies]: ProxiesCtrl
 }
 
 const sidebarComp = computed(() => {
@@ -56,14 +60,16 @@ const sidebarComp = computed(() => {
 })
 
 const route = useRoute()
-const routes = [
-  ROUTE_NAME.proxies,
-  ROUTE_NAME.connections,
-  ROUTE_NAME.logs,
-  ROUTE_NAME.rules,
-]
+const routes = Object.values(ROUTE_NAME)
 
-initConnections()
-initLogs()
+watch(activeUuid, () => {
+  fetchConfigs()
+  fetchProxies()
+  fetchRules()
+  initConnections()
+  initLogs()
+}, {
+  immediate: true
+})
 
 </script>

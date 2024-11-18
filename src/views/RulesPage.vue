@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { fetchRules, rules } from '@/store/rules';
+import { rules } from '@/store/rules';
 
-fetchRules()
 </script>

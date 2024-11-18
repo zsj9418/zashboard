@@ -61,6 +61,18 @@ export const disconnectAllAPI = () => {
   return axios.delete('/connections')
 }
 
+export const getConfigsAPI = () => {
+  return axios.get('/configs')
+}
+
+export const patchConfigsAPI = (configs: Record<string, string>) => {
+  return axios.patch('/configs', configs)
+}
+
+export const flushFakeIPAPI = () => {
+  return axios.post('/cache/fakeip/flush')
+}
+
 const getWsUrl = (url: string) => {
   return `${activeBackend.value?.protocol === 'https' ? 'wss' : 'ws'}://${activeBackend.value?.host}:${activeBackend.value?.port}/${url}?token=${activeBackend.value?.password}`
 }
