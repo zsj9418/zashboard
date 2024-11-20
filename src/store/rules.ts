@@ -1,6 +1,6 @@
-import { getRulesAPI } from "@/api";
-import type { Rule } from "@/types";
-import { ref } from "vue";
+import { getRulesAPI } from '@/api'
+import type { Rule } from '@/types'
+import { ref } from 'vue'
 
 export const rules = ref<Rule[]>()
 export const fetchRules = async () => {

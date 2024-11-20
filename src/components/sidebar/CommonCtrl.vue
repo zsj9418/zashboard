@@ -1,60 +1,124 @@
 <template>
-  <div class="flex flex-col gap-2">
-    <div class="flex">
-      <div class="text-xs flex flex-col gap-2 p-2">
-        <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
-        <div>{{ $t('download') }}: {{ prettyBytes(downloadTotal) }} ({{ prettyBytes(downloadSpeedTotal) }}/s)</div>
-        <div>{{ $t('upload') }}: {{ prettyBytes(uploadTotal) }} ({{ prettyBytes(uploadSpeedTotal) }}/s)</div>
-        <div>{{ $t('memoryUsage') }}: {{ prettyBytes(memory) }}</div>
-        <div>{{ $t('version') }}: {{ version }}</div>
-        <div class="flex gap-2">
-          <select class="select select-xs w-48 select-bordered" v-model="activeUuid">
-            <option v-for="opt in opts" :key="opt.value" :value="opt.value" >{{ opt.label }}</option>
-          </select>
-          <button class="btn btn-xs btn-circle" @click="addBackend">
-            <PlusIcon class="w-4 h-4" />
-          </button>
-        </div>
+  <div class="flex justify-between">
+    <div class="flex flex-col gap-2 p-2 text-xs">
+      <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
+      <div>
+        {{ $t('download') }}: {{ prettyBytes(downloadTotal) }} ({{
+          prettyBytes(downloadSpeedTotal)
+        }}/s)
       </div>
-      <div class="flex justify-end items-end flex-1 p-2">
-        <LanguageIcon class="w-6 h-6 cursor-pointer" @click="swapLanguage"></LanguageIcon>
-        <label class="swap swap-rotate">
-          <input type="checkbox" class="theme-controller" v-model="isDark" value="dark" />
-          <SunIcon class="swap-off h-6 w-6 fill-current" />
-          <MoonIcon class="swap-on h-6 w-6 fill-current" />
-        </label>
+      <div>
+        {{ $t('upload') }}: {{ prettyBytes(uploadTotal) }} ({{ prettyBytes(uploadSpeedTotal) }}/s)
       </div>
+      <div>{{ $t('memoryUsage') }}: {{ prettyBytes(memory) }}</div>
+      <div class="flex gap-1">
+        {{ $t('version') }}:
+        <img
+          v-if="version?.includes('sing-box')"
+          class="w-4"
+          src="/icon.svg?/public/icon.svg"
+        />{{ version }}
+      </div>
+      <select
+        class="select select-bordered select-xs w-48"
+        v-model="theme"
+      >
+        <option
+          v-for="opt in themes"
+          :key="opt"
+          :value="opt"
+        >
+          {{ opt }}
+        </option>
+      </select>
+      <div class="flex gap-2">
+        <select
+          class="select select-bordered select-xs w-48"
+          v-model="activeUuid"
+        >
+          <option
+            v-for="opt in opts"
+            :key="opt.value"
+            :value="opt.value"
+          >
+            {{ opt.label }}
+          </option>
+        </select>
+        <button
+          class="btn btn-circle btn-xs"
+          @click="addBackend"
+        >
+          <PlusIcon class="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+    <div class="flex flex-1 items-end justify-end p-2">
+      <LanguageIcon
+        class="h-6 w-6 cursor-pointer"
+        @click="swapLanguage"
+      ></LanguageIcon>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { version } from '@/api';
-import { i18n } from '@/i18n';
-import { isDark, LANG, language } from '@/store/config';
-import { activeConnections, downloadTotal, memory, uploadTotal } from '@/store/connections';
-import { activeUuid, backendList } from '@/store/setup';
-import { SunIcon, MoonIcon, LanguageIcon, PlusIcon } from '@heroicons/vue/24/outline';
-import prettyBytes from 'pretty-bytes';
-import { computed } from 'vue';
+import { version } from '@/api'
+import { i18n } from '@/i18n'
+import { LANG, language, theme } from '@/store/config'
+import {
+  activeConnections,
+  downloadSpeedTotal,
+  downloadTotal,
+  memory,
+  uploadSpeedTotal,
+  uploadTotal,
+} from '@/store/connections'
+import { activeUuid, backendList } from '@/store/setup'
+import { LanguageIcon, PlusIcon } from '@heroicons/vue/24/outline'
+import prettyBytes from 'pretty-bytes'
+import { computed } from 'vue'
 
-const downloadSpeedTotal = computed(() => {
-  return activeConnections.value.reduce((total, conn) => {
-    return total + conn.downloadSpeed
-  }, 0)
-})
-
-const uploadSpeedTotal = computed(() => {
-  return activeConnections.value.reduce((total, conn) => {
-    return total + conn.uploadSpeed
-  }, 0)
-})
+const themes = [
+  'default',
+  'light',
+  'dark',
+  'cupcake',
+  'bumblebee',
+  'emerald',
+  'corporate',
+  'synthwave',
+  'retro',
+  'cyberpunk',
+  'valentine',
+  'halloween',
+  'garden',
+  'forest',
+  'aqua',
+  'lofi',
+  'pastel',
+  'fantasy',
+  'wireframe',
+  'black',
+  'luxury',
+  'dracula',
+  'cmyk',
+  'autumn',
+  'business',
+  'acid',
+  'lemonade',
+  'night',
+  'coffee',
+  'winter',
+  'dim',
+  'nord',
+  'sunset',
+]
 
 const opts = computed(() => {
   return backendList.value.map((b) => {
     return {
       label: `${b.protocol}://${b.host}:${b.port}`,
-      value: b.uuid
+      value: b.uuid,
     }
   })
 })
@@ -67,5 +131,4 @@ const swapLanguage = () => {
   language.value = language.value === LANG.ZH_CN ? LANG.EN_US : LANG.ZH_CN
   i18n.global.locale = language.value
 }
-
 </script>

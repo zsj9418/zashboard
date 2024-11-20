@@ -25,4 +25,7 @@ export default {
   sortBy: 'Sort By',
   rule: 'Rule',
   sourceIP: 'Source IP',
+  activeConnections: 'Active Connections',
+  closedConnections: 'Closed Connections',
+  logLevel: 'Log Level',
 }

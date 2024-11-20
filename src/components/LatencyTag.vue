@@ -1,17 +1,23 @@
 <template>
-  <div class="w-12 badge shadow-sm flex items-center justify-center">
-    <div :class="twMerge('text-xs', color)" v-if="latency > 0">
+  <div class="badge flex w-12 items-center justify-center shadow-sm">
+    <div
+      :class="twMerge('text-xs', color)"
+      v-if="latency > 0"
+    >
       {{ latency }}ms
     </div>
-    <BoltIcon v-else class="w-4 h-4"/>
+    <BoltIcon
+      v-else
+      class="h-4 w-4"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import { getLatencyByName } from '@/store/proxies';
-import { twMerge } from 'tailwind-merge';
-import { computed } from 'vue';
-import { BoltIcon } from '@heroicons/vue/24/outline';
+import { getLatencyByName } from '@/store/proxies'
+import { BoltIcon } from '@heroicons/vue/24/outline'
+import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
 const props = defineProps<{
   name: string
 }>()

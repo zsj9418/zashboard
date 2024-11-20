@@ -1,17 +1,23 @@
-import { fetchConnectionsAPI } from "@/api";
-import type { Connection, ConnectionRawMessage } from "@/types";
-import { useStorage } from "@vueuse/core";
-import { computed, ref, watch } from "vue";
+import { fetchConnectionsAPI } from '@/api'
+import type { Connection, ConnectionRawMessage } from '@/types'
+import { useStorage } from '@vueuse/core'
+import { differenceWith } from 'lodash'
+import { computed, ref, watch } from 'vue'
 
 export const activeConnections = ref<Connection[]>([])
+export const closedConnections = ref<Connection[]>([])
+
 export const downloadTotal = ref(0)
 export const uploadTotal = ref(0)
+export const downloadSpeedTotal = ref(0)
+export const uploadSpeedTotal = ref(0)
 export const memory = ref(0)
 
 export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'dns|direct')
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
+export const showActiveConnections = ref(true)
 
-export enum sortType {
+export enum SORT_TYPE {
   HOST = 'host',
   RULE = 'rule',
   CHAINS = 'chains',
@@ -22,61 +28,79 @@ export enum sortType {
   SOURCE_IP = 'sourceIP',
 }
 
-const sortFunctionMap: Record<sortType, (a: Connection, b: Connection) => number> = {
-  [sortType.HOST]: (a: Connection, b: Connection) => {
-    return (a.metadata.host || a.metadata.destinationIP).localeCompare((b.metadata.host || b.metadata.destinationIP))
+const sortFunctionMap: Record<SORT_TYPE, (a: Connection, b: Connection) => number> = {
+  [SORT_TYPE.HOST]: (a: Connection, b: Connection) => {
+    return (a.metadata.host || a.metadata.destinationIP).localeCompare(
+      b.metadata.host || b.metadata.destinationIP,
+    )
   },
-  [sortType.RULE]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.RULE]: (a: Connection, b: Connection) => {
     return a.rule.localeCompare(b.rule)
   },
-  [sortType.CHAINS]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.CHAINS]: (a: Connection, b: Connection) => {
     return a.chains.join('').localeCompare(b.chains.join(''))
   },
-  [sortType.DOWNLOAD]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.DOWNLOAD]: (a: Connection, b: Connection) => {
     return b.download - a.download
   },
-  [sortType.DOWNLOAD_SPEED]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.DOWNLOAD_SPEED]: (a: Connection, b: Connection) => {
     return b.downloadSpeed - a.downloadSpeed
   },
-  [sortType.UPLOAD]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.UPLOAD]: (a: Connection, b: Connection) => {
     return b.upload - a.upload
   },
-  [sortType.UPLOAD_SPEED]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.UPLOAD_SPEED]: (a: Connection, b: Connection) => {
     return b.uploadSpeed - a.uploadSpeed
   },
-  [sortType.SOURCE_IP]: (a: Connection, b: Connection) => {
+  [SORT_TYPE.SOURCE_IP]: (a: Connection, b: Connection) => {
     return a.metadata.sourceIP.localeCompare(b.metadata.sourceIP)
   },
 }
 
-export const connectionSortType = useStorage<sortType>('config/connection-sort-type', sortType.HOST)
+export const connectionSortType = useStorage<SORT_TYPE>(
+  'config/connection-sort-type',
+  SORT_TYPE.HOST,
+)
 export const connectionFilter = ref('')
 export const isPaused = ref(false)
 
 export const renderConnections = computed(() => {
-  return activeConnections.value.filter((conn) => {
-    if (quickFilterEnabled.value && quickFilterRegex.value) {
-      const regex = new RegExp(quickFilterRegex.value)
+  return (showActiveConnections.value ? activeConnections.value : closedConnections.value)
+    .filter((conn) => {
+      if (quickFilterEnabled.value && quickFilterRegex.value) {
+        const regex = new RegExp(quickFilterRegex.value)
 
-      return !regex.test(conn.chains.join(''))
-    }
+        return !(
+          regex.test(conn.chains.join('')) ||
+          regex.test(conn.metadata.host) ||
+          regex.test(conn.metadata.destinationIP)
+        )
+      }
 
-    return true
-  }).filter(conn => {
-    if (connectionFilter.value) {
-      return [
-        conn.metadata.host,
-        conn.metadata.destinationIP,
-        conn.metadata.destinationPort,
-        conn.chains,
-        conn.rule,
-      ].some(i => i?.includes(connectionFilter.value))
-    }
+      return true
+    })
+    .filter((conn) => {
+      if (connectionFilter.value) {
+        return [
+          conn.metadata.host,
+          conn.metadata.destinationIP,
+          conn.metadata.destinationPort,
+          conn.metadata.sourceIP,
+          conn.metadata.sourcePort,
+          conn.metadata.processPath,
+          conn.metadata.type,
+          conn.metadata.network,
+          conn.chains,
+          conn.rule,
+        ].some((i) => i?.includes(connectionFilter.value))
+      }
 
-    return true
-  }).sort((a, b) => {
-    return a.id.localeCompare(b.id)
-  }).sort(sortFunctionMap[connectionSortType.value])
+      return true
+    })
+    .sort((a, b) => {
+      return a.id.localeCompare(b.id)
+    })
+    .sort(sortFunctionMap[connectionSortType.value])
 })
 
 let cancel: () => void
@@ -84,7 +108,13 @@ let cancel: () => void
 export const initConnections = () => {
   cancel?.()
   activeConnections.value = []
-  
+  closedConnections.value = []
+  downloadTotal.value = 0
+  uploadTotal.value = 0
+  downloadSpeedTotal.value = 0
+  uploadSpeedTotal.value = 0
+  memory.value = 0
+
   const ws = fetchConnectionsAPI<string>()
   const unwatch = watch(ws.data, (data) => {
     if (!data) return
@@ -96,22 +126,37 @@ export const initConnections = () => {
       memory: number
     }
 
+    downloadSpeedTotal.value =
+      downloadTotal.value === 0 ? 0 : parsedData.downloadTotal - downloadTotal.value
+    uploadSpeedTotal.value =
+      uploadTotal.value === 0 ? 0 : parsedData.uploadTotal - uploadTotal.value
+
     downloadTotal.value = parsedData.downloadTotal
     uploadTotal.value = parsedData.uploadTotal
+
     memory.value = parsedData.memory
 
     if (isPaused.value) {
       return
     }
-    activeConnections.value = parsedData.connections?.map((connection) => {
-      const preConnection = activeConnections.value.find((c) => c.id === connection.id) ?? { download: 0, upload: 0 }
 
-      return {
-        ...connection,
-        downloadSpeed: connection.download - preConnection.download,
-        uploadSpeed: connection.upload - preConnection.upload
-      }
-    }) ?? []
+    closedConnections.value = [
+      ...closedConnections.value,
+      ...differenceWith(activeConnections.value, parsedData.connections, (a, b) => a.id === b.id),
+    ]
+    activeConnections.value =
+      parsedData.connections?.map((connection) => {
+        const preConnection = activeConnections.value.find((c) => c.id === connection.id) ?? {
+          download: 0,
+          upload: 0,
+        }
+
+        return {
+          ...connection,
+          downloadSpeed: connection.download - preConnection.download,
+          uploadSpeed: connection.upload - preConnection.upload,
+        }
+      }) ?? []
   })
 
   cancel = () => {

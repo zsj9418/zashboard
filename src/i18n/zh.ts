@@ -25,4 +25,7 @@ export default {
   sortBy: '排序方式',
   rule: '规则',
   sourceIP: '源IP',
+  activeConnections: '活跃连接',
+  closedConnections: '已关闭连接',
+  logLevel: '日志等级',
 }

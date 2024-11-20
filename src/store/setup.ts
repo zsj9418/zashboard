@@ -1,19 +1,21 @@
 import { useStorage } from '@vueuse/core'
-import { computed } from 'vue'
-import { v4 as uuid } from 'uuid'
 import { isEqual, omit } from 'lodash'
+import { v4 as uuid } from 'uuid'
+import { computed } from 'vue'
 
 type Backend = {
-  host: string,
-  port: number,
-  password: string,
-  protocol: string,
+  host: string
+  port: number
+  password: string
+  protocol: string
   uuid: string
 }
 
 export const backendList = useStorage<Backend[]>('setup/api-list', [])
 export const activeUuid = useStorage<string>('setup/active-uuid', '')
-export const activeBackend = computed(() => backendList.value.find((backend) => backend.uuid === activeUuid.value))
+export const activeBackend = computed(() =>
+  backendList.value.find((backend) => backend.uuid === activeUuid.value),
+)
 
 export const addBackend = (backend: Omit<Backend, 'uuid'>) => {
   const currentEnd = backendList.value.find((end) => {
@@ -29,7 +31,7 @@ export const addBackend = (backend: Omit<Backend, 'uuid'>) => {
 
   backendList.value.push({
     ...backend,
-    uuid: id
+    uuid: id,
   })
   activeUuid.value = id
 }

@@ -1,11 +1,11 @@
-import './assets/main.css'
+import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
+import relativeTime from 'dayjs/plugin/relativeTime'
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from './router'
-import dayjs from 'dayjs'
-import relativeTime from 'dayjs/plugin/relativeTime'
+import './assets/main.css'
 import { i18n } from './i18n'
+import router from './router'
 const app = createApp(App)
 
 dayjs.extend(relativeTime)

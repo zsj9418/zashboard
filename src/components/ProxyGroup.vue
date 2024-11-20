@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse collapse-arrow bg-base-100 shadow-xl">
+  <div class="collapse collapse-arrow bg-base-100 shadow-md">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
         <div class="text-xl font-medium">
@@ -8,39 +8,61 @@
         <div class="text-sm">
           {{ proxyGroup.now }}
         </div>
-        <LatencyTag :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')" :name="proxyGroup.now"
-          @click.stop="handlerLatencyTest" />
+        <LatencyTag
+          :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')"
+          :name="proxyGroup.now"
+          @click.stop="handlerLatencyTest"
+        />
         <div class="flex-1" />
-        <div class="text-sm">
-          {{ prettyBytes(downloadTotal) }}/s
-        </div>
+        <div class="text-sm">{{ prettyBytes(downloadTotal) }}/s</div>
       </div>
-      <div class="flex flex-wrap gap-1 pt-2" v-if="!showCollapse">
-        <div v-for="node in proxyGroup.all" :key="node" class="shadow-sm w-4 h-4 rounded-full flex items-center justify-center"
-          :class="getBgColor(getLatencyByName(node))">
-          <div class="w-2 h-2 rounded-full bg-white" v-if="proxyGroup.now === node"></div>
+      <div
+        class="flex flex-wrap gap-1 pt-2"
+        v-if="!showCollapse"
+      >
+        <div
+          v-for="node in proxyGroup.all"
+          :key="node"
+          class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
+          :class="getBgColor(getLatencyByName(node))"
+        >
+          <div
+            class="h-2 w-2 rounded-full bg-white"
+            v-if="proxyGroup.now === node"
+          ></div>
         </div>
       </div>
     </div>
-    <input type="checkbox" v-model="showCollapse" />
+    <input
+      type="checkbox"
+      v-model="showCollapse"
+    />
     <div class="collapse-content flex flex-col gap-2">
-      <div class="grid grid-cols-1 gap-2 md:grid-cols-2">
-        <ProxyNodeCard v-for="node in proxyGroup.all" :key="node" :name="node" :active="node === proxyGroup.now"
-          @click="selectProxy(proxyGroup.name, node)" />
+      <div
+        class="grid grid-cols-1 gap-2 md:grid-cols-2"
+        v-if="showContent"
+      >
+        <ProxyNodeCard
+          v-for="node in proxyGroup.all"
+          :key="node"
+          :name="node"
+          :active="node === proxyGroup.now"
+          @click="selectProxy(proxyGroup.name, node)"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import LatencyTag from '@/components/LatencyTag.vue';
-import ProxyNodeCard from '@/components/ProxyNodeCard.vue';
-import { collapseGroupMap } from '@/store/config';
-import { activeConnections } from '@/store/connections';
-import { selectProxy, proxyMap, proxyGroupLatencyTest, getLatencyByName } from '@/store/proxies';
-import prettyBytes from 'pretty-bytes';
-import { twMerge } from 'tailwind-merge';
-import { computed, ref } from 'vue';
+import LatencyTag from '@/components/LatencyTag.vue'
+import ProxyNodeCard from '@/components/ProxyNodeCard.vue'
+import { collapseGroupMap } from '@/store/config'
+import { activeConnections } from '@/store/connections'
+import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import prettyBytes from 'pretty-bytes'
+import { twMerge } from 'tailwind-merge'
+import { computed, ref, watch } from 'vue'
 const props = defineProps<{
   name: string
 }>()
@@ -61,8 +83,22 @@ const showCollapse = computed({
   },
   set(value) {
     collapseGroupMap.value[props.name] = value
+  },
+})
+const showContent = ref(showCollapse.value)
+
+watch(showCollapse, (value) => {
+  if (value) {
+    showContent.value = value
+  } else {
+    setTimeout(() => {
+      if (value === showCollapse.value) {
+        showContent.value = value
+      }
+    }, 1000)
   }
 })
+
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {

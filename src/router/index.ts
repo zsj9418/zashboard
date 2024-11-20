@@ -35,9 +35,9 @@ const router = createRouter({
       component: RulesPage,
     },
     {
-      path: "/:catchAll(.*)",
+      path: '/:catchAll(.*)',
       redirect: ROUTE_NAME.proxies,
-    }
+    },
   ],
 })
 

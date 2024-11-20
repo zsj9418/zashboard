@@ -1,3 +1,5 @@
+import daisyui from 'daisyui'
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -13,9 +15,16 @@ export default {
       '2xl': '1536px',
       '3xl': '1700px',
     },
+    extend: {
+      fontFamily: {
+        twemoji: ['system-ui', 'Twemoji Mozilla'],
+      },
+    }
   },
-  themes: ["light", "dark", "sunset"],
+  daisyui: {
+    themes: true,
+  },
   plugins: [
-    require('daisyui'),
+    daisyui,
   ],
 }

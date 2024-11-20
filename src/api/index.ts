@@ -5,7 +5,12 @@ import axios from 'axios'
 import { ref, watch } from 'vue'
 
 axios.interceptors.request.use((config) => {
-  config.baseURL = activeBackend.value?.protocol + '://' + activeBackend.value?.host + ':' + activeBackend.value?.port
+  config.baseURL =
+    activeBackend.value?.protocol +
+    '://' +
+    activeBackend.value?.host +
+    ':' +
+    activeBackend.value?.port
   config.headers['Authorization'] = 'Bearer ' + activeBackend.value?.password
   return config
 })
@@ -15,19 +20,23 @@ export const fetchVersionAPI = () => {
   return axios.get<{ version: string }>('/version')
 }
 
-watch(activeBackend, async (val) => {
-  if (val) {
-    const { data } = await fetchVersionAPI()
+watch(
+  activeBackend,
+  async (val) => {
+    if (val) {
+      const { data } = await fetchVersionAPI()
 
-    version.value = data.version
-  }
-}, { immediate: true })
+      version.value = data.version
+    }
+  },
+  { immediate: true },
+)
 
 export const fetchProxiesAPI = () => {
   return axios.get<{ proxies: Record<string, Proxy> }>('/proxies')
 }
 
-export const selectProxyAPI = (proxyGroup: string ,name: string) => {
+export const selectProxyAPI = (proxyGroup: string, name: string) => {
   return axios.put(`/proxies/${encodeURIComponent(proxyGroup)}`, { name })
 }
 
@@ -35,8 +44,8 @@ export const fetchProxyLatencyAPI = (proxyName: string, url: string, timeout: nu
   return axios.get<{ delay: number }>(`/proxies/${encodeURIComponent(proxyName)}/delay`, {
     params: {
       url,
-      timeout
-    }
+      timeout,
+    },
   })
 }
 
@@ -44,8 +53,8 @@ export const fetchProxyGroupLatencyAPI = (proxyName: string, url: string, timeou
   return axios.get<{ delay: number }>(`/group/${encodeURIComponent(proxyName)}/delay`, {
     params: {
       url,
-      timeout
-    }
+      timeout,
+    },
   })
 }
 
@@ -73,18 +82,30 @@ export const flushFakeIPAPI = () => {
   return axios.post('/cache/fakeip/flush')
 }
 
-const getWsUrl = (url: string) => {
-  return `${activeBackend.value?.protocol === 'https' ? 'wss' : 'ws'}://${activeBackend.value?.host}:${activeBackend.value?.port}/${url}?token=${activeBackend.value?.password}`
+const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
+  const backend = activeBackend.value
+  const resurl = new URL(
+    `${backend?.protocol === 'https' ? 'wss' : 'ws'}://${backend?.host}:${backend?.port}/${url}`,
+  )
+
+  resurl.searchParams.append('token', backend?.password || '')
+
+  if (searchParams) {
+    Object.entries(searchParams).forEach(([key, value]) => {
+      resurl.searchParams.append(key, value)
+    })
+  }
+
+  return useWebSocket<T>(resurl, {
+    autoClose: false,
+    autoReconnect: true,
+  })
 }
 
 export const fetchConnectionsAPI = <T>() => {
-  return useWebSocket<T>(
-    getWsUrl('connections'),
-  )
+  return createWebSocket<T>('connections')
 }
 
-export const fetchLogsAPI = <T>() => {
-  return useWebSocket<T>(
-    getWsUrl('logs'),
-  )
+export const fetchLogsAPI = <T>(params: Record<string, string> = {}) => {
+  return createWebSocket<T>('logs', params)
 }

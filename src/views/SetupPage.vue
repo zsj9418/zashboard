@@ -1,12 +1,15 @@
 <template>
-  <div class="w-full h-full flex justify-center items-center">
-    <div class="p-6 bg-base-100 shadow-lg rounded-lg">
-      <h1 class="text-2xl font-semibold mb-4">{{ $t('setup') }}</h1>
+  <div class="flex h-full w-full items-center justify-center">
+    <div class="rounded-lg bg-base-100 p-6 shadow-lg">
+      <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control mb-4">
         <label class="label">
           <span class="label-text">{{ $t('protocol') }}</span>
         </label>
-        <select class="select select-bordered w-full" v-model="form.protocol">
+        <select
+          class="select select-bordered w-full"
+          v-model="form.protocol"
+        >
           <option value="http">HTTP</option>
           <option value="https">HTTPS</option>
         </select>
@@ -15,25 +18,44 @@
         <label class="label">
           <span class="label-text">{{ $t('host') }}</span>
         </label>
-        <input type="text" class="input input-bordered w-full" v-model="form.host" />
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          v-model="form.host"
+        />
       </div>
       <div class="form-control mb-4">
         <label class="label">
           <span class="label-text">{{ $t('port') }}</span>
         </label>
-        <input type="text" class="input input-bordered w-full" v-model="form.port" />
+        <input
+          type="text"
+          class="input input-bordered w-full"
+          v-model="form.port"
+        />
       </div>
       <div class="form-control">
         <label class="label">
           <span class="label-text">{{ $t('password') }}</span>
         </label>
-        <input type="password" class="input input-bordered w-full" v-model="form.password" />
+        <input
+          type="password"
+          class="input input-bordered w-full"
+          v-model="form.password"
+        />
       </div>
-      <button class="btn btn-primary w-full mt-4" @click="handleSubmit">
+      <button
+        class="btn btn-primary mt-4 w-full"
+        @click="handleSubmit(form)"
+      >
         {{ $t('submit') }}
       </button>
-      <button class="btn btn-xs w-full mt-2" v-for="backend in backendList" :key="backend.uuid"
-        @click="activeUuid = backend.uuid">
+      <button
+        class="btn btn-xs mt-2 w-full"
+        v-for="backend in backendList"
+        :key="backend.uuid"
+        @click="activeUuid = backend.uuid"
+      >
         {{ backend.protocol }}://{{ backend.host }}:{{ backend.port }}
       </button>
     </div>
@@ -41,9 +63,9 @@
 </template>
 
 <script setup lang="ts">
+import router from '@/router'
 import { activeUuid, addBackend, backendList } from '@/store/setup'
 import { reactive } from 'vue'
-import router from '@/router';
 
 const form = reactive({
   protocol: 'http',
@@ -52,7 +74,15 @@ const form = reactive({
   password: '',
 })
 
-const handleSubmit = async () => {
+const handleSubmit = async (
+  form: {
+    protocol: string
+    host: string
+    port: number
+    password: string
+  },
+  quiet = false,
+) => {
   const { protocol, host, port, password } = form
 
   if (!protocol || !host || !port) {
@@ -70,12 +100,27 @@ const handleSubmit = async () => {
   const { version, message } = await data.json()
 
   if (!version) {
-    alert(message)
+    if (!quiet) {
+      alert(message)
+    }
     return
   }
 
   addBackend(form)
-
   router.push({ name: 'proxies' })
+}
+
+const query = new URLSearchParams(
+  window.location.search || location.hash.match(/\?.*$/)?.[0]?.replace('?', ''),
+)
+if (query.has('hostname')) {
+  handleSubmit({
+    protocol: window.location.protocol.replace(':', ''),
+    host: query.get('hostname') as string,
+    port: Number(query.get('port')) as unknown as number,
+    password: query.get('secret') as string,
+  })
+} else {
+  handleSubmit(form, true)
 }
 </script>

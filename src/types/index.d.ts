@@ -1,8 +1,6 @@
-declare module '*.vue' {
-}
+declare module '*.vue' {}
 
-declare module '*.tsx' {
-}
+declare module '*.tsx' {}
 
 export type Proxy = {
   name: string
@@ -53,7 +51,7 @@ export type Connection = ConnectionRawMessage & {
 }
 
 export type Log = {
-  type: LOG_LEVEL
+  type: 'info' | 'warning' | 'error' | 'debug'
   payload: string
 }
 
