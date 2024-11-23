@@ -13,11 +13,7 @@
       <div>{{ $t('memoryUsage') }}: {{ prettyBytes(memory) }}</div>
       <div class="flex gap-1">
         {{ $t('version') }}:
-        <img
-          v-if="version?.includes('sing-box')"
-          class="w-4"
-          src="/icon.svg?/public/icon.svg"
-        />{{ version }}
+        {{ version }}
       </div>
       <select
         class="select select-bordered select-xs w-48"
