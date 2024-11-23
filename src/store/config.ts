@@ -1,4 +1,5 @@
 import { getConfigsAPI, patchConfigsAPI } from '@/api'
+import type { Config } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
@@ -18,7 +19,7 @@ export const compactConnectionCard = useStorage<boolean>('config/compact-connect
 export const hostLabelMap = useStorage<Record<string, string>>('config/host-label-map', {})
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
 
-export const configs = ref()
+export const configs = ref<Config>()
 export const fetchConfigs = async () => {
   configs.value = (await getConfigsAPI()).data
 }

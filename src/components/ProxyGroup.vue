@@ -2,10 +2,10 @@
   <div class="collapse collapse-arrow bg-base-100 shadow-md">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
-        <div class="text-xl font-medium">
+        <div class="text-lg font-medium sm:text-xl">
           {{ proxyGroup.name }}
         </div>
-        <div class="text-sm">
+        <div class="text-xs sm:text-sm">
           {{ proxyGroup.now }}
         </div>
         <LatencyTag

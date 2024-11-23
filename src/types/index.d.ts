@@ -1,6 +1,19 @@
 declare module '*.vue' {}
-
 declare module '*.tsx' {}
+
+export type Config = {
+  port: number
+  'socks-port': number
+  'redir-port': number
+  'tproxy-port': number
+  'mixed-port': number
+  'allow-lan': boolean
+  'bind-address': string
+  mode: string
+  'mode-list': string[]
+  'log-level': string
+  ipv6: boolean
+}
 
 export type Proxy = {
   name: string

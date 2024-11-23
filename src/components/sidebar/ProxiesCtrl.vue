@@ -14,9 +14,12 @@
       :value="configs.mode"
       @change="handlerModeChange"
     >
-      <option>direct</option>
-      <option>rule</option>
-      <option>global</option>
+      <option
+        v-for="mode in modeList"
+        :key="mode"
+        :label="mode"
+        :value="mode"
+      />
     </select>
     <input
       type="text"
@@ -29,6 +32,11 @@
 <script setup lang="ts">
 import { flushFakeIPAPI } from '@/api'
 import { configs, speedtestUrl, updateConfigs } from '@/store/config'
+import { computed } from 'vue'
+
+const modeList = computed(() => {
+  return configs.value?.['mode-list'] || ['direct', 'rule', 'global']
+})
 
 const handlerModeChange = (e: Event) => {
   const mode = (e.target as HTMLSelectElement).value

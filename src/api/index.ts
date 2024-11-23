@@ -1,5 +1,5 @@
 import { activeBackend } from '@/store/setup'
-import type { Proxy, Rule } from '@/types'
+import type { Config, Proxy, Rule } from '@/types'
 import { useWebSocket } from '@vueuse/core'
 import axios from 'axios'
 import { ref, watch } from 'vue'
@@ -71,7 +71,7 @@ export const disconnectAllAPI = () => {
 }
 
 export const getConfigsAPI = () => {
-  return axios.get('/configs')
+  return axios.get<Config>('/configs')
 }
 
 export const patchConfigsAPI = (configs: Record<string, string>) => {
