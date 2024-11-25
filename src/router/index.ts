@@ -1,7 +1,12 @@
+import { i18n } from '@/i18n'
+import { language } from '@/store/config'
+import { activeBackend } from '@/store/setup'
 import ConnectionsPage from '@/views/ConnectionsPage.vue'
 import LogsPage from '@/views/LogsPage.vue'
 import ProxiesPage from '@/views/ProxiesPage.vue'
 import RulesPage from '@/views/RulesPage.vue'
+import { useTitle } from '@vueuse/core'
+import { watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 export enum ROUTE_NAME {
@@ -9,6 +14,7 @@ export enum ROUTE_NAME {
   connections = 'connections',
   logs = 'logs',
   rules = 'rules',
+  settings = 'settings',
 }
 
 const router = createRouter({
@@ -35,10 +41,32 @@ const router = createRouter({
       component: RulesPage,
     },
     {
+      path: '/settings',
+      name: ROUTE_NAME.settings,
+      component: () => import('@/views/SettingsPage.vue'),
+    },
+    {
       path: '/:catchAll(.*)',
       redirect: ROUTE_NAME.proxies,
     },
   ],
+})
+
+const title = useTitle('zashboard')
+const setTitleByName = (name: string | symbol | undefined) => {
+  if (typeof name === 'string' && activeBackend.value) {
+    title.value = `zashboard | ${i18n.global.t(name)}`
+  } else {
+    title.value = 'zashboard'
+  }
+}
+
+router.afterEach((to) => {
+  setTitleByName(to.name)
+})
+
+watch(language, () => {
+  setTitleByName(router.currentRoute.value.name)
 })
 
 export default router

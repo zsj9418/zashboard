@@ -5,13 +5,14 @@ import {
   fetchProxyLatencyAPI,
   selectProxyAPI,
 } from '@/api'
-import type { Proxy, ProxyGroup } from '@/types'
+import type { Proxy } from '@/types'
 import { last } from 'lodash'
 import { ref } from 'vue'
 import { speedtestTimeout, speedtestUrl } from './config'
 import { activeConnections } from './connections'
 
-export const proxyGroups = ref<ProxyGroup[]>([])
+export const GLOBAL = 'GLOBAL'
+export const proxyGroups = ref<string[]>([])
 export const proxyMap = ref<Record<string, Proxy>>({})
 export const latencyMap = ref<Record<string, number>>({})
 
@@ -21,15 +22,13 @@ export const getLatencyByName = (proxyName: string) => {
 
 export const fetchProxies = async () => {
   const { data } = await fetchProxiesAPI()
-  const sortIndex = data.proxies['GLOBAL'].all ?? []
-  const proxies = Object.values(data.proxies).filter(
-    (proxy) => proxy.all?.length && proxy.name !== 'GLOBAL',
-  ) as ProxyGroup[]
+  const sortIndex = data.proxies[GLOBAL].all ?? []
 
   proxyMap.value = data.proxies
-  proxyGroups.value = proxies.sort(
-    (prev, next) => sortIndex.indexOf(prev.name) - sortIndex.indexOf(next.name),
-  )
+  proxyGroups.value = Object.values(data.proxies)
+    .filter((proxy) => proxy.all?.length && proxy.name !== GLOBAL)
+    .sort((prev, next) => sortIndex.indexOf(prev.name) - sortIndex.indexOf(next.name))
+    .map((proxy) => proxy.name)
 
   latencyMap.value = Object.fromEntries(
     Object.entries(data.proxies).map(([name, proxy]) => [name, getLatencyFromHistory(proxy)]),

@@ -41,7 +41,7 @@
       <div
         :class="
           twMerge(
-            'grid grid-cols-1 gap-2 sm:grid-cols-2',
+            'grid grid-cols-1 gap-2 sm:grid-cols-2 3xl:grid-cols-3',
             !twoColumns && 'lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5',
           )
         "
@@ -60,14 +60,14 @@
 </template>
 
 <script setup lang="ts">
-import LatencyTag from '@/components/LatencyTag.vue'
-import ProxyNodeCard from '@/components/ProxyNodeCard.vue'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { activeConnections } from '@/store/connections'
 import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
+import LatencyTag from './LatencyTag.vue'
+import ProxyNodeCard from './ProxyNodeCard.vue'
 const props = defineProps<{
   name: string
 }>()

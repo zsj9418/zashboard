@@ -15,18 +15,6 @@
         {{ $t('version') }}:
         {{ version }}
       </div>
-      <select
-        class="select select-bordered select-xs w-48"
-        v-model="theme"
-      >
-        <option
-          v-for="opt in themes"
-          :key="opt"
-          :value="opt"
-        >
-          {{ opt }}
-        </option>
-      </select>
       <div class="flex gap-2">
         <select
           class="select select-bordered select-xs w-48"
@@ -60,7 +48,7 @@
 <script setup lang="ts">
 import { version } from '@/api'
 import { i18n } from '@/i18n'
-import { LANG, language, theme } from '@/store/config'
+import { LANG, language } from '@/store/config'
 import {
   activeConnections,
   downloadSpeedTotal,
@@ -73,42 +61,6 @@ import { activeUuid, backendList } from '@/store/setup'
 import { LanguageIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import prettyBytes from 'pretty-bytes'
 import { computed } from 'vue'
-
-const themes = [
-  'default',
-  'light',
-  'dark',
-  'cupcake',
-  'bumblebee',
-  'emerald',
-  'corporate',
-  'synthwave',
-  'retro',
-  'cyberpunk',
-  'valentine',
-  'halloween',
-  'garden',
-  'forest',
-  'aqua',
-  'lofi',
-  'pastel',
-  'fantasy',
-  'wireframe',
-  'black',
-  'luxury',
-  'dracula',
-  'cmyk',
-  'autumn',
-  'business',
-  'acid',
-  'lemonade',
-  'night',
-  'coffee',
-  'winter',
-  'dim',
-  'nord',
-  'sunset',
-]
 
 const opts = computed(() => {
   return backendList.value.map((b) => {
