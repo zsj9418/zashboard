@@ -1,7 +1,7 @@
 <template>
   <div class="h-full overflow-y-auto overflow-x-hidden p-2">
-    <template v-if="isLargeScreen">
-      <div class="flex flex-1 gap-1">
+    <template v-if="isLargeScreen && twoColumns">
+      <div class="grid grid-cols-2 gap-1">
         <div
           v-for="idx in [0, 1]"
           :key="idx"
@@ -16,7 +16,7 @@
       </div>
     </template>
     <div
-      class="flex flex-1 flex-col gap-1"
+      class="grid grid-cols-1 gap-1"
       v-else
     >
       <ProxyGroup
@@ -31,6 +31,7 @@
 <script setup lang="ts">
 import ProxyGroup from '@/components/ProxyGroup.vue'
 import { isLargeScreen } from '@/helper'
+import { twoColumns } from '@/store/config'
 import { proxyGroups } from '@/store/proxies'
 
 const filterContent: <T>(all: T[], target: number) => T[] = (all, target) => {

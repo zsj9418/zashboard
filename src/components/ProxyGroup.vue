@@ -39,7 +39,12 @@
     />
     <div class="collapse-content flex flex-col gap-2">
       <div
-        class="grid grid-cols-1 gap-2 md:grid-cols-2"
+        :class="
+          twMerge(
+            'grid grid-cols-1 gap-2 sm:grid-cols-2',
+            !twoColumns && 'lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5',
+          )
+        "
         v-if="showContent"
       >
         <ProxyNodeCard
@@ -57,7 +62,7 @@
 <script setup lang="ts">
 import LatencyTag from '@/components/LatencyTag.vue'
 import ProxyNodeCard from '@/components/ProxyNodeCard.vue'
-import { collapseGroupMap } from '@/store/config'
+import { collapseGroupMap, twoColumns } from '@/store/config'
 import { activeConnections } from '@/store/connections'
 import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import prettyBytes from 'pretty-bytes'

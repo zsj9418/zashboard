@@ -28,4 +28,5 @@ export default {
   activeConnections: '活跃连接',
   closedConnections: '已关闭连接',
   logLevel: '日志等级',
+  twoColumns: '双列显示',
 }

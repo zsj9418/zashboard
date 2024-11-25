@@ -28,4 +28,5 @@ export default {
   activeConnections: 'Active Connections',
   closedConnections: 'Closed Connections',
   logLevel: 'Log Level',
+  twoColumns: 'Two Columns',
 }

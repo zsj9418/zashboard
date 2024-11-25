@@ -3,12 +3,14 @@
     class="flex flex-col gap-2 p-2"
     v-if="configs"
   >
-    <button
-      class="btn btn-sm w-full"
-      @click="flushFakeIPAPI"
-    >
-      {{ $t('flushFakeIP') }}
-    </button>
+    <div class="flex items-center gap-2">
+      {{ $t('twoColumns') }}:
+      <input
+        class="toggle"
+        type="checkbox"
+        v-model="twoColumns"
+      />
+    </div>
     <select
       class="select select-bordered select-sm w-full"
       :value="configs.mode"
@@ -26,12 +28,18 @@
       class="input input-sm input-bordered w-full"
       v-model="speedtestUrl"
     />
+    <button
+      class="btn btn-sm w-full"
+      @click="flushFakeIPAPI"
+    >
+      {{ $t('flushFakeIP') }}
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { flushFakeIPAPI } from '@/api'
-import { configs, speedtestUrl, updateConfigs } from '@/store/config'
+import { configs, speedtestUrl, twoColumns, updateConfigs } from '@/store/config'
 import { computed } from 'vue'
 
 const modeList = computed(() => {

@@ -18,6 +18,7 @@ export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5
 export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
 export const hostLabelMap = useStorage<Record<string, string>>('config/host-label-map', {})
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
+export const twoColumns = useStorage('config/twoColumns', true)
 
 export const configs = ref<Config>()
 export const fetchConfigs = async () => {
