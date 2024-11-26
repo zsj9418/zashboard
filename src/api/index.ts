@@ -108,6 +108,10 @@ export const flushFakeIPAPI = () => {
   return axios.post('/cache/fakeip/flush')
 }
 
+export const reloadConfigsAPI = () => {
+  return axios.put('/configs?reload=true')
+}
+
 export const upgradeUIAPI = () => {
   return axios.post('/upgrade/ui')
 }

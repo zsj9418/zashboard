@@ -58,4 +58,6 @@ export default {
   noExpire: 'Null',
   updated: 'Updated',
   upgradeUI: 'Upgrade Dashboard',
+  upgradeAllProviders: 'Upgrade All Providers',
+  reloadConfigs: 'Reload Configs',
 }

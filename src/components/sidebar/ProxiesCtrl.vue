@@ -3,22 +3,35 @@
     class="flex flex-col gap-2 p-2"
     v-if="configs"
   >
-    <div
-      role="tablist"
-      class="tabs-boxed tabs tabs-sm"
-      v-if="proxyProviederList.length"
-    >
-      <a
-        role="tab"
-        class="tab"
-        v-for="type in PROXY_TAB_TYPE"
-        :key="type"
-        :class="{ 'tab-active': proxiesTabShow === type }"
-        @click="proxiesTabShow = type"
+    <template v-if="proxyProviederList.length">
+      <div
+        role="tablist"
+        class="tabs-boxed tabs tabs-sm"
+        v-if="proxyProviederList.length"
       >
-        {{ $t(type) }}</a
+        <a
+          role="tab"
+          class="tab"
+          v-for="type in PROXY_TAB_TYPE"
+          :key="type"
+          :class="{ 'tab-active': proxiesTabShow === type }"
+          @click="proxiesTabShow = type"
+        >
+          {{ $t(type) }}</a
+        >
+      </div>
+      <div
+        class="flex flex-col gap-2"
+        v-if="proxiesTabShow === PROXY_TAB_TYPE.PROVIDER"
       >
-    </div>
+        <button
+          :class="twMerge('btn btn-sm', isUpgrading ? 'animate-pulse' : '')"
+          @click="handlerClickUpgradeAllProviders"
+        >
+          {{ $t('upgradeAllProviders') }}
+        </button>
+      </div>
+    </template>
     <select
       class="select select-bordered select-sm w-full"
       :value="configs.mode"
@@ -41,10 +54,22 @@
 </template>
 
 <script setup lang="ts">
-import { flushFakeIPAPI } from '@/api'
+import { flushFakeIPAPI, updateProxyProviderAPI } from '@/api'
 import { configs, proxiesTabShow, PROXY_TAB_TYPE, updateConfigs } from '@/store/config'
-import { proxyProviederList } from '@/store/proxies'
-import { computed } from 'vue'
+import { fetchProxies, proxyProviederList } from '@/store/proxies'
+import { twMerge } from 'tailwind-merge'
+import { computed, ref } from 'vue'
+const isUpgrading = ref(false)
+
+const handlerClickUpgradeAllProviders = async () => {
+  if (isUpgrading.value) return
+  isUpgrading.value = true
+  await Promise.all(
+    proxyProviederList.value.map((provider) => updateProxyProviderAPI(provider.name)),
+  )
+  await fetchProxies()
+  isUpgrading.value = false
+}
 
 const modeList = computed(() => {
   return configs.value?.['mode-list'] || ['direct', 'rule', 'global']

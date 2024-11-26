@@ -18,6 +18,15 @@
           </button>
         </div>
         <div class="flex items-center gap-2">
+          {{ $t('reloadConfigs') }}:
+          <button
+            :class="twMerge('btn btn-xs', isConfigReloading ? 'animate-pulse' : '')"
+            @click="handlerClickReloadConfigs"
+          >
+            {{ $t('reloadConfigs') }}
+          </button>
+        </div>
+        <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
             class="select select-bordered select-xs w-48"
@@ -112,7 +121,7 @@
 </template>
 
 <script setup lang="ts">
-import { isSingBox, upgradeUIAPI } from '@/api'
+import { isSingBox, reloadConfigsAPI, upgradeUIAPI } from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
 import {
   compactConnectionCard,
@@ -133,6 +142,15 @@ const handlerClickUpgradeUI = async () => {
   await upgradeUIAPI()
   isUpgrading.value = false
 }
+
+const isConfigReloading = ref(false)
+const handlerClickReloadConfigs = async () => {
+  if (isConfigReloading.value) return
+  isConfigReloading.value = true
+  await reloadConfigsAPI()
+  isConfigReloading.value = false
+}
+
 const themes = [
   'default',
   'light',
