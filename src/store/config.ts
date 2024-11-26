@@ -47,7 +47,7 @@ export enum PROXY_TAB_TYPE {
 export const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 
 // connections
-export const useConnectionCard = useStorage('config/use-connecticon-card', true)
+export const useConnectionCard = useStorage('config/use-connecticon-card', false)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
   'config/connection-table-columns',
   [

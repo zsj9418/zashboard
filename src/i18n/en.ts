@@ -57,4 +57,5 @@ export default {
   expire: 'Expire',
   noExpire: 'Null',
   updated: 'Updated',
+  upgradeUI: 'Upgrade Dashboard',
 }

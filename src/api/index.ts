@@ -2,7 +2,7 @@ import { activeBackend } from '@/store/setup'
 import type { Config, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import { useWebSocket } from '@vueuse/core'
 import axios from 'axios'
-import { ref, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 axios.interceptors.request.use((config) => {
   config.baseURL =
@@ -19,6 +19,7 @@ export const version = ref()
 export const fetchVersionAPI = () => {
   return axios.get<{ version: string }>('/version')
 }
+export const isSingBox = computed(() => version.value.includes('sing-box'))
 
 watch(
   activeBackend,
@@ -105,6 +106,10 @@ export const patchConfigsAPI = (configs: Record<string, string>) => {
 
 export const flushFakeIPAPI = () => {
   return axios.post('/cache/fakeip/flush')
+}
+
+export const upgradeUIAPI = () => {
+  return axios.post('/upgrade/ui')
 }
 
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {

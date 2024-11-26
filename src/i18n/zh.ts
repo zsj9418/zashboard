@@ -57,4 +57,5 @@ export default {
   expire: '到期时间',
   noExpire: '不限时',
   updated: '更新于',
+  upgradeUI: '更新面板',
 }

@@ -5,6 +5,18 @@
         {{ $t('dashboard') }}
       </div>
       <div class="card-body">
+        <div
+          class="flex items-center gap-2"
+          v-if="!isSingBox"
+        >
+          {{ $t('upgradeUI') }}:
+          <button
+            :class="twMerge('btn btn-primary btn-xs', isUpgrading ? 'animate-pulse' : '')"
+            @click="handlerClickUpgradeUI"
+          >
+            {{ $t('upgradeUI') }}
+          </button>
+        </div>
         <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
@@ -47,7 +59,7 @@
           {{ $t('speedtestUrl') }}:
           <input
             type="text"
-            class="input input-sm input-bordered w-96"
+            class="input input-sm input-bordered max-w-96 flex-1"
             v-model="speedtestUrl"
           />
         </div>
@@ -55,7 +67,7 @@
           {{ $t('speedtestTimeout') }}:
           <input
             type="text"
-            class="input input-sm input-bordered w-96"
+            class="input input-sm input-bordered max-w-96 flex-1"
             v-model="speedtestTimeout"
           />
         </div>
@@ -100,6 +112,7 @@
 </template>
 
 <script setup lang="ts">
+import { isSingBox, upgradeUIAPI } from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
 import {
   compactConnectionCard,
@@ -110,7 +123,16 @@ import {
   twoColumns,
   useConnectionCard,
 } from '@/store/config'
+import { twMerge } from 'tailwind-merge'
+import { ref } from 'vue'
 
+const isUpgrading = ref(false)
+const handlerClickUpgradeUI = async () => {
+  if (isUpgrading.value) return
+  isUpgrading.value = true
+  await upgradeUIAPI()
+  isUpgrading.value = false
+}
 const themes = [
   'default',
   'light',
