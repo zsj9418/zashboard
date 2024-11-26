@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.1.0](https://github.com/Zephyruso/zashboard/compare/v1.0.0...v1.1.0) (2024-11-26)
+
+
+### Features
+
+* providers ([b64119b](https://github.com/Zephyruso/zashboard/commit/b64119bbce9c8aa10cca56068d7459aaaa88b083))
+* subscription info ([09c71be](https://github.com/Zephyruso/zashboard/commit/09c71bebb27555b176bc4e7cb2c9b56393c998da))
+
 ## 1.0.0 (2024-11-25)
 
 
