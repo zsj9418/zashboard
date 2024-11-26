@@ -13,7 +13,7 @@
         class="drawer-overlay"
       ></label>
       <div class="flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content">
-        <ul class="menu w-80 flex-1">
+        <ul class="menu w-80 flex-1 pb-0">
           <li
             v-for="r in routes"
             :key="r"
