@@ -12,14 +12,14 @@
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <div class="flex h-full flex-col bg-base-200 text-base-content">
-        <ul class="menu w-80 flex-1 p-4">
+      <div class="flex h-full flex-col overflow-x-hidden bg-base-200 p-2 text-base-content">
+        <ul class="menu w-80 flex-1">
           <li
             v-for="r in routes"
             :key="r"
           >
             <a
-              :class="r === route.name ? 'active' : ''"
+              :class="r === route.name ? 'active' : 'inactive'"
               :href="`#${r}`"
             >
               <component
@@ -31,7 +31,7 @@
           </li>
         </ul>
         <SpeedCharts />
-        <div class="card m-2 bg-base-100 shadow-lg">
+        <div class="card w-80 bg-base-100 shadow-lg">
           <component
             v-if="sidebarComp"
             :is="sidebarComp"
@@ -53,7 +53,7 @@
             :key="r"
           >
             <a
-              :class="r === route.name ? 'active' : ''"
+              :class="r === route.name ? 'active' : 'inactive'"
               :href="`#${r}`"
             >
               <component
