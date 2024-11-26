@@ -4,28 +4,7 @@
       <div class="card-title px-4 pt-4">
         {{ $t('dashboard') }}
       </div>
-      <div class="card-body">
-        <div
-          class="flex items-center gap-2"
-          v-if="!isSingBox"
-        >
-          {{ $t('upgradeUI') }}:
-          <button
-            :class="twMerge('btn btn-primary btn-xs', isUpgrading ? 'animate-pulse' : '')"
-            @click="handlerClickUpgradeUI"
-          >
-            {{ $t('upgradeUI') }}
-          </button>
-        </div>
-        <div class="flex items-center gap-2">
-          {{ $t('reloadConfigs') }}:
-          <button
-            :class="twMerge('btn btn-xs', isConfigReloading ? 'animate-pulse' : '')"
-            @click="handlerClickReloadConfigs"
-          >
-            {{ $t('reloadConfigs') }}
-          </button>
-        </div>
+      <div class="card-body gap-4">
         <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
@@ -40,6 +19,28 @@
               {{ opt }}
             </option>
           </select>
+        </div>
+        <div class="flex items-center gap-2">
+          <template v-if="!isSingBox">
+            <button
+              :class="twMerge('btn btn-primary btn-sm', isUpgrading ? 'animate-pulse' : '')"
+              @click="handlerClickUpgradeUI"
+            >
+              {{ $t('upgradeUI') }}
+            </button>
+          </template>
+          <button
+            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
+            @click="handlerClickReloadConfigs"
+          >
+            {{ $t('reloadConfigs') }}
+          </button>
+          <button
+            class="btn btn-sm"
+            @click="flushFakeIPAPI"
+          >
+            {{ $t('flushFakeIP') }}
+          </button>
         </div>
       </div>
     </div>
@@ -121,7 +122,7 @@
 </template>
 
 <script setup lang="ts">
-import { isSingBox, reloadConfigsAPI, upgradeUIAPI } from '@/api'
+import { flushFakeIPAPI, isSingBox, reloadConfigsAPI, upgradeUIAPI } from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
 import {
   compactConnectionCard,

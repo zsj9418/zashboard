@@ -46,10 +46,10 @@
         v-if="!showCollapse"
       >
         <div
-          v-for="node in proxyProvider.proxies"
-          :key="node.name"
+          v-for="node in sortedProxies"
+          :key="node"
           class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
-          :class="getBgColor(getLatencyByName(node.name))"
+          :class="getBgColor(getLatencyByName(node))"
         ></div>
       </div>
     </div>
@@ -68,9 +68,9 @@
         v-if="showContent"
       >
         <ProxyNodeCard
-          v-for="node in proxyProvider.proxies"
-          :key="node.name"
-          :name="node.name"
+          v-for="node in sortedProxies"
+          :key="node"
+          :name="node"
         />
       </div>
     </div>
@@ -79,7 +79,7 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
-import { fromNow } from '@/helper'
+import { fromNow, sortProxyNodeByType } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
 import type { SubscriptionInfo } from '@/types'
@@ -162,6 +162,9 @@ const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
 const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
+const sortedProxies = computed(() => {
+  return sortProxyNodeByType(proxyProvider.value.proxies.map((node) => node.name))
+})
 const subscriptionInfo = computed(() => {
   if (proxyProvider.value.subscriptionInfo) {
     return getSubscriptionsInfo(proxyProvider.value.subscriptionInfo)

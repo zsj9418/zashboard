@@ -109,7 +109,7 @@ export const flushFakeIPAPI = () => {
 }
 
 export const reloadConfigsAPI = () => {
-  return axios.put('/configs?reload=true')
+  return axios.put('/configs?reload=true', { path: '', payload: '' })
 }
 
 export const upgradeUIAPI = () => {

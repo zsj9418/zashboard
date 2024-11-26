@@ -60,4 +60,11 @@ export default {
   upgradeUI: '更新面板',
   upgradeAllProviders: '更新所有提供商',
   reloadConfigs: '重载配置',
+  mode: '模式',
+  proxySortType: '代理排序方式',
+  defaultsort: '按配置文件排序',
+  nameasc: '按名称升序',
+  namedesc: '按名称降序',
+  latencydesc: '按延迟降序',
+  latencyasc: '按延迟升序',
 }

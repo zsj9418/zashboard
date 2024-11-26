@@ -41,7 +41,7 @@ export type SubscriptionInfo = {
 export type ProxyProvider = {
   subscriptionInfo?: SubscriptionInfo
   name: string
-  proxies: ProxyNode[]
+  proxies: Proxy[]
   testUrl: string
   updatedAt: string
   vehicleType: string

@@ -34,6 +34,17 @@
     </template>
     <select
       class="select select-bordered select-sm w-full"
+      v-model="proxySortType"
+    >
+      <option
+        v-for="type in Object.values(PROXY_SORT_TYPE)"
+        :key="type"
+        :label="$t(type)"
+        :value="type"
+      />
+    </select>
+    <select
+      class="select select-bordered select-sm w-full"
       :value="configs.mode"
       @change="handlerModeChange"
     >
@@ -44,18 +55,19 @@
         :value="mode"
       />
     </select>
-    <button
-      class="btn btn-sm w-full"
-      @click="flushFakeIPAPI"
-    >
-      {{ $t('flushFakeIP') }}
-    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { flushFakeIPAPI, updateProxyProviderAPI } from '@/api'
-import { configs, proxiesTabShow, PROXY_TAB_TYPE, updateConfigs } from '@/store/config'
+import { updateProxyProviderAPI } from '@/api'
+import {
+  configs,
+  proxiesTabShow,
+  PROXY_SORT_TYPE,
+  PROXY_TAB_TYPE,
+  proxySortType,
+  updateConfigs,
+} from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'

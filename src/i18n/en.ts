@@ -60,4 +60,11 @@ export default {
   upgradeUI: 'Upgrade Dashboard',
   upgradeAllProviders: 'Upgrade All Providers',
   reloadConfigs: 'Reload Configs',
+  mode: 'Mode',
+  proxySortType: 'Proxy Sort Type',
+  defaultsort: 'By Configs',
+  nameasc: 'Name Asc',
+  namedesc: 'Name Desc',
+  latencydesc: 'Latency Desc',
+  latencyasc: 'Latency Asc',
 }

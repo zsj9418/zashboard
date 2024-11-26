@@ -21,7 +21,7 @@
         v-if="!showCollapse"
       >
         <div
-          v-for="node in proxyGroup.all"
+          v-for="node in sortedProxies"
           :key="node"
           class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
           :class="getBgColor(getLatencyByName(node))"
@@ -48,7 +48,7 @@
         v-if="showContent"
       >
         <ProxyNodeCard
-          v-for="node in proxyGroup.all"
+          v-for="node in sortedProxies"
           :key="node"
           :name="node"
           :active="node === proxyGroup.now"
@@ -60,6 +60,7 @@
 </template>
 
 <script setup lang="ts">
+import { sortProxyNodeByType } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { activeConnections } from '@/store/connections'
 import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
@@ -105,6 +106,9 @@ watch(showCollapse, (value) => {
 })
 
 const proxyGroup = computed(() => proxyMap.value[props.name])
+const sortedProxies = computed(() => {
+  return sortProxyNodeByType(proxyGroup.value.all ?? [])
+})
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
