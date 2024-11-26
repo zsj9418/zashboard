@@ -52,4 +52,6 @@ export default {
   showGlobalProxy: 'Show Global Proxy Node',
   dashboard: 'Dashboard',
   theme: 'Theme',
+  proxyProvider: 'Proxy Provider',
+  ruleProvider: 'Rule Provider',
 }

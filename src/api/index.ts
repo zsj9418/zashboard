@@ -1,5 +1,5 @@
 import { activeBackend } from '@/store/setup'
-import type { Config, Proxy, Rule } from '@/types'
+import type { Config, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import { useWebSocket } from '@vueuse/core'
 import axios from 'axios'
 import { ref, watch } from 'vue'
@@ -58,8 +58,33 @@ export const fetchProxyGroupLatencyAPI = (proxyName: string, url: string, timeou
   })
 }
 
-export const getRulesAPI = () => {
+export const fetchProxyProviderAPI = () => {
+  return axios.get<{ providers: Record<string, ProxyProvider> }>('/providers/proxies')
+}
+
+export const updateProxyProviderAPI = (name: string) => {
+  return axios.put(`/providers/proxies/${encodeURIComponent(name)}`)
+}
+
+export const proxyProviderHealthCheckAPI = (name: string) => {
+  return axios.get<Record<string, number>>(
+    `/providers/proxies/${encodeURIComponent(name)}/healthcheck`,
+    {
+      timeout: 15000,
+    },
+  )
+}
+
+export const fetchRulesAPI = () => {
   return axios.get<{ rules: Rule[] }>('/rules')
+}
+
+export const fetchRuleProvidersAPI = () => {
+  return axios.get<{ providers: Record<string, RuleProvider> }>('/providers/rules')
+}
+
+export const updateRuleProviderAPI = (name: string) => {
+  return axios.put(`/providers/rules/${encodeURIComponent(name)}`)
 }
 
 export const disconnectByIdAPI = (id: string) => {

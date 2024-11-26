@@ -30,7 +30,7 @@ import LatencyTag from './LatencyTag.vue'
 
 const props = defineProps<{
   name: string
-  active: boolean
+  active?: boolean
 }>()
 const node = computed(() => proxyMap.value[props.name])
 const isLatencyTesting = ref(false)

@@ -79,8 +79,15 @@ import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
+import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_NAME } from '@/router'
-import { fetchConfigs } from '@/store/config'
+import {
+  fetchConfigs,
+  proxiesTabShow,
+  PROXY_TAB_TYPE,
+  RULE_TAB_TYPE,
+  rulesTabShow,
+} from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
@@ -101,6 +108,7 @@ const sidebarCompMap = {
   [ROUTE_NAME.connections]: ConnectionCtrl,
   [ROUTE_NAME.logs]: LogsCtrl,
   [ROUTE_NAME.proxies]: ProxiesCtrl,
+  [ROUTE_NAME.rules]: RulesCtrl,
 }
 
 const routeIconMap = {
@@ -125,6 +133,8 @@ const routes = Object.values(ROUTE_NAME)
 watch(
   activeUuid,
   () => {
+    rulesTabShow.value = RULE_TAB_TYPE.RULES
+    proxiesTabShow.value = PROXY_TAB_TYPE.PROXIES
     fetchConfigs()
     fetchProxies()
     fetchRules()

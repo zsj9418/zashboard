@@ -1,14 +1,15 @@
 <template>
   <div class="h-full overflow-y-auto overflow-x-hidden p-2">
-    <template v-if="isLargeScreen && twoColumns">
+    <template v-if="isLargeScreen && twoColumns && renderGroups.length > 1">
       <div class="grid grid-cols-2 gap-1">
         <div
           v-for="idx in [0, 1]"
           :key="idx"
           class="flex flex-1 flex-col gap-1"
         >
-          <ProxyGroup
+          <component
             v-for="name in filterContent(renderGroups, idx)"
+            :is="Comp"
             :key="name"
             :name="name"
           />
@@ -19,8 +20,9 @@
       class="grid grid-cols-1 gap-1"
       v-else
     >
-      <ProxyGroup
+      <component
         v-for="name in renderGroups"
+        :is="Comp"
         :key="name"
         :name="name"
       />
@@ -30,12 +32,19 @@
 
 <script setup lang="ts">
 import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
+import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { isLargeScreen } from '@/helper'
-import { showGlobalProxy, twoColumns } from '@/store/config'
-import { GLOBAL, proxyGroups } from '@/store/proxies'
+import { proxiesTabShow, PROXY_TAB_TYPE, showGlobalProxy, twoColumns } from '@/store/config'
+import { GLOBAL, proxyGroups, proxyProviederList } from '@/store/proxies'
 import { computed } from 'vue'
 
+const Comp = computed(() =>
+  proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER ? ProxyProvider : ProxyGroup,
+)
 const renderGroups = computed(() => {
+  if (proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER) {
+    return proxyProviederList.value.map((group) => group.name)
+  }
   if (showGlobalProxy.value && proxyGroups.value.length) {
     return [...proxyGroups.value, GLOBAL]
   }

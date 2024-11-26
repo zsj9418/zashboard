@@ -40,6 +40,12 @@ export const speedtestUrl = useStorage<string>(
 )
 export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
 
+export enum PROXY_TAB_TYPE {
+  PROXIES = 'proxies',
+  PROVIDER = 'proxyProvider',
+}
+export const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
+
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', true)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
@@ -59,6 +65,13 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
 )
 export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
 export const hostLabelMap = useStorage<Record<string, string>>('config/host-label-map', {})
+
+// rules
+export enum RULE_TAB_TYPE {
+  RULES = 'rules',
+  PROVIDER = 'ruleProvider',
+}
+export const rulesTabShow = ref(RULE_TAB_TYPE.RULES)
 
 // configs
 export const configs = ref<Config>()

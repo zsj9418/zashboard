@@ -1,5 +1,5 @@
 import { disconnectByIdAPI } from '@/api'
-import { isLargeScreen } from '@/helper'
+import { fromNow, isLargeScreen } from '@/helper'
 import { compactConnectionCard, LANG, language } from '@/store/config'
 import type { Connection } from '@/types'
 import {
@@ -8,7 +8,6 @@ import {
   InformationCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import dayjs from 'dayjs'
 import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { defineComponent } from 'vue'
@@ -80,7 +79,7 @@ export default defineComponent<{
             language.value === LANG.ZH_CN ? 'w-20' : 'w-32',
           )}
         >
-          {dayjs(props.conn.start).locale(language.value).fromNow()}
+          {fromNow(props.conn.start)}
         </span>
       )
       const type = (

@@ -52,4 +52,6 @@ export default {
   showGlobalProxy: '显示全局代理节点',
   dashboard: '面板',
   theme: '主题',
+  proxyProvider: '代理提供商',
+  ruleProvider: '规则提供商',
 }

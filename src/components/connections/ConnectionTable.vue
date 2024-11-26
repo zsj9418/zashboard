@@ -113,7 +113,8 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, connectionTableColumns, language } from '@/store/config'
+import { fromNow } from '@/helper'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, connectionTableColumns } from '@/store/config'
 import { renderConnections } from '@/store/connections'
 import type { Connection } from '@/types'
 import {
@@ -225,7 +226,7 @@ const columns: ColumnDef<Connection>[] = [
     header: () => t('connectTime'),
     enableGrouping: false,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime,
-    accessorFn: (original) => dayjs(original.start).locale(language.value).fromNow(),
+    accessorFn: (original) => fromNow(original.start),
     sortingFn: (prev, next) =>
       dayjs(prev.original.start).valueOf() - dayjs(next.original.start).valueOf(),
   },

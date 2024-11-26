@@ -31,10 +31,29 @@ export type ProxyGroup = Proxy & {
   all: string[]
 }
 
+export type ProxyProvider = {
+  subscriptionInfo?: SubscriptionInfo
+  name: string
+  proxies: ProxyNode[]
+  testUrl: string
+  updatedAt: string
+  vehicleType: string
+}
+
 export type Rule = {
   type: string
   payload: string
   proxy: string
+}
+
+export type RuleProvider = {
+  behavior: string
+  format: string
+  name: string
+  ruleCount: number
+  type: string
+  updatedAt: string
+  vehicleType: string
 }
 
 export type ConnectionRawMessage = {
