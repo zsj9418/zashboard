@@ -6,7 +6,7 @@
       </span>
       <span class="w-16">{{ ruleProvider.behavior }}</span>
       <span class="w-16">{{ ruleProvider.vehicleType }}</span>
-      <span class="w-16">{{ fromNow(ruleProvider.updatedAt) }}</span>
+      <span class="w-48">{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
       <button
         :class="twMerge('btn btn-circle btn-xs', isUpdating ? 'animate-spin' : '')"
         @click="updateRuleProviderClickHandler"

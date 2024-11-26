@@ -54,4 +54,7 @@ export default {
   theme: '主题',
   proxyProvider: '代理提供商',
   ruleProvider: '规则提供商',
+  expire: '到期时间',
+  noExpire: '不限时',
+  updated: '更新于',
 }

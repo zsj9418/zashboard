@@ -54,4 +54,7 @@ export default {
   theme: 'Theme',
   proxyProvider: 'Proxy Provider',
   ruleProvider: 'Rule Provider',
+  expire: 'Expire',
+  noExpire: 'Null',
+  updated: 'Updated',
 }

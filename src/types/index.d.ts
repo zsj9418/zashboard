@@ -31,6 +31,13 @@ export type ProxyGroup = Proxy & {
   all: string[]
 }
 
+export type SubscriptionInfo = {
+  Download?: number
+  Upload?: number
+  Total?: number
+  Expire?: number
+}
+
 export type ProxyProvider = {
   subscriptionInfo?: SubscriptionInfo
   name: string

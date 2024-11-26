@@ -14,11 +14,31 @@
             <BoltIcon class="h-4 w-4" />
           </button>
           <button
-            :class="twMerge('btn btn-circle btn-xs z-30', isHealthChecking ? 'animate-pulse' : '')"
+            :class="twMerge('btn btn-circle btn-xs z-30', isUpdating ? 'animate-spin' : '')"
             @click="updateProviderClickHandler"
           >
             <ArrowPathIcon class="h-4 w-4" />
           </button>
+        </div>
+      </div>
+      <progress
+        class="progress"
+        v-if="subscriptionInfo"
+        :value="subscriptionInfo.percentage"
+        max="100"
+      />
+      <div class="flex gap-4">
+        <template v-if="subscriptionInfo">
+          <div class="text-sm text-slate-500">
+            {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} (
+            {{ subscriptionInfo.percentage }}% )
+          </div>
+          <div class="text-sm text-slate-500">
+            {{ subscriptionInfo.expirePrefix() }}: {{ subscriptionInfo.expireStr() }}
+          </div>
+        </template>
+        <div class="text-sm text-slate-500">
+          {{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}
         </div>
       </div>
       <div
@@ -59,11 +79,17 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
+import { fromNow } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
+import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
+import dayjs from 'dayjs'
+import { toFinite } from 'lodash'
+import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
 import ProxyNodeCard from './ProxyNodeCard.vue'
 const props = defineProps<{
   name: string
@@ -101,9 +127,49 @@ watch(showCollapse, (value) => {
   }
 })
 
+const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
+  const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
+
+  const total = prettyBytes(Total)
+  const used = prettyBytes(Download + Upload)
+  const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))
+
+  const expirePrefix = () => {
+    const { t } = useI18n()
+
+    return t('expire')
+  }
+
+  const expireStr = () => {
+    const { t } = useI18n()
+
+    if (Expire === 0) {
+      return t('noExpire')
+    }
+
+    return dayjs(Expire * 1000).format('YYYY-MM-DD')
+  }
+
+  return {
+    total,
+    used,
+    percentage,
+    expirePrefix,
+    expireStr,
+  }
+}
+
 const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
+const subscriptionInfo = computed(() => {
+  if (proxyProvider.value.subscriptionInfo) {
+    return getSubscriptionsInfo(proxyProvider.value.subscriptionInfo)
+  }
+
+  return null
+})
+
 const isUpdating = ref(false)
 const isHealthChecking = ref(false)
 
