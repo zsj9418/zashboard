@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.2](https://github.com/Zephyruso/zashboard/compare/v1.5.1...v1.5.2) (2024-11-26)
+
+
+### Bug Fixes
+
+* menu width ([7249ffe](https://github.com/Zephyruso/zashboard/commit/7249ffe0cdcc055d76b32b1fb4d230c0c80b1591))
+
 ## [1.5.1](https://github.com/Zephyruso/zashboard/compare/v1.5.0...v1.5.1) (2024-11-26)
 
 
