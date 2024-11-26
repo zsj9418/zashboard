@@ -83,6 +83,7 @@ onMounted(() => {
           },
           type: 'line',
           color: secondaryColor,
+          smooth: true,
         },
         {
           name: t('download'),
@@ -93,6 +94,7 @@ onMounted(() => {
           },
           type: 'line',
           color: primaryColor,
+          smooth: true,
         },
       ],
     }
