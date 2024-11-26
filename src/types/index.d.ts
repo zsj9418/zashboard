@@ -1,5 +1,6 @@
 declare module '*.vue' {}
 declare module '*.tsx' {}
+declare const __APP_VERSION__: string
 
 export type Config = {
   port: number
