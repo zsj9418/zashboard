@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.2.0](https://github.com/Zephyruso/zashboard/compare/v1.1.0...v1.2.0) (2024-11-26)
+
+
+### Features
+
+* save sorting to storage ([e52950b](https://github.com/Zephyruso/zashboard/commit/e52950b40aa01223d812a8d280199fbac8b94117))
+* upgrade all providers ([32465fe](https://github.com/Zephyruso/zashboard/commit/32465fe7f4e1a7e7d7e381fef4ff99f31ec98c10))
+* upgrade ui ([796be32](https://github.com/Zephyruso/zashboard/commit/796be32f1869ebf79bcc35b4424b1f19f4528163))
+
+
+### Bug Fixes
+
+* provider preview ([b583847](https://github.com/Zephyruso/zashboard/commit/b583847d42345e7666f49e63874d003489fb00ac))
+
 ## [1.1.0](https://github.com/Zephyruso/zashboard/compare/v1.0.0...v1.1.0) (2024-11-26)
 
 
