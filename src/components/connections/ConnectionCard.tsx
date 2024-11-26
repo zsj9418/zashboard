@@ -115,7 +115,7 @@ export default defineComponent<{
 
       if (isLargeScreen.value && compactConnectionCard.value) {
         return (
-          <div class="card w-full flex-row items-center justify-between gap-1 bg-base-100 px-2 py-1 shadow-xl">
+          <div class="card w-full flex-row items-center justify-between gap-1 rounded-xl bg-base-100 px-2 py-1 shadow-lg">
             {host}
             {chians}
             {connectionCompact}
@@ -128,7 +128,7 @@ export default defineComponent<{
         )
       } else {
         return (
-          <div class="card w-full gap-[1px] bg-base-100 px-2 py-[1px] shadow-xl">
+          <div class="card w-full gap-[1px] rounded-xl bg-base-100 px-2 py-[1px] shadow-lg">
             <div class="flex flex-row items-center gap-1 px-1">
               {host}
               {flex1}

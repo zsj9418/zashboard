@@ -20,7 +20,7 @@
     >
       {{ $t('sortBy') }}:
       <select
-        class="select select-bordered select-sm"
+        class="select select-bordered select-sm w-52"
         v-model="connectionSortType"
       >
         <option

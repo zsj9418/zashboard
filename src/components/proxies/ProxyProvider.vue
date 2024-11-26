@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse collapse-arrow bg-base-100 shadow-md">
+  <div class="collapse collapse-arrow bg-base-100 shadow-lg">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
@@ -48,7 +48,7 @@
         <div
           v-for="node in sortedProxies"
           :key="node"
-          class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
+          class="flex h-4 w-4 items-center justify-center rounded-full shadow-lg"
           :class="getBgColor(getLatencyByName(node))"
         ></div>
       </div>
@@ -129,8 +129,8 @@ watch(showCollapse, (value) => {
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 
-  const total = prettyBytesHelper(Total)
-  const used = prettyBytesHelper(Download + Upload)
+  const total = prettyBytesHelper(Total, { binary: true })
+  const used = prettyBytesHelper(Download + Upload, { binary: true })
   const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))
 
   const expirePrefix = () => {

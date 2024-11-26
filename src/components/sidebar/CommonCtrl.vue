@@ -12,7 +12,7 @@
           prettyBytesHelper(uploadSpeedTotal)
         }}/s)
       </div>
-      <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory) }}</div>
+      <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
       <div class="flex gap-1">
         {{ $t('version') }}:
         {{ version }}

@@ -10,7 +10,7 @@
       <div
         v-for="item in connectionTableColumns"
         :key="item"
-        class="flex cursor-move items-center rounded bg-neutral px-2 text-neutral-content shadow"
+        class="flex cursor-move items-center rounded bg-neutral px-2 text-neutral-content shadow-lg"
       >
         {{ $t(item) }}
       </div>
@@ -25,7 +25,7 @@
       <div
         v-for="item in restOfColumns"
         :key="item"
-        class="flex cursor-move items-center rounded bg-neutral px-2 text-neutral-content shadow"
+        class="flex cursor-move items-center rounded bg-neutral px-2 text-neutral-content shadow-lg"
       >
         {{ $t(item) }}
       </div>

@@ -1,8 +1,8 @@
 <template>
-  <div class="h-full overflow-y-auto overflow-x-hidden p-2">
+  <div class="h-full overflow-auto p-2">
     <template v-if="useConnectionCard">
       <template v-if="!renderConnections.length">
-        <div class="card w-full flex-row gap-1 bg-base-100 p-2 text-sm shadow-xl">
+        <div class="card w-full flex-row gap-1 rounded-xl bg-base-100 p-2 text-sm shadow-lg">
           {{ $t('noContent') }}
         </div>
       </template>

@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div class="card w-full flex-row items-center gap-1 bg-base-100 p-1 px-2 text-sm shadow-xl">
+    <div
+      class="card w-full flex-row items-center gap-1 rounded-xl bg-base-100 p-1 px-2 text-sm shadow-lg"
+    >
       <span class="w-48 flex-1 text-primary">
         {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }})
       </span>

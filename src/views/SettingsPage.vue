@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col gap-1 overflow-y-auto p-2">
-    <div class="card card-compact shadow-md">
+    <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4 text-primary">zashboard v{{ zashboardVersion }}</div>
       <div class="card-body gap-4">
         <div class="flex items-center gap-2">
@@ -42,7 +42,7 @@
         </div>
       </div>
     </div>
-    <div class="card card-compact shadow-md">
+    <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4">
         {{ $t('proxies') }}
       </div>
@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-    <div class="card card-compact shadow-md">
+    <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4">
         {{ $t('connections') }}
       </div>

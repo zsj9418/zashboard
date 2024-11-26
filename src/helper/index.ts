@@ -7,7 +7,7 @@ import { computed } from 'vue'
 
 export const prettyBytesHelper = (bytes: number, opts?: Options) => {
   return prettyBytes(bytes, {
-    binary: true,
+    binary: false,
     ...opts,
   })
 }

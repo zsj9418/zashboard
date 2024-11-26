@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse collapse-arrow bg-base-100 shadow-md">
+  <div class="collapse collapse-arrow bg-base-100 shadow-lg">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
@@ -23,7 +23,7 @@
         <div
           v-for="node in sortedProxies"
           :key="node"
-          class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
+          class="flex h-4 w-4 items-center justify-center rounded-full shadow-lg"
           :class="getBgColor(getLatencyByName(node))"
         >
           <div

@@ -68,7 +68,6 @@ onMounted(() => {
           formatter: (value: number) => {
             return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
-              binary: false,
             })}/s`
           },
           color: color,
