@@ -12,7 +12,7 @@
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <div class="flex h-full flex-col overflow-x-hidden bg-base-200 p-2 text-base-content">
+      <div class="flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content">
         <ul class="menu w-80 flex-1">
           <li
             v-for="r in routes"
@@ -30,7 +30,6 @@
             </a>
           </li>
         </ul>
-        <SpeedCharts />
         <div class="card w-80 bg-base-100 shadow-lg">
           <component
             v-if="sidebarComp"
@@ -38,6 +37,7 @@
           />
           <CommonSidebar />
         </div>
+        <SpeedCharts />
       </div>
     </div>
 

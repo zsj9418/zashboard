@@ -1,7 +1,7 @@
 <template>
   <div
     ref="chart"
-    class="h-28 w-full p-1"
+    class="card h-28 w-full bg-base-100 p-0 shadow-lg"
   ></div>
   <span
     class="hidden text-base-content"
@@ -46,8 +46,8 @@ onMounted(() => {
         },
       },
       grid: {
-        left: 65,
-        top: 8,
+        left: 70,
+        top: 10,
         bottom: 25,
       },
       xAxis: {
