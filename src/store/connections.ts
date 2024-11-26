@@ -90,7 +90,11 @@ export const initConnections = () => {
 
 export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'dns|direct')
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
-export const showActiveConnections = ref(true)
+export enum CONNECTION_TAB_TYPE {
+  ACTIVE = 'active',
+  CLOSED = 'closed',
+}
+export const connectionTabShow = ref(CONNECTION_TAB_TYPE.ACTIVE)
 
 export enum SORT_TYPE {
   HOST = 'host',
@@ -150,7 +154,11 @@ export const connectionFilter = ref('')
 export const isPaused = ref(false)
 
 export const renderConnections = computed(() => {
-  return (showActiveConnections.value ? activeConnections.value : closedConnections.value)
+  return (
+    connectionTabShow.value === CONNECTION_TAB_TYPE.ACTIVE
+      ? activeConnections.value
+      : closedConnections.value
+  )
     .filter((conn) => {
       if (quickFilterEnabled.value && quickFilterRegex.value) {
         const regex = new RegExp(quickFilterRegex.value)

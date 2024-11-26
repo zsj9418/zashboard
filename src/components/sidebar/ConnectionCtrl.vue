@@ -1,12 +1,18 @@
 <template>
   <div class="flex flex-col gap-2 p-2 text-sm">
-    <div class="flex items-center gap-2">
-      {{ showActiveConnections ? $t('activeConnections') : $t('closedConnections') }}:
-      <input
-        type="checkbox"
-        class="toggle"
-        v-model="showActiveConnections"
-      />
+    <div class="tabs-boxed tabs tabs-sm">
+      <a
+        role="tab"
+        :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.ACTIVE && 'tab-active')"
+        @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.ACTIVE)"
+        >{{ $t('activeConnections') }}</a
+      >
+      <a
+        role="tab"
+        :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.CLOSED && 'tab-active')"
+        @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.CLOSED)"
+        >{{ $t('closedConnections') }}</a
+      >
     </div>
     <div
       class="flex items-center gap-2"
@@ -30,7 +36,7 @@
       {{ $t('quickFilter') }}:
       <input
         type="text"
-        class="input input-sm join-item input-bordered w-32"
+        class="input input-sm join-item input-bordered w-40"
         v-model="quickFilterRegex"
       />
       <input
@@ -42,7 +48,7 @@
     <div class="join">
       <input
         type="text"
-        class="input input-sm join-item input-bordered"
+        class="input input-sm join-item input-bordered flex-1"
         v-model="connectionFilter"
       />
       <button
@@ -68,16 +74,18 @@
 import { disconnectByIdAPI } from '@/api'
 import { useConnectionCard } from '@/store/config'
 import {
+  CONNECTION_TAB_TYPE,
   connectionFilter,
   connectionSortType,
+  connectionTabShow,
   isPaused,
   quickFilterEnabled,
   quickFilterRegex,
   renderConnections,
-  showActiveConnections,
   SORT_TYPE,
 } from '@/store/connections'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { twMerge } from 'tailwind-merge'
 
 const handlerClickCloseAll = () => {
   renderConnections.value.forEach((conn) => {
