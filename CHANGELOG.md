@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.3](https://github.com/Zephyruso/zashboard/compare/v1.5.2...v1.5.3) (2024-11-26)
+
+
+### Bug Fixes
+
+* chart style ([02feffd](https://github.com/Zephyruso/zashboard/commit/02feffdcf6b32c0e8b2d18282780170894025612))
+
 ## [1.5.2](https://github.com/Zephyruso/zashboard/compare/v1.5.1...v1.5.2) (2024-11-26)
 
 
