@@ -12,7 +12,7 @@
     ref="primaryText"
   ></span>
   <span
-    class="hidden text-secondary"
+    class="hidden text-info"
     ref="secondaryText"
   ></span>
 </template>
@@ -46,7 +46,7 @@ onMounted(() => {
         },
       },
       grid: {
-        left: 60,
+        left: 65,
         top: 8,
         bottom: 25,
       },
@@ -66,7 +66,9 @@ onMounted(() => {
         axisLine: { show: false },
         axisLabel: {
           formatter: (value: number) => {
-            return `${prettyBytes(value)}/s`
+            return `${prettyBytes(value, {
+              maximumFractionDigits: 1,
+            })}/s`
           },
           color: color,
         },
