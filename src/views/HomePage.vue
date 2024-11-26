@@ -12,7 +12,9 @@
         aria-label="close sidebar"
         class="drawer-overlay"
       ></label>
-      <div class="flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content">
+      <div
+        class="flex h-full flex-col gap-2 overflow-x-hidden bg-base-300/80 p-2 text-base-content"
+      >
         <ul class="menu w-80 flex-1 pb-0">
           <li
             v-for="r in routes"
@@ -44,7 +46,7 @@
     <div
       class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden md:relative md:w-auto"
     >
-      <RouterView class="flex-1"></RouterView>
+      <RouterView class="flex-1 bg-base-200/70"></RouterView>
 
       <div class="flex h-12 w-full items-center justify-center gap-1 bg-base-200 p-1 md:hidden">
         <ul class="menu menu-horizontal">

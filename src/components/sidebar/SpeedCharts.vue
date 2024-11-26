@@ -1,7 +1,7 @@
 <template>
   <div
     ref="chart"
-    class="card h-28 w-full bg-base-100 p-0 shadow-lg"
+    class="card h-28 w-80 bg-base-100 p-0 shadow-lg"
   ></div>
   <span
     class="hidden text-base-content"
@@ -46,8 +46,9 @@ onMounted(() => {
         },
       },
       grid: {
-        left: 70,
-        top: 10,
+        left: 60,
+        top: 15,
+        right: 10,
         bottom: 25,
       },
       xAxis: {
@@ -65,6 +66,8 @@ onMounted(() => {
         },
         axisLine: { show: false },
         axisLabel: {
+          align: 'left',
+          padding: [0, 0, 0, -45],
           formatter: (value: number) => {
             return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
