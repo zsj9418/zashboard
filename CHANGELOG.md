@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.3.0](https://github.com/Zephyruso/zashboard/compare/v1.2.0...v1.3.0) (2024-11-26)
+
+
+### Features
+
+* custom sort proxy ([b38c154](https://github.com/Zephyruso/zashboard/commit/b38c1543dfb577598efdc451461f001e699de265))
+
 ## [1.2.0](https://github.com/Zephyruso/zashboard/compare/v1.1.0...v1.2.0) (2024-11-26)
 
 
