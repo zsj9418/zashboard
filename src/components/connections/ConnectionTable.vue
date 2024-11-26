@@ -113,7 +113,7 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
-import { fromNow } from '@/helper'
+import { fromNow, prettyBytesHelper } from '@/helper'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY, connectionTableColumns } from '@/store/config'
 import { renderConnections } from '@/store/connections'
 import type { Connection } from '@/types'
@@ -140,7 +140,6 @@ import {
 } from '@tanstack/vue-table'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
-import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { h, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -236,28 +235,28 @@ const columns: ColumnDef<Connection>[] = [
     enableGrouping: false,
     enableSorting: true,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-    accessorFn: (original) => `${prettyBytes(original.downloadSpeed)}/s`,
+    accessorFn: (original) => `${prettyBytesHelper(original.downloadSpeed)}/s`,
     sortingFn: (prev, next) => prev.original.downloadSpeed - next.original.downloadSpeed,
   },
   {
     header: () => t('ulSpeed'),
     enableGrouping: false,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
-    accessorFn: (original) => `${prettyBytes(original.uploadSpeed)}/s`,
+    accessorFn: (original) => `${prettyBytesHelper(original.uploadSpeed)}/s`,
     sortingFn: (prev, next) => prev.original.uploadSpeed - next.original.uploadSpeed,
   },
   {
     header: () => t('dl'),
     enableGrouping: false,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
-    accessorFn: (original) => prettyBytes(original.download),
+    accessorFn: (original) => prettyBytesHelper(original.download),
     sortingFn: (prev, next) => prev.original.download - next.original.download,
   },
   {
     header: () => t('ul'),
     enableGrouping: false,
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
-    accessorFn: (original) => prettyBytes(original.upload),
+    accessorFn: (original) => prettyBytesHelper(original.upload),
     sortingFn: (prev, next) => prev.original.upload - next.original.upload,
   },
   {

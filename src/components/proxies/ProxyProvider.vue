@@ -79,14 +79,13 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
-import { fromNow, sortProxyNodeByType } from '@/helper'
+import { fromNow, prettyBytesHelper, sortProxyNodeByType } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
 import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
 import { toFinite } from 'lodash'
-import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -130,8 +129,8 @@ watch(showCollapse, (value) => {
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 
-  const total = prettyBytes(Total)
-  const used = prettyBytes(Download + Upload)
+  const total = prettyBytesHelper(Total)
+  const used = prettyBytesHelper(Download + Upload)
   const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))
 
   const expirePrefix = () => {

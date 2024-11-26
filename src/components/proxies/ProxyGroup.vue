@@ -14,7 +14,7 @@
           @click.stop="handlerLatencyTest"
         />
         <div class="flex-1" />
-        <div class="text-sm">{{ prettyBytes(downloadTotal) }}/s</div>
+        <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
       <div
         class="flex flex-wrap gap-1 pt-2"
@@ -60,11 +60,10 @@
 </template>
 
 <script setup lang="ts">
-import { sortProxyNodeByType } from '@/helper'
+import { prettyBytesHelper, sortProxyNodeByType } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { activeConnections } from '@/store/connections'
 import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
 import LatencyTag from './LatencyTag.vue'

@@ -3,14 +3,16 @@
     <div class="flex flex-col gap-2 p-2 text-xs">
       <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
       <div>
-        {{ $t('download') }}: {{ prettyBytes(downloadTotal) }} ({{
-          prettyBytes(downloadSpeedTotal)
+        {{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }} ({{
+          prettyBytesHelper(downloadSpeedTotal)
         }}/s)
       </div>
       <div>
-        {{ $t('upload') }}: {{ prettyBytes(uploadTotal) }} ({{ prettyBytes(uploadSpeedTotal) }}/s)
+        {{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }} ({{
+          prettyBytesHelper(uploadSpeedTotal)
+        }}/s)
       </div>
-      <div>{{ $t('memoryUsage') }}: {{ prettyBytes(memory) }}</div>
+      <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory) }}</div>
       <div class="flex gap-1">
         {{ $t('version') }}:
         {{ version }}
@@ -47,6 +49,7 @@
 
 <script setup lang="ts">
 import { version } from '@/api'
+import { prettyBytesHelper } from '@/helper'
 import { i18n } from '@/i18n'
 import { LANG, language } from '@/store/config'
 import {
@@ -59,7 +62,6 @@ import {
 } from '@/store/connections'
 import { activeUuid, backendList } from '@/store/setup'
 import { LanguageIcon, PlusIcon } from '@heroicons/vue/24/outline'
-import prettyBytes from 'pretty-bytes'
 import { computed } from 'vue'
 
 const opts = computed(() => {

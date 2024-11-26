@@ -18,9 +18,9 @@
 </template>
 
 <script setup lang="ts">
+import { prettyBytesHelper } from '@/helper'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/connections'
 import * as echarts from 'echarts'
-import prettyBytes from 'pretty-bytes'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -66,8 +66,9 @@ onMounted(() => {
         axisLine: { show: false },
         axisLabel: {
           formatter: (value: number) => {
-            return `${prettyBytes(value, {
+            return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
+              binary: false,
             })}/s`
           },
           color: color,

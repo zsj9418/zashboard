@@ -1,5 +1,5 @@
 import { disconnectByIdAPI } from '@/api'
-import { fromNow, isLargeScreen } from '@/helper'
+import { fromNow, isLargeScreen, prettyBytesHelper } from '@/helper'
 import { compactConnectionCard, LANG, language } from '@/store/config'
 import type { Connection } from '@/types'
 import {
@@ -8,7 +8,6 @@ import {
   InformationCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
 import { defineComponent } from 'vue'
 
@@ -31,22 +30,24 @@ export default defineComponent<{
       const download = (
         <div class="badge flex bg-base-200 px-1 text-sm text-base-content">
           <ArrowDownIcon class="h-4 w-3" />
-          <div class="hidden w-16 text-right sm:inline">{prettyBytes(props.conn.download)} | </div>
-          <div class="w-20 text-right">{prettyBytes(props.conn.downloadSpeed)}/s</div>
+          <div class="hidden w-16 text-right sm:inline">
+            {prettyBytesHelper(props.conn.download)} |{' '}
+          </div>
+          <div class="w-20 text-right">{prettyBytesHelper(props.conn.downloadSpeed)}/s</div>
         </div>
       )
       const uploadCompact = (
         <div class="badge hidden bg-base-200 px-1 text-sm text-base-content 2xl:flex">
           <ArrowUpIcon class="h-4 w-3" />
-          <div class="w-16 text-right">{prettyBytes(props.conn.upload)} | </div>
-          <div class="w-20 text-right">{prettyBytes(props.conn.uploadSpeed)}/s</div>
+          <div class="w-16 text-right">{prettyBytesHelper(props.conn.upload)} | </div>
+          <div class="w-20 text-right">{prettyBytesHelper(props.conn.uploadSpeed)}/s</div>
         </div>
       )
       const upload = (
         <div class="badge hidden bg-base-200 px-1 text-sm text-base-content lg:flex">
           <ArrowUpIcon class="h-4 w-3" />
-          <div class="w-16 text-right">{prettyBytes(props.conn.upload)} | </div>
-          <div class="w-20 text-right">{prettyBytes(props.conn.uploadSpeed)}/s</div>
+          <div class="w-16 text-right">{prettyBytesHelper(props.conn.upload)} | </div>
+          <div class="w-20 text-right">{prettyBytesHelper(props.conn.uploadSpeed)}/s</div>
         </div>
       )
 

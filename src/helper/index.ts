@@ -2,7 +2,15 @@ import { language, PROXY_SORT_TYPE, proxySortType } from '@/store/config'
 import { getLatencyByName } from '@/store/proxies'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
+import prettyBytes, { type Options } from 'pretty-bytes'
 import { computed } from 'vue'
+
+export const prettyBytesHelper = (bytes: number, opts?: Options) => {
+  return prettyBytes(bytes, {
+    binary: true,
+    ...opts,
+  })
+}
 
 const windowSize = useWindowSize()
 
