@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.4.0](https://github.com/Zephyruso/zashboard/compare/v1.3.0...v1.4.0) (2024-11-26)
+
+
+### Features
+
+* speed charts ([244ed8b](https://github.com/Zephyruso/zashboard/commit/244ed8bfec1544bd03b160769fad645334f38629))
+
+
+### Bug Fixes
+
+* card style with long name ([ae77d8b](https://github.com/Zephyruso/zashboard/commit/ae77d8b9726a76959ca80a6df8a27c0d6398aa1d))
+
 ## [1.3.0](https://github.com/Zephyruso/zashboard/compare/v1.2.0...v1.3.0) (2024-11-26)
 
 
