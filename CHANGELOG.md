@@ -1,5 +1,19 @@
 # Changelog
 
+## [1.5.0](https://github.com/Zephyruso/zashboard/compare/v1.4.0...v1.5.0) (2024-11-26)
+
+
+### Features
+
+* zashboard version ([f08c584](https://github.com/Zephyruso/zashboard/commit/f08c5848c23605db0cc8a240e7a64c27e0be57cd))
+
+
+### Bug Fixes
+
+* build ([a7d51f3](https://github.com/Zephyruso/zashboard/commit/a7d51f32512ae2c87e7c285f235ae6d299b71f6c))
+* charts units ([f4dc1c7](https://github.com/Zephyruso/zashboard/commit/f4dc1c76b85e2af3da2c32595fbf07866b1f4a52))
+* pretty bytes ([2563b02](https://github.com/Zephyruso/zashboard/commit/2563b02ca54a11a7fc4975b802b3a513d11a7ceb))
+
 ## [1.4.0](https://github.com/Zephyruso/zashboard/compare/v1.3.0...v1.4.0) (2024-11-26)
 
 
