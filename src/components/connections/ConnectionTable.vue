@@ -138,6 +138,7 @@ import {
   type GroupingState,
   type SortingState,
 } from '@tanstack/vue-table'
+import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes from 'pretty-bytes'
 import { twMerge } from 'tailwind-merge'
@@ -280,7 +281,7 @@ const columns: ColumnDef<Connection>[] = [
 
 const grouping = ref<GroupingState>([])
 const expanded = ref<ExpandedState>({})
-const sorting = ref<SortingState>([])
+const sorting = useStorage<SortingState>('config/table-sorting', [])
 
 const table = useVueTable({
   get data() {
