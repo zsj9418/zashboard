@@ -2,12 +2,12 @@
   <div
     :class="
       twMerge(
-        'flex cursor-pointer items-center gap-2 rounded-md bg-base-200 p-2 shadow-md',
+        'flex cursor-pointer flex-wrap items-center justify-end gap-2 rounded-md bg-base-200 p-2 shadow-md',
         props.active && 'bg-primary text-primary-content',
       )
     "
   >
-    <div class="flex-1 text-xs md:text-sm">{{ node.name }}</div>
+    <div class="flex-1 whitespace-nowrap text-xs md:text-sm">{{ node.name }}</div>
     <div class="flex items-center gap-2 text-xs">
       <div class="flex-1">
         <span>{{ typeFormatter(node.type) }}</span>
