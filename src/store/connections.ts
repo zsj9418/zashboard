@@ -15,6 +15,79 @@ export const downloadSpeedTotal = ref(0)
 export const uploadSpeedTotal = ref(0)
 export const memory = ref(0)
 
+export const downloadSpeedHistory = ref<number[]>([])
+export const uploadSpeedHistory = ref<number[]>([])
+
+let cancel: () => void
+
+export const initConnections = () => {
+  cancel?.()
+  activeConnections.value = []
+  closedConnections.value = []
+  downloadSpeedHistory.value = []
+  uploadSpeedHistory.value = []
+  downloadTotal.value = 0
+  uploadTotal.value = 0
+  downloadSpeedTotal.value = 0
+  uploadSpeedTotal.value = 0
+  memory.value = 0
+
+  const ws = fetchConnectionsAPI<string>()
+  const unwatch = watch(ws.data, (data) => {
+    if (!data) return
+
+    const parsedData = JSON.parse(data) as {
+      connections: ConnectionRawMessage[]
+      downloadTotal: number
+      uploadTotal: number
+      memory: number
+    }
+
+    downloadSpeedTotal.value =
+      downloadTotal.value === 0 ? 0 : parsedData.downloadTotal - downloadTotal.value
+    uploadSpeedTotal.value =
+      uploadTotal.value === 0 ? 0 : parsedData.uploadTotal - uploadTotal.value
+
+    downloadTotal.value = parsedData.downloadTotal
+    uploadTotal.value = parsedData.uploadTotal
+
+    downloadSpeedHistory.value.push(downloadSpeedTotal.value)
+    uploadSpeedHistory.value.push(uploadSpeedTotal.value)
+
+    downloadSpeedHistory.value = downloadSpeedHistory.value.slice(-60)
+    uploadSpeedHistory.value = uploadSpeedHistory.value.slice(-60)
+
+    memory.value = parsedData.memory
+
+    if (isPaused.value) {
+      return
+    }
+
+    closedConnections.value = [
+      ...closedConnections.value,
+      ...differenceWith(activeConnections.value, parsedData.connections, (a, b) => a.id === b.id),
+    ]
+    activeConnections.value =
+      parsedData.connections?.map((connection) => {
+        const preConnection = activeConnections.value.find((c) => c.id === connection.id) ?? {
+          download: 0,
+          upload: 0,
+        }
+
+        return {
+          ...connection,
+          downloadSpeed: connection.download - preConnection.download,
+          uploadSpeed: connection.upload - preConnection.upload,
+        }
+      }) ?? []
+  })
+
+  cancel = () => {
+    unwatch()
+    ws.close()
+  }
+}
+
 export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'dns|direct')
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
 export const showActiveConnections = ref(true)
@@ -120,65 +193,3 @@ export const renderConnections = computed(() => {
       return sortResult
     })
 })
-
-let cancel: () => void
-
-export const initConnections = () => {
-  cancel?.()
-  activeConnections.value = []
-  closedConnections.value = []
-  downloadTotal.value = 0
-  uploadTotal.value = 0
-  downloadSpeedTotal.value = 0
-  uploadSpeedTotal.value = 0
-  memory.value = 0
-
-  const ws = fetchConnectionsAPI<string>()
-  const unwatch = watch(ws.data, (data) => {
-    if (!data) return
-
-    const parsedData = JSON.parse(data) as {
-      connections: ConnectionRawMessage[]
-      downloadTotal: number
-      uploadTotal: number
-      memory: number
-    }
-
-    downloadSpeedTotal.value =
-      downloadTotal.value === 0 ? 0 : parsedData.downloadTotal - downloadTotal.value
-    uploadSpeedTotal.value =
-      uploadTotal.value === 0 ? 0 : parsedData.uploadTotal - uploadTotal.value
-
-    downloadTotal.value = parsedData.downloadTotal
-    uploadTotal.value = parsedData.uploadTotal
-
-    memory.value = parsedData.memory
-
-    if (isPaused.value) {
-      return
-    }
-
-    closedConnections.value = [
-      ...closedConnections.value,
-      ...differenceWith(activeConnections.value, parsedData.connections, (a, b) => a.id === b.id),
-    ]
-    activeConnections.value =
-      parsedData.connections?.map((connection) => {
-        const preConnection = activeConnections.value.find((c) => c.id === connection.id) ?? {
-          download: 0,
-          upload: 0,
-        }
-
-        return {
-          ...connection,
-          downloadSpeed: connection.download - preConnection.download,
-          uploadSpeed: connection.upload - preConnection.upload,
-        }
-      }) ?? []
-  })
-
-  cancel = () => {
-    unwatch()
-    ws.close()
-  }
-}

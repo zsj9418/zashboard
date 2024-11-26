@@ -30,6 +30,7 @@
             </a>
           </li>
         </ul>
+        <SpeedCharts />
         <div class="card m-2 bg-base-100 shadow-lg">
           <component
             v-if="sidebarComp"
@@ -80,6 +81,7 @@ import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
+import SpeedCharts from '@/components/sidebar/SpeedCharts.vue'
 import { ROUTE_NAME } from '@/router'
 import {
   fetchConfigs,
