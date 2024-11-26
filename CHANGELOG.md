@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.1](https://github.com/Zephyruso/zashboard/compare/v1.5.0...v1.5.1) (2024-11-26)
+
+
+### Bug Fixes
+
+* tab for connections ([60cb6fe](https://github.com/Zephyruso/zashboard/commit/60cb6fe0dcd5cdc21c5bc8dbe4b5e4f377d81c11))
+* unify card style & pretty bytes ([77bb99b](https://github.com/Zephyruso/zashboard/commit/77bb99b88cc3c9ce05f3381641ec77ca8b728cec))
+
 ## [1.5.0](https://github.com/Zephyruso/zashboard/compare/v1.4.0...v1.5.0) (2024-11-26)
 
 
