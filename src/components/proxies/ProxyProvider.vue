@@ -47,9 +47,9 @@
       >
         <div
           v-for="node in proxyProvider.proxies"
-          :key="node"
+          :key="node.name"
           class="flex h-4 w-4 items-center justify-center rounded-full shadow-sm"
-          :class="getBgColor(getLatencyByName(node))"
+          :class="getBgColor(getLatencyByName(node.name))"
         ></div>
       </div>
     </div>
