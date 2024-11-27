@@ -179,17 +179,25 @@ const healthCheckClickHandler = async () => {
   if (isHealthChecking.value) return
 
   isHealthChecking.value = true
-  await proxyProviderHealthCheckAPI(props.name)
-  await fetchProxies()
-  isHealthChecking.value = false
+  try {
+    await proxyProviderHealthCheckAPI(props.name)
+    await fetchProxies()
+    isHealthChecking.value = false
+  } catch {
+    isHealthChecking.value = false
+  }
 }
 
 const updateProviderClickHandler = async () => {
   if (isUpdating.value) return
 
   isUpdating.value = true
-  await updateProxyProviderAPI(props.name)
-  await fetchProxies()
-  isUpdating.value = false
+  try {
+    await updateProxyProviderAPI(props.name)
+    await fetchProxies()
+    isUpdating.value = false
+  } catch {
+    isUpdating.value = false
+  }
 }
 </script>

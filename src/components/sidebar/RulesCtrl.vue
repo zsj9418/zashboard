@@ -43,8 +43,14 @@ const isUpgrading = ref(false)
 const handlerClickUpgradeAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true
-  await Promise.all(ruleProviderList.value.map((provider) => updateRuleProviderAPI(provider.name)))
-  await fetchRules()
-  isUpgrading.value = false
+  try {
+    await Promise.all(
+      ruleProviderList.value.map((provider) => updateRuleProviderAPI(provider.name)),
+    )
+    await fetchRules()
+    isUpgrading.value = false
+  } catch {
+    isUpgrading.value = false
+  }
 }
 </script>

@@ -113,8 +113,12 @@ const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
 
   isLatencyTesting.value = true
-  await proxyGroupLatencyTest(props.name)
-  isLatencyTesting.value = false
+  try {
+    await proxyGroupLatencyTest(props.name)
+    isLatencyTesting.value = false
+  } catch {
+    isLatencyTesting.value = false
+  }
 }
 const downloadTotal = computed(() => {
   const speed = activeConnections.value

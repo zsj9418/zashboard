@@ -46,7 +46,11 @@ const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
 
   isLatencyTesting.value = true
-  await proxyLatencyTest(props.name)
-  isLatencyTesting.value = false
+  try {
+    await proxyLatencyTest(props.name)
+    isLatencyTesting.value = false
+  } catch {
+    isLatencyTesting.value = false
+  }
 }
 </script>

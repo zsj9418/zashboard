@@ -76,11 +76,15 @@ const isUpgrading = ref(false)
 const handlerClickUpgradeAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true
-  await Promise.all(
-    proxyProviederList.value.map((provider) => updateProxyProviderAPI(provider.name)),
-  )
-  await fetchProxies()
-  isUpgrading.value = false
+  try {
+    await Promise.all(
+      proxyProviederList.value.map((provider) => updateProxyProviderAPI(provider.name)),
+    )
+    await fetchProxies()
+    isUpgrading.value = false
+  } catch {
+    isUpgrading.value = false
+  }
 }
 
 const modeList = computed(() => {
