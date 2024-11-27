@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.5.5](https://github.com/Zephyruso/zashboard/compare/v1.5.4...v1.5.5) (2024-11-27)
+
+
+### Bug Fixes
+
+* catch errors ([58754f7](https://github.com/Zephyruso/zashboard/commit/58754f75638d05541b43a4a1979d702928300da2))
+* tab translate & home bg ([0bcffce](https://github.com/Zephyruso/zashboard/commit/0bcffce17edca247f6771e2db53656529da3765b))
+
 ## [1.5.4](https://github.com/Zephyruso/zashboard/compare/v1.5.3...v1.5.4) (2024-11-27)
 
 
