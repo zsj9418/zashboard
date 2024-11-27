@@ -1,3 +1,4 @@
+import { ROUTE_NAME } from '@/config'
 import { i18n } from '@/i18n'
 import { language } from '@/store/config'
 import { activeBackend } from '@/store/setup'
@@ -8,14 +9,6 @@ import RulesPage from '@/views/RulesPage.vue'
 import { useTitle } from '@vueuse/core'
 import { watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
-
-export enum ROUTE_NAME {
-  proxies = 'proxies',
-  connections = 'connections',
-  logs = 'logs',
-  rules = 'rules',
-  settings = 'settings',
-}
 
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),

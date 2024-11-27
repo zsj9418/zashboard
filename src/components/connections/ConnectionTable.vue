@@ -111,8 +111,9 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
 import { fromNow, prettyBytesHelper } from '@/helper'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, connectionTableColumns } from '@/store/config'
+import { connectionTableColumns } from '@/store/config'
 import { renderConnections } from '@/store/connections'
 import type { Connection } from '@/types'
 import {

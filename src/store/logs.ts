@@ -1,15 +1,8 @@
 import { fetchLogsAPI } from '@/api'
+import { LOG_LEVEL } from '@/config'
 import type { Log, LogWithSeq } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { ref, watch } from 'vue'
-
-export enum LOG_LEVEL {
-  Info = 'info',
-  Error = 'error',
-  Warning = 'warning',
-  Debug = 'debug',
-  Silent = 'silent',
-}
 
 export const logs = ref<LogWithSeq[]>([])
 export const logFilter = ref('')

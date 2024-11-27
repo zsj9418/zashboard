@@ -1,0 +1,41 @@
+<template>
+  <div class="flex gap-2">
+    <select
+      class="select select-bordered select-xs w-48"
+      v-model="activeUuid"
+    >
+      <option
+        v-for="opt in opts"
+        :key="opt.value"
+        :value="opt.value"
+      >
+        {{ opt.label }}
+      </option>
+    </select>
+    <button
+      class="btn btn-circle btn-xs"
+      @click="addBackend"
+    >
+      <PlusIcon class="h-4 w-4" />
+    </button>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { activeUuid, backendList } from '@/store/setup'
+import { PlusIcon } from '@heroicons/vue/24/outline'
+import { computed } from 'vue'
+
+const opts = computed(() => {
+  return backendList.value.map((b) => {
+    return {
+      label: `${b.protocol}://${b.host}:${b.port}`,
+      value: b.uuid,
+    }
+  })
+})
+
+const addBackend = () => {
+  activeUuid.value = null
+}
+</script>

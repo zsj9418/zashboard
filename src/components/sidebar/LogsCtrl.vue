@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-2 p-2 text-sm">
+  <div :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row')">
     <div class="flex items-center gap-2">
       {{ $t('logLevel') }}:
       <select
@@ -36,6 +36,12 @@
 </template>
 
 <script setup lang="ts">
-import { initLogs, isPaused, LOG_LEVEL, logFilter, logLevel } from '@/store/logs'
+import { LOG_LEVEL } from '@/config'
+import { initLogs, isPaused, logFilter, logLevel } from '@/store/logs'
 import { PauseIcon, PlayIcon } from '@heroicons/vue/24/outline'
+import { twMerge } from 'tailwind-merge'
+
+defineProps<{
+  horizontal?: boolean
+}>()
 </script>

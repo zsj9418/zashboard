@@ -1,3 +1,5 @@
+import { LANG } from '@/config'
+
 export default {
   setup: 'Setup',
   overview: 'Overview',
@@ -67,4 +69,7 @@ export default {
   namedesc: 'Name Desc',
   latencydesc: 'Latency Desc',
   latencyasc: 'Latency Asc',
+  language: 'Language',
+  [LANG.EN_US]: 'English',
+  [LANG.ZH_CN]: '中文',
 }

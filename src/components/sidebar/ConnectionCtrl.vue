@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-2 p-2 text-sm">
+  <div :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row')">
     <div class="tabs-boxed tabs tabs-sm">
       <a
         role="tab"
@@ -72,9 +72,9 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
+import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
 import { useConnectionCard } from '@/store/config'
 import {
-  CONNECTION_TAB_TYPE,
   connectionFilter,
   connectionSortType,
   connectionTabShow,
@@ -82,11 +82,12 @@ import {
   quickFilterEnabled,
   quickFilterRegex,
   renderConnections,
-  SORT_TYPE,
 } from '@/store/connections'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
-
+defineProps<{
+  horizontal?: boolean
+}>()
 const handlerClickCloseAll = () => {
   renderConnections.value.forEach((conn) => {
     disconnectByIdAPI(conn.id)

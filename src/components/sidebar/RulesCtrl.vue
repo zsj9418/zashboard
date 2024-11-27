@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-2 p-2"
+    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row')"
     v-if="ruleProviderList.length"
   >
     <div
@@ -34,10 +34,15 @@
 
 <script setup lang="ts">
 import { updateRuleProviderAPI } from '@/api'
-import { RULE_TAB_TYPE, rulesTabShow } from '@/store/config'
+import { RULE_TAB_TYPE } from '@/config'
+import { rulesTabShow } from '@/store/config'
 import { fetchRules, ruleProviderList } from '@/store/rules'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
+
+defineProps<{
+  horizontal?: boolean
+}>()
 
 const isUpgrading = ref(false)
 const handlerClickUpgradeAllProviders = async () => {

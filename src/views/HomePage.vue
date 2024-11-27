@@ -6,40 +6,7 @@
       class="drawer-toggle"
     />
 
-    <div class="drawer-side z-30">
-      <label
-        for="sidebar"
-        aria-label="close sidebar"
-        class="drawer-overlay"
-      ></label>
-      <div class="flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content">
-        <ul class="menu w-80 flex-1 pb-0">
-          <li
-            v-for="r in routes"
-            :key="r"
-          >
-            <a
-              :class="r === route.name ? 'active' : 'inactive'"
-              :href="`#${r}`"
-            >
-              <component
-                :is="routeIconMap[r]"
-                class="h-5 w-5"
-              />
-              {{ $t(r) }}
-            </a>
-          </li>
-        </ul>
-        <div class="card w-80 bg-base-100 shadow-lg">
-          <component
-            v-if="sidebarComp"
-            :is="sidebarComp"
-          />
-          <CommonSidebar />
-        </div>
-        <SpeedCharts />
-      </div>
-    </div>
+    <SideBar />
 
     <div
       class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden md:relative md:w-auto"
@@ -76,25 +43,15 @@
 </template>
 
 <script setup lang="ts">
-import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
-import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
-import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
-import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
-import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
-import SpeedCharts from '@/components/sidebar/SpeedCharts.vue'
-import { ROUTE_NAME } from '@/router'
-import {
-  fetchConfigs,
-  proxiesTabShow,
-  PROXY_TAB_TYPE,
-  RULE_TAB_TYPE,
-  rulesTabShow,
-} from '@/store/config'
+import SideBar from '@/components/sidebar/SideBar.vue'
+import { PROXY_TAB_TYPE, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
+import { fetchConfigs, proxiesTabShow, rulesTabShow } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { activeUuid } from '@/store/setup'
+import { initSatistic } from '@/store/statistic'
 import {
   ArrowsRightLeftIcon,
   Bars3Icon,
@@ -103,15 +60,8 @@ import {
   GlobeAltIcon,
   WrenchScrewdriverIcon,
 } from '@heroicons/vue/24/outline'
-import { computed, watch } from 'vue'
+import { watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-
-const sidebarCompMap = {
-  [ROUTE_NAME.connections]: ConnectionCtrl,
-  [ROUTE_NAME.logs]: LogsCtrl,
-  [ROUTE_NAME.proxies]: ProxiesCtrl,
-  [ROUTE_NAME.rules]: RulesCtrl,
-}
 
 const routeIconMap = {
   [ROUTE_NAME.proxies]: GlobeAltIcon,
@@ -120,14 +70,6 @@ const routeIconMap = {
   [ROUTE_NAME.logs]: DocumentTextIcon,
   [ROUTE_NAME.settings]: Cog6ToothIcon,
 }
-
-const sidebarComp = computed(() => {
-  if (route.name) {
-    return sidebarCompMap[route.name as keyof typeof sidebarCompMap]
-  }
-
-  return null
-})
 
 const route = useRoute()
 const routes = Object.values(ROUTE_NAME)
@@ -142,6 +84,7 @@ watch(
     fetchRules()
     initConnections()
     initLogs()
+    initSatistic()
   },
   {
     immediate: true,

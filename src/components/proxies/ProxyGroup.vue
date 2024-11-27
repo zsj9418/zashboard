@@ -16,22 +16,12 @@
         <div class="flex-1" />
         <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
-      <div
-        class="flex flex-wrap gap-1 pt-2"
+
+      <ProxyPreview
         v-if="!showCollapse"
-      >
-        <div
-          v-for="node in sortedProxies"
-          :key="node"
-          class="flex h-4 w-4 items-center justify-center rounded-full shadow-lg"
-          :class="getBgColor(getLatencyByName(node))"
-        >
-          <div
-            class="h-2 w-2 rounded-full bg-white"
-            v-if="proxyGroup.now === node"
-          ></div>
-        </div>
-      </div>
+        :nodes="sortedProxies"
+        :now="proxyGroup.now"
+      />
     </div>
     <input
       type="checkbox"
@@ -63,25 +53,16 @@
 import { prettyBytesHelper, sortProxyNodeByType } from '@/helper'
 import { collapseGroupMap, twoColumns } from '@/store/config'
 import { activeConnections } from '@/store/connections'
-import { getLatencyByName, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
+import ProxyPreview from './ProxyPreview.vue'
 const props = defineProps<{
   name: string
 }>()
-const getBgColor = (latency: number) => {
-  if (latency === 0) {
-    return 'bg-gray-500'
-  } else if (latency < 300) {
-    return 'bg-green-500'
-  } else if (latency < 800) {
-    return 'bg-yellow-500'
-  } else {
-    return 'bg-red-500'
-  }
-}
+
 const showCollapse = computed({
   get() {
     return collapseGroupMap.value[props.name]

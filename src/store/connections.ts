@@ -1,4 +1,5 @@
 import { fetchConnectionsAPI } from '@/api'
+import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
 import type { Connection, ConnectionRawMessage } from '@/types'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
@@ -13,7 +14,6 @@ export const downloadTotal = ref(0)
 export const uploadTotal = ref(0)
 export const downloadSpeedTotal = ref(0)
 export const uploadSpeedTotal = ref(0)
-export const memory = ref(0)
 
 export const downloadSpeedHistory = ref<number[]>(new Array(60).fill(0))
 export const uploadSpeedHistory = ref<number[]>(new Array(60).fill(0))
@@ -30,7 +30,6 @@ export const initConnections = () => {
   uploadTotal.value = 0
   downloadSpeedTotal.value = 0
   uploadSpeedTotal.value = 0
-  memory.value = 0
 
   const ws = fetchConnectionsAPI<string>()
   const unwatch = watch(ws.data, (data) => {
@@ -56,8 +55,6 @@ export const initConnections = () => {
 
     downloadSpeedHistory.value = downloadSpeedHistory.value.slice(-60)
     uploadSpeedHistory.value = uploadSpeedHistory.value.slice(-60)
-
-    memory.value = parsedData.memory
 
     if (isPaused.value) {
       return
@@ -90,24 +87,7 @@ export const initConnections = () => {
 
 export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'dns|direct')
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
-export enum CONNECTION_TAB_TYPE {
-  ACTIVE = 'active',
-  CLOSED = 'closed',
-}
 export const connectionTabShow = ref(CONNECTION_TAB_TYPE.ACTIVE)
-
-export enum SORT_TYPE {
-  HOST = 'host',
-  CHAINS = 'chains',
-  RULE = 'rule',
-  TYPE = 'type',
-  CONNECT_TIME = 'connectTime',
-  DOWNLOAD = 'download',
-  DOWNLOAD_SPEED = 'downloadSpeed',
-  UPLOAD = 'upload',
-  UPLOAD_SPEED = 'uploadSpeed',
-  SOURCE_IP = 'sourceIP',
-}
 
 const sortFunctionMap: Record<SORT_TYPE, (a: Connection, b: Connection) => number> = {
   [SORT_TYPE.HOST]: (a: Connection, b: Connection) => {

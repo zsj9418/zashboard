@@ -144,3 +144,11 @@ export const fetchConnectionsAPI = <T>() => {
 export const fetchLogsAPI = <T>(params: Record<string, string> = {}) => {
   return createWebSocket<T>('logs', params)
 }
+
+export const fetchMemoryAPI = <T>() => {
+  return createWebSocket<T>('memory')
+}
+
+export const fetchTrafficAPI = <T>() => {
+  return createWebSocket<T>('traffic')
+}

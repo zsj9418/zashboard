@@ -13,36 +13,20 @@
         }}/s)
       </div>
       <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
-      <div class="flex gap-1">
+      <div>
         {{ $t('version') }}:
         {{ version }}
       </div>
-      <div class="flex gap-2">
-        <select
-          class="select select-bordered select-xs w-48"
-          v-model="activeUuid"
-        >
-          <option
-            v-for="opt in opts"
-            :key="opt.value"
-            :value="opt.value"
-          >
-            {{ opt.label }}
-          </option>
-        </select>
-        <button
-          class="btn btn-circle btn-xs"
-          @click="addBackend"
-        >
-          <PlusIcon class="h-4 w-4" />
-        </button>
-      </div>
+      <BackendSwitch />
     </div>
     <div class="flex flex-1 items-end justify-end p-2">
-      <LanguageIcon
-        class="h-6 w-6 cursor-pointer"
-        @click="swapLanguage"
-      ></LanguageIcon>
+      <button
+        class="btn btn-circle btn-ghost btn-xs hidden md:flex"
+        v-if="!isSiderbarCollapsed"
+        @click="isSiderbarCollapsed = true"
+      >
+        <ArrowLeftCircleIcon class="h-5 w-5" />
+      </button>
     </div>
   </div>
 </template>
@@ -50,35 +34,15 @@
 <script setup lang="ts">
 import { version } from '@/api'
 import { prettyBytesHelper } from '@/helper'
-import { i18n } from '@/i18n'
-import { LANG, language } from '@/store/config'
+import { isSiderbarCollapsed } from '@/store/config'
 import {
   activeConnections,
   downloadSpeedTotal,
   downloadTotal,
-  memory,
   uploadSpeedTotal,
   uploadTotal,
 } from '@/store/connections'
-import { activeUuid, backendList } from '@/store/setup'
-import { LanguageIcon, PlusIcon } from '@heroicons/vue/24/outline'
-import { computed } from 'vue'
-
-const opts = computed(() => {
-  return backendList.value.map((b) => {
-    return {
-      label: `${b.protocol}://${b.host}:${b.port}`,
-      value: b.uuid,
-    }
-  })
-})
-
-const addBackend = () => {
-  activeUuid.value = null
-}
-
-const swapLanguage = () => {
-  language.value = language.value === LANG.ZH_CN ? LANG.EN_US : LANG.ZH_CN
-  i18n.global.locale = language.value
-}
+import { memory } from '@/store/statistic'
+import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
+import BackendSwitch from '../settings/BackendSwitch.vue'
 </script>

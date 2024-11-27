@@ -34,7 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, connectionTableColumns } from '@/store/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
+import { connectionTableColumns } from '@/store/config'
 import { ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 

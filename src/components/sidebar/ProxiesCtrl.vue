@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col gap-2 p-2"
+    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row')"
     v-if="configs"
   >
     <template v-if="proxyProviederList.length">
@@ -33,7 +33,7 @@
       </div>
     </template>
     <select
-      class="select select-bordered select-sm w-full"
+      class="select select-bordered select-sm"
       v-model="proxySortType"
     >
       <option
@@ -44,7 +44,7 @@
       />
     </select>
     <select
-      class="select select-bordered select-sm w-full"
+      class="select select-bordered select-sm"
       :value="configs.mode"
       @change="handlerModeChange"
     >
@@ -60,19 +60,16 @@
 
 <script setup lang="ts">
 import { updateProxyProviderAPI } from '@/api'
-import {
-  configs,
-  proxiesTabShow,
-  PROXY_SORT_TYPE,
-  PROXY_TAB_TYPE,
-  proxySortType,
-  updateConfigs,
-} from '@/store/config'
+import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
+import { configs, proxiesTabShow, proxySortType, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
-const isUpgrading = ref(false)
+defineProps<{
+  horizontal?: boolean
+}>()
 
+const isUpgrading = ref(false)
 const handlerClickUpgradeAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true

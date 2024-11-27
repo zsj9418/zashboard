@@ -1,3 +1,5 @@
+import { LANG } from '@/config'
+
 export default {
   setup: '配置',
   overview: '概览',
@@ -67,4 +69,7 @@ export default {
   namedesc: '按名称降序',
   latencydesc: '按延迟降序',
   latencyasc: '按延迟升序',
+  language: '语言',
+  [LANG.EN_US]: 'English',
+  [LANG.ZH_CN]: '中文',
 }

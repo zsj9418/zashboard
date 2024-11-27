@@ -1,7 +1,7 @@
 <template>
   <div
     ref="chart"
-    class="card h-28 w-80 bg-base-100 p-0 shadow-lg"
+    class="card h-28 w-full bg-base-100 p-0 shadow-lg"
   ></div>
   <span
     class="hidden text-base-content"
@@ -20,7 +20,9 @@
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/connections'
+import { useElementSize } from '@vueuse/core'
 import * as echarts from 'echarts'
+import { debounce } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
@@ -111,5 +113,17 @@ onMounted(() => {
   watch(options, () => {
     myChart.setOption(options.value)
   })
+
+  const { width } = useElementSize(chart)
+  const resize = debounce(() => {
+    myChart.resize()
+  }, 100)
+
+  watch(
+    () => width.value,
+    () => {
+      resize()
+    },
+  )
 })
 </script>

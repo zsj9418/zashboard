@@ -1,34 +1,19 @@
 import { getConfigsAPI, patchConfigsAPI } from '@/api'
+import {
+  CONNECTIONS_TABLE_ACCESSOR_KEY,
+  LANG,
+  PROXY_SORT_TYPE,
+  PROXY_TAB_TYPE,
+  RULE_TAB_TYPE,
+} from '@/config'
 import type { Config } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { ref } from 'vue'
 
-export enum LANG {
-  EN_US = 'en-US',
-  ZH_CN = 'zh-CN',
-}
-
-export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
-  Details = 'details',
-  Close = 'close',
-  Type = 'type',
-  Process = 'process',
-  Host = 'host',
-  Rule = 'rule',
-  Chains = 'chains',
-  DlSpeed = 'dlSpeed',
-  UlSpeed = 'ulSpeed',
-  Download = 'dl',
-  Upload = 'ul',
-  ConnectTime = 'connectTime',
-  SourceIP = 'sourceIP',
-  SourcePort = 'sourcePort',
-  Destination = 'destination',
-}
-
 // global
 export const theme = useStorage<string>('config/theme', 'default')
 export const language = useStorage<LANG>('config/language', LANG.EN_US)
+export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
 
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)
@@ -39,22 +24,10 @@ export const speedtestUrl = useStorage<string>(
   'http://www.gstatic.com/generate_204',
 )
 export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
-export enum PROXY_SORT_TYPE {
-  DEFAULT = 'defaultsort',
-  NAME_ASC = 'nameasc',
-  NAME_DESC = 'namedesc',
-  LATENCY_ASC = 'latencyasc',
-  LATENCY_DESC = 'latencydesc',
-}
 export const proxySortType = useStorage<PROXY_SORT_TYPE>(
   'config/proxy-sort-type',
   PROXY_SORT_TYPE.DEFAULT,
 )
-
-export enum PROXY_TAB_TYPE {
-  PROXIES = 'proxies',
-  PROVIDER = 'proxyProvider',
-}
 export const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 
 // connections
@@ -78,10 +51,6 @@ export const compactConnectionCard = useStorage<boolean>('config/compact-connect
 export const hostLabelMap = useStorage<Record<string, string>>('config/host-label-map', {})
 
 // rules
-export enum RULE_TAB_TYPE {
-  RULES = 'rules',
-  PROVIDER = 'ruleProvider',
-}
 export const rulesTabShow = ref(RULE_TAB_TYPE.RULES)
 
 // configs

@@ -19,6 +19,22 @@
           </select>
         </div>
         <div class="flex items-center gap-2">
+          {{ $t('language') }}:
+          <select
+            class="select select-bordered select-xs w-48"
+            v-model="language"
+            @change="() => (i18n.global.locale = language)"
+          >
+            <option
+              v-for="opt in Object.values(LANG)"
+              :key="opt"
+              :value="opt"
+              :label="$t(opt)"
+            />
+          </select>
+        </div>
+        <BackendSwitch />
+        <div class="flex items-center gap-2">
           <template v-if="!isSingBox">
             <button
               :class="twMerge('btn btn-primary btn-sm', isUpgrading ? 'animate-pulse' : '')"
@@ -122,8 +138,12 @@
 <script setup lang="ts">
 import { flushFakeIPAPI, isSingBox, reloadConfigsAPI, upgradeUIAPI, zashboardVersion } from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
+import BackendSwitch from '@/components/settings/BackendSwitch.vue'
+import { LANG } from '@/config'
+import { i18n } from '@/i18n'
 import {
   compactConnectionCard,
+  language,
   showGlobalProxy,
   speedtestTimeout,
   speedtestUrl,

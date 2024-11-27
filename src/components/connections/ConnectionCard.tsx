@@ -1,6 +1,7 @@
 import { disconnectByIdAPI } from '@/api'
+import { LANG } from '@/config'
 import { fromNow, isLargeScreen, prettyBytesHelper } from '@/helper'
-import { compactConnectionCard, LANG, language } from '@/store/config'
+import { compactConnectionCard, language } from '@/store/config'
 import type { Connection } from '@/types'
 import {
   ArrowDownIcon,

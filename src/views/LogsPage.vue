@@ -1,5 +1,9 @@
 <template>
   <div class="flex h-full flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
+    <LogsCtrl
+      v-if="isSiderbarCollapsed"
+      :horizontal="true"
+    />
     <template v-if="!renderLogs.length">
       <div class="card w-full flex-row gap-1 rounded-xl bg-base-100 p-2 text-sm shadow-lg">
         {{ $t('noContent') }}
@@ -18,7 +22,10 @@
 </template>
 
 <script setup lang="ts">
-import { LOG_LEVEL, logFilter, logs } from '@/store/logs'
+import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
+import { LOG_LEVEL } from '@/config'
+import { isSiderbarCollapsed } from '@/store/config'
+import { logFilter, logs } from '@/store/logs'
 import { computed } from 'vue'
 
 const textColorMapForType = {
