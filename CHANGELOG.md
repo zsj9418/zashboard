@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.5.4](https://github.com/Zephyruso/zashboard/compare/v1.5.3...v1.5.4) (2024-11-27)
+
+
+### Bug Fixes
+
+* chart style & home bg ([827f9df](https://github.com/Zephyruso/zashboard/commit/827f9df5fbd22c128ce33b68e65fb27954df7b82))
+
 ## [1.5.3](https://github.com/Zephyruso/zashboard/compare/v1.5.2...v1.5.3) (2024-11-26)
 
 
