@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.6.1](https://github.com/Zephyruso/zashboard/compare/v1.6.0...v1.6.1) (2024-11-28)
+
+
+### Bug Fixes
+
+* align fix & href link ([8c7678f](https://github.com/Zephyruso/zashboard/commit/8c7678f850ee4fa2618437c5366ebd2f03703f4d))
+* remove dynamic import & connections ([54eacb4](https://github.com/Zephyruso/zashboard/commit/54eacb453906d3916022fa2da46f7f24265461ff))
+* speed info ([54d3364](https://github.com/Zephyruso/zashboard/commit/54d33646f419c92a2bdc6849354d63b1bfac9581))
+
 ## [1.6.0](https://github.com/Zephyruso/zashboard/compare/v1.5.5...v1.6.0) (2024-11-28)
 
 
