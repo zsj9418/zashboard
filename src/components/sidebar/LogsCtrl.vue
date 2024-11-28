@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge('join w-full p-2', horizontal && 'w-96 px-0')">
+  <div :class="twMerge('join w-full p-2', horizontal && 'w-96')">
     <select
       class="join-item select select-bordered select-sm"
       v-model="logLevel"

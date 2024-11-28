@@ -1,9 +1,5 @@
 <template>
   <div class="h-full overflow-auto p-2">
-    <ConnectionCtrl
-      :horizontal="true"
-      v-if="isSiderbarCollapsed"
-    />
     <template v-if="useConnectionCard">
       <template v-if="!renderConnections.length">
         <div class="card w-full flex-row gap-1 rounded-xl bg-base-100 p-2 text-sm shadow-lg">
@@ -43,8 +39,7 @@
 <script setup lang="ts">
 import ConnectionCard from '@/components/connections/ConnectionCard'
 import ConnectionTable from '@/components/connections/ConnectionTable.vue'
-import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
-import { isSiderbarCollapsed, useConnectionCard } from '@/store/config'
+import { useConnectionCard } from '@/store/config'
 import { renderConnections } from '@/store/connections'
 import type { Connection } from '@/types'
 import { ref } from 'vue'

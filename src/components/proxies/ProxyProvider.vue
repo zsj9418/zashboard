@@ -51,21 +51,13 @@
       v-model="showCollapse"
     />
     <div class="collapse-content flex flex-col gap-2">
-      <div
-        :class="
-          twMerge(
-            'grid grid-cols-1 gap-2 sm:grid-cols-2 3xl:grid-cols-3',
-            !twoColumns && 'lg:grid-cols-3 2xl:grid-cols-4 3xl:grid-cols-5',
-          )
-        "
-        v-if="showContent"
-      >
+      <ProxyNodeGrid v-if="showContent">
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
         />
-      </div>
+      </ProxyNodeGrid>
     </div>
   </div>
 </template>
@@ -73,7 +65,7 @@
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
 import { fromNow, prettyBytesHelper, sortProxyNodeByType } from '@/helper'
-import { collapseGroupMap, twoColumns } from '@/store/config'
+import { collapseGroupMap } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
@@ -83,6 +75,7 @@ import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ProxyNodeCard from './ProxyNodeCard.vue'
+import ProxyNodeGrid from './ProxyNodeGrid.vue'
 import ProxyPreview from './ProxyPreview.vue'
 const props = defineProps<{
   name: string

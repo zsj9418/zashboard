@@ -13,7 +13,7 @@ import { speedtestTimeout, speedtestUrl } from './config'
 import { activeConnections } from './connections'
 
 export const GLOBAL = 'GLOBAL'
-export const proxyGroups = ref<string[]>([])
+export const proxyGroupList = ref<string[]>([])
 export const proxyMap = ref<Record<string, Proxy>>({})
 export const latencyMap = ref<Record<string, number>>({})
 export const proxyProviederList = ref<ProxyProvider[]>([])
@@ -28,7 +28,7 @@ export const fetchProxies = async () => {
   const sortIndex = proxyData.proxies[GLOBAL].all ?? []
 
   proxyMap.value = proxyData.proxies
-  proxyGroups.value = Object.values(proxyData.proxies)
+  proxyGroupList.value = Object.values(proxyData.proxies)
     .filter((proxy) => proxy.all?.length && proxy.name !== GLOBAL)
     .sort((prev, next) => sortIndex.indexOf(prev.name) - sortIndex.indexOf(next.name))
     .map((proxy) => proxy.name)

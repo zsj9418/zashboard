@@ -9,9 +9,14 @@
     <SideBar />
 
     <div
-      class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden md:relative md:w-auto"
+      class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/50 md:relative md:w-auto"
     >
-      <RouterView class="flex-1 bg-base-200/50"></RouterView>
+      <component
+        v-if="ctrlComp && isSiderbarCollapsed"
+        :is="ctrlComp"
+        :horizontal="true"
+      />
+      <RouterView></RouterView>
 
       <div class="flex h-12 w-full items-center justify-center gap-1 bg-base-200 p-1 md:hidden">
         <ul class="menu menu-horizontal">
@@ -43,9 +48,13 @@
 </template>
 
 <script setup lang="ts">
+import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
+import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
+import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
+import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
 import { PROXY_TAB_TYPE, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
-import { fetchConfigs, proxiesTabShow, rulesTabShow } from '@/store/config'
+import { fetchConfigs, isSiderbarCollapsed, proxiesTabShow, rulesTabShow } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
@@ -60,7 +69,7 @@ import {
   GlobeAltIcon,
   WrenchScrewdriverIcon,
 } from '@heroicons/vue/24/outline'
-import { watch } from 'vue'
+import { computed, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 
 const routeIconMap = {
@@ -71,8 +80,18 @@ const routeIconMap = {
   [ROUTE_NAME.settings]: Cog6ToothIcon,
 }
 
+const ctrlsMap = {
+  [ROUTE_NAME.connections]: ConnectionCtrl,
+  [ROUTE_NAME.logs]: LogsCtrl,
+  [ROUTE_NAME.proxies]: ProxiesCtrl,
+  [ROUTE_NAME.rules]: RulesCtrl,
+}
+
 const route = useRoute()
 const routes = Object.values(ROUTE_NAME)
+const ctrlComp = computed(() => {
+  return ctrlsMap[route.name as keyof typeof ctrlsMap]
+})
 
 watch(
   activeUuid,

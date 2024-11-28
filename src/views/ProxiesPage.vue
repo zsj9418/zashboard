@@ -1,9 +1,5 @@
 <template>
   <div class="h-full overflow-y-auto overflow-x-hidden p-2">
-    <ProxiesCtrl
-      :horizontal="true"
-      v-if="isSiderbarCollapsed"
-    />
     <template v-if="isLargeScreen && twoColumns && renderGroups.length > 1">
       <div class="grid grid-cols-2 gap-1">
         <div
@@ -37,11 +33,10 @@
 <script setup lang="ts">
 import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
 import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
-import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import { PROXY_TAB_TYPE } from '@/config'
 import { isLargeScreen } from '@/helper'
-import { isSiderbarCollapsed, proxiesTabShow, showGlobalProxy, twoColumns } from '@/store/config'
-import { GLOBAL, proxyGroups, proxyProviederList } from '@/store/proxies'
+import { proxiesTabShow, showGlobalProxy, twoColumns } from '@/store/config'
+import { GLOBAL, proxyGroupList, proxyProviederList } from '@/store/proxies'
 import { computed } from 'vue'
 
 const Comp = computed(() =>
@@ -51,10 +46,10 @@ const renderGroups = computed(() => {
   if (proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER) {
     return proxyProviederList.value.map((group) => group.name)
   }
-  if (showGlobalProxy.value && proxyGroups.value.length) {
-    return [...proxyGroups.value, GLOBAL]
+  if (showGlobalProxy.value && proxyGroupList.value.length) {
+    return [...proxyGroupList.value, GLOBAL]
   }
-  return proxyGroups.value
+  return proxyGroupList.value
 })
 
 const filterContent: <T>(all: T[], target: number) => T[] = (all, target) => {

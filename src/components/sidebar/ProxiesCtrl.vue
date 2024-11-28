@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row px-0')"
+    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row')"
     v-if="configs"
   >
     <template v-if="proxyProviederList.length">

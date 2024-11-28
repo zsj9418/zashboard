@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row px-0')">
+  <div :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row')">
     <div class="tabs-boxed tabs tabs-sm">
       <a
         role="tab"
