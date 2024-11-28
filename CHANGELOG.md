@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.6.2](https://github.com/Zephyruso/zashboard/compare/v1.6.1...v1.6.2) (2024-11-28)
+
+
+### Bug Fixes
+
+* btn click & logs layout ([c8f7a38](https://github.com/Zephyruso/zashboard/commit/c8f7a38fde8c980c6d3769f8556868b41297ba7e))
+* proxy node grid ([4e3458b](https://github.com/Zephyruso/zashboard/commit/4e3458bfe8b3bc9333f804a8a55beb51fd203302))
+
 ## [1.6.1](https://github.com/Zephyruso/zashboard/compare/v1.6.0...v1.6.1) (2024-11-28)
 
 
