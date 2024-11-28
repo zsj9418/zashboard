@@ -22,7 +22,6 @@
     <div class="flex flex-1 items-end justify-end p-2">
       <button
         class="btn btn-circle btn-ghost btn-xs hidden md:flex"
-        v-if="!isSiderbarCollapsed"
         @click="isSiderbarCollapsed = true"
       >
         <ArrowLeftCircleIcon class="h-5 w-5" />
