@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.6.0](https://github.com/Zephyruso/zashboard/compare/v1.5.5...v1.6.0) (2024-11-28)
+
+
+### Features
+
+* sidebar collapse & bars preview ([059c64f](https://github.com/Zephyruso/zashboard/commit/059c64f61f55f8b6ef09637d52e25985b9a4e2cd))
+
 ## [1.5.5](https://github.com/Zephyruso/zashboard/compare/v1.5.4...v1.5.5) (2024-11-27)
 
 
