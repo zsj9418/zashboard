@@ -13,7 +13,10 @@ import { ref } from 'vue'
 // global
 export const theme = useStorage<string>('config/theme', 'default')
 export const language = useStorage<LANG>('config/language', LANG.EN_US)
-export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
+export const isSiderbarCollapsed = useStorage(
+  'config/is-sidebar-collapsed',
+  window.innerWidth > 720,
+)
 
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)

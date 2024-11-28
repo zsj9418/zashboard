@@ -6,6 +6,7 @@ import ConnectionsPage from '@/views/ConnectionsPage.vue'
 import LogsPage from '@/views/LogsPage.vue'
 import ProxiesPage from '@/views/ProxiesPage.vue'
 import RulesPage from '@/views/RulesPage.vue'
+import SettingsPage from '@/views/SettingsPage.vue'
 import { useTitle } from '@vueuse/core'
 import { watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -36,7 +37,7 @@ const router = createRouter({
     {
       path: '/settings',
       name: ROUTE_NAME.settings,
-      component: () => import('@/views/SettingsPage.vue'),
+      component: SettingsPage,
     },
     {
       path: '/:catchAll(.*)',
