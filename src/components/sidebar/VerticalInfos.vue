@@ -19,11 +19,11 @@
       {{ prettyBytesHelper(memory, { binary: true }) }}
     </div>
     <div class="flex flex-col items-center justify-center">
-      <button class="btn btn-circle btn-sm">
-        <ArrowRightCircleIcon
-          class="h-5 w-5"
-          @click="isSiderbarCollapsed = false"
-        />
+      <button
+        class="btn btn-circle btn-sm"
+        @click="isSiderbarCollapsed = false"
+      >
+        <ArrowRightCircleIcon class="h-5 w-5" />
       </button>
     </div>
   </div>
