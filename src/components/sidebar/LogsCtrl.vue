@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row')">
+  <div :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row px-0')">
     <div class="flex items-center gap-2">
       {{ $t('logLevel') }}:
       <select
