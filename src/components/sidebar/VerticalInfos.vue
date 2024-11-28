@@ -3,10 +3,12 @@
     <div class="flex flex-col items-center justify-center">
       <ArrowDownCircleIcon class="h-5 w-5" />
       {{ prettyBytesHelper(downloadTotal) }}
+      <span class="text-xs"> {{ prettyBytesHelper(downloadSpeedTotal) }}/s </span>
     </div>
     <div class="flex flex-col items-center justify-center">
       <ArrowUpCircleIcon class="h-5 w-5" />
       {{ prettyBytesHelper(uploadTotal) }}
+      <span class="text-xs"> {{ prettyBytesHelper(uploadSpeedTotal) }}/s </span>
     </div>
     <div class="flex flex-col items-center justify-center">
       <CpuChipIcon class="h-5 w-5" />
@@ -26,7 +28,12 @@
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
 import { isSiderbarCollapsed } from '@/store/config'
-import { downloadTotal, uploadTotal } from '@/store/connections'
+import {
+  downloadSpeedTotal,
+  downloadTotal,
+  uploadSpeedTotal,
+  uploadTotal,
+} from '@/store/connections'
 import { memory } from '@/store/statistic'
 import {
   ArrowDownCircleIcon,
