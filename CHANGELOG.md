@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.7.0](https://github.com/Zephyruso/zashboard/compare/v1.6.2...v1.7.0) (2024-11-29)
+
+
+### Features
+
+* time for log & proxy icon ([097e936](https://github.com/Zephyruso/zashboard/commit/097e9366d4f2041d76fb2249960f8ce6952a3e29))
+
+
+### Bug Fixes
+
+* rule card ([9697156](https://github.com/Zephyruso/zashboard/commit/969715641f4979b0f3b1fa808a119d860fb26f17))
+* style ([95232e0](https://github.com/Zephyruso/zashboard/commit/95232e0d2457a5423b8156d056945b5209cdc62c))
+
 ## [1.6.2](https://github.com/Zephyruso/zashboard/compare/v1.6.1...v1.6.2) (2024-11-28)
 
 
