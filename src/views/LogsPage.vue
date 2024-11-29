@@ -11,7 +11,7 @@
       class="card w-full flex-row gap-1 gap-2 rounded-xl bg-base-100 p-2 text-sm shadow-lg"
     >
       <span>{{ log.seq }}</span>
-      <span class="text-info">{{ dayjs(log.time).locale(language).format('HH:mm:ss') }}</span>
+      <span class="text-primary">{{ dayjs(log.time).locale(language).format('HH:mm:ss') }}</span>
       <span :class="textColorMapForType[log.type]">{{ log.type }}</span>
       <span>{{ log.payload }}</span>
     </div>
@@ -28,7 +28,7 @@ import { computed } from 'vue'
 const textColorMapForType = {
   [LOG_LEVEL.Error]: 'text-error',
   [LOG_LEVEL.Warning]: 'text-warning',
-  [LOG_LEVEL.Info]: 'text-primary',
+  [LOG_LEVEL.Info]: 'text-info',
   [LOG_LEVEL.Debug]: 'text-accent',
 }
 
