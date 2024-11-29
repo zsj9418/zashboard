@@ -31,6 +31,7 @@ export const initLogs = () => {
 
     logs.value.unshift({
       ...parsedData,
+      time: new Date().valueOf(),
       seq: idx++,
     })
 

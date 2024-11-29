@@ -8,9 +8,10 @@
     <div
       v-for="log in renderLogs"
       :key="log.seq"
-      class="card w-full flex-row gap-1 rounded-xl bg-base-100 p-2 text-sm shadow-lg"
+      class="card w-full flex-row gap-1 gap-2 rounded-xl bg-base-100 p-2 text-sm shadow-lg"
     >
       <span>{{ log.seq }}</span>
+      <span class="text-info">{{ dayjs(log.time).locale(language).format('HH:mm:ss') }}</span>
       <span :class="textColorMapForType[log.type]">{{ log.type }}</span>
       <span>{{ log.payload }}</span>
     </div>
@@ -19,7 +20,9 @@
 
 <script setup lang="ts">
 import { LOG_LEVEL } from '@/config'
+import { language } from '@/store/config'
 import { logFilter, logs } from '@/store/logs'
+import dayjs from 'dayjs'
 import { computed } from 'vue'
 
 const textColorMapForType = {

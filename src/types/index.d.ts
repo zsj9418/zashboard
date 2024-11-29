@@ -24,6 +24,7 @@ export type Proxy = {
   all?: string[]
   udp: boolean
   now: string
+  icon: string
 }
 
 export type ProxyGroup = Proxy & {
@@ -93,4 +94,4 @@ export type Log = {
   payload: string
 }
 
-export type LogWithSeq = Log & { seq: number }
+export type LogWithSeq = Log & { seq: number; time: number }
