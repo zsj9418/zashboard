@@ -16,9 +16,11 @@
         :is="ctrlComp"
         :horizontal="true"
       />
-      <RouterView />
+      <RouterView class="mb-12 md:mb-0" />
 
-      <div class="flex h-12 w-full items-center justify-center gap-1 bg-base-200 p-1 md:hidden">
+      <div
+        class="fixed bottom-0 flex h-12 w-full items-center justify-center gap-1 bg-base-200 p-1 md:hidden"
+      >
         <ul class="menu menu-horizontal">
           <li
             v-for="r in routes"

@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row pb-0')"
+    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row flex-wrap pb-0')"
     v-if="configs"
   >
     <template v-if="proxyProviederList.length">
@@ -32,6 +32,10 @@
         </button>
       </div>
     </template>
+    <div
+      v-if="horizontal"
+      class="w-full sm:hidden"
+    ></div>
     <select
       class="select select-bordered select-sm"
       v-model="proxySortType"
