@@ -1,10 +1,10 @@
 <template>
-  <div class="badge flex w-12 items-center justify-center shadow-sm">
+  <div class="badge flex w-8 items-center justify-center shadow-sm">
     <div
       :class="twMerge('text-xs', color)"
       v-if="latency > 0"
     >
-      {{ latency }}ms
+      {{ latency }}
     </div>
     <BoltIcon
       v-else
