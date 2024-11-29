@@ -62,7 +62,7 @@ import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { activeUuid } from '@/store/setup'
-import { initSatistic } from '@/store/statistic'
+import { initSatistic } from '@/store/statistics'
 import {
   ArrowsRightLeftIcon,
   Bars3Icon,

@@ -4,12 +4,12 @@
       <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
       <div>
         {{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }} ({{
-          prettyBytesHelper(downloadSpeedTotal)
+          prettyBytesHelper(downloadSpeed)
         }}/s)
       </div>
       <div>
         {{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }} ({{
-          prettyBytesHelper(uploadSpeedTotal)
+          prettyBytesHelper(uploadSpeed)
         }}/s)
       </div>
       <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
@@ -34,14 +34,8 @@
 import { version } from '@/api'
 import { prettyBytesHelper } from '@/helper'
 import { isSiderbarCollapsed } from '@/store/config'
-import {
-  activeConnections,
-  downloadSpeedTotal,
-  downloadTotal,
-  uploadSpeedTotal,
-  uploadTotal,
-} from '@/store/connections'
-import { memory } from '@/store/statistic'
+import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
+import { downloadSpeed, memory, uploadSpeed } from '@/store/statistics'
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
 import BackendSwitch from '../settings/BackendSwitch.vue'
 </script>

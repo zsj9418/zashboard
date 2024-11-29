@@ -12,11 +12,6 @@ export const closedConnections = ref<Connection[]>([])
 
 export const downloadTotal = ref(0)
 export const uploadTotal = ref(0)
-export const downloadSpeedTotal = ref(0)
-export const uploadSpeedTotal = ref(0)
-
-export const downloadSpeedHistory = ref<number[]>(new Array(60).fill(0))
-export const uploadSpeedHistory = ref<number[]>(new Array(60).fill(0))
 
 let cancel: () => void
 
@@ -24,12 +19,8 @@ export const initConnections = () => {
   cancel?.()
   activeConnections.value = []
   closedConnections.value = []
-  downloadSpeedHistory.value = new Array(60).fill(0)
-  uploadSpeedHistory.value = new Array(60).fill(0)
   downloadTotal.value = 0
   uploadTotal.value = 0
-  downloadSpeedTotal.value = 0
-  uploadSpeedTotal.value = 0
 
   const ws = fetchConnectionsAPI<string>()
   const unwatch = watch(ws.data, (data) => {
@@ -42,19 +33,8 @@ export const initConnections = () => {
       memory: number
     }
 
-    downloadSpeedTotal.value =
-      downloadTotal.value === 0 ? 0 : parsedData.downloadTotal - downloadTotal.value
-    uploadSpeedTotal.value =
-      uploadTotal.value === 0 ? 0 : parsedData.uploadTotal - uploadTotal.value
-
     downloadTotal.value = parsedData.downloadTotal
     uploadTotal.value = parsedData.uploadTotal
-
-    downloadSpeedHistory.value.push(downloadSpeedTotal.value)
-    uploadSpeedHistory.value.push(uploadSpeedTotal.value)
-
-    downloadSpeedHistory.value = downloadSpeedHistory.value.slice(-60)
-    uploadSpeedHistory.value = uploadSpeedHistory.value.slice(-60)
 
     if (isPaused.value) {
       return
