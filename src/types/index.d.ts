@@ -10,6 +10,7 @@ export type Config = {
   'bind-address': string
   mode: string
   'mode-list': string[]
+  modes: string[]
   'log-level': string
   ipv6: boolean
 }

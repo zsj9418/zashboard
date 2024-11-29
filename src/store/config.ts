@@ -15,7 +15,7 @@ export const theme = useStorage<string>('config/theme', 'default')
 export const language = useStorage<LANG>('config/language', LANG.EN_US)
 export const isSiderbarCollapsed = useStorage(
   'config/is-sidebar-collapsed',
-  window.innerWidth > 720,
+  window.screen.width > 720,
 )
 
 // proxies

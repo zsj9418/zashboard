@@ -4,7 +4,7 @@
       <div class="flex items-center gap-2">
         <img
           v-if="proxyGroup.icon"
-          class="h-5 w-5"
+          class="w-5"
           :src="proxyGroup.icon"
         />
         <div class="text-lg font-medium sm:text-xl">

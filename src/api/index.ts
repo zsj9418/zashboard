@@ -19,7 +19,7 @@ export const version = ref()
 export const fetchVersionAPI = () => {
   return axios.get<{ version: string }>('/version')
 }
-export const isSingBox = computed(() => version.value.includes('sing-box'))
+export const isSingBox = computed(() => version.value?.includes('sing-box'))
 export const zashboardVersion = ref(__APP_VERSION__)
 
 watch(

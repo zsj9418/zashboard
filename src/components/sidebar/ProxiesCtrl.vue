@@ -89,7 +89,7 @@ const handlerClickUpgradeAllProviders = async () => {
 }
 
 const modeList = computed(() => {
-  return configs.value?.['mode-list'] || ['direct', 'rule', 'global']
+  return configs.value?.['mode-list'] || configs.value?.['modes'] || ['direct', 'rule', 'global']
 })
 
 const handlerModeChange = (e: Event) => {
