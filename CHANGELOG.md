@@ -1,5 +1,15 @@
 # Changelog
 
+## [1.7.1](https://github.com/Zephyruso/zashboard/compare/v1.7.0...v1.7.1) (2024-11-29)
+
+
+### Bug Fixes
+
+* collapse for mobile ([4561d33](https://github.com/Zephyruso/zashboard/commit/4561d33c73aa628e8b9f12b65362f47817392854))
+* md & logs color ([75b02f5](https://github.com/Zephyruso/zashboard/commit/75b02f50fc5438504053eb5a03bf9a4ba06d9e4e))
+* node card style ([9b1d391](https://github.com/Zephyruso/zashboard/commit/9b1d3914bae838c0bcc36cca11aa17becf0c8830))
+* statistics when switch backend ([b18c8b8](https://github.com/Zephyruso/zashboard/commit/b18c8b866551f580a9e0759683aed9b5af729170))
+
 ## [1.7.0](https://github.com/Zephyruso/zashboard/compare/v1.6.2...v1.7.0) (2024-11-29)
 
 
