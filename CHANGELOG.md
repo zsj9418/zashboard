@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.7.2](https://github.com/Zephyruso/zashboard/compare/v1.7.1...v1.7.2) (2024-11-29)
+
+
+### Bug Fixes
+
+* modes for sing-box-p & version error & icon height ([793fdf4](https://github.com/Zephyruso/zashboard/commit/793fdf4c9221adf1108d93fafeacda54bf445804))
+
 ## [1.7.1](https://github.com/Zephyruso/zashboard/compare/v1.7.0...v1.7.1) (2024-11-29)
 
 
