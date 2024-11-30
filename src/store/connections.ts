@@ -46,9 +46,14 @@ export const initConnections = () => {
     ]
     activeConnections.value =
       parsedData.connections?.map((connection) => {
-        const preConnection = activeConnections.value.find((c) => c.id === connection.id) ?? {
-          download: 0,
-          upload: 0,
+        const preConnection = activeConnections.value.find((c) => c.id === connection.id)
+
+        if (!preConnection) {
+          return {
+            ...connection,
+            downloadSpeed: 0,
+            uploadSpeed: 0,
+          }
         }
 
         return {
