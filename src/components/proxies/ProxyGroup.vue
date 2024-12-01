@@ -1,25 +1,27 @@
 <template>
   <div class="collapse collapse-arrow bg-base-100 shadow-lg">
     <div class="collapse-title">
-      <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1 text-lg font-medium sm:text-xl">
-          <img
-            v-if="proxyGroup.icon"
-            class="w-5"
-            :src="proxyGroup.icon"
-          />
-          {{ proxyGroup.name }}
+      <div class="items-top flex gap-2">
+        <div class="flex flex-col gap-2 sm:flex-row">
+          <div class="flex items-center gap-1 text-lg font-medium sm:text-xl">
+            <img
+              v-if="proxyGroup.icon"
+              class="w-5"
+              :src="proxyGroup.icon"
+            />
+            {{ proxyGroup.name }}
+          </div>
+          <div class="flex items-center gap-2 text-xs sm:text-sm">-> {{ proxyGroup.now }}</div>
         </div>
-        <div class="text-xs sm:text-sm">
-          {{ proxyGroup.now }}
-        </div>
-        <LatencyTag
-          :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')"
-          :name="proxyGroup.now"
-          @click.stop="handlerLatencyTest"
-        />
         <div class="flex-1" />
-        <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+        <div class="mt-1 flex gap-2">
+          <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+          <LatencyTag
+            :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')"
+            :name="proxyGroup.now"
+            @click.stop="handlerLatencyTest"
+          />
+        </div>
       </div>
 
       <ProxyPreview
