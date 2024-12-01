@@ -174,5 +174,5 @@ export const renderConnections = computed(() => {
 export const sourceIPFilter = ref('')
 
 export const sourceIPs = computed(() => {
-  return _.uniq(activeConnections.value.map((conn) => conn.metadata.sourceIP))
+  return _.uniq(activeConnections.value.map((conn) => conn.metadata.sourceIP)).sort()
 })
