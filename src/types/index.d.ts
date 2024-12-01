@@ -26,10 +26,8 @@ export type Proxy = {
   udp: boolean
   now: string
   icon: string
-}
-
-export type ProxyGroup = Proxy & {
-  all: string[]
+  hide?: boolean
+  all?: string[]
 }
 
 export type SubscriptionInfo = {

@@ -70,6 +70,7 @@ export default {
   latencydesc: '按延迟降序',
   latencyasc: '按延迟升序',
   language: '语言',
+  automaticDisconnection: '自动断开连接',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

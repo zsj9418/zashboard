@@ -70,6 +70,14 @@
       </div>
       <div class="card-body">
         <div class="flex items-center gap-2">
+          {{ $t('automaticDisconnection') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="automaticDisconnection"
+          />
+        </div>
+        <div class="flex items-center gap-2">
           {{ $t('showGlobalProxy') }}:
           <input
             class="toggle"
@@ -148,6 +156,7 @@ import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import { LANG } from '@/config'
 import { i18n } from '@/i18n'
 import {
+  automaticDisconnection,
   compactConnectionCard,
   language,
   showGlobalProxy,

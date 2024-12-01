@@ -19,7 +19,7 @@
 
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
-import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics.ts'
+import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
 import { useElementSize } from '@vueuse/core'
 import * as echarts from 'echarts'
 import { debounce } from 'lodash'

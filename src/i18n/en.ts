@@ -70,6 +70,7 @@ export default {
   latencydesc: 'Latency Desc',
   latencyasc: 'Latency Asc',
   language: 'Language',
+  automaticDisconnection: 'Automatic Disconnection',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

@@ -9,7 +9,7 @@ import {
 import type { Proxy, ProxyProvider } from '@/types'
 import { last } from 'lodash'
 import { ref } from 'vue'
-import { speedtestTimeout, speedtestUrl } from './config'
+import { automaticDisconnection, speedtestTimeout, speedtestUrl } from './config'
 import { activeConnections } from './connections'
 
 export const GLOBAL = 'GLOBAL'
@@ -29,7 +29,7 @@ export const fetchProxies = async () => {
 
   proxyMap.value = proxyData.proxies
   proxyGroupList.value = Object.values(proxyData.proxies)
-    .filter((proxy) => proxy.all?.length && proxy.name !== GLOBAL)
+    .filter((proxy) => proxy.all?.length && proxy.name !== GLOBAL && !proxy?.hide)
     .sort((prev, next) => sortIndex.indexOf(prev.name) - sortIndex.indexOf(next.name))
     .map((proxy) => proxy.name)
 
@@ -44,9 +44,12 @@ export const fetchProxies = async () => {
 export const selectProxy = async (proxyGroup: string, name: string) => {
   await selectProxyAPI(proxyGroup, name)
   proxyMap.value[proxyGroup].now = name
-  activeConnections.value
-    .filter((c) => c.chains.includes(proxyGroup))
-    .forEach((c) => disconnectByIdAPI(c.id))
+
+  if (automaticDisconnection.value) {
+    activeConnections.value
+      .filter((c) => c.chains.includes(proxyGroup))
+      .forEach((c) => disconnectByIdAPI(c.id))
+  }
 }
 
 export const proxyLatencyTest = async (proxyName: string) => {
