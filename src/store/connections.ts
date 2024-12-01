@@ -137,7 +137,7 @@ export const renderConnections = computed(() => {
         }
       }
 
-      if (sourceIPFilter.value && conn.metadata.sourceIP === sourceIPFilter.value) {
+      if (sourceIPFilter.value && conn.metadata.sourceIP !== sourceIPFilter.value) {
         return false
       }
 
