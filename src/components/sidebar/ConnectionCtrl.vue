@@ -45,10 +45,42 @@
         v-model="quickFilterEnabled"
       />
     </div>
-    <div class="join">
+    <select
+      v-if="!horizontal"
+      class="select select-bordered select-sm"
+      v-model="sourceIPFilter"
+    >
+      <option
+        value=""
+        label="all"
+      ></option>
+      <option
+        v-for="opt in sourceIPs"
+        :key="opt"
+        :value="opt"
+        :label="opt"
+      />
+    </select>
+    <div class="join flex-1">
+      <select
+        v-if="horizontal"
+        class="join-item select select-bordered select-sm min-w-24"
+        v-model="sourceIPFilter"
+      >
+        <option
+          value=""
+          label="all"
+        ></option>
+        <option
+          v-for="opt in sourceIPs"
+          :key="opt"
+          :value="opt"
+          :label="opt"
+        />
+      </select>
       <input
         type="text"
-        class="input input-sm join-item input-bordered flex-1"
+        class="input input-sm join-item input-bordered w-24 flex-1"
         v-model="connectionFilter"
       />
       <button
@@ -82,6 +114,8 @@ import {
   quickFilterEnabled,
   quickFilterRegex,
   renderConnections,
+  sourceIPFilter,
+  sourceIPs,
 } from '@/store/connections'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'

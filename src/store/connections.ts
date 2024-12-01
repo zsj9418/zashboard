@@ -3,7 +3,7 @@ import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
 import type { Connection, ConnectionRawMessage } from '@/types'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
-import { differenceWith } from 'lodash'
+import _, { differenceWith } from 'lodash'
 import { computed, ref, watch } from 'vue'
 import { useConnectionCard } from './config'
 
@@ -137,6 +137,10 @@ export const renderConnections = computed(() => {
         }
       }
 
+      if (sourceIPFilter.value && conn.metadata.sourceIP === sourceIPFilter.value) {
+        return false
+      }
+
       if (connectionFilter.value) {
         return [
           conn.metadata.host,
@@ -165,4 +169,10 @@ export const renderConnections = computed(() => {
 
       return sortResult
     })
+})
+
+export const sourceIPFilter = ref('')
+
+export const sourceIPs = computed(() => {
+  return _.uniq(activeConnections.value.map((conn) => conn.metadata.sourceIP))
 })
