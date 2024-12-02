@@ -63,15 +63,8 @@ export const proxyLatencyTest = async (proxyName: string) => {
 }
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
-  const { data: latencyResult } = await fetchProxyGroupLatencyAPI(
-    proxyGroupName,
-    speedtestUrl.value,
-    speedtestTimeout.value,
-  )
-
-  Object.entries(latencyResult).forEach(([name, latency]) => {
-    latencyMap.value[getNowProxyNodeName(name)] = latency
-  })
+  await fetchProxyGroupLatencyAPI(proxyGroupName, speedtestUrl.value, speedtestTimeout.value)
+  await fetchProxies()
 }
 
 const getLatencyFromHistory = (proxy: Proxy) => {
