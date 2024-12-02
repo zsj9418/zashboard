@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.9.0](https://github.com/Zephyruso/zashboard/compare/v1.8.0...v1.9.0) (2024-12-02)
+
+
+### Features
+
+* host label map & log style ([35a8dc9](https://github.com/Zephyruso/zashboard/commit/35a8dc99d1483522eaffc6284d490cb3f1ded01f))
+* truncate proxy name ([7dbeb31](https://github.com/Zephyruso/zashboard/commit/7dbeb31790772bf7612cfc95055f39eae6ababda))
+* tun mode switch ([9619aae](https://github.com/Zephyruso/zashboard/commit/9619aaeaf84756eb772e842eb902e3b1b6390e10))
+
+
+### Bug Fixes
+
+* element observer ([ad329a2](https://github.com/Zephyruso/zashboard/commit/ad329a2e3bd21a497ff48b00ee40d3aa090087f4))
+* latency test for url-test ([f9113d6](https://github.com/Zephyruso/zashboard/commit/f9113d681021ecc2ca8f94ce7b0bd7e832fdb517))
+* show tip when truncate ([a160824](https://github.com/Zephyruso/zashboard/commit/a160824f7759c719a203c92ebe46720f05b3c0c1))
+* translate ([b8ab4d9](https://github.com/Zephyruso/zashboard/commit/b8ab4d9e3790e3ef420a990e89522c1b54e86a59))
+* update all providers ([c88b1e1](https://github.com/Zephyruso/zashboard/commit/c88b1e1c3d569d77bd2248abfe53298fb4a42e57))
+
 ## [1.8.0](https://github.com/Zephyruso/zashboard/compare/v1.7.2...v1.8.0) (2024-12-02)
 
 
