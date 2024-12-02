@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex flex-wrap gap-1 pt-2"
-    v-if="nodes.length < 20"
+    v-if="showDots"
   >
     <div
       v-for="node in nodesLatency"
@@ -49,14 +49,23 @@
 </template>
 
 <script setup lang="ts">
-import { LATENCY_STATUS } from '@/config'
+import { LATENCY_STATUS, PROXY_PREVIEW_TYPE } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
+import { proxyPreviewType } from '@/store/settings'
 import { computed } from 'vue'
 
 const props = defineProps<{
   nodes: string[]
   now?: string
 }>()
+
+const showDots = computed(() => {
+  return (
+    proxyPreviewType.value === PROXY_PREVIEW_TYPE.DOTS ||
+    (proxyPreviewType.value === PROXY_PREVIEW_TYPE.AUTO && props.nodes.length < 20)
+  )
+})
+
 const nodesLatency = computed(() =>
   props.nodes.map((name) => {
     return {

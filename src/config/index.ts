@@ -35,6 +35,12 @@ export enum PROXY_SORT_TYPE {
   LATENCY_DESC = 'latencydesc',
 }
 
+export enum PROXY_PREVIEW_TYPE {
+  AUTO = 'auto',
+  DOTS = 'dots',
+  BAR = 'bar',
+}
+
 export enum RULE_TAB_TYPE {
   RULES = 'rules',
   PROVIDER = 'ruleProvider',

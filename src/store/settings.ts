@@ -1,6 +1,7 @@
 import {
   CONNECTIONS_TABLE_ACCESSOR_KEY,
   LANG,
+  PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
   PROXY_TAB_TYPE,
   RULE_TAB_TYPE,
@@ -36,6 +37,7 @@ export const twoColumnsInProxyGroupForMobile = useStorage(
   false,
 )
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
+export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)

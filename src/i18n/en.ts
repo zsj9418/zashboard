@@ -77,6 +77,10 @@ export default {
   upgradeCore: 'Upgrade Core',
   truncateProxyName: 'Truncate Proxy Name',
   sourceIPLabels: 'Source IP Labels',
+  proxyPreviewType: 'Proxy Preview Type',
+  auto: 'Auto',
+  dots: 'Dots',
+  bar: 'Bar',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

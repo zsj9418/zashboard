@@ -77,6 +77,10 @@ export default {
   tunMode: 'Tun 模式',
   truncateProxyName: '截断代理名称',
   sourceIPLabels: '源IP标签',
+  proxyPreviewType: '代理预览类型',
+  auto: '自动',
+  dots: '点',
+  bar: '条',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

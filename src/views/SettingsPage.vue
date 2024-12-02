@@ -96,6 +96,21 @@
       </div>
       <div class="card-body">
         <div class="flex items-center gap-2">
+          {{ $t('proxyPreviewType') }}:
+          <select
+            class="select select-bordered select-xs"
+            v-model="proxyPreviewType"
+          >
+            <option
+              v-for="opt in Object.values(PROXY_PREVIEW_TYPE)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ $t(opt) }}
+            </option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
           {{ $t('truncateProxyName') }}:
           <input
             class="toggle"
@@ -204,13 +219,14 @@ import {
 import TableSettings from '@/components/connections/TableSettings.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
-import { LANG } from '@/config'
+import { LANG, PROXY_PREVIEW_TYPE } from '@/config'
 import { i18n } from '@/i18n'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
   compactConnectionCard,
   language,
+  proxyPreviewType,
   showGlobalProxy,
   speedtestTimeout,
   speedtestUrl,
