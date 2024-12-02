@@ -1,8 +1,8 @@
 <template>
-  <div class="card w-full flex-row gap-2 rounded-xl bg-base-100 p-2 text-sm shadow-lg">
+  <div class="card block w-full gap-2 rounded-xl bg-base-100 p-2 text-sm shadow-lg">
     <span>{{ rule.type }}</span>
-    <span>{{ rule.payload }}</span>
-    <div class="min-w-32 text-primary">-> {{ rule.proxy }}</div>
+    <span class="mx-2">{{ rule.payload }}</span>
+    <span class="min-w-32 text-primary">-> {{ rule.proxy }}</span>
   </div>
 </template>
 
