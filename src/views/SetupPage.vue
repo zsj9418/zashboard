@@ -50,21 +50,34 @@
       >
         {{ $t('submit') }}
       </button>
-      <button
-        class="btn btn-xs mt-2 w-full"
-        v-for="backend in backendList"
-        :key="backend.uuid"
-        @click="activeUuid = backend.uuid"
-      >
-        {{ backend.protocol }}://{{ backend.host }}:{{ backend.port }}
-      </button>
+      <div class="flex flex-col gap-2 pt-4">
+        <div
+          v-for="backend in backendList"
+          :key="backend.uuid"
+          class="flex items-center gap-2"
+        >
+          <button
+            class="btn btn-xs flex-1"
+            @click="activeUuid = backend.uuid"
+          >
+            {{ backend.protocol }}://{{ backend.host }}:{{ backend.port }}
+          </button>
+          <button
+            class="btn btn-circle btn-xs"
+            @click="() => removeBackend(backend.uuid)"
+          >
+            <MinusCircleIcon class="h-4 w-4" />
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import router from '@/router'
-import { activeUuid, addBackend, backendList } from '@/store/setup'
+import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
+import { MinusCircleIcon } from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
 
 const form = reactive({

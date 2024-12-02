@@ -35,3 +35,7 @@ export const addBackend = (backend: Omit<Backend, 'uuid'>) => {
   })
   activeUuid.value = id
 }
+
+export const removeBackend = (uuid: string) => {
+  backendList.value = backendList.value.filter((end) => end.uuid !== uuid)
+}
