@@ -70,7 +70,7 @@ export const initConnections = () => {
   }
 }
 
-export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'dns|direct')
+export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 'direct')
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
 export const connectionTabShow = ref(CONNECTION_TAB_TYPE.ACTIVE)
 
@@ -126,7 +126,7 @@ export const renderConnections = computed(() => {
   )
     .filter((conn) => {
       if (quickFilterEnabled.value && quickFilterRegex.value) {
-        const regex = new RegExp(quickFilterRegex.value)
+        const regex = new RegExp(quickFilterRegex.value, 'i')
         const quickFilterMatch =
           regex.test(conn.chains.join('')) ||
           regex.test(conn.metadata.host) ||
