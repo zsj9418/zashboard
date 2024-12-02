@@ -8,12 +8,14 @@
     <div
       v-for="log in renderLogs"
       :key="log.seq"
-      class="card w-full flex-row flex-wrap gap-2 break-all rounded-xl bg-base-100 p-2 text-sm shadow-lg"
+      class="card block rounded-xl bg-base-100 p-2 text-sm shadow-lg"
     >
       <span>{{ log.seq }}</span>
-      <span class="text-primary">{{ dayjs(log.time).locale(language).format('HH:mm:ss') }}</span>
+      <span class="mx-2 text-primary">{{
+        dayjs(log.time).locale(language).format('HH:mm:ss')
+      }}</span>
       <span :class="textColorMapForType[log.type]">{{ log.type }}</span>
-      <span>{{ log.payload }}</span>
+      <span class="ml-2">{{ log.payload }}</span>
     </div>
   </div>
 </template>
