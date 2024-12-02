@@ -1,7 +1,7 @@
 import { disconnectByIdAPI } from '@/api'
 import { LANG } from '@/config'
 import { fromNow, isLargeScreen, prettyBytesHelper } from '@/helper'
-import { compactConnectionCard, language } from '@/store/settings'
+import { compactConnectionCard, language, sourceIPLabelMap } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownIcon,
@@ -97,10 +97,12 @@ export default defineComponent<{
         </span>
       )
       const destination = props.conn.metadata.destinationIP || 'remote-resolve'
+      const sourceIP =
+        sourceIPLabelMap.value[props.conn.metadata.sourceIP] || props.conn.metadata.sourceIP
       const connection = (
         <span class="hidden w-96 truncate text-sm tracking-tight xl:flex">
           <span>
-            {props.conn.metadata.sourceIP}:{props.conn.metadata.sourcePort}
+            {sourceIP}:{props.conn.metadata.sourcePort}
           </span>
           <span>-&gt;</span>
           <span>
@@ -110,7 +112,7 @@ export default defineComponent<{
       )
       const connectionCompact = (
         <span class="hidden w-52 truncate text-sm tracking-tight 3xl:flex">
-          <span>{props.conn.metadata.sourceIP}</span>
+          <span>{sourceIP}</span>
           <span>-&gt;</span>
           <span>{destination}</span>
         </span>
