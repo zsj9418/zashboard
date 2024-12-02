@@ -54,6 +54,7 @@
         {{ $t('backend') }}
       </div>
       <div class="card-body gap-4">
+        <BackendSwitch />
         <div
           class="flex items-center gap-2"
           v-if="!isSingBox && configs?.tun"
@@ -66,7 +67,6 @@
             @change="hanlderTunModeChange"
           />
         </div>
-        <BackendSwitch />
         <div class="flex items-center gap-2">
           <button
             v-if="!isSingBox"

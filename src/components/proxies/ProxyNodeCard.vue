@@ -4,7 +4,7 @@
       twMerge(
         'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow-md',
         props.active && 'bg-primary text-primary-content',
-        truncateProxyName && 'tooltip text-left',
+        truncateProxyName && isTruncate && 'tooltip text-left',
       )
     "
     :data-tip="node.name"
@@ -13,6 +13,7 @@
       :class="
         twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
       "
+      ref="nameRef"
     >
       {{ node.name }}
     </div>
@@ -33,6 +34,7 @@
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName } from '@/store/settings'
+import { useElementSize } from '@vueuse/core'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -41,6 +43,13 @@ const props = defineProps<{
   name: string
   active?: boolean
 }>()
+const nameRef = ref()
+const isTruncate = computed(() => {
+  const { width } = useElementSize(nameRef)
+
+  return width.value < nameRef.value?.scrollWidth
+})
+
 const node = computed(() => proxyMap.value[props.name])
 const isLatencyTesting = ref(false)
 const typeFormatter = (type: string) => {
