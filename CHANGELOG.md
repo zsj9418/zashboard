@@ -1,5 +1,23 @@
 # Changelog
 
+## [1.8.0](https://github.com/Zephyruso/zashboard/compare/v1.7.2...v1.8.0) (2024-12-02)
+
+
+### Features
+
+* proxy group hide & config for automatic disconnection ([8b48f45](https://github.com/Zephyruso/zashboard/commit/8b48f4535c13d02114fc589c7bc78e37cb83d2ac))
+* source ip filter ([4a09d25](https://github.com/Zephyruso/zashboard/commit/4a09d25586b281b11f3b7d2cae397ee79e46ec2c))
+* upgrade core for mihomo ([cd0f65b](https://github.com/Zephyruso/zashboard/commit/cd0f65b6f8ee0e07efa880bd8f162b8413be88b9))
+
+
+### Bug Fixes
+
+* dl speed ([0d09a78](https://github.com/Zephyruso/zashboard/commit/0d09a78b8c1f8ea03f59bd780fa7165b2bcc6288))
+* proxy group style ([7c2841c](https://github.com/Zephyruso/zashboard/commit/7c2841c8436b68023b89ffe3ca2af6756d912b0e))
+* source ip filter ([4ca1a89](https://github.com/Zephyruso/zashboard/commit/4ca1a8992915774f761fa493e135b890312f10fa))
+* stable sourceips opts ([8836dd8](https://github.com/Zephyruso/zashboard/commit/8836dd81d1caccf240a9ee9c591d1ee01a0b851c))
+* style fix & config for mobile ([a59fac2](https://github.com/Zephyruso/zashboard/commit/a59fac257e2f19a8022972bc1c245c4314881a5c))
+
 ## [1.7.2](https://github.com/Zephyruso/zashboard/compare/v1.7.1...v1.7.2) (2024-11-29)
 
 
