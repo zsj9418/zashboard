@@ -2,7 +2,7 @@
   <div class="collapse collapse-arrow bg-base-100 shadow-lg">
     <div class="collapse-title">
       <div class="items-top flex gap-2">
-        <div class="flex flex-col gap-2 sm:flex-row">
+        <div class="flex flex-col gap-1 sm:flex-row">
           <div class="flex items-center gap-1 text-lg font-medium sm:text-xl">
             <img
               v-if="proxyGroup.icon"
@@ -10,8 +10,15 @@
               :src="proxyGroup.icon"
             />
             {{ proxyGroup.name }}
+
+            <span class="text-xs">:: {{ proxyGroup.type }}</span>
           </div>
-          <div class="flex items-center gap-2 text-xs sm:text-sm">-> {{ proxyGroup.now }}</div>
+          <div
+            class="flex items-center gap-2 text-xs sm:text-sm"
+            v-if="proxyGroup.now"
+          >
+            -> {{ proxyGroup.now }}
+          </div>
         </div>
         <div class="flex-1" />
         <div class="mt-1 flex gap-2">

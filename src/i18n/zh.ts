@@ -72,6 +72,8 @@ export default {
   language: '语言',
   automaticDisconnection: '自动断开连接',
   twoColumnsForProxyGroupInMobile: '在移动端显示两列代理节点',
+  backend: '后端',
+  upgradeCore: '更新核心',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

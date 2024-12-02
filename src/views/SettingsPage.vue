@@ -39,16 +39,30 @@
             />
           </select>
         </div>
+        <div v-if="!isSingBox">
+          <button
+            :class="twMerge('btn btn-primary btn-sm', isUIUpgrading ? 'animate-pulse' : '')"
+            @click="handlerClickUpgradeUI"
+          >
+            {{ $t('upgradeUI') }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card card-compact bg-base-100 shadow-lg">
+      <div class="card-title px-4 pt-4">
+        {{ $t('backend') }}
+      </div>
+      <div class="card-body gap-4">
         <BackendSwitch />
         <div class="flex items-center gap-2">
-          <template v-if="!isSingBox">
-            <button
-              :class="twMerge('btn btn-primary btn-sm', isUpgrading ? 'animate-pulse' : '')"
-              @click="handlerClickUpgradeUI"
-            >
-              {{ $t('upgradeUI') }}
-            </button>
-          </template>
+          <button
+            v-if="!isSingBox"
+            :class="twMerge('btn btn-primary btn-sm', isCoreUpgrading ? 'animate-pulse' : '')"
+            @click="handlerClickUpgradeCore"
+          >
+            {{ $t('upgradeCore') }}
+          </button>
           <button
             :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
             @click="handlerClickReloadConfigs"
@@ -158,7 +172,14 @@
 </template>
 
 <script setup lang="ts">
-import { flushFakeIPAPI, isSingBox, reloadConfigsAPI, upgradeUIAPI, zashboardVersion } from '@/api'
+import {
+  flushFakeIPAPI,
+  isSingBox,
+  reloadConfigsAPI,
+  upgradeCoreAPI,
+  upgradeUIAPI,
+  zashboardVersion,
+} from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import { LANG } from '@/config'
@@ -178,20 +199,40 @@ import {
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 
-const isUpgrading = ref(false)
+const isCoreUpgrading = ref(false)
+const handlerClickUpgradeCore = async () => {
+  if (isCoreUpgrading.value) return
+  isCoreUpgrading.value = true
+  try {
+    await upgradeCoreAPI()
+    isCoreUpgrading.value = false
+  } catch {
+    isCoreUpgrading.value = false
+  }
+}
+
+const isUIUpgrading = ref(false)
 const handlerClickUpgradeUI = async () => {
-  if (isUpgrading.value) return
-  isUpgrading.value = true
-  await upgradeUIAPI()
-  isUpgrading.value = false
+  if (isUIUpgrading.value) return
+  isUIUpgrading.value = true
+  try {
+    await upgradeUIAPI()
+    isUIUpgrading.value = false
+  } catch {
+    isUIUpgrading.value = false
+  }
 }
 
 const isConfigReloading = ref(false)
 const handlerClickReloadConfigs = async () => {
   if (isConfigReloading.value) return
   isConfigReloading.value = true
-  await reloadConfigsAPI()
-  isConfigReloading.value = false
+  try {
+    await reloadConfigsAPI()
+    isConfigReloading.value = false
+  } catch {
+    isConfigReloading.value = false
+  }
 }
 
 const themes = [
