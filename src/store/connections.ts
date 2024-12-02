@@ -151,7 +151,7 @@ export const renderConnections = computed(() => {
           conn.metadata.processPath,
           conn.metadata.type,
           conn.metadata.network,
-          conn.chains,
+          conn.chains.join(''),
           conn.rule,
         ].some((i) => i?.includes(connectionFilter.value))
       }
