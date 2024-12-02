@@ -66,7 +66,9 @@ export default defineComponent<{
         </div>
       )
       const chians = (
-        <span class="inline w-56 text-sm">{[...props.conn.chains].reverse().join('->')}</span>
+        <span class="inline w-56 truncate text-sm">
+          {[...props.conn.chains].reverse().join('->')}
+        </span>
       )
       const rule = <span class="hidden text-sm tracking-tight xl:inline">{props.conn.rule}</span>
       const processPath = (
