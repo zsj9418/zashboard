@@ -71,7 +71,7 @@ export default {
   latencyasc: 'Latency Asc',
   language: 'Language',
   automaticDisconnection: 'Automatic Disconnection',
-  twoColumnsForProxyGroupInMobile: 'Two Columns For Proxy Group In Mobile',
+  twoColumnsInProxyGroupForMobile: 'Two Columns In Proxy Group For Mobile',
   backend: 'Backend',
   upgradeCore: 'Upgrade Core',
   [LANG.EN_US]: 'English',

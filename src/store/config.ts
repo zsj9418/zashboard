@@ -33,7 +33,7 @@ export const proxySortType = useStorage<PROXY_SORT_TYPE>(
 )
 export const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 export const automaticDisconnection = useStorage('config/automatic-disconnection', true)
-export const twoColumnsForProxyGroupInMobile = useStorage(
+export const twoColumnsInProxyGroupForMobile = useStorage(
   'config/two-columns-for-proxy-group-in-mobile',
   false,
 )

@@ -108,11 +108,11 @@
           />
         </div>
         <div class="flex items-center gap-2">
-          {{ $t('twoColumnsForProxyGroupInMobile') }}:
+          {{ $t('twoColumnsInProxyGroupForMobile') }}:
           <input
             class="toggle"
             type="checkbox"
-            v-model="twoColumnsForProxyGroupInMobile"
+            v-model="twoColumnsInProxyGroupForMobile"
           />
         </div>
         <div class="flex max-w-96 items-center gap-2">
@@ -193,7 +193,7 @@ import {
   speedtestUrl,
   theme,
   twoColumns,
-  twoColumnsForProxyGroupInMobile,
+  twoColumnsInProxyGroupForMobile,
   useConnectionCard,
 } from '@/store/config'
 import { twMerge } from 'tailwind-merge'

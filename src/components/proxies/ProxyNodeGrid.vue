@@ -3,7 +3,7 @@
     :class="
       twMerge(
         'grid gap-2',
-        twoColumnsForProxyGroupInMobile ? 'grid-cols-2' : 'grid-cols-1',
+        twoColumnsInProxyGroupForMobile ? 'grid-cols-2' : 'grid-cols-1',
         isSiderbarCollapsed
           ? inTwoColumns
             ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3'
@@ -24,7 +24,7 @@ import {
   isSiderbarCollapsed,
   proxiesTabShow,
   twoColumns,
-  twoColumnsForProxyGroupInMobile,
+  twoColumnsInProxyGroupForMobile,
 } from '@/store/config'
 import { proxyGroupList, proxyProviederList } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
