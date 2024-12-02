@@ -96,6 +96,14 @@
       </div>
       <div class="card-body">
         <div class="flex items-center gap-2">
+          {{ $t('truncateProxyName') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="truncateProxyName"
+          />
+        </div>
+        <div class="flex items-center gap-2">
           {{ $t('automaticDisconnection') }}:
           <input
             class="toggle"
@@ -205,6 +213,7 @@ import {
   speedtestTimeout,
   speedtestUrl,
   theme,
+  truncateProxyName,
   twoColumns,
   twoColumnsInProxyGroupForMobile,
   useConnectionCard,

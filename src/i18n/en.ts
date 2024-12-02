@@ -75,6 +75,7 @@ export default {
   backend: 'Backend',
   tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',
+  truncateProxyName: 'Truncate Proxy Name',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

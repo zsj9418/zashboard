@@ -4,10 +4,18 @@
       twMerge(
         'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow-md',
         props.active && 'bg-primary text-primary-content',
+        truncateProxyName && 'tooltip text-left',
       )
     "
+    :data-tip="node.name"
   >
-    <div class="flex-1 whitespace-nowrap text-xs md:text-sm">{{ node.name }}</div>
+    <div
+      :class="
+        twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
+      "
+    >
+      {{ node.name }}
+    </div>
     <div class="flex items-center gap-2 text-xs">
       <div class="flex-1">
         <span>{{ typeFormatter(node.type) }}</span>
@@ -24,6 +32,7 @@
 
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
+import { truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -54,3 +63,9 @@ const handlerLatencyTest = async () => {
   }
 }
 </script>
+
+<style scoped>
+.tooltip:before {
+  z-index: 20;
+}
+</style>

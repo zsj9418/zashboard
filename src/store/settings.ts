@@ -35,6 +35,8 @@ export const twoColumnsInProxyGroupForMobile = useStorage(
   'config/two-columns-for-proxy-group-in-mobile',
   false,
 )
+export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
+
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
