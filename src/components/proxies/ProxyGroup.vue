@@ -57,9 +57,9 @@
 
 <script setup lang="ts">
 import { prettyBytesHelper, sortProxyNodeByType } from '@/helper'
-import { collapseGroupMap } from '@/store/config'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import { collapseGroupMap } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref, watch } from 'vue'
 import LatencyTag from './LatencyTag.vue'

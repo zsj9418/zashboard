@@ -1,6 +1,6 @@
 import { PROXY_SORT_TYPE } from '@/config'
-import { language, proxySortType } from '@/store/config'
 import { getLatencyByName } from '@/store/proxies'
+import { language, proxySortType } from '@/store/settings'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'

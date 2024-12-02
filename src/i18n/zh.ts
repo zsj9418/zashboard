@@ -74,6 +74,7 @@ export default {
   twoColumnsInProxyGroupForMobile: '在移动端显示两列代理节点',
   backend: '后端',
   upgradeCore: '更新核心',
+  tunMode: 'Tun 模式',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

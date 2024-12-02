@@ -113,8 +113,8 @@
 import { disconnectByIdAPI } from '@/api'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
 import { fromNow, prettyBytesHelper } from '@/helper'
-import { connectionTableColumns } from '@/store/config'
 import { renderConnections } from '@/store/connections'
+import { connectionTableColumns } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,

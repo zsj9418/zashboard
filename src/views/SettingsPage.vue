@@ -54,6 +54,18 @@
         {{ $t('backend') }}
       </div>
       <div class="card-body gap-4">
+        <div
+          class="flex items-center gap-2"
+          v-if="!isSingBox && configs?.tun"
+        >
+          {{ $t('tunMode') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="configs.tun.enable"
+            @change="hanlderTunModeChange"
+          />
+        </div>
         <BackendSwitch />
         <div class="flex items-center gap-2">
           <button
@@ -184,6 +196,7 @@ import TableSettings from '@/components/connections/TableSettings.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import { LANG } from '@/config'
 import { i18n } from '@/i18n'
+import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
   compactConnectionCard,
@@ -195,7 +208,7 @@ import {
   twoColumns,
   twoColumnsInProxyGroupForMobile,
   useConnectionCard,
-} from '@/store/config'
+} from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 
@@ -233,6 +246,10 @@ const handlerClickReloadConfigs = async () => {
   } catch {
     isConfigReloading.value = false
   }
+}
+
+const hanlderTunModeChange = async () => {
+  await updateConfigs({ tun: { enable: configs.value?.tun.enable } })
 }
 
 const themes = [

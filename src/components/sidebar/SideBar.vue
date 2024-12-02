@@ -58,7 +58,7 @@ import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SpeedCharts from '@/components/sidebar/SpeedCharts.vue'
 import { ROUTE_NAME } from '@/config'
 import router from '@/router'
-import { isSiderbarCollapsed } from '@/store/config'
+import { isSiderbarCollapsed } from '@/store/settings'
 import {
   ArrowsRightLeftIcon,
   Cog6ToothIcon,

@@ -21,6 +21,6 @@
 import RuleCard from '@/components/rules/RuleCard.vue'
 import RuleProvider from '@/components/rules/RuleProvider.vue'
 import { RULE_TAB_TYPE } from '@/config'
-import { rulesTabShow } from '@/store/config'
 import { ruleProviderList, rules } from '@/store/rules'
+import { rulesTabShow } from '@/store/settings'
 </script>

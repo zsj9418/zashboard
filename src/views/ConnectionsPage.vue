@@ -39,8 +39,8 @@
 <script setup lang="ts">
 import ConnectionCard from '@/components/connections/ConnectionCard'
 import ConnectionTable from '@/components/connections/ConnectionTable.vue'
-import { useConnectionCard } from '@/store/config'
 import { renderConnections } from '@/store/connections'
+import { useConnectionCard } from '@/store/settings'
 import type { Connection } from '@/types'
 import { ref } from 'vue'
 import VueJsonPretty from 'vue-json-pretty'

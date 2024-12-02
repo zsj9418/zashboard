@@ -65,8 +65,8 @@
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
 import { fromNow, prettyBytesHelper, sortProxyNodeByType } from '@/helper'
-import { collapseGroupMap } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
+import { collapseGroupMap } from '@/store/settings'
 import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'

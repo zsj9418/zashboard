@@ -20,13 +20,13 @@
 
 <script lang="ts" setup>
 import { PROXY_TAB_TYPE } from '@/config'
+import { proxyGroupList, proxyProviederList } from '@/store/proxies'
 import {
   isSiderbarCollapsed,
   proxiesTabShow,
   twoColumns,
   twoColumnsInProxyGroupForMobile,
-} from '@/store/config'
-import { proxyGroupList, proxyProviederList } from '@/store/proxies'
+} from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 

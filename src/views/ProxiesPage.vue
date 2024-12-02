@@ -35,8 +35,8 @@ import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
 import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { PROXY_TAB_TYPE } from '@/config'
 import { isLargeScreen } from '@/helper'
-import { proxiesTabShow, showGlobalProxy, twoColumns } from '@/store/config'
 import { GLOBAL, proxyGroupList, proxyProviederList } from '@/store/proxies'
+import { proxiesTabShow, showGlobalProxy, twoColumns } from '@/store/settings'
 import { computed } from 'vue'
 
 const Comp = computed(() =>

@@ -35,8 +35,8 @@
 <script setup lang="ts">
 import { updateRuleProviderAPI } from '@/api'
 import { RULE_TAB_TYPE } from '@/config'
-import { rulesTabShow } from '@/store/config'
 import { fetchRules, ruleProviderList } from '@/store/rules'
+import { rulesTabShow } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 

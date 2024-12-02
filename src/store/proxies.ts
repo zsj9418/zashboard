@@ -9,8 +9,8 @@ import {
 import type { Proxy, ProxyProvider } from '@/types'
 import { last } from 'lodash'
 import { ref } from 'vue'
-import { automaticDisconnection, speedtestTimeout, speedtestUrl } from './config'
 import { activeConnections } from './connections'
+import { automaticDisconnection, speedtestTimeout, speedtestUrl } from './settings'
 
 export const GLOBAL = 'GLOBAL'
 export const proxyGroupList = ref<string[]>([])

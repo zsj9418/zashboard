@@ -1,6 +1,6 @@
 import { ROUTE_NAME } from '@/config'
 import { i18n } from '@/i18n'
-import { language } from '@/store/config'
+import { language } from '@/store/settings'
 import { activeBackend } from '@/store/setup'
 import ConnectionsPage from '@/views/ConnectionsPage.vue'
 import LogsPage from '@/views/LogsPage.vue'

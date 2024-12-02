@@ -73,6 +73,7 @@ export default {
   automaticDisconnection: 'Automatic Disconnection',
   twoColumnsInProxyGroupForMobile: 'Two Columns In Proxy Group For Mobile',
   backend: 'Backend',
+  tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',

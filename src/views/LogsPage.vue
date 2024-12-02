@@ -20,8 +20,8 @@
 
 <script setup lang="ts">
 import { LOG_LEVEL } from '@/config'
-import { language } from '@/store/config'
 import { logFilter, logs } from '@/store/logs'
+import { language } from '@/store/settings'
 import dayjs from 'dayjs'
 import { computed } from 'vue'
 

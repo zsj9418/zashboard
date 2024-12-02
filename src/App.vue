@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { theme } from './store/config'
+import { theme } from './store/settings'
 import { activeBackend } from './store/setup'
 import Home from './views/HomePage.vue'
 import SetupPage from './views/SetupPage.vue'

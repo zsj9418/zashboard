@@ -13,6 +13,9 @@ export type Config = {
   modes: string[]
   'log-level': string
   ipv6: boolean
+  tun: {
+    enable: boolean
+  }
 }
 
 export type Proxy = {

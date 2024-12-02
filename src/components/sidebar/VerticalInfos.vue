@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
-import { isSiderbarCollapsed } from '@/store/config'
 import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
+import { isSiderbarCollapsed } from '@/store/settings'
 import { downloadSpeed, memory, uploadSpeed } from '@/store/statistics'
 import {
   ArrowDownCircleIcon,

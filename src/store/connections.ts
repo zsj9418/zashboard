@@ -5,7 +5,7 @@ import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
 import _, { differenceWith } from 'lodash'
 import { computed, ref, watch } from 'vue'
-import { useConnectionCard } from './config'
+import { useConnectionCard } from './settings'
 
 export const activeConnections = ref<Connection[]>([])
 export const closedConnections = ref<Connection[]>([])

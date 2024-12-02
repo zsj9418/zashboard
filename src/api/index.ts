@@ -101,7 +101,7 @@ export const getConfigsAPI = () => {
   return axios.get<Config>('/configs')
 }
 
-export const patchConfigsAPI = (configs: Record<string, string>) => {
+export const patchConfigsAPI = (configs: Record<string, string | boolean | object>) => {
   return axios.patch('/configs', configs)
 }
 
