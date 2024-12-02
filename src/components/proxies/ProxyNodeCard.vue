@@ -4,7 +4,7 @@
       twMerge(
         'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow-md',
         props.active && 'bg-primary text-primary-content',
-        truncateProxyName && isTruncate && 'tooltip text-left',
+        truncateProxyName && isTruncated && 'tooltip text-left',
       )
     "
     :data-tip="node.name"
@@ -34,9 +34,8 @@
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName } from '@/store/settings'
-import { useElementSize } from '@vueuse/core'
 import { twMerge } from 'tailwind-merge'
-import { computed, ref } from 'vue'
+import { computed, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 
 const props = defineProps<{
@@ -44,10 +43,33 @@ const props = defineProps<{
   active?: boolean
 }>()
 const nameRef = ref()
-const isTruncate = computed(() => {
-  const { width } = useElementSize(nameRef)
+const isTruncated = ref(false)
 
-  return width.value < nameRef.value?.scrollWidth
+let resizeObserver: ResizeObserver | null = null
+
+const checkTruncation = () => {
+  if (nameRef.value) {
+    const { scrollWidth, clientWidth } = nameRef.value
+    isTruncated.value = scrollWidth > clientWidth
+  }
+}
+
+onMounted(() => {
+  if (nameRef.value) {
+    resizeObserver = new ResizeObserver(() => {
+      checkTruncation()
+    })
+    resizeObserver.observe(nameRef.value)
+  }
+
+  checkTruncation()
+})
+
+onUnmounted(() => {
+  if (resizeObserver && nameRef.value) {
+    resizeObserver.unobserve(nameRef.value)
+  }
+  resizeObserver = null
 })
 
 const node = computed(() => proxyMap.value[props.name])
