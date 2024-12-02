@@ -76,6 +76,7 @@ export default {
   upgradeCore: '更新核心',
   tunMode: 'Tun 模式',
   truncateProxyName: '截断代理名称',
+  sourceIPLabels: '源IP标签',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

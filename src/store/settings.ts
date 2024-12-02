@@ -55,7 +55,7 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
   ],
 )
 export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
-export const hostLabelMap = useStorage<Record<string, string>>('config/host-label-map', {})
+export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
 
 // rules
 export const rulesTabShow = ref(RULE_TAB_TYPE.RULES)

@@ -158,6 +158,7 @@
         {{ $t('connections') }}
       </div>
       <div class="card-body">
+        <SourceIPLabels />
         <div class="flex items-center gap-2">
           {{ $t('connectionStyle') }}:
           {{ $t('table') }}
@@ -202,6 +203,7 @@ import {
 } from '@/api'
 import TableSettings from '@/components/connections/TableSettings.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
+import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import { LANG } from '@/config'
 import { i18n } from '@/i18n'
 import { configs, updateConfigs } from '@/store/config'

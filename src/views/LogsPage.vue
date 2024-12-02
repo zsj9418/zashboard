@@ -8,7 +8,7 @@
     <div
       v-for="log in renderLogs"
       :key="log.seq"
-      class="card w-full flex-row gap-1 gap-2 rounded-xl bg-base-100 p-2 text-sm shadow-lg"
+      class="card w-full flex-row flex-wrap gap-2 break-all rounded-xl bg-base-100 p-2 text-sm shadow-lg"
     >
       <span>{{ log.seq }}</span>
       <span class="text-primary">{{ dayjs(log.time).locale(language).format('HH:mm:ss') }}</span>

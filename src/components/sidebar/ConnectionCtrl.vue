@@ -55,10 +55,10 @@
         label="all"
       ></option>
       <option
-        v-for="opt in sourceIPs"
-        :key="opt"
-        :value="opt"
-        :label="opt"
+        v-for="opt in sourceIPOpts"
+        :key="opt.value"
+        :value="opt.value"
+        :label="opt.label"
       />
     </select>
     <div class="join flex-1">
@@ -72,10 +72,10 @@
           label="all"
         ></option>
         <option
-          v-for="opt in sourceIPs"
-          :key="opt"
-          :value="opt"
-          :label="opt"
+          v-for="opt in sourceIPOpts"
+          :key="opt.value"
+          :value="opt.value"
+          :label="opt.label"
         />
       </select>
       <input
@@ -116,9 +116,10 @@ import {
   sourceIPFilter,
   sourceIPs,
 } from '@/store/connections'
-import { useConnectionCard } from '@/store/settings'
+import { sourceIPLabelMap, useConnectionCard } from '@/store/settings'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
 defineProps<{
   horizontal?: boolean
 }>()
@@ -127,4 +128,13 @@ const handlerClickCloseAll = () => {
     disconnectByIdAPI(conn.id)
   })
 }
+
+const sourceIPOpts = computed(() => {
+  return sourceIPs.value.map((ip) => {
+    return {
+      label: sourceIPLabelMap.value[ip] || ip,
+      value: ip,
+    }
+  })
+})
 </script>

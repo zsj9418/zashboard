@@ -76,6 +76,7 @@ export default {
   tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',
   truncateProxyName: 'Truncate Proxy Name',
+  sourceIPLabels: 'Source IP Labels',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }
