@@ -30,7 +30,7 @@ export default {
   activeConnections: 'Active Conns',
   closedConnections: 'Closed Conns',
   logLevel: 'Log Level',
-  twoColumns: 'Two Columns',
+  twoColumns: 'Two Columns For Proxy Groups',
   type: 'Type',
   process: 'Process',
   sniffHost: 'Sniff Host',
@@ -71,6 +71,7 @@ export default {
   latencyasc: 'Latency Asc',
   language: 'Language',
   automaticDisconnection: 'Automatic Disconnection',
+  twoColumnsForProxyGroupInMobile: 'Two Columns For Proxy Group In Mobile',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

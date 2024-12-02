@@ -94,18 +94,26 @@
           />
         </div>
         <div class="flex items-center gap-2">
+          {{ $t('twoColumnsForProxyGroupInMobile') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="twoColumnsForProxyGroupInMobile"
+          />
+        </div>
+        <div class="flex max-w-96 items-center gap-2">
           {{ $t('speedtestUrl') }}:
           <input
             type="text"
-            class="input input-sm input-bordered max-w-96 flex-1"
+            class="input input-sm input-bordered flex-1"
             v-model="speedtestUrl"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex max-w-96 items-center gap-2">
           {{ $t('speedtestTimeout') }}:
           <input
             type="text"
-            class="input input-sm input-bordered max-w-96 flex-1"
+            class="input input-sm input-bordered flex-1"
             v-model="speedtestTimeout"
           />
         </div>
@@ -164,6 +172,7 @@ import {
   speedtestUrl,
   theme,
   twoColumns,
+  twoColumnsForProxyGroupInMobile,
   useConnectionCard,
 } from '@/store/config'
 import { twMerge } from 'tailwind-merge'

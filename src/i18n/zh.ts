@@ -30,7 +30,7 @@ export default {
   activeConnections: '活跃连接',
   closedConnections: '已关闭连接',
   logLevel: '日志等级',
-  twoColumns: '双列显示',
+  twoColumns: '双列显示代理组',
   type: '类型',
   process: '进程',
   sniffHost: '嗅探主机',
@@ -71,6 +71,7 @@ export default {
   latencyasc: '按延迟升序',
   language: '语言',
   automaticDisconnection: '自动断开连接',
+  twoColumnsForProxyGroupInMobile: '在移动端显示两列代理节点',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

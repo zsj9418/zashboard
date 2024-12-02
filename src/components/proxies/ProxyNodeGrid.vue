@@ -2,7 +2,8 @@
   <div
     :class="
       twMerge(
-        'grid grid-cols-1 gap-2',
+        'grid gap-2',
+        twoColumnsForProxyGroupInMobile ? 'grid-cols-2' : 'grid-cols-1',
         isSiderbarCollapsed
           ? inTwoColumns
             ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3'
@@ -19,7 +20,12 @@
 
 <script lang="ts" setup>
 import { PROXY_TAB_TYPE } from '@/config'
-import { isSiderbarCollapsed, proxiesTabShow, twoColumns } from '@/store/config'
+import {
+  isSiderbarCollapsed,
+  proxiesTabShow,
+  twoColumns,
+  twoColumnsForProxyGroupInMobile,
+} from '@/store/config'
 import { proxyGroupList, proxyProviederList } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
