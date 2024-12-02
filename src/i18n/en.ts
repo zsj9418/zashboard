@@ -60,7 +60,7 @@ export default {
   noExpire: 'Null',
   updated: 'Updated',
   upgradeUI: 'Upgrade Dashboard',
-  upgradeAllProviders: 'Upgrade All Providers',
+  updateAllProviders: 'Upgrade All Providers',
   reloadConfigs: 'Reload Configs',
   mode: 'Mode',
   proxySortType: 'Proxy Sort Type',

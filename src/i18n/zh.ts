@@ -60,7 +60,7 @@ export default {
   noExpire: '不限时',
   updated: '更新于',
   upgradeUI: '更新面板',
-  upgradeAllProviders: '更新所有提供商',
+  updateAllProviders: '更新所有提供商',
   reloadConfigs: '重载配置',
   mode: '模式',
   proxySortType: '代理排序方式',

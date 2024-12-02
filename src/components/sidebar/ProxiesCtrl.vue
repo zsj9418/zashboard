@@ -26,9 +26,9 @@
       >
         <button
           :class="twMerge('btn btn-sm', isUpgrading ? 'animate-pulse' : '')"
-          @click="handlerClickUpgradeAllProviders"
+          @click="handlerClickUpdateAllProviders"
         >
-          {{ $t('upgradeAllProviders') }}
+          {{ $t('updateAllProviders') }}
         </button>
       </div>
     </template>
@@ -74,7 +74,7 @@ defineProps<{
 }>()
 
 const isUpgrading = ref(false)
-const handlerClickUpgradeAllProviders = async () => {
+const handlerClickUpdateAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true
   try {
@@ -84,6 +84,7 @@ const handlerClickUpgradeAllProviders = async () => {
     await fetchProxies()
     isUpgrading.value = false
   } catch {
+    await fetchProxies()
     isUpgrading.value = false
   }
 }
