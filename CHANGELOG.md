@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.9.1](https://github.com/Zephyruso/zashboard/compare/v1.9.0...v1.9.1) (2024-12-02)
+
+
+### Bug Fixes
+
+* log style ([99c4f77](https://github.com/Zephyruso/zashboard/commit/99c4f778139fdfd64c35c12ba006f574f82155b1))
+* sourceip label for card ([80cb1c8](https://github.com/Zephyruso/zashboard/commit/80cb1c82db772b363ed8f692d6258a08720cf556))
+* truncate proxy chain in card ([7aaeaec](https://github.com/Zephyruso/zashboard/commit/7aaeaec8046348ff2e1f97e46d79504729b598a6))
+
 ## [1.9.0](https://github.com/Zephyruso/zashboard/compare/v1.8.0...v1.9.0) (2024-12-02)
 
 
