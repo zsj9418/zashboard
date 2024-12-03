@@ -16,34 +16,36 @@
         :is="ctrlComp"
         :horizontal="true"
       />
-      <RouterView class="mb-12 md:mb-0" />
+      <RouterView :class="`${isPWA ? 'mb-24' : 'mb-12'} md:mb-0`" />
 
       <div
-        class="fixed bottom-0 flex h-12 w-full items-center justify-center gap-1 bg-base-200 p-1 md:hidden"
+        :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-24 pb-12' : 'h-12'}`"
       >
-        <ul class="menu menu-horizontal">
-          <li
-            v-for="r in routes"
-            :key="r"
-          >
-            <a
-              :class="r === route.name ? 'active' : 'inactive'"
-              :href="`#${r}`"
+        <div class="flex h-12 w-full items-center justify-center gap-1">
+          <ul class="menu menu-horizontal">
+            <li
+              v-for="r in routes"
+              :key="r"
             >
-              <component
-                :is="routeIconMap[r]"
-                class="h-5 w-5"
-              />
-            </a>
-          </li>
-        </ul>
-        <label for="sidebar">
-          <div
-            class="btn btn-circle drawer-button btn-sm bg-neutral text-neutral-content shadow-lg"
-          >
-            <Bars3Icon class="h-4 w-4" />
-          </div>
-        </label>
+              <a
+                :class="r === route.name ? 'active' : 'inactive'"
+                :href="`#${r}`"
+              >
+                <component
+                  :is="routeIconMap[r]"
+                  class="h-5 w-5"
+                />
+              </a>
+            </li>
+          </ul>
+          <label for="sidebar">
+            <div
+              class="btn btn-circle drawer-button btn-sm bg-neutral text-neutral-content shadow-lg"
+            >
+              <Bars3Icon class="h-4 w-4" />
+            </div>
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -74,6 +76,10 @@ import {
 } from '@heroicons/vue/24/outline'
 import { computed, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
+
+const isPWA = (() => {
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
+})()
 
 const routeIconMap = {
   [ROUTE_NAME.proxies]: GlobeAltIcon,
