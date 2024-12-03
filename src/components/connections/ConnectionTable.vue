@@ -112,9 +112,9 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
-import { fromNow, prettyBytesHelper } from '@/helper'
+import { fromNow, getIPLabelFromMap, prettyBytesHelper } from '@/helper'
 import { renderConnections } from '@/store/connections'
-import { connectionTableColumns, sourceIPLabelMap } from '@/store/settings'
+import { connectionTableColumns } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
@@ -262,7 +262,7 @@ const columns: ColumnDef<Connection>[] = [
     header: () => t('sourceIP'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP,
     accessorFn: (original) => {
-      return sourceIPLabelMap.value[original.metadata.sourceIP] || original.metadata.sourceIP
+      return getIPLabelFromMap(original.metadata.sourceIP)
     },
   },
   {

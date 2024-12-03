@@ -105,6 +105,7 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
+import { getIPLabelFromMap } from '@/helper'
 import {
   connectionFilter,
   connectionSortType,
@@ -116,7 +117,7 @@ import {
   sourceIPFilter,
   sourceIPs,
 } from '@/store/connections'
-import { sourceIPLabelMap, useConnectionCard } from '@/store/settings'
+import { useConnectionCard } from '@/store/settings'
 import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
@@ -132,7 +133,7 @@ const handlerClickCloseAll = () => {
 const sourceIPOpts = computed(() => {
   return sourceIPs.value.map((ip) => {
     return {
-      label: sourceIPLabelMap.value[ip] || ip,
+      label: getIPLabelFromMap(ip),
       value: ip,
     }
   })

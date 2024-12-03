@@ -1,6 +1,6 @@
 import { PROXY_SORT_TYPE } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
-import { language, proxySortType } from '@/store/settings'
+import { language, proxySortType, sourceIPLabelMap } from '@/store/settings'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'
@@ -43,4 +43,15 @@ export const sortProxyNodeByType = (proxies: string[]) => {
     case PROXY_SORT_TYPE.LATENCY_DESC:
       return proxies.sort((prev, next) => getLatencyExceptZero(next) - getLatencyExceptZero(prev))
   }
+}
+
+export const getIPLabelFromMap = (ip: string) => {
+  const isIPv6 = ip.includes(':')
+
+  for (const key in sourceIPLabelMap.value) {
+    if (ip === key || (isIPv6 && ip.endsWith(key))) {
+      return sourceIPLabelMap.value[key]
+    }
+  }
+  return ip
 }
