@@ -23,7 +23,7 @@
       IP:
       <input
         type="text"
-        class="input input-xs input-bordered"
+        class="input input-xs input-bordered w-44"
         v-model="newLabelForIP.ip"
       />
       <input

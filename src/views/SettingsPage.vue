@@ -39,22 +39,27 @@
             />
           </select>
         </div>
-        <div class="flex items-center gap-2">
+        <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
+          <template v-if="!isSingBox">
+            <button
+              :class="
+                twMerge('btn btn-primary btn-xs sm:btn-sm', isUIUpgrading ? 'animate-pulse' : '')
+              "
+              @click="handlerClickUpgradeUI"
+            >
+              {{ $t('upgradeUI') }}
+            </button>
+            <div class="sm:hidden"></div>
+          </template>
+
           <button
-            v-if="!isSingBox"
-            :class="twMerge('btn btn-primary btn-sm', isUIUpgrading ? 'animate-pulse' : '')"
-            @click="handlerClickUpgradeUI"
-          >
-            {{ $t('upgradeUI') }}
-          </button>
-          <button
-            class="btn btn-sm"
+            class="btn btn-xs sm:btn-sm"
             @click="handlerClickExport"
           >
             {{ $t('exportSettings') }}
           </button>
           <button
-            class="btn btn-sm"
+            class="btn btn-xs sm:btn-sm"
             @click="handlerClickImport"
           >
             {{ $t('importSettings') }}
@@ -80,22 +85,26 @@
             @change="hanlderTunModeChange"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
+          <template v-if="!isSingBox">
+            <button
+              :class="
+                twMerge('btn btn-primary btn-xs sm:btn-sm', isCoreUpgrading ? 'animate-pulse' : '')
+              "
+              @click="handlerClickUpgradeCore"
+            >
+              {{ $t('upgradeCore') }}
+            </button>
+            <div class="sm:hidden"></div>
+          </template>
           <button
-            v-if="!isSingBox"
-            :class="twMerge('btn btn-primary btn-sm', isCoreUpgrading ? 'animate-pulse' : '')"
-            @click="handlerClickUpgradeCore"
-          >
-            {{ $t('upgradeCore') }}
-          </button>
-          <button
-            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
+            :class="twMerge('btn btn-xs sm:btn-sm', isConfigReloading ? 'animate-pulse' : '')"
             @click="handlerClickReloadConfigs"
           >
             {{ $t('reloadConfigs') }}
           </button>
           <button
-            class="btn btn-sm"
+            class="btn btn-xs sm:btn-sm"
             @click="flushFakeIPAPI"
           >
             {{ $t('flushFakeIP') }}
@@ -163,19 +172,19 @@
             v-model="twoColumnsInProxyGroupForMobile"
           />
         </div>
-        <div class="flex max-w-96 items-center gap-2">
-          {{ $t('speedtestUrl') }}:
+        <div class="flex items-center gap-2">
+          <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered flex-1"
+            class="input input-sm input-bordered w-60 sm:w-96"
             v-model="speedtestUrl"
           />
         </div>
-        <div class="flex max-w-96 items-center gap-2">
-          {{ $t('speedtestTimeout') }}:
+        <div class="flex items-center gap-2">
+          <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered flex-1"
+            class="input input-sm input-bordered w-60 sm:w-96"
             v-model="speedtestTimeout"
           />
         </div>
