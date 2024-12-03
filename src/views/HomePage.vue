@@ -21,13 +21,15 @@
       <div
         :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-24 pb-12' : 'h-12'}`"
       >
-        <div class="flex h-12 w-full items-center justify-center gap-1">
-          <ul class="menu menu-horizontal">
+        <div class="flex h-12 w-full items-center justify-center gap-1 p-2">
+          <ul class="menu menu-horizontal flex flex-1">
             <li
               v-for="r in routes"
               :key="r"
+              class="flex-1"
             >
               <a
+                class="flex items-center justify-center"
                 :class="r === route.name ? 'active' : 'inactive'"
                 :href="`#${r}`"
               >
