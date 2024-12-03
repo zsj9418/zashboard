@@ -1,25 +1,17 @@
 <template>
-  <div class="flex justify-between">
-    <div class="flex flex-col gap-2 p-2 text-xs">
+  <div class="flex flex-col gap-2 p-2 text-xs">
+    <div class="grid grid-cols-2 gap-2">
       <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
-      <div>
-        {{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }} ({{
-          prettyBytesHelper(downloadSpeed)
-        }}/s)
-      </div>
-      <div>
-        {{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }} ({{
-          prettyBytesHelper(uploadSpeed)
-        }}/s)
-      </div>
       <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
-      <div>
-        {{ $t('version') }}:
-        {{ version }}
-      </div>
-      <BackendSwitch />
+      <div>{{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }}</div>
+      <div>{{ $t('dlSpeed') }}: {{ prettyBytesHelper(downloadSpeed) }}/s</div>
+      <div>{{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }}</div>
+      <div>{{ $t('ulSpeed') }}: {{ prettyBytesHelper(uploadSpeed) }}/s</div>
+      <div>{{ $t('version') }}: {{ version }}</div>
     </div>
-    <div class="flex flex-1 items-end justify-end p-2">
+
+    <div class="flex">
+      <BackendSwitch class="flex-1" />
       <button
         class="btn btn-circle btn-ghost btn-xs"
         @click="isSiderbarCollapsed = true"
