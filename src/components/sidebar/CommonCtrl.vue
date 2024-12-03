@@ -7,7 +7,15 @@
       <div>{{ $t('dlSpeed') }}: {{ prettyBytesHelper(downloadSpeed) }}/s</div>
       <div>{{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }}</div>
       <div>{{ $t('ulSpeed') }}: {{ prettyBytesHelper(uploadSpeed) }}/s</div>
-      <div>{{ $t('version') }}: {{ version }}</div>
+    </div>
+
+    <div class="flex gap-1">
+      {{ $t('version') }}:
+      <img
+        :src="isSingBox ? SingBoxLogo : MetacubexLogo"
+        class="w-4 rounded-sm"
+      />
+      {{ version }}
     </div>
 
     <div class="flex">
@@ -23,7 +31,9 @@
 </template>
 
 <script setup lang="ts">
-import { version } from '@/api'
+import { isSingBox, version } from '@/api'
+import MetacubexLogo from '@/assets/metacubex.jpeg'
+import SingBoxLogo from '@/assets/sing-box.svg'
 import { prettyBytesHelper } from '@/helper'
 import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
 import { isSiderbarCollapsed } from '@/store/settings'
