@@ -6,7 +6,7 @@
       :key="ip"
       class="flex items-center gap-2"
     >
-      {{ ip }}:
+      {{ ip }} ->
       <input
         type="text"
         class="input input-xs input-bordered w-24"
