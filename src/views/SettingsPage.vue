@@ -337,11 +337,11 @@ const handlerClickExport = () => {
     }
   }
 
-  const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'text/plain' })
+  const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' })
   const url = URL.createObjectURL(blob)
   const a = document.createElement('a')
   a.href = url
-  a.download = 'zashboard-settings.json'
+  a.download = 'zashboard-settings'
   a.click()
   URL.revokeObjectURL(url)
 }
