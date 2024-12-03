@@ -39,12 +39,25 @@
             />
           </select>
         </div>
-        <div v-if="!isSingBox">
+        <div class="flex items-center gap-2">
           <button
+            v-if="!isSingBox"
             :class="twMerge('btn btn-primary btn-sm', isUIUpgrading ? 'animate-pulse' : '')"
             @click="handlerClickUpgradeUI"
           >
             {{ $t('upgradeUI') }}
+          </button>
+          <button
+            class="btn btn-sm"
+            @click="handlerClickExport"
+          >
+            {{ $t('exportSettings') }}
+          </button>
+          <button
+            class="btn btn-sm"
+            @click="handlerClickImport"
+          >
+            {{ $t('importSettings') }}
           </button>
         </div>
       </div>
@@ -314,4 +327,42 @@ const themes = [
   'nord',
   'sunset',
 ]
+
+const handlerClickExport = () => {
+  const settings: Record<string, string | null> = {}
+
+  for (const key in localStorage) {
+    if (key.startsWith('config/') || key.startsWith('setup/')) {
+      settings[key] = localStorage.getItem(key)
+    }
+  }
+
+  const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'text/plain' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'zashboard-settings.json'
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+const handlerClickImport = () => {
+  const input = document.createElement('input')
+  input.type = 'file'
+  input.accept = '.json'
+  input.onchange = async () => {
+    const file = input.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const settings = JSON.parse(reader.result as string)
+      for (const key in settings) {
+        localStorage.setItem(key, settings[key])
+      }
+      location.reload()
+    }
+    reader.readAsText(file)
+  }
+  input.click()
+}
 </script>

@@ -81,6 +81,8 @@ export default {
   auto: 'Auto',
   dots: 'Dots',
   bar: 'Bar',
+  exportSettings: 'Export Settings',
+  importSettings: 'Import Settings',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

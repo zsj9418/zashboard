@@ -81,6 +81,8 @@ export default {
   auto: '自动',
   dots: '点',
   bar: '条',
+  exportSettings: '导出设置',
+  importSettings: '导入设置',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }
