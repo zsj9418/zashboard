@@ -3,11 +3,21 @@
     <div class="collapse-title">
       <div class="flex items-center gap-2">
         <div class="flex items-center gap-1 text-lg font-medium sm:text-xl">
-          <img
-            v-if="proxyGroup.icon"
-            class="w-5"
-            :src="proxyGroup.icon"
-          />
+          <template v-if="proxyGroup.icon">
+            <div
+              v-if="proxyGroup.icon.startsWith('data:image/svg+xml')"
+              class="h-5 w-5 bg-primary"
+              :style="{
+                maskImage: `url(&quot;${encodeSvg(proxyGroup.icon)}&quot;)`,
+                maskSize: '100% 100%',
+              }"
+            />
+            <img
+              v-else
+              class="w-5"
+              :src="proxyGroup.icon"
+            />
+          </template>
           {{ proxyGroup.name }}
 
           <span class="text-xs">:: {{ proxyGroup.type }}</span>
@@ -117,4 +127,20 @@ const downloadTotal = computed(() => {
 
   return speed
 })
+
+/**
+ * transform an SVG into a data URI
+ * @see https://gist.github.com/jennyknuth/222825e315d45a738ed9d6e04c7a88d0
+ */
+const encodeSvg = (svg: string) => {
+  return svg
+    .replace('<svg', ~svg.indexOf('xmlns') ? '<svg' : '<svg xmlns="http://www.w3.org/2000/svg"')
+    .replace(/"/g, "'")
+    .replace(/%/g, '%25')
+    .replace(/#/g, '%23')
+    .replace(/\{/g, '%7B')
+    .replace(/\}/g, '%7D')
+    .replace(/</g, '%3C')
+    .replace(/>/g, '%3E')
+}
 </script>
