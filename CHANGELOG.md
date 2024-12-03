@@ -1,5 +1,25 @@
 # Changelog
 
+## [1.11.0](https://github.com/Zephyruso/zashboard/compare/v1.10.0...v1.11.0) (2024-12-03)
+
+
+### Features
+
+* export & import settings ([3617a07](https://github.com/Zephyruso/zashboard/commit/3617a07124925764fa05d532373bc2ad0dec796c))
+* logos for version ([feb0e14](https://github.com/Zephyruso/zashboard/commit/feb0e14be50a5c9fec51d90c6c7bf9e3768fe7d4))
+* support to set icon color to the theme color when proxy icon starts with `data:image/svg+xml` ([520c44a](https://github.com/Zephyruso/zashboard/commit/520c44ae0d74c538d7a335127698797cead22086))
+
+
+### Bug Fixes
+
+* bigger menu for mobile ([fa74af5](https://github.com/Zephyruso/zashboard/commit/fa74af5b0e98409dec880273af7d3b0a64eb6790))
+* export on ios ([430cc2d](https://github.com/Zephyruso/zashboard/commit/430cc2d52ac0100ba27395e9cac15e29b5049685))
+* ip label match ends ([8ffe0c4](https://github.com/Zephyruso/zashboard/commit/8ffe0c4051a6cdda43b04584aabb6d91dbba0303))
+* remove ambiguity ([273da00](https://github.com/Zephyruso/zashboard/commit/273da002be4d7e2987bb7efb2da6c15c764e73bd))
+* settings input style ([1586c75](https://github.com/Zephyruso/zashboard/commit/1586c752b86cd5401bf10eae9f250f69febaf417))
+* style for statistics infos ([eae3bf8](https://github.com/Zephyruso/zashboard/commit/eae3bf8ccdb310bda124e3e9840dadb4e0218610))
+* truncate long host ([3cdb783](https://github.com/Zephyruso/zashboard/commit/3cdb783c449e72d8ffa7d811dcfb88fa05ed6f3a))
+
 ## [1.10.0](https://github.com/Zephyruso/zashboard/compare/v1.9.1...v1.10.0) (2024-12-03)
 
 
