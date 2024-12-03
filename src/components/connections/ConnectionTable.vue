@@ -115,7 +115,7 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
-import { fromNow, getIPLabelFromMap, prettyBytesHelper } from '@/helper'
+import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
 import { renderConnections } from '@/store/connections'
 import { connectionTableColumns } from '@/store/settings'
 import type { Connection } from '@/types'
@@ -203,7 +203,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('process'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Process,
-    accessorFn: (original) => original.metadata.processPath || '-',
+    accessorFn: (original) => getProcessFromConnection(original),
   },
   {
     header: () => t('host'),

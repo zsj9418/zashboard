@@ -1,6 +1,7 @@
 import { PROXY_SORT_TYPE } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
 import { language, proxySortType, sourceIPLabelMap } from '@/store/settings'
+import type { Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'
@@ -54,4 +55,12 @@ export const getIPLabelFromMap = (ip: string) => {
     }
   }
   return ip
+}
+
+export const getProcessFromConnection = (connection: Connection) => {
+  return (
+    connection.metadata.process ||
+    connection.metadata.processPath.replace(/^.*[/\\](.*)$/, '$1') ||
+    '-'
+  )
 }

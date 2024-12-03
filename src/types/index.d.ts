@@ -81,6 +81,7 @@ export type ConnectionRawMessage = {
     dnsMode: string
     host: string
     processPath: string
+    process: string
     sourceIP: string
     sourcePort: string
   }

@@ -1,6 +1,12 @@
 import { disconnectByIdAPI } from '@/api'
 import { LANG } from '@/config'
-import { fromNow, getIPLabelFromMap, isLargeScreen, prettyBytesHelper } from '@/helper'
+import {
+  fromNow,
+  getIPLabelFromMap,
+  getProcessFromConnection,
+  isLargeScreen,
+  prettyBytesHelper,
+} from '@/helper'
 import { compactConnectionCard, language } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
@@ -73,7 +79,7 @@ export default defineComponent<{
       const rule = <span class="hidden text-sm tracking-tight xl:inline">{props.conn.rule}</span>
       const processPath = (
         <span class={`hidden min-w-48 px-2 text-sm 2xl:inline`}>
-          {props.conn.metadata.processPath}
+          {getProcessFromConnection(props.conn)}
         </span>
       )
       const startTime = (
