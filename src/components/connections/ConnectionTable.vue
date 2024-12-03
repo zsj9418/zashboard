@@ -66,6 +66,9 @@
                   CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
                   CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
                 ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'w-14',
+                [CONNECTIONS_TABLE_ACCESSOR_KEY.Host].includes(
+                  cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY,
+                ) && 'max-w-[32rem] truncate',
               )
             "
           >
