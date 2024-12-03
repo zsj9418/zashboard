@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-1 overflow-y-auto p-2">
+  <div class="grid grid-cols-1 gap-2 overflow-y-auto p-2">
     <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4 text-primary">
         <a
@@ -195,7 +195,6 @@
         {{ $t('connections') }}
       </div>
       <div class="card-body">
-        <SourceIPLabels />
         <div class="flex items-center gap-2">
           {{ $t('connectionStyle') }}:
           {{ $t('table') }}
@@ -217,13 +216,8 @@
             v-model="compactConnectionCard"
           />
         </div>
-        <div
-          v-else
-          class="flex flex-col gap-2"
-        >
-          <div>{{ $t('customTableColumns') }}:</div>
-          <TableSettings />
-        </div>
+        <TableSettings v-else />
+        <SourceIPLabels />
       </div>
     </div>
   </div>
@@ -238,9 +232,9 @@ import {
   upgradeUIAPI,
   zashboardVersion,
 } from '@/api'
-import TableSettings from '@/components/connections/TableSettings.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
+import TableSettings from '@/components/settings/TableSettings.vue'
 import { LANG, PROXY_PREVIEW_TYPE } from '@/config'
 import { i18n } from '@/i18n'
 import { configs, updateConfigs } from '@/store/config'

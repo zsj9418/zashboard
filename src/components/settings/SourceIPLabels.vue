@@ -1,6 +1,6 @@
 <template>
   <div>{{ $t('sourceIPLabels') }}:</div>
-  <div class="flex flex-col gap-2 bg-base-200 p-2">
+  <div class="flex flex-col gap-2 p-2">
     <div
       v-for="ip in sourceIPs"
       :key="ip"

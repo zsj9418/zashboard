@@ -1,4 +1,5 @@
 <template>
+  <div>{{ $t('customTableColumns') }}:</div>
   <div class="flex rounded bg-base-200 lg:flex-col">
     <VueDraggable
       class="flex flex-1 flex-col gap-2 bg-base-300 p-2 lg:flex-row"
