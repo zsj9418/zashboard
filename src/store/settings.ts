@@ -3,7 +3,6 @@ import {
   LANG,
   PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
-  PROXY_TAB_TYPE,
   RULE_TAB_TYPE,
 } from '@/config'
 import { useStorage } from '@vueuse/core'
@@ -30,7 +29,6 @@ export const proxySortType = useStorage<PROXY_SORT_TYPE>(
   'config/proxy-sort-type',
   PROXY_SORT_TYPE.DEFAULT,
 )
-export const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 export const automaticDisconnection = useStorage('config/automatic-disconnection', true)
 export const twoColumnsInProxyGroupForMobile = useStorage(
   'config/two-columns-for-proxy-group-in-mobile',

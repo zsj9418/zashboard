@@ -64,10 +64,11 @@
 
 <script setup lang="ts">
 import { updateProxyProviderAPI } from '@/api'
+import { useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
-import { proxiesTabShow, proxySortType } from '@/store/settings'
+import { proxySortType } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 
@@ -75,6 +76,7 @@ defineProps<{
   horizontal?: boolean
 }>()
 
+const { proxiesTabShow } = useProxies()
 const isUpgrading = ref(false)
 const handlerClickUpdateAllProviders = async () => {
   if (isUpgrading.value) return

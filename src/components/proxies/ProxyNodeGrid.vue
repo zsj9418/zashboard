@@ -5,10 +5,10 @@
         'grid gap-2',
         twoColumnsInProxyGroupForMobile ? 'grid-cols-2' : 'grid-cols-1',
         isSiderbarCollapsed
-          ? inTwoColumns
+          ? hasTwoColumns
             ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3'
             : 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-6'
-          : inTwoColumns
+          : hasTwoColumns
             ? 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2 3xl:grid-cols-3'
             : 'sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5',
       )
@@ -19,22 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { PROXY_TAB_TYPE } from '@/config'
-import { proxyGroupList, proxyProviederList } from '@/store/proxies'
-import {
-  isSiderbarCollapsed,
-  proxiesTabShow,
-  twoColumns,
-  twoColumnsInProxyGroupForMobile,
-} from '@/store/settings'
+import { useProxies } from '@/composables/proxies'
+import { isSiderbarCollapsed, twoColumnsInProxyGroupForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
-import { computed } from 'vue'
 
-const inTwoColumns = computed(() => {
-  if (proxiesTabShow.value === PROXY_TAB_TYPE.PROXIES) {
-    return twoColumns.value && proxyGroupList.value.length > 1
-  } else {
-    return twoColumns.value && proxyProviederList.value.length > 1
-  }
-})
+const { hasTwoColumns } = useProxies()
 </script>

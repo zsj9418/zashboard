@@ -59,13 +59,14 @@ import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
+import { useProxies } from '@/composables/proxies'
 import { PROXY_TAB_TYPE, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
-import { isSiderbarCollapsed, proxiesTabShow, rulesTabShow } from '@/store/settings'
+import { isSiderbarCollapsed, rulesTabShow } from '@/store/settings'
 import { activeUuid } from '@/store/setup'
 import { initSatistic } from '@/store/statistics'
 import {
@@ -103,6 +104,8 @@ const routes = Object.values(ROUTE_NAME)
 const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
 })
+
+const { proxiesTabShow } = useProxies()
 
 watch(
   activeUuid,
