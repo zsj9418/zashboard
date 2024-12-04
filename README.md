@@ -9,7 +9,7 @@
 docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 ```
 5. GitHub Pages no longer allows disabling HTTPS. If you are using the https://zephyruso.github.io/ and the backend IP you are accessing is not local, please set your browser to allow insecure content for the https://zephyruso.github.io/.
-![alt text](image.png)
+
 
 ## 提示
 1. PC 和移动设备均可切换侧边栏/菜单至折叠状态。折叠后，控制小组件将显示在主页面内。  
