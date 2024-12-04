@@ -1,12 +1,5 @@
-import {
-  CONNECTIONS_TABLE_ACCESSOR_KEY,
-  LANG,
-  PROXY_PREVIEW_TYPE,
-  PROXY_SORT_TYPE,
-  RULE_TAB_TYPE,
-} from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, LANG, PROXY_PREVIEW_TYPE, PROXY_SORT_TYPE } from '@/config'
 import { useStorage } from '@vueuse/core'
-import { ref } from 'vue'
 
 // global
 export const theme = useStorage<string>('config/theme', 'default')
@@ -56,6 +49,3 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
 )
 export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
 export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
-
-// rules
-export const rulesTabShow = ref(RULE_TAB_TYPE.RULES)

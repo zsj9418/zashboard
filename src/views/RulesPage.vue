@@ -20,7 +20,7 @@
 <script setup lang="ts">
 import RuleCard from '@/components/rules/RuleCard.vue'
 import RuleProvider from '@/components/rules/RuleProvider.vue'
+import { rulesTabShow } from '@/composables/rules'
 import { RULE_TAB_TYPE } from '@/config'
 import { ruleProviderList, rules } from '@/store/rules'
-import { rulesTabShow } from '@/store/settings'
 </script>

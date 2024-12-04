@@ -11,7 +11,7 @@ const renderGroups = computed(() => {
     return proxyProviederList.value.map((group) => group.name)
   }
 
-  if (isSingBox.value && (showGlobalProxy.value || !proxyGroupList.value.length)) {
+  if (isSingBox.value && showGlobalProxy.value && proxyMap.value[GLOBAL]) {
     return [...proxyGroupList.value, GLOBAL]
   }
 
