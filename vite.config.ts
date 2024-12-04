@@ -18,6 +18,10 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.svg'],
       manifest: {
+        name: 'zashboard',
+        short_name: 'zashboard',
+        description: 'a dashboard using clash api',
+        theme_color: '#000000',
         icons: [
           {
             "src": "./pwa-192x192.png",
