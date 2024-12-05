@@ -1,5 +1,7 @@
 # zashboard
 
+![alt text](image-1.png)
+
 ## Tips
 1. Both PC and mobile devices can toggle the sidebar/menu to a collapsed state. After collapsing, the control widgets will be displayed within the main page.  
 2. The connection page has two layout styles: cards and customizable tables. It is recommended to use tables on PC and cards on mobile devices.  
