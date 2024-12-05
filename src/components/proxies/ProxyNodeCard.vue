@@ -17,10 +17,19 @@
     >
       {{ node.name }}
     </div>
-    <div class="flex items-center gap-2 text-xs">
+    <div class="flex items-center gap-1 text-xs sm:gap-2">
       <div class="flex-1">
         <span>{{ typeFormatter(node.type) }}</span>
-        <span v-if="node.udp"> | udp</span>
+        <template v-if="node.udp">
+          <span
+            v-if="twoColumnsInProxyGroupForMobile"
+            class="sm:hidden"
+            >/u</span
+          >
+          <span :class="twMerge('hidden sm:inline', !twoColumnsInProxyGroupForMobile && 'inline')">
+            | udp</span
+          >
+        </template>
       </div>
       <LatencyTag
         :class="isLatencyTesting ? 'animate-pulse' : ''"
@@ -33,7 +42,7 @@
 
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { truncateProxyName } from '@/store/settings'
+import { truncateProxyName, twoColumnsInProxyGroupForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
