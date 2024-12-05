@@ -37,7 +37,7 @@
       class="w-full sm:hidden"
     ></div>
 
-    <div class="flex items-center gap-2">
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
       <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
       <input
         class="toggle"
@@ -45,7 +45,7 @@
         v-model="hideUnavailableProxies"
       />
       <select
-        class="shrink-1 select select-bordered select-sm flex-1"
+        class="select select-bordered select-sm w-1/2 flex-1"
         v-model="proxySortType"
       >
         <option
@@ -56,18 +56,20 @@
         />
       </select>
     </div>
-    <select
-      class="select select-bordered select-sm"
-      :value="configs.mode"
-      @change="handlerModeChange"
-    >
-      <option
-        v-for="mode in modeList"
-        :key="mode"
-        :label="mode"
-        :value="mode"
-      />
-    </select>
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
+      <select
+        class="select select-bordered select-sm w-1/2 flex-1"
+        :value="configs.mode"
+        @change="handlerModeChange"
+      >
+        <option
+          v-for="mode in modeList"
+          :key="mode"
+          :label="mode"
+          :value="mode"
+        />
+      </select>
+    </div>
   </div>
 </template>
 

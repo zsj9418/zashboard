@@ -25,7 +25,7 @@ export const proxySortType = useStorage<PROXY_SORT_TYPE>(
 export const automaticDisconnection = useStorage('config/automatic-disconnection', true)
 export const twoColumnsInProxyGroupForMobile = useStorage(
   'config/two-columns-for-proxy-group-in-mobile',
-  false,
+  true,
 )
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
 export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)

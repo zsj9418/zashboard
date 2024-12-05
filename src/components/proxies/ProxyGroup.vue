@@ -41,7 +41,7 @@
       type="checkbox"
       v-model="showCollapse"
     />
-    <div class="collapse-content flex flex-col gap-2">
+    <div class="collapse-content flex flex-col gap-2 p-2 sm:p-4">
       <ProxyNodeGrid v-if="showContent">
         <ProxyNodeCard
           v-for="node in sortedProxies"
