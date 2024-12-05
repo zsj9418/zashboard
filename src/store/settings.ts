@@ -29,6 +29,7 @@ export const twoColumnsInProxyGroupForMobile = useStorage(
 )
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
 export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)
+export const hideUnavailableProxies = useStorage('config/hide-unavailable-proxies', false)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)

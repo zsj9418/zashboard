@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row flex-wrap pb-0')"
+    :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row flex-wrap pb-0')"
     v-if="configs"
   >
     <template v-if="proxyProviederList.length">
@@ -36,17 +36,26 @@
       v-if="horizontal"
       class="w-full sm:hidden"
     ></div>
-    <select
-      class="select select-bordered select-sm"
-      v-model="proxySortType"
-    >
-      <option
-        v-for="type in Object.values(PROXY_SORT_TYPE)"
-        :key="type"
-        :label="$t(type)"
-        :value="type"
+
+    <div class="flex items-center gap-2">
+      <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
+      <input
+        class="toggle"
+        type="checkbox"
+        v-model="hideUnavailableProxies"
       />
-    </select>
+      <select
+        class="shrink-1 select select-bordered select-sm flex-1"
+        v-model="proxySortType"
+      >
+        <option
+          v-for="type in Object.values(PROXY_SORT_TYPE)"
+          :key="type"
+          :label="$t(type)"
+          :value="type"
+        />
+      </select>
+    </div>
     <select
       class="select select-bordered select-sm"
       :value="configs.mode"
@@ -68,7 +77,7 @@ import { useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
-import { proxySortType } from '@/store/settings'
+import { hideUnavailableProxies, proxySortType } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 

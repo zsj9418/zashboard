@@ -64,7 +64,7 @@ export default {
   reloadConfigs: '重载配置',
   mode: '模式',
   proxySortType: '代理排序方式',
-  defaultsort: '按配置文件排序',
+  defaultsort: '按配置排序',
   nameasc: '按名称升序',
   namedesc: '按名称降序',
   latencydesc: '按延迟降序',
@@ -83,6 +83,7 @@ export default {
   bar: '条',
   exportSettings: '导出设置',
   importSettings: '导入设置',
+  hideUnavailable: '隐藏不可用',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

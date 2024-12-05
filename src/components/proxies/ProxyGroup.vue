@@ -56,7 +56,7 @@
 </template>
 
 <script setup lang="ts">
-import { prettyBytesHelper, sortProxyNodeByType } from '@/helper'
+import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { collapseGroupMap } from '@/store/settings'
@@ -96,7 +96,7 @@ watch(showCollapse, (value) => {
 
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
-  return sortProxyNodeByType(proxyGroup.value.all ?? [])
+  return sortAndFilterProxyNodes(proxyGroup.value.all ?? [])
 })
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {

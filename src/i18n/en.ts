@@ -83,6 +83,7 @@ export default {
   bar: 'Bar',
   exportSettings: 'Export Settings',
   importSettings: 'Import Settings',
+  hideUnavailable: 'Hide Unavailable',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

@@ -64,7 +64,7 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
-import { fromNow, prettyBytesHelper, sortProxyNodeByType } from '@/helper'
+import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { collapseGroupMap } from '@/store/settings'
 import type { SubscriptionInfo } from '@/types'
@@ -139,7 +139,7 @@ const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
 const sortedProxies = computed(() => {
-  return sortProxyNodeByType(proxyProvider.value.proxies.map((node) => node.name))
+  return sortAndFilterProxyNodes(proxyProvider.value.proxies.map((node) => node.name))
 })
 const subscriptionInfo = computed(() => {
   if (proxyProvider.value.subscriptionInfo) {

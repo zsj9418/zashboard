@@ -1,6 +1,6 @@
 import { PROXY_SORT_TYPE } from '@/config'
-import { getLatencyByName } from '@/store/proxies'
-import { language, proxySortType, sourceIPLabelMap } from '@/store/settings'
+import { getLatencyByName, proxyMap } from '@/store/proxies'
+import { hideUnavailableProxies, language, proxySortType, sourceIPLabelMap } from '@/store/settings'
 import type { Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
@@ -30,8 +30,24 @@ export const getLatencyExceptZero = (name: string) => {
   return latency === 0 ? Infinity : latency
 }
 
-export const sortProxyNodeByType = (proxies: string[]) => {
+const isProxyGroup = (name: string) => {
+  const proxyNode = proxyMap.value[name]
+
+  if (!proxyNode) {
+    return false
+  }
+
+  return ['direct', 'reject'].includes(proxyNode.type.toLowerCase()) || !!proxyNode.all
+}
+
+export const sortAndFilterProxyNodes = (proxies: string[]) => {
   proxies = [...proxies]
+
+  if (hideUnavailableProxies.value) {
+    proxies = proxies.filter((name) => {
+      return isProxyGroup(name) || getLatencyByName(name) > 0
+    })
+  }
   switch (proxySortType.value) {
     case PROXY_SORT_TYPE.DEFAULT:
       return proxies
