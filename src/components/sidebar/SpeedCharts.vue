@@ -79,7 +79,6 @@ onMounted(() => {
         },
         splitLine: { show: false },
       },
-      animation: false,
       series: [
         {
           name: t('upload'),
