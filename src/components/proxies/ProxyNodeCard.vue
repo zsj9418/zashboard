@@ -21,14 +21,10 @@
       <div class="flex-1">
         <span>{{ typeFormatter(node.type) }}</span>
         <template v-if="node.udp">
-          <span
-            v-if="twoColumnNodeForMobile"
-            class="sm:hidden"
-            >/u</span
-          >
+          <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')">/u</span>
           <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
-            | udp</span
-          >
+            | udp
+          </span>
         </template>
       </div>
       <LatencyTag
