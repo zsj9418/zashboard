@@ -3,7 +3,7 @@
     :class="
       twMerge(
         'grid gap-2',
-        twoColumnsInProxyGroupForMobile ? 'grid-cols-2' : 'grid-cols-1',
+        twoColumnNodeForMobile ? 'grid-cols-2' : 'grid-cols-1',
         isSiderbarCollapsed
           ? hasTwoColumns
             ? 'sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-2 2xl:grid-cols-3'
@@ -20,7 +20,7 @@
 
 <script lang="ts" setup>
 import { useProxies } from '@/composables/proxies'
-import { isSiderbarCollapsed, twoColumnsInProxyGroupForMobile } from '@/store/settings'
+import { isSiderbarCollapsed, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 
 const { hasTwoColumns } = useProxies()

@@ -1,6 +1,6 @@
 <template>
   <div class="h-full overflow-y-auto overflow-x-hidden p-2">
-    <template v-if="isLargeScreen && twoColumns && renderGroups.length > 1">
+    <template v-if="isLargeScreen && twoColumnProxyGroup && renderGroups.length > 1">
       <div class="grid grid-cols-2 gap-1">
         <div
           v-for="idx in [0, 1]"
@@ -36,7 +36,7 @@ import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { useProxies } from '@/composables/proxies'
 import { PROXY_TAB_TYPE } from '@/config'
 import { isLargeScreen } from '@/helper'
-import { twoColumns } from '@/store/settings'
+import { twoColumnProxyGroup } from '@/store/settings'
 import { computed } from 'vue'
 
 const { proxiesTabShow, renderGroups } = useProxies()

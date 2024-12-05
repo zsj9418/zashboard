@@ -22,11 +22,11 @@
         <span>{{ typeFormatter(node.type) }}</span>
         <template v-if="node.udp">
           <span
-            v-if="twoColumnsInProxyGroupForMobile"
+            v-if="twoColumnNodeForMobile"
             class="sm:hidden"
             >/u</span
           >
-          <span :class="twMerge('hidden sm:inline', !twoColumnsInProxyGroupForMobile && 'inline')">
+          <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
             | udp</span
           >
         </template>
@@ -42,7 +42,7 @@
 
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { truncateProxyName, twoColumnsInProxyGroupForMobile } from '@/store/settings'
+import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'

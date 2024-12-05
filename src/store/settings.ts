@@ -12,7 +12,7 @@ export const isSiderbarCollapsed = useStorage(
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
-export const twoColumns = useStorage('config/two-columns', true)
+export const twoColumnProxyGroup = useStorage('config/two-columns', true)
 export const speedtestUrl = useStorage<string>(
   'config/speedtest-url',
   'http://www.gstatic.com/generate_204',
@@ -23,10 +23,7 @@ export const proxySortType = useStorage<PROXY_SORT_TYPE>(
   PROXY_SORT_TYPE.DEFAULT,
 )
 export const automaticDisconnection = useStorage('config/automatic-disconnection', true)
-export const twoColumnsInProxyGroupForMobile = useStorage(
-  'config/two-columns-for-proxy-group-in-mobile',
-  true,
-)
+export const twoColumnNodeForMobile = useStorage('config/two-column-node-for-mobile', true)
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
 export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)
 export const hideUnavailableProxies = useStorage('config/hide-unavailable-proxies', false)

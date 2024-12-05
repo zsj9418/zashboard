@@ -15,12 +15,12 @@
       >
     </div>
     <div
-      class="flex items-center gap-2"
+      :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')"
       v-if="useConnectionCard"
     >
-      {{ $t('sortBy') }}:
+      <span class="shrink-0">{{ $t('sortBy') }}:</span>
       <select
-        class="select select-bordered select-sm w-52"
+        class="select select-bordered select-sm w-full"
         v-model="connectionSortType"
       >
         <option
@@ -32,11 +32,11 @@
         </option>
       </select>
     </div>
-    <div class="flex items-center gap-2">
-      {{ $t('quickFilter') }}:
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
+      <span class="shrink-0">{{ $t('quickFilter') }}:</span>
       <input
         type="text"
-        class="input input-sm join-item input-bordered w-40"
+        class="input input-sm join-item input-bordered w-full"
         v-model="quickFilterRegex"
       />
       <input
@@ -61,10 +61,10 @@
         :label="opt.label"
       />
     </select>
-    <div class="join flex-1">
+    <div class="join w-full flex-1">
       <select
         v-if="horizontal"
-        class="join-item select select-bordered select-sm min-w-24"
+        class="join-item select select-bordered select-sm"
         v-model="sourceIPFilter"
       >
         <option
@@ -80,7 +80,7 @@
       </select>
       <input
         type="text"
-        class="input input-sm join-item input-bordered w-24 flex-1"
+        class="input input-sm join-item input-bordered w-32 flex-1"
         v-model="connectionFilter"
       />
       <button
