@@ -1,5 +1,33 @@
 <template>
   <div class="flex h-full w-full items-center justify-center">
+    <div
+      class="toast toast-start toast-top max-w-64 whitespace-normal text-sm"
+      v-if="protocolTips"
+    >
+      <div class="breaks-all alert alert-warning w-72 whitespace-normal">
+        <a
+          href="https://github.com/Zephyruso/zashboard/blob/main/README.md"
+          target="_blank"
+        >
+          {{ $t('protocolTips') }}
+        </a>
+      </div>
+    </div>
+    <div class="absolute bottom-4 right-4">
+      {{ $t('language') }}:
+      <select
+        class="select select-bordered select-xs w-48"
+        v-model="language"
+        @change="() => (i18n.global.locale = language)"
+      >
+        <option
+          v-for="opt in Object.values(LANG)"
+          :key="opt"
+          :value="opt"
+          :label="$t(opt)"
+        />
+      </select>
+    </div>
     <div class="rounded-lg bg-base-100 p-6 shadow-lg">
       <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control mb-4">
@@ -75,10 +103,13 @@
 </template>
 
 <script setup lang="ts">
+import { LANG } from '@/config'
+import { i18n } from '@/i18n'
 import router from '@/router'
+import { language } from '@/store/settings'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import { MinusCircleIcon } from '@heroicons/vue/24/outline'
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 const form = reactive({
   protocol: 'http',
@@ -86,6 +117,8 @@ const form = reactive({
   port: 9090,
   password: '',
 })
+
+const protocolTips = ref(false)
 
 const handleSubmit = async (
   form: {
@@ -101,6 +134,13 @@ const handleSubmit = async (
   if (!protocol || !host || !port) {
     alert('Please fill in all the fields.')
     return
+  }
+
+  if (window.location.protocol === 'https:' && protocol === 'http' && !quiet) {
+    protocolTips.value = true
+    setTimeout(() => {
+      protocolTips.value = false
+    }, 10000)
   }
 
   const data = await fetch(`${protocol}://${host}:${port}/version`, {
