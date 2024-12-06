@@ -25,7 +25,7 @@
         )
       "
     >
-      <div class="flex-1 tracking-tight">
+      <div class="flex-1">
         <span>{{ typeFormatter(node.type) }}</span>
         <template v-if="node.udp">
           <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')">:udp</span>

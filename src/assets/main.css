@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-family: 'MiSans';
-  src: url('./MiSans-Medium.woff2') format('truetype');
+  font-family: 'Fira Sans';
+  src: url('./FiraSans-Regular.woff2') format('woff2');
   font-display: swap;
 }
