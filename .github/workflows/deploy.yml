@@ -43,6 +43,25 @@ jobs:
           github_token: ${{ secrets.PAT }}
           publish_dir: ./dist
 
+  release-dist:
+    needs: release-please
+    runs-on: ubuntu-latest
+    if: ${{ needs.release-please.outputs.release_created }}
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Zip the dist folder
+        run: |
+          zip -r dist.zip dist
+
+      - name: Upload dist.zip to GitHub Release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ needs.release-please.outputs.release.upload_url }}
+          asset_path: ./dist.zip
+          asset_name: dist.zip
+          asset_content_type: application/zip
+
   release-image:
     needs: release-please
     runs-on: ubuntu-latest
