@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 @font-face {
-  font-family: 'Twemoji Mozilla';
-  src: url('./Twemoji.Mozilla.ttf') format('truetype');
+  font-family: 'NotoEmoji';
+  src: url('./NotoColorEmoji-flagsonly.ttf') format('truetype');
 }
 
 @font-face {
   font-family: 'Fira Sans';
-  src: url('./FiraSans-Regular.woff2') format('woff2');
-  font-display: swap;
+  src: url('./FiraSans-Regular.ttf') format('truetype');
+}
+
+:root {
+  font-family: 'Fira Sans', 'NotoEmoji', 'system-ui';
 }

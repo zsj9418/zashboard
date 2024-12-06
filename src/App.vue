@@ -19,7 +19,7 @@ onMounted(() => {
 <template>
   <div
     ref="app"
-    class="flex h-dvh w-screen overflow-x-hidden bg-base-100 font-twemoji"
+    class="font-twemoji flex h-dvh w-screen overflow-x-hidden bg-base-100"
     :data-theme="theme"
   >
     <SetupPage v-if="!activeBackend"></SetupPage>
