@@ -45,7 +45,7 @@
         v-model="quickFilterEnabled"
       />
       <div
-        class="tooltip tooltip-left"
+        :class="`tooltip ${horizontal ? 'tooltip-bottom' : 'tooltip-left'}`"
         :data-tip="$t('quickFilterTip')"
       >
         <QuestionMarkCircleIcon class="h-4 w-4" />
@@ -145,3 +145,9 @@ const sourceIPOpts = computed(() => {
   })
 })
 </script>
+
+<style scoped>
+.tooltip:before {
+  width: 200px;
+}
+</style>

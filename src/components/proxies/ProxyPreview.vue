@@ -21,25 +21,25 @@
   >
     <div class="flex flex-1 items-center justify-center overflow-hidden rounded-2xl [&>*]:h-2">
       <div
-        :class="getBgColor(LATENCY_STATUS.MEDIUM - 1)"
+        :class="getBgColor(lowLatency - 1)"
         :style="{
           width: `${(goodsCounts * 100) / nodes.length}%`, // cant use tw class, otherwise dynamic classname won't be generated
         }"
       />
       <div
-        :class="getBgColor(LATENCY_STATUS.HIGH - 1)"
+        :class="getBgColor(mediumLatency - 1)"
         :style="{
           width: `${(mediumCounts * 100) / nodes.length}%`,
         }"
       />
       <div
-        :class="getBgColor(LATENCY_STATUS.HIGH + 1)"
+        :class="getBgColor(mediumLatency + 1)"
         :style="{
           width: `${(badCounts * 100) / nodes.length}%`,
         }"
       />
       <div
-        :class="getBgColor(LATENCY_STATUS.NOT_CONNECTED)"
+        :class="getBgColor(NOT_CONNECTED)"
         :style="{
           width: `${(notConnectedCounts * 100) / nodes.length}%`,
         }"
@@ -49,9 +49,9 @@
 </template>
 
 <script setup lang="ts">
-import { LATENCY_STATUS, PROXY_PREVIEW_TYPE } from '@/config'
+import { NOT_CONNECTED, PROXY_PREVIEW_TYPE } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
-import { proxyPreviewType } from '@/store/settings'
+import { lowLatency, mediumLatency, proxyPreviewType } from '@/store/settings'
 import { computed } from 'vue'
 
 const props = defineProps<{
@@ -75,11 +75,11 @@ const nodesLatency = computed(() =>
   }),
 )
 const getBgColor = (latency: number) => {
-  if (latency === LATENCY_STATUS.NOT_CONNECTED) {
+  if (latency === NOT_CONNECTED) {
     return 'bg-gray-500'
-  } else if (latency < LATENCY_STATUS.MEDIUM) {
+  } else if (latency < lowLatency.value) {
     return 'bg-green-500'
-  } else if (latency < LATENCY_STATUS.HIGH) {
+  } else if (latency < mediumLatency.value) {
     return 'bg-yellow-500'
   } else {
     return 'bg-red-500'
@@ -88,18 +88,18 @@ const getBgColor = (latency: number) => {
 
 const goodsCounts = computed(() => {
   return nodesLatency.value.filter(
-    (node) => node.latency < LATENCY_STATUS.MEDIUM && node.latency > LATENCY_STATUS.NOT_CONNECTED,
+    (node) => node.latency < lowLatency.value && node.latency > NOT_CONNECTED,
   ).length
 })
 const mediumCounts = computed(() => {
   return nodesLatency.value.filter(
-    (node) => node.latency >= LATENCY_STATUS.MEDIUM && node.latency < LATENCY_STATUS.HIGH,
+    (node) => node.latency >= lowLatency.value && node.latency < mediumLatency.value,
   ).length
 })
 const badCounts = computed(() => {
-  return nodesLatency.value.filter((node) => node.latency >= LATENCY_STATUS.HIGH).length
+  return nodesLatency.value.filter((node) => node.latency >= mediumLatency.value).length
 })
 const notConnectedCounts = computed(() => {
-  return nodesLatency.value.filter((node) => node.latency === LATENCY_STATUS.NOT_CONNECTED).length
+  return nodesLatency.value.filter((node) => node.latency === NOT_CONNECTED).length
 })
 </script>

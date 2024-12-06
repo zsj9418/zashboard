@@ -200,6 +200,20 @@
             v-model="speedtestTimeout"
           />
         </div>
+        <div class="flex items-center gap-2">
+          <span class="shrink-0"> {{ $t('lowLatencyDesc') }}: </span>
+          <input
+            type="number"
+            class="input input-sm input-bordered w-16"
+            v-model="lowLatency"
+          />
+          <span class="shrink-0"> {{ $t('mediumLatencyDesc') }}: </span>
+          <input
+            type="number"
+            class="input input-sm input-bordered w-16"
+            v-model="mediumLatency"
+          />
+        </div>
       </div>
     </div>
     <div class="card card-compact bg-base-100 shadow-lg">
@@ -255,6 +269,8 @@ import {
   automaticDisconnection,
   compactConnectionCard,
   language,
+  lowLatency,
+  mediumLatency,
   proxyPreviewType,
   showGlobalProxy,
   speedtestTimeout,

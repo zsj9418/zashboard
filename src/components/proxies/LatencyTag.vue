@@ -14,8 +14,8 @@
 </template>
 
 <script setup lang="ts">
-import { LATENCY_STATUS } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
+import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
@@ -25,9 +25,9 @@ const props = defineProps<{
 
 const latency = computed(() => getLatencyByName(props.name))
 const color = computed(() => {
-  if (latency.value < LATENCY_STATUS.MEDIUM) {
+  if (latency.value < lowLatency.value) {
     return 'text-green-500'
-  } else if (latency.value < LATENCY_STATUS.HIGH) {
+  } else if (latency.value < mediumLatency.value) {
     return 'text-yellow-500'
   } else {
     return 'text-red-500'

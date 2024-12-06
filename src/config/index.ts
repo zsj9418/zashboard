@@ -1,9 +1,4 @@
-export enum LATENCY_STATUS {
-  MEDIUM = 500,
-  HIGH = 800,
-  NOT_CONNECTED = 0,
-}
-
+export const NOT_CONNECTED = 0
 export enum LANG {
   EN_US = 'en-US',
   ZH_CN = 'zh-CN',

@@ -27,6 +27,8 @@ export const twoColumnNodeForMobile = useStorage('config/two-column-node-for-mob
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
 export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)
 export const hideUnavailableProxies = useStorage('config/hide-unavailable-proxies', false)
+export const lowLatency = useStorage('config/low-latency', 300)
+export const mediumLatency = useStorage('config/medium-latency', 800)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)
