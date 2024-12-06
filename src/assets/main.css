@@ -10,4 +10,5 @@
 @font-face {
   font-family: 'MiSans';
   src: url('./MiSans-Medium.woff2') format('truetype');
+  font-display: swap;
 }
