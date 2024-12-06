@@ -33,7 +33,7 @@
       </select>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
-      <span class="shrink-0">{{ $t('quickFilter') }}:</span>
+      <span class="shrink-0"> {{ $t('quickFilter') }}: </span>
       <input
         type="text"
         class="input input-sm join-item input-bordered w-full"
@@ -44,6 +44,12 @@
         class="toggle"
         v-model="quickFilterEnabled"
       />
+      <div
+        class="tooltip tooltip-left"
+        :data-tip="$t('quickFilterTip')"
+      >
+        <QuestionMarkCircleIcon class="h-4 w-4" />
+      </div>
     </div>
     <select
       v-if="!horizontal"
@@ -118,7 +124,7 @@ import {
   sourceIPs,
 } from '@/store/connections'
 import { useConnectionCard } from '@/store/settings'
-import { PauseIcon, PlayIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { PauseIcon, PlayIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 defineProps<{

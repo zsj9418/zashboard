@@ -88,6 +88,8 @@ export default {
     'You are trying to connect a http backend but the zashboard is served by https. This may cause connection error. Please allow the insecure content in your browser settings. The settings is on the left of the browser address bar.',
   global: 'Global',
   direct: 'Direct',
+  quickFilterTip:
+    'Quick filtering allows one-click exclusion of connections matching proxy chains, host, or destination IPs using regular expressions.',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }
