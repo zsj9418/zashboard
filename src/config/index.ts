@@ -1,5 +1,5 @@
 export enum LATENCY_STATUS {
-  MEDIUM = 300,
+  MEDIUM = 500,
   HIGH = 800,
   NOT_CONNECTED = 0,
 }
