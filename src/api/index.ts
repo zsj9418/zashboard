@@ -11,6 +11,7 @@ axios.interceptors.request.use((config) => {
     activeBackend.value?.host +
     ':' +
     activeBackend.value?.port
+
   config.headers['Authorization'] = 'Bearer ' + activeBackend.value?.password
   return config
 })
@@ -155,4 +156,11 @@ export const fetchMemoryAPI = <T>() => {
 
 export const fetchTrafficAPI = <T>() => {
   return createWebSocket<T>('traffic')
+}
+
+export const fetchIsUIUpdateAvailable = async () => {
+  const response = await fetch('https://api.github.com/repos/Zephyruso/zashboard/releases/latest')
+  const { tag_name } = await response.json()
+
+  return tag_name !== `v${zashboardVersion.value}`
 }
