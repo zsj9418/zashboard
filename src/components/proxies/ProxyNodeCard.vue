@@ -17,11 +17,18 @@
     >
       {{ node.name }}
     </div>
-    <div class="flex items-center gap-1 text-xs sm:gap-2">
-      <div class="flex-1">
+    <div
+      :class="
+        twMerge(
+          'flex items-center text-xs sm:gap-2',
+          twoColumnNodeForMobile ? 'gap-[2px]' : 'gap-1',
+        )
+      "
+    >
+      <div class="flex-1 tracking-tight">
         <span>{{ typeFormatter(node.type) }}</span>
         <template v-if="node.udp">
-          <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')">/u</span>
+          <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')">:udp</span>
           <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
             | udp
           </span>
