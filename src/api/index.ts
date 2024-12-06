@@ -162,5 +162,5 @@ export const fetchIsUIUpdateAvailable = async () => {
   const response = await fetch('https://api.github.com/repos/Zephyruso/zashboard/releases/latest')
   const { tag_name } = await response.json()
 
-  return tag_name !== `v${zashboardVersion.value}`
+  return tag_name && tag_name !== `v${zashboardVersion.value}`
 }
