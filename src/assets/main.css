@@ -6,3 +6,8 @@
   font-family: 'Twemoji Mozilla';
   src: url('./Twemoji.Mozilla.ttf') format('truetype');
 }
+
+@font-face {
+  font-family: 'MiSans';
+  src: url('./MiSans-Medium.ttf') format('truetype');
+}

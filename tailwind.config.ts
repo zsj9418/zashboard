@@ -17,7 +17,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        twemoji: ['system-ui', 'Twemoji Mozilla'],
+        twemoji: ['MiSans', 'Twemoji Mozilla', 'system-ui'],
       },
     }
   },
