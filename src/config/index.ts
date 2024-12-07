@@ -9,6 +9,7 @@ export enum FONTS {
   SARASA_UI = 'SarasaUi',
   PING_FANG = 'PingFang',
   FIRA_SANS = 'FiraSans',
+  SYSTEM_UI = 'SystemUI',
 }
 
 export enum CONNECTIONS_TABLE_ACCESSOR_KEY {

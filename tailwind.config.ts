@@ -21,6 +21,7 @@ export default {
         SarasaUI: ['SarasaUiSC-Regular', 'NotoEmoji', 'system-ui'],
         PingFang: ['PingFangSC-Regular', 'NotoEmoji', 'system-ui'],
         FiraSans: ['Fira Sans', 'NotoEmoji', 'system-ui'],
+        SystemUI: ['system-ui', 'NotoEmoji'],
       },
     },
   },
