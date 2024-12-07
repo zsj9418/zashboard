@@ -14,19 +14,7 @@
       </div>
     </div>
     <div class="absolute bottom-4 right-4">
-      {{ $t('language') }}:
-      <select
-        class="select select-bordered select-xs w-48"
-        v-model="language"
-        @change="() => (i18n.global.locale = language)"
-      >
-        <option
-          v-for="opt in Object.values(LANG)"
-          :key="opt"
-          :value="opt"
-          :label="$t(opt)"
-        />
-      </select>
+      <LanguageSelect />
     </div>
     <div class="rounded-lg bg-base-100 p-6 shadow-lg">
       <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
@@ -103,10 +91,8 @@
 </template>
 
 <script setup lang="ts">
-import { LANG } from '@/config'
-import { i18n } from '@/i18n'
+import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import router from '@/router'
-import { language } from '@/store/settings'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import { MinusCircleIcon } from '@heroicons/vue/24/outline'
 import { reactive, ref } from 'vue'

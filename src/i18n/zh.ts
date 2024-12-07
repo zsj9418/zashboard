@@ -1,5 +1,3 @@
-import { LANG } from '@/config'
-
 export default {
   setup: '配置',
   overview: '概览',
@@ -92,6 +90,4 @@ export default {
   lowLatencyDesc: '黄色的阈值',
   mediumLatencyDesc: '红色的阈值',
   fonts: '字体',
-  [LANG.EN_US]: 'English',
-  [LANG.ZH_CN]: '中文',
 }

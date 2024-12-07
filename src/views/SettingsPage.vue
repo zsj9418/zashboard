@@ -33,21 +33,7 @@
             </option>
           </select>
         </div>
-        <div class="flex items-center gap-2">
-          {{ $t('language') }}:
-          <select
-            class="select select-bordered select-sm w-48"
-            v-model="language"
-            @change="() => (i18n.global.locale = language)"
-          >
-            <option
-              v-for="opt in Object.values(LANG)"
-              :key="opt"
-              :value="opt"
-              :label="$t(opt)"
-            />
-          </select>
-        </div>
+        <LanguageSelect />
         <div class="flex items-center gap-2">
           {{ $t('fonts') }}:
           <select
@@ -276,16 +262,15 @@ import {
   zashboardVersion,
 } from '@/api'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
+import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
-import { FONTS, LANG, PROXY_PREVIEW_TYPE } from '@/config'
-import { i18n } from '@/i18n'
+import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
   compactConnectionCard,
   font,
-  language,
   lowLatency,
   mediumLatency,
   proxyPreviewType,

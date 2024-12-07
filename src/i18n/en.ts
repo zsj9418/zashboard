@@ -1,5 +1,3 @@
-import { LANG } from '@/config'
-
 export default {
   setup: 'Setup',
   overview: 'Overview',
@@ -93,6 +91,4 @@ export default {
   lowLatencyDesc: 'Yellow threshold',
   mediumLatencyDesc: 'Red threshold',
   fonts: 'Fonts',
-  [LANG.EN_US]: 'English',
-  [LANG.ZH_CN]: '中文',
 }
