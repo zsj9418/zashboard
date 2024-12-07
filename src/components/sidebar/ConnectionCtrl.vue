@@ -5,14 +5,20 @@
         role="tab"
         :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.ACTIVE && 'tab-active')"
         @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.ACTIVE)"
-        >{{ $t('activeConnections') }}({{ renderConnections.length }})</a
-      >
+        >{{ $t('activeConnections') }}
+        <template v-if="connectionTabShow === CONNECTION_TAB_TYPE.ACTIVE">
+          ({{ renderConnections.length }})
+        </template>
+      </a>
       <a
         role="tab"
         :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.CLOSED && 'tab-active')"
         @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.CLOSED)"
-        >{{ $t('closedConnections') }}({{ closedConnections.length }})</a
-      >
+        >{{ $t('closedConnections') }}
+        <template v-if="connectionTabShow === CONNECTION_TAB_TYPE.CLOSED">
+          ({{ renderConnections.length }})
+        </template>
+      </a>
     </div>
     <div
       :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')"
@@ -113,7 +119,6 @@ import { disconnectByIdAPI } from '@/api'
 import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
 import { getIPLabelFromMap } from '@/helper'
 import {
-  closedConnections,
   connectionFilter,
   connectionSortType,
   connectionTabShow,
