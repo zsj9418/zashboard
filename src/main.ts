@@ -1,6 +1,8 @@
 import dayjs from 'dayjs'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
+import 'misans/lib/Normal/MiSans-Bold.min.css'
+import 'misans/lib/Normal/MiSans-Medium.min.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'

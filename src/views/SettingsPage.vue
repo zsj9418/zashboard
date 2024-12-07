@@ -21,7 +21,7 @@
         <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
-            class="select select-bordered select-xs w-48"
+            class="select select-bordered select-sm w-48"
             v-model="theme"
           >
             <option
@@ -36,7 +36,7 @@
         <div class="flex items-center gap-2">
           {{ $t('language') }}:
           <select
-            class="select select-bordered select-xs w-48"
+            class="select select-bordered select-sm w-48"
             v-model="language"
             @change="() => (i18n.global.locale = language)"
           >
@@ -129,7 +129,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyPreviewType') }}:
           <select
-            class="select select-bordered select-xs"
+            class="select select-bordered select-sm"
             v-model="proxyPreviewType"
           >
             <option
@@ -184,19 +184,19 @@
             v-model="twoColumnNodeForMobile"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex w-full items-center gap-2">
           <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 sm:w-96"
+            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-96"
             v-model="speedtestUrl"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex w-full items-center gap-2">
           <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 sm:w-96"
+            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-96"
             v-model="speedtestTimeout"
           />
         </div>
@@ -204,13 +204,15 @@
           <span class="shrink-0"> {{ $t('lowLatencyDesc') }}: </span>
           <input
             type="number"
-            class="input input-sm input-bordered w-16"
+            class="input input-sm input-bordered w-20"
             v-model="lowLatency"
           />
+        </div>
+        <div class="flex items-center gap-2">
           <span class="shrink-0"> {{ $t('mediumLatencyDesc') }}: </span>
           <input
             type="number"
-            class="input input-sm input-bordered w-16"
+            class="input input-sm input-bordered w-20"
             v-model="mediumLatency"
           />
         </div>

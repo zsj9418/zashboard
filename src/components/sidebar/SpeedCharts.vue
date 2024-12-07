@@ -21,10 +21,15 @@
 import { prettyBytesHelper } from '@/helper'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
 import { useElementSize } from '@vueuse/core'
-import * as echarts from 'echarts'
+import { LineChart } from 'echarts/charts'
+import { GridComponent, LegendComponent } from 'echarts/components'
+import * as echarts from 'echarts/core'
+import { CanvasRenderer } from 'echarts/renderers'
 import { debounce } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
+
+echarts.use([LineChart, GridComponent, LegendComponent, CanvasRenderer])
 
 const text = ref()
 const primaryText = ref()

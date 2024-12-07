@@ -45,7 +45,7 @@
         v-model="quickFilterEnabled"
       />
       <div
-        :class="`tooltip ${horizontal ? 'tooltip-bottom' : 'tooltip-left'}`"
+        :class="`tooltip ${horizontal ? 'tooltip-left sm:tooltip-bottom' : 'tooltip-left'}`"
         :data-tip="$t('quickFilterTip')"
       >
         <QuestionMarkCircleIcon class="h-4 w-4" />
