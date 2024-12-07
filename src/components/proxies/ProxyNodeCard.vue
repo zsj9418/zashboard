@@ -9,6 +9,10 @@
     "
     :data-tip="node.name"
   >
+    <ProxyIcon
+      v-if="node.icon"
+      :icon="node.icon"
+    />
     <div
       :class="
         twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
@@ -49,6 +53,7 @@ import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
+import ProxyIcon from './ProxyIcon.vue'
 
 const props = defineProps<{
   name: string
