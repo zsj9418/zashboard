@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
-import { theme } from './store/settings'
+import { computed, onMounted, ref } from 'vue'
+import { FONTS } from './config'
+import { font, theme } from './store/settings'
 import { activeBackend } from './store/setup'
 import Home from './views/HomePage.vue'
 import SetupPage from './views/SetupPage.vue'
@@ -14,12 +15,19 @@ onMounted(() => {
     metaThemeColor.setAttribute('content', themeColor)
   }
 })
+
+const fontClassMap = {
+  [FONTS.MI_SANS]: 'font-MiSans',
+  [FONTS.SARASA_UI]: 'font-SarasaUI',
+  [FONTS.PING_FANG]: 'font-PingFang',
+}
+const fontClassName = computed(() => fontClassMap[font.value])
 </script>
 
 <template>
   <div
     ref="app"
-    class="font-twemoji flex h-dvh w-screen overflow-x-hidden bg-base-100"
+    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName}`"
     :data-theme="theme"
   >
     <SetupPage v-if="!activeBackend"></SetupPage>

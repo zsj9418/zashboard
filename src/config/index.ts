@@ -4,6 +4,12 @@ export enum LANG {
   ZH_CN = 'zh-CN',
 }
 
+export enum FONTS {
+  MI_SANS = 'MiSans',
+  SARASA_UI = 'SarasaUi',
+  PING_FANG = 'PingFang',
+}
+
 export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   Details = 'details',
   Close = 'close',

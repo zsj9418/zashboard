@@ -92,6 +92,7 @@ export default {
     'Quick filtering allows one-click exclusion of connections matching proxy chains, host, or destination IPs using regular expressions.',
   lowLatencyDesc: 'Yellow threshold',
   mediumLatencyDesc: 'Red threshold',
+  fonts: 'Fonts',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }

@@ -48,6 +48,20 @@
             />
           </select>
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('fonts') }}:
+          <select
+            class="select select-bordered select-sm w-48"
+            v-model="font"
+          >
+            <option
+              v-for="opt in Object.values(FONTS)"
+              :key="opt"
+              :value="opt"
+              :label="opt"
+            />
+          </select>
+        </div>
         <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
           <template v-if="!isSingBox">
             <button
@@ -264,12 +278,13 @@ import {
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
-import { LANG, PROXY_PREVIEW_TYPE } from '@/config'
+import { FONTS, LANG, PROXY_PREVIEW_TYPE } from '@/config'
 import { i18n } from '@/i18n'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
   compactConnectionCard,
+  font,
   language,
   lowLatency,
   mediumLatency,

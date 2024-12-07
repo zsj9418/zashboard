@@ -14,7 +14,14 @@ export default {
       'xl': '1280px',
       '2xl': '1536px',
       '3xl': '1800px',
-    }
+    },
+    extend: {
+      fontFamily: {
+        MiSans: ['MiSans-VF', 'NotoEmoji', 'system-ui'],
+        SarasaUI: ['SarasaUiSC-Regular', 'NotoEmoji', 'system-ui'],
+        PingFang: ['PingFangSC-Regular', 'NotoEmoji', 'system-ui'],
+      },
+    },
   },
   daisyui: {
     themes: true,

@@ -27,6 +27,7 @@
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "pretty-bytes": "^6.1.1",
+    "subsetted-fonts": "^1.0.4",
     "theme-change": "^2.5.0",
     "uuid": "^11.0.3",
     "vite-plugin-pwa": "^0.21.1",

@@ -91,6 +91,7 @@ export default {
   quickFilterTip: '快速过滤使用正则表达式进行匹配，支持一键排除符合代理链、主机或目标 IP 的连接。',
   lowLatencyDesc: '黄色的阈值',
   mediumLatencyDesc: '红色的阈值',
+  fonts: '字体',
   [LANG.EN_US]: 'English',
   [LANG.ZH_CN]: '中文',
 }
