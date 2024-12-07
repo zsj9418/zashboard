@@ -20,6 +20,7 @@ export default {
         MiSans: ['MiSans-VF', 'NotoEmoji', 'system-ui'],
         SarasaUI: ['SarasaUiSC-Regular', 'NotoEmoji', 'system-ui'],
         PingFang: ['PingFangSC-Regular', 'NotoEmoji', 'system-ui'],
+        FiraSans: ['Fira Sans', 'NotoEmoji', 'system-ui'],
       },
     },
   },

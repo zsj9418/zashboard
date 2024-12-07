@@ -8,6 +8,7 @@ export enum FONTS {
   MI_SANS = 'MiSans',
   SARASA_UI = 'SarasaUi',
   PING_FANG = 'PingFang',
+  FIRA_SANS = 'FiraSans',
 }
 
 export enum CONNECTIONS_TABLE_ACCESSOR_KEY {

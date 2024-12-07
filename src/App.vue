@@ -20,6 +20,7 @@ const fontClassMap = {
   [FONTS.MI_SANS]: 'font-MiSans',
   [FONTS.SARASA_UI]: 'font-SarasaUI',
   [FONTS.PING_FANG]: 'font-PingFang',
+  [FONTS.FIRA_SANS]: 'font-FiraSans',
 }
 const fontClassName = computed(() => fontClassMap[font.value])
 </script>
