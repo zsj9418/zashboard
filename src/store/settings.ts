@@ -4,10 +4,7 @@ import { useStorage } from '@vueuse/core'
 // global
 export const theme = useStorage<string>('config/theme', 'default')
 export const language = useStorage<LANG>('config/language', LANG.EN_US)
-export const isSiderbarCollapsed = useStorage(
-  'config/is-sidebar-collapsed',
-  window.screen.width > 720,
-)
+export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
 
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)
