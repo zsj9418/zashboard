@@ -152,7 +152,7 @@ const query = new URLSearchParams(
 )
 if (query.has('hostname')) {
   handleSubmit({
-    protocol: window.location.protocol.replace(':', ''),
+    protocol: query.get('http') ? 'http' : query.get('https') ? 'https' : window.location.protocol.replace(':', ''),
     host: query.get('hostname') as string,
     port: Number(query.get('port')) as unknown as number,
     password: query.get('secret') as string,
