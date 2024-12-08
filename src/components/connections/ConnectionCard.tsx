@@ -35,7 +35,7 @@ export default defineComponent<{
         </span>
       )
       const download = (
-        <div class="badge flex bg-base-200 px-1 text-sm text-base-content">
+        <div class="badge flex px-1 text-sm text-base-content">
           <ArrowDownIcon class="h-4 w-3" />
           <div class="hidden w-16 text-right sm:inline">
             {prettyBytesHelper(props.conn.download)} |{' '}
@@ -44,14 +44,14 @@ export default defineComponent<{
         </div>
       )
       const uploadCompact = (
-        <div class="badge hidden bg-base-200 px-1 text-sm text-base-content 2xl:flex">
+        <div class="badge hidden px-1 text-sm text-base-content 2xl:flex">
           <ArrowUpIcon class="h-4 w-3" />
           <div class="w-16 text-right">{prettyBytesHelper(props.conn.upload)} | </div>
           <div class="w-20 text-right">{prettyBytesHelper(props.conn.uploadSpeed)}/s</div>
         </div>
       )
       const upload = (
-        <div class="badge hidden bg-base-200 px-1 text-sm text-base-content lg:flex">
+        <div class="badge hidden px-1 text-sm text-base-content lg:flex">
           <ArrowUpIcon class="h-4 w-3" />
           <div class="w-16 text-right">{prettyBytesHelper(props.conn.upload)} | </div>
           <div class="w-20 text-right">{prettyBytesHelper(props.conn.uploadSpeed)}/s</div>
@@ -125,7 +125,7 @@ export default defineComponent<{
 
       if (isLargeScreen.value && compactConnectionCard.value) {
         return (
-          <div class="card w-full flex-row items-center justify-between gap-1 rounded-xl bg-base-100 px-2 py-1 shadow-lg">
+          <div class="card w-full flex-row items-center justify-between gap-1 px-2 py-1">
             {host}
             {chians}
             {connectionCompact}
@@ -138,7 +138,7 @@ export default defineComponent<{
         )
       } else {
         return (
-          <div class="card w-full gap-[1px] rounded-xl bg-base-100 px-2 py-[1px] shadow-lg">
+          <div class="card w-full gap-[1px] px-2 py-[1px]">
             <div class="flex flex-row items-center gap-1 px-1">
               {host}
               {flex1}

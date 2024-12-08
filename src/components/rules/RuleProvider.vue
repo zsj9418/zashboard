@@ -1,7 +1,5 @@
 <template>
-  <div
-    class="card w-full flex-row items-center gap-2 rounded-xl bg-base-100 p-1 px-2 text-sm shadow-lg"
-  >
+  <div class="card w-full flex-row items-center gap-2 p-1 px-2 text-sm">
     <div class="flex flex-1 flex-col sm:flex-row">
       <div class="w-48 flex-1 text-primary">
         {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }})

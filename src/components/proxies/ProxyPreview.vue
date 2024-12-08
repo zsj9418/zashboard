@@ -6,7 +6,7 @@
     <div
       v-for="node in nodesLatency"
       :key="node.name"
-      class="flex h-4 w-4 items-center justify-center rounded-full shadow-lg"
+      class="flex h-4 w-4 items-center justify-center rounded-full"
       :class="getBgColor(node.latency)"
     >
       <div
@@ -78,11 +78,11 @@ const getBgColor = (latency: number) => {
   if (latency === NOT_CONNECTED) {
     return 'bg-gray-500'
   } else if (latency < lowLatency.value) {
-    return 'bg-green-500'
+    return 'bg-low-latency'
   } else if (latency < mediumLatency.value) {
-    return 'bg-yellow-500'
+    return 'bg-medium-latency'
   } else {
-    return 'bg-red-500'
+    return 'bg-high-latency'
   }
 }
 

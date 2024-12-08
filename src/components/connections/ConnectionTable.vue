@@ -1,6 +1,6 @@
 <template>
-  <table class="table table-zebra table-xs overflow-hidden rounded-lg bg-base-100 shadow-lg">
-    <thead class="bg-base-100">
+  <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-lg">
+    <thead class="">
       <tr
         v-for="headerGroup in table.getHeaderGroups()"
         :key="headerGroup.id"

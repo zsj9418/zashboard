@@ -13,7 +13,7 @@
         v-model="sourceIPLabelMap[ip]"
       />
       <button
-        class="btn btn-circle btn-xs bg-base-300"
+        class="btn btn-circle btn-xs"
         @click="() => handlerLabelRemove(ip)"
       >
         <MinusCircleIcon class="h-4 w-4" />
@@ -32,7 +32,7 @@
         v-model="newLabelForIP.label"
       />
       <button
-        class="btn btn-circle btn-xs bg-base-300"
+        class="btn btn-circle btn-xs"
         @click="handlerLabelAdd"
       >
         <PlusIcon class="h-4 w-4" />

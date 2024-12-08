@@ -1,7 +1,7 @@
 <template>
   <div
     ref="chart"
-    class="h-28 w-full bg-base-100"
+    class="h-28 w-full"
   ></div>
   <span
     class="hidden text-base-content"

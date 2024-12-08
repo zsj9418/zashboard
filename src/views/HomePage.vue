@@ -9,7 +9,7 @@
     <SideBar />
 
     <div
-      class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/50 md:relative md:w-auto"
+      class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
     >
       <component
         v-if="ctrlComp && isSiderbarCollapsed"
@@ -41,9 +41,7 @@
             </li>
           </ul>
           <label for="sidebar">
-            <div
-              class="btn btn-circle drawer-button btn-sm bg-neutral text-neutral-content shadow-lg"
-            >
+            <div class="btn btn-circle drawer-button btn-sm bg-neutral text-neutral-content">
               <Bars3Icon class="h-4 w-4" />
             </div>
           </label>

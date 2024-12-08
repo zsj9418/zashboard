@@ -1,7 +1,7 @@
 <template>
   <div class="grid grid-cols-1 gap-2 overflow-y-auto p-2">
     <!-- dashboard -->
-    <div class="card card-compact bg-base-100 shadow-lg">
+    <div class="card card-compact">
       <div class="card-title px-4 pt-4 text-primary">
         <div class="indicator">
           <span
@@ -79,19 +79,21 @@
     </div>
 
     <!-- statistics -->
-    <div class="card card-compact bg-base-100 shadow-lg">
+    <div class="card card-compact">
       <div class="card-title px-4 pt-4">
         {{ $t('statistics') }}
       </div>
       <div class="card-body gap-4">
         <StatisticsInfo class="block sm:hidden" />
-        <MemoryCharts />
-        <SpeedCharts />
+        <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+          <MemoryCharts />
+          <SpeedCharts />
+        </div>
       </div>
     </div>
 
     <!-- backend -->
-    <div class="card card-compact bg-base-100 shadow-lg">
+    <div class="card card-compact">
       <div class="card-title px-4 pt-4">
         {{ $t('backend') }}
       </div>
@@ -138,7 +140,7 @@
     </div>
 
     <!-- proxies -->
-    <div class="card card-compact bg-base-100 shadow-lg">
+    <div class="card card-compact">
       <div class="card-title px-4 pt-4">
         {{ $t('proxies') }}
       </div>
@@ -237,7 +239,7 @@
     </div>
 
     <!-- connections -->
-    <div class="card card-compact bg-base-100 shadow-lg">
+    <div class="card card-compact">
       <div class="card-title px-4 pt-4">
         {{ $t('connections') }}
       </div>

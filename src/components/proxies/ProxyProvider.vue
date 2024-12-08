@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse collapse-arrow bg-base-100 shadow-lg">
+  <div class="collapse collapse-arrow">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">

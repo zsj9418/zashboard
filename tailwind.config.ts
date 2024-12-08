@@ -16,6 +16,16 @@ export default {
       '3xl': '1800px',
     },
     extend: {
+      colors: {
+        ['low-latency']: 'rgb(181,196,177)',
+        ['medium-latency']: 'rgb(224, 200, 166)',
+        ['high-latency']: '#C68A8A',
+      },
+      backgroundColors: {
+        ['low-latency']: 'rgb(181,196,177)',
+        ['medium-latency']: 'rgb(224, 200, 166)',
+        ['high-latency']: '#C68A8A',
+      },
       fontFamily: {
         MiSans: ['MiSans-VF', 'NotoEmoji', 'system-ui'],
         SarasaUI: ['SarasaUiSC-Regular', 'NotoEmoji', 'system-ui'],

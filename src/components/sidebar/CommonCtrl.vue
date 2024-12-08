@@ -5,7 +5,7 @@
       {{ $t('version') }}:
       <img
         :src="isSingBox ? SingBoxLogo : MetacubexLogo"
-        class="w-4 rounded-sm"
+        class="w-4"
       />
       {{ version }}
     </div>

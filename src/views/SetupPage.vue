@@ -16,7 +16,7 @@
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
-    <div class="rounded-lg bg-base-100 p-6 shadow-lg">
+    <div class="card p-6">
       <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control mb-4">
         <label class="label">
@@ -152,7 +152,11 @@ const query = new URLSearchParams(
 )
 if (query.has('hostname')) {
   handleSubmit({
-    protocol: query.get('http') ? 'http' : query.get('https') ? 'https' : window.location.protocol.replace(':', ''),
+    protocol: query.get('http')
+      ? 'http'
+      : query.get('https')
+        ? 'https'
+        : window.location.protocol.replace(':', ''),
     host: query.get('hostname') as string,
     port: Number(query.get('port')) as unknown as number,
     password: query.get('secret') as string,
