@@ -1,8 +1,9 @@
-import { activeBackend } from '@/store/setup'
+import { useSetup } from '@/composables/setup'
+import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
 import type { Config, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import axios from 'axios'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
-import { computed, ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 
 axios.interceptors.request.use((config) => {
   config.baseURL =
@@ -14,6 +15,19 @@ axios.interceptors.request.use((config) => {
 
   config.headers['Authorization'] = 'Bearer ' + activeBackend.value?.password
   return config
+})
+
+axios.interceptors.response.use(null, (error) => {
+  if (error.status === 401 && activeUuid.value) {
+    removeBackend(activeUuid.value)
+    activeUuid.value = null
+    nextTick(() => {
+      const { showTip } = useSetup()
+
+      showTip('unauthorizedTip')
+    })
+  }
+  return error
 })
 
 export const version = ref()
