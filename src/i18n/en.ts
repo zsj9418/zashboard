@@ -15,7 +15,7 @@ export default {
   upload: 'Upload',
   downloadSpeed: 'Download Speed',
   uploadSpeed: 'Upload Speed',
-  memoryUsage: 'Memory Usage',
+  memoryUsage: 'Memory',
   version: 'Version',
   quickFilter: 'Quick Filter',
   noContent: 'No Content',
@@ -91,4 +91,5 @@ export default {
   lowLatencyDesc: 'Yellow threshold',
   mediumLatencyDesc: 'Red threshold',
   fonts: 'Fonts',
+  statistics: 'Statistics',
 }

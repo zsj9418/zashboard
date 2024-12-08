@@ -1,3 +1,11 @@
+import {
+  ArrowsRightLeftIcon,
+  Cog6ToothIcon,
+  DocumentTextIcon,
+  GlobeAltIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/vue/24/outline'
+
 export const NOT_CONNECTED = 0
 export enum LANG {
   EN_US = 'en-US',
@@ -86,4 +94,12 @@ export enum ROUTE_NAME {
   logs = 'logs',
   rules = 'rules',
   settings = 'settings',
+}
+
+export const ROUTE_ICON_MAP = {
+  [ROUTE_NAME.proxies]: GlobeAltIcon,
+  [ROUTE_NAME.connections]: ArrowsRightLeftIcon,
+  [ROUTE_NAME.rules]: WrenchScrewdriverIcon,
+  [ROUTE_NAME.logs]: DocumentTextIcon,
+  [ROUTE_NAME.settings]: Cog6ToothIcon,
 }

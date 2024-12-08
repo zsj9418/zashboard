@@ -7,19 +7,12 @@
     class="hidden text-base-content"
     ref="text"
   ></span>
-  <span
-    class="hidden text-primary"
-    ref="primaryText"
-  ></span>
-  <span
-    class="hidden text-info"
-    ref="secondaryText"
-  ></span>
 </template>
 
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
-import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
+import { theme } from '@/store/settings'
+import { memoryHistory } from '@/store/statistics'
 import { useElementSize } from '@vueuse/core'
 import { LineChart } from 'echarts/charts'
 import { GridComponent, LegendComponent } from 'echarts/components'
@@ -32,22 +25,22 @@ import { useI18n } from 'vue-i18n'
 echarts.use([LineChart, GridComponent, LegendComponent, CanvasRenderer])
 
 const text = ref()
-const primaryText = ref()
-const secondaryText = ref()
-
 const t = useI18n().t
 const chart = ref()
 
 onMounted(() => {
+  let color = getComputedStyle(text.value)?.color
+  watch(
+    () => theme.value,
+    () => {
+      color = getComputedStyle(text.value)?.color
+    },
+  )
   const options = computed(() => {
-    const color = getComputedStyle(text.value)?.color
-    const primaryColor = getComputedStyle(primaryText.value)?.color
-    const secondaryColor = getComputedStyle(secondaryText.value)?.color
-
     return {
       legend: {
         bottom: 0,
-        data: [t('download'), t('upload')],
+        data: [t('memoryUsage')],
         textStyle: {
           color: color,
         },
@@ -78,7 +71,8 @@ onMounted(() => {
           formatter: (value: number) => {
             return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
-            })}/s`
+              binary: true,
+            })}`
           },
           color: color,
         },
@@ -86,25 +80,14 @@ onMounted(() => {
       },
       series: [
         {
-          name: t('upload'),
-          data: uploadSpeedHistory.value,
+          name: t('memoryUsage'),
+          data: memoryHistory.value,
           symbol: 'none',
           emphasis: {
             disabled: true,
           },
           type: 'line',
-          color: secondaryColor,
-          smooth: true,
-        },
-        {
-          name: t('download'),
-          data: downloadSpeedHistory.value,
-          symbol: 'none',
-          emphasis: {
-            disabled: true,
-          },
-          type: 'line',
-          color: primaryColor,
+          color: color,
           smooth: true,
         },
       ],
@@ -115,7 +98,7 @@ onMounted(() => {
   myChart.setOption(options.value)
 
   watch(options, () => {
-    myChart.setOption(options.value)
+    myChart?.setOption(options.value)
   })
 
   const { width } = useElementSize(chart)

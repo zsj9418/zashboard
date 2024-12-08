@@ -1,14 +1,6 @@
 <template>
   <div class="flex flex-col gap-2 p-2 text-xs">
-    <div class="grid grid-cols-2 gap-2">
-      <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
-      <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
-      <div>{{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }}</div>
-      <div>{{ $t('dlSpeed') }}: {{ prettyBytesHelper(downloadSpeed) }}/s</div>
-      <div>{{ $t('upload') }}: {{ prettyBytesHelper(uploadTotal) }}</div>
-      <div>{{ $t('ulSpeed') }}: {{ prettyBytesHelper(uploadSpeed) }}/s</div>
-    </div>
-
+    <StatisticsInfo />
     <div class="flex gap-1">
       {{ $t('version') }}:
       <img
@@ -34,10 +26,8 @@
 import { isSingBox, version } from '@/api'
 import MetacubexLogo from '@/assets/metacubex.jpeg'
 import SingBoxLogo from '@/assets/sing-box.svg'
-import { prettyBytesHelper } from '@/helper'
-import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
 import { isSiderbarCollapsed } from '@/store/settings'
-import { downloadSpeed, memory, uploadSpeed } from '@/store/statistics'
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
 import BackendSwitch from '../settings/BackendSwitch.vue'
+import StatisticsInfo from './StatisticsInfo.vue'
 </script>

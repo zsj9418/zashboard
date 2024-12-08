@@ -16,13 +16,11 @@ export const initLogs = () => {
   logs.value = []
 
   let idx = 1
-  const ws = fetchLogsAPI<string>({
+  const ws = fetchLogsAPI<Log>({
     level: logLevel.value,
   })
   const unwatch = watch(ws.data, (data) => {
     if (!data) return
-
-    const parsedData = JSON.parse(data) as Log
 
     if (isPaused.value) {
       idx++
@@ -30,7 +28,7 @@ export const initLogs = () => {
     }
 
     logs.value.unshift({
-      ...parsedData,
+      ...data,
       time: new Date().valueOf(),
       seq: idx++,
     })

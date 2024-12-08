@@ -22,19 +22,17 @@ export const initConnections = () => {
   downloadTotal.value = 0
   uploadTotal.value = 0
 
-  const ws = fetchConnectionsAPI<string>()
+  const ws = fetchConnectionsAPI<{
+    connections: ConnectionRawMessage[]
+    downloadTotal: number
+    uploadTotal: number
+    memory: number
+  }>()
   const unwatch = watch(ws.data, (data) => {
     if (!data) return
 
-    const parsedData = JSON.parse(data) as {
-      connections: ConnectionRawMessage[]
-      downloadTotal: number
-      uploadTotal: number
-      memory: number
-    }
-
-    downloadTotal.value = parsedData.downloadTotal
-    uploadTotal.value = parsedData.uploadTotal
+    downloadTotal.value = data.downloadTotal
+    uploadTotal.value = data.uploadTotal
 
     if (isPaused.value) {
       return
@@ -42,10 +40,10 @@ export const initConnections = () => {
 
     closedConnections.value = [
       ...closedConnections.value,
-      ...differenceWith(activeConnections.value, parsedData.connections, (a, b) => a.id === b.id),
+      ...differenceWith(activeConnections.value, data.connections, (a, b) => a.id === b.id),
     ]
     activeConnections.value =
-      parsedData.connections?.map((connection) => {
+      data.connections?.map((connection) => {
         const preConnection = activeConnections.value.find((c) => c.id === connection.id)
 
         if (!preConnection) {

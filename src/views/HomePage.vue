@@ -34,7 +34,7 @@
                 :href="`#${r}`"
               >
                 <component
-                  :is="routeIconMap[r]"
+                  :is="ROUTE_ICON_MAP[r]"
                   class="h-5 w-5"
                 />
               </a>
@@ -61,7 +61,7 @@ import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
 import { useProxies } from '@/composables/proxies'
 import { rulesTabShow } from '@/composables/rules'
-import { PROXY_TAB_TYPE, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
+import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
@@ -70,28 +70,13 @@ import { fetchRules } from '@/store/rules'
 import { isSiderbarCollapsed } from '@/store/settings'
 import { activeUuid } from '@/store/setup'
 import { initSatistic } from '@/store/statistics'
-import {
-  ArrowsRightLeftIcon,
-  Bars3Icon,
-  Cog6ToothIcon,
-  DocumentTextIcon,
-  GlobeAltIcon,
-  WrenchScrewdriverIcon,
-} from '@heroicons/vue/24/outline'
+import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { computed, watch } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 
 const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
 })()
-
-const routeIconMap = {
-  [ROUTE_NAME.proxies]: GlobeAltIcon,
-  [ROUTE_NAME.connections]: ArrowsRightLeftIcon,
-  [ROUTE_NAME.rules]: WrenchScrewdriverIcon,
-  [ROUTE_NAME.logs]: DocumentTextIcon,
-  [ROUTE_NAME.settings]: Cog6ToothIcon,
-}
 
 const ctrlsMap = {
   [ROUTE_NAME.connections]: ConnectionCtrl,

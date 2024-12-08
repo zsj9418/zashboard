@@ -90,4 +90,5 @@ export default {
   lowLatencyDesc: '黄色的阈值',
   mediumLatencyDesc: '红色的阈值',
   fonts: '字体',
+  statistics: '统计',
 }

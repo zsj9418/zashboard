@@ -1,5 +1,6 @@
 <template>
   <div class="grid grid-cols-1 gap-2 overflow-y-auto p-2">
+    <!-- dashboard -->
     <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4 text-primary">
         <div class="indicator">
@@ -76,6 +77,20 @@
         </div>
       </div>
     </div>
+
+    <!-- statistics -->
+    <div class="card card-compact bg-base-100 shadow-lg">
+      <div class="card-title px-4 pt-4">
+        {{ $t('statistics') }}
+      </div>
+      <div class="card-body gap-4">
+        <StatisticsInfo class="block sm:hidden" />
+        <SpeedCharts />
+        <MemoryCharts />
+      </div>
+    </div>
+
+    <!-- backend -->
     <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4">
         {{ $t('backend') }}
@@ -121,6 +136,8 @@
         </div>
       </div>
     </div>
+
+    <!-- proxies -->
     <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4">
         {{ $t('proxies') }}
@@ -196,7 +213,7 @@
           <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-96"
+            class="input input-sm input-bordered w-20"
             v-model="speedtestTimeout"
           />
         </div>
@@ -218,6 +235,8 @@
         </div>
       </div>
     </div>
+
+    <!-- connections -->
     <div class="card card-compact bg-base-100 shadow-lg">
       <div class="card-title px-4 pt-4">
         {{ $t('connections') }}
@@ -261,10 +280,13 @@ import {
   upgradeUIAPI,
   zashboardVersion,
 } from '@/api'
+import MemoryCharts from '@/components/charts/MemoryCharts.vue'
+import SpeedCharts from '@/components/charts/SpeedCharts.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
+import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import {

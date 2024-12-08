@@ -23,7 +23,7 @@
             @click="() => router.push({ name: r })"
           >
             <component
-              :is="routeIconMap[r]"
+              :is="ROUTE_ICON_MAP[r]"
               class="h-5 w-5"
             />
             <template v-if="!isSiderbarCollapsed">
@@ -43,29 +43,22 @@
           />
           <CommonSidebar />
         </div>
-        <SpeedCharts />
+        <SpeedCharts v-if="route.name !== ROUTE_NAME.settings" />
       </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import SpeedCharts from '@/components/charts/SpeedCharts.vue'
 import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
-import SpeedCharts from '@/components/sidebar/SpeedCharts.vue'
-import { ROUTE_NAME } from '@/config'
+import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import router from '@/router'
 import { isSiderbarCollapsed } from '@/store/settings'
-import {
-  ArrowsRightLeftIcon,
-  Cog6ToothIcon,
-  DocumentTextIcon,
-  GlobeAltIcon,
-  WrenchScrewdriverIcon,
-} from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
@@ -76,14 +69,6 @@ const sidebarCompMap = {
   [ROUTE_NAME.logs]: LogsCtrl,
   [ROUTE_NAME.proxies]: ProxiesCtrl,
   [ROUTE_NAME.rules]: RulesCtrl,
-}
-
-const routeIconMap = {
-  [ROUTE_NAME.proxies]: GlobeAltIcon,
-  [ROUTE_NAME.connections]: ArrowsRightLeftIcon,
-  [ROUTE_NAME.rules]: WrenchScrewdriverIcon,
-  [ROUTE_NAME.logs]: DocumentTextIcon,
-  [ROUTE_NAME.settings]: Cog6ToothIcon,
 }
 
 const sidebarComp = computed(() => {

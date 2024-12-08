@@ -1,7 +1,7 @@
 import { activeBackend } from '@/store/setup'
 import type { Config, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
-import { useWebSocket } from '@vueuse/core'
 import axios from 'axios'
+import ReconnectingWebSocket from 'reconnectingwebsocket'
 import { computed, ref, watch } from 'vue'
 
 axios.interceptors.request.use((config) => {
@@ -136,10 +136,21 @@ const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) 
     })
   }
 
-  return useWebSocket<T>(resurl, {
-    autoClose: false,
-    autoReconnect: true,
-  })
+  const data = ref<T>()
+  const websocket = new ReconnectingWebSocket(resurl.toString())
+
+  const close = () => {
+    websocket.close()
+  }
+
+  websocket.onmessage = ({ data: message }) => {
+    data.value = JSON.parse(message)
+  }
+
+  return {
+    data,
+    close,
+  }
 }
 
 export const fetchConnectionsAPI = <T>() => {
