@@ -85,8 +85,8 @@
       </div>
       <div class="card-body gap-4">
         <StatisticsInfo class="block sm:hidden" />
-        <SpeedCharts />
         <MemoryCharts />
+        <SpeedCharts />
       </div>
     </div>
 
@@ -280,13 +280,13 @@ import {
   upgradeUIAPI,
   zashboardVersion,
 } from '@/api'
-import MemoryCharts from '@/components/charts/MemoryCharts.vue'
-import SpeedCharts from '@/components/charts/SpeedCharts.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
 import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
+import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
+import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import {

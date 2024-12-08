@@ -25,7 +25,6 @@ export const initSatistic = () => {
   const unwatchMemory = watch(
     () => memoryWsData.value,
     (data) => {
-      console.log(data, 'statistics')
       if (!data) return
 
       memory.value = data.inuse

@@ -1,26 +1,18 @@
 <template>
   <div
     ref="chart"
-    class="card h-28 w-full bg-base-100 p-0 shadow-lg"
+    class="h-28 w-full bg-base-100"
   ></div>
   <span
     class="hidden text-base-content"
     ref="text"
-  ></span>
-  <span
-    class="hidden text-primary"
-    ref="primaryText"
-  ></span>
-  <span
-    class="hidden text-info"
-    ref="secondaryText"
   ></span>
 </template>
 
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
 import { theme } from '@/store/settings'
-import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
+import { memoryHistory } from '@/store/statistics'
 import { useElementSize } from '@vueuse/core'
 import { LineChart } from 'echarts/charts'
 import { GridComponent, LegendComponent } from 'echarts/components'
@@ -33,35 +25,24 @@ import { useI18n } from 'vue-i18n'
 echarts.use([LineChart, GridComponent, LegendComponent, CanvasRenderer])
 
 const text = ref()
-const primaryText = ref()
-const secondaryText = ref()
-
 const t = useI18n().t
 const chart = ref()
 
 onMounted(() => {
-  const colorMap = {
-    color: getComputedStyle(text.value)?.color,
-    primaryColor: getComputedStyle(primaryText.value)?.color,
-    secondaryColor: getComputedStyle(secondaryText.value)?.color,
-  }
-
+  let color = getComputedStyle(text.value)?.color
   watch(
     () => theme.value,
     () => {
-      colorMap.color = getComputedStyle(text.value)?.color
-      colorMap.primaryColor = getComputedStyle(primaryText.value)?.color
-      colorMap.secondaryColor = getComputedStyle(secondaryText.value)?.color
+      color = getComputedStyle(text.value)?.color
     },
   )
-
   const options = computed(() => {
     return {
       legend: {
         bottom: 0,
-        data: [t('download'), t('upload')],
+        data: [t('memoryUsage')],
         textStyle: {
-          color: colorMap.color,
+          color: color,
         },
       },
       grid: {
@@ -90,33 +71,23 @@ onMounted(() => {
           formatter: (value: number) => {
             return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
-            })}/s`
+              binary: true,
+            })}`
           },
-          color: colorMap.color,
+          color: color,
         },
         splitLine: { show: false },
       },
       series: [
         {
-          name: t('upload'),
-          data: uploadSpeedHistory.value,
+          name: t('memoryUsage'),
+          data: memoryHistory.value,
           symbol: 'none',
           emphasis: {
             disabled: true,
           },
           type: 'line',
-          color: colorMap.secondaryColor,
-          smooth: true,
-        },
-        {
-          name: t('download'),
-          data: downloadSpeedHistory.value,
-          symbol: 'none',
-          emphasis: {
-            disabled: true,
-          },
-          type: 'line',
-          color: colorMap.primaryColor,
+          color: color,
           smooth: true,
         },
       ],

@@ -43,19 +43,24 @@
           />
           <CommonSidebar />
         </div>
-        <SpeedCharts v-if="route.name !== ROUTE_NAME.settings" />
+        <div
+          class="card overflow-hidden bg-base-100 shadow-lg"
+          v-if="route.name !== ROUTE_NAME.settings"
+        >
+          <SpeedCharts />
+        </div>
       </template>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import SpeedCharts from '@/components/charts/SpeedCharts.vue'
 import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
+import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import router from '@/router'
 import { isSiderbarCollapsed } from '@/store/settings'
