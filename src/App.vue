@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { FONTS } from './config'
 import { font, theme } from './store/settings'
 import { activeBackend } from './store/setup'
@@ -7,13 +7,19 @@ import Home from './views/HomePage.vue'
 import SetupPage from './views/SetupPage.vue'
 
 const app = ref<HTMLElement>()
-
-onMounted(() => {
+const setThemeColor = () => {
   const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
   const metaThemeColor = document.querySelector('meta[name="theme-color"]')
   if (metaThemeColor) {
     metaThemeColor.setAttribute('content', themeColor)
   }
+}
+
+onMounted(() => {
+  setThemeColor()
+  watch(theme, () => {
+    nextTick(setThemeColor)
+  })
 })
 
 const fontClassMap = {
