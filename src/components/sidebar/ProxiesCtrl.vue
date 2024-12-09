@@ -37,26 +37,7 @@
       class="w-full sm:hidden"
     ></div>
 
-    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
-      <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
-      <input
-        class="toggle"
-        type="checkbox"
-        v-model="hideUnavailableProxies"
-      />
-      <select
-        class="select select-bordered select-sm w-1/2 flex-1"
-        v-model="proxySortType"
-      >
-        <option
-          v-for="type in Object.values(PROXY_SORT_TYPE)"
-          :key="type"
-          :label="$t(type)"
-          :value="type"
-        />
-      </select>
-    </div>
-    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-32')">
       <select
         class="select select-bordered select-sm w-1/2 flex-1"
         :value="configs.mode"
@@ -69,6 +50,25 @@
           :value="mode"
         />
       </select>
+    </div>
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
+      <select
+        class="select select-bordered select-sm w-1/2 flex-1"
+        v-model="proxySortType"
+      >
+        <option
+          v-for="type in Object.values(PROXY_SORT_TYPE)"
+          :key="type"
+          :label="$t(type)"
+          :value="type"
+        />
+      </select>
+      <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
+      <input
+        class="toggle"
+        type="checkbox"
+        v-model="hideUnavailableProxies"
+      />
     </div>
   </div>
 </template>
