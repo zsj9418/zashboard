@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-btn bg-base-200 p-2 sm:hover:scale-105',
+        'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow sm:hover:scale-105',
         active && 'bg-primary text-primary-content',
         truncateProxyName && isTruncated && 'tooltip text-left',
       )
