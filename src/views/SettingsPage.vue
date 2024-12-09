@@ -121,7 +121,12 @@
             >
               {{ $t('upgradeCore') }}
             </button>
-            <div class="sm:hidden"></div>
+            <button
+              :class="twMerge('btn btn-xs sm:btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
+              @click="handlerClickRestartCore"
+            >
+              {{ $t('restartCore') }}
+            </button>
           </template>
           <button
             :class="twMerge('btn btn-xs sm:btn-sm', isConfigReloading ? 'animate-pulse' : '')"
@@ -278,6 +283,7 @@ import {
   flushFakeIPAPI,
   isSingBox,
   reloadConfigsAPI,
+  restartCoreAPI,
   upgradeCoreAPI,
   upgradeUIAPI,
   zashboardVersion,
@@ -309,6 +315,18 @@ import {
 } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { onMounted, ref } from 'vue'
+
+const isCoreRestarting = ref(false)
+const handlerClickRestartCore = async () => {
+  if (isCoreRestarting.value) return
+  isCoreRestarting.value = true
+  try {
+    await restartCoreAPI()
+    isCoreRestarting.value = false
+  } catch {
+    isCoreRestarting.value = false
+  }
+}
 
 const isCoreUpgrading = ref(false)
 const handlerClickUpgradeCore = async () => {

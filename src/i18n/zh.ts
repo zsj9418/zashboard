@@ -92,4 +92,5 @@ export default {
   fonts: '字体',
   statistics: '统计',
   unauthorizedTip: '未授权，请重新登录',
+  restartCore: '重启核心',
 }

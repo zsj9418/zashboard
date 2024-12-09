@@ -136,6 +136,10 @@ export const upgradeCoreAPI = () => {
   return axios.post('/upgrade')
 }
 
+export const restartCoreAPI = () => {
+  return axios.post('/restart')
+}
+
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
   const backend = activeBackend.value
   const resurl = new URL(

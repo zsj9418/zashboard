@@ -93,4 +93,5 @@ export default {
   fonts: 'Fonts',
   statistics: 'Statistics',
   unauthorizedTip: 'Unauthorized, please login again.',
+  restartCore: 'Restart Core',
 }
