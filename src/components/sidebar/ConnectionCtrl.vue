@@ -57,39 +57,9 @@
         <QuestionMarkCircleIcon class="h-4 w-4" />
       </div>
     </div>
-    <select
-      v-if="!horizontal"
-      class="select select-bordered select-sm"
-      v-model="sourceIPFilter"
-    >
-      <option
-        value=""
-        label="all"
-      ></option>
-      <option
-        v-for="opt in sourceIPOpts"
-        :key="opt.value"
-        :value="opt.value"
-        :label="opt.label"
-      />
-    </select>
+    <SourceIPFilter v-if="!horizontal" />
     <div class="join w-full flex-1">
-      <select
-        v-if="horizontal"
-        class="join-item select select-bordered select-sm"
-        v-model="sourceIPFilter"
-      >
-        <option
-          value=""
-          label="all"
-        ></option>
-        <option
-          v-for="opt in sourceIPOpts"
-          :key="opt.value"
-          :value="opt.value"
-          :label="opt.label"
-        />
-      </select>
+      <SourceIPFilter v-if="horizontal" />
       <input
         type="text"
         class="input input-sm join-item input-bordered w-32 flex-1"
@@ -117,7 +87,6 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
-import { getIPLabelFromMap } from '@/helper'
 import {
   connectionFilter,
   connectionSortType,
@@ -126,13 +95,11 @@ import {
   quickFilterEnabled,
   quickFilterRegex,
   renderConnections,
-  sourceIPFilter,
-  sourceIPs,
 } from '@/store/connections'
 import { useConnectionCard } from '@/store/settings'
 import { PauseIcon, PlayIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
-import { computed } from 'vue'
+import SourceIPFilter from './SourceIPFilter.vue'
 defineProps<{
   horizontal?: boolean
 }>()
@@ -141,15 +108,6 @@ const handlerClickCloseAll = () => {
     disconnectByIdAPI(conn.id)
   })
 }
-
-const sourceIPOpts = computed(() => {
-  return sourceIPs.value.map((ip) => {
-    return {
-      label: getIPLabelFromMap(ip),
-      value: ip,
-    }
-  })
-})
 </script>
 
 <style scoped>
