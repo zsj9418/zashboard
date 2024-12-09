@@ -17,9 +17,9 @@ export default {
     },
     extend: {
       colors: {
-        ['low-latency']: 'rgb(181,216,177)',
-        ['medium-latency']: 'rgb(244, 210, 166)',
-        ['high-latency']: '#C68A8A',
+        ['low-latency']: 'rgb(103, 194, 58)',
+        ['medium-latency']: 'rgb(250, 210, 75)',
+        ['high-latency']: 'rgb(244, 96, 108)',
       },
       fontFamily: {
         MiSans: ['MiSans-VF', 'NotoEmoji', 'system-ui'],
