@@ -9,7 +9,12 @@ import { useStorage } from '@vueuse/core'
 
 // global
 export const theme = useStorage<string>('config/theme', 'default')
-export const language = useStorage<LANG>('config/language', LANG.EN_US)
+export const language = useStorage<LANG>(
+  'config/language',
+  Object.values(LANG).includes(navigator.language as LANG)
+    ? (navigator.language as LANG)
+    : LANG.EN_US,
+)
 export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 

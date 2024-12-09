@@ -17,13 +17,8 @@ export default {
     },
     extend: {
       colors: {
-        ['low-latency']: 'rgb(181,196,177)',
-        ['medium-latency']: 'rgb(224, 200, 166)',
-        ['high-latency']: '#C68A8A',
-      },
-      backgroundColors: {
-        ['low-latency']: 'rgb(181,196,177)',
-        ['medium-latency']: 'rgb(224, 200, 166)',
+        ['low-latency']: 'rgb(181,216,177)',
+        ['medium-latency']: 'rgb(244, 210, 166)',
         ['high-latency']: '#C68A8A',
       },
       fontFamily: {

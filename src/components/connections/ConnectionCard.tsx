@@ -15,6 +15,7 @@ import {
   InformationCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
+import { first, last } from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { defineComponent } from 'vue'
 
@@ -71,9 +72,16 @@ export default defineComponent<{
           </button>
         </div>
       )
+
+      const connChians = props.conn.chains
+      const fisrtChain = first(connChians)
+      const lastChain = last(connChians)
       const chians = (
         <span class="inline w-56 truncate text-sm">
-          {[...props.conn.chains].reverse().join('->')}
+          <span class="hidden sm:inline">{[...connChians].reverse().join('->')}</span>
+          <span class="inline sm:hidden">
+            {connChians.length > 1 ? [lastChain, fisrtChain].join(' =>> ') : fisrtChain}
+          </span>
         </span>
       )
       const rule = <span class="hidden text-sm tracking-tight xl:inline">{props.conn.rule}</span>

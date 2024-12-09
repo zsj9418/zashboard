@@ -6,7 +6,7 @@
           {{ $t('noContent') }}
         </div>
       </template>
-      <div class="flex flex-col gap-[2px]">
+      <div class="flex flex-col gap-1">
         <ConnectionCard
           v-for="conn in renderConnections"
           :key="conn.id"

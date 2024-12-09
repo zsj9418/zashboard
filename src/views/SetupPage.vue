@@ -158,7 +158,7 @@ if (query.has('hostname')) {
         ? 'https'
         : window.location.protocol.replace(':', ''),
     host: query.get('hostname') as string,
-    port: Number(query.get('port')) as unknown as number,
+    port: Number(query.get('port')),
     password: query.get('secret') as string,
   })
 } else {
