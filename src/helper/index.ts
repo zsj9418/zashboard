@@ -37,7 +37,10 @@ const isProxyGroup = (name: string) => {
     return false
   }
 
-  return ['direct', 'reject'].includes(proxyNode.type.toLowerCase()) || !!proxyNode.all
+  return (
+    ['direct', 'reject', 'reject-drop', 'pass'].includes(proxyNode.type.toLowerCase()) ||
+    !!proxyNode.all
+  )
 }
 
 export const sortAndFilterProxyNodes = (proxies: string[]) => {
