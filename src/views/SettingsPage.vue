@@ -19,6 +19,17 @@
         </div>
       </div>
       <div class="card-body gap-4">
+        <div
+          class="flex items-center gap-2"
+          v-if="!isSingBox"
+        >
+          {{ $t('autoUpdate') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="autoUpdate"
+          />
+        </div>
         <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
@@ -279,7 +290,6 @@
 
 <script setup lang="ts">
 import {
-  fetchIsUIUpdateAvailable,
   flushFakeIPAPI,
   isSingBox,
   reloadConfigsAPI,
@@ -295,10 +305,12 @@ import TableSettings from '@/components/settings/TableSettings.vue'
 import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
 import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
+import { useSettings } from '@/composables/settings'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
+  autoUpdate,
   compactConnectionCard,
   font,
   lowLatency,
@@ -314,7 +326,9 @@ import {
   useConnectionCard,
 } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
-import { onMounted, ref } from 'vue'
+import { ref } from 'vue'
+
+const { isUIUpdateAvailable } = useSettings()
 
 const isCoreRestarting = ref(false)
 const handlerClickRestartCore = async () => {
@@ -340,7 +354,6 @@ const handlerClickUpgradeCore = async () => {
   }
 }
 
-const isUIUpdateAvailable = ref(false)
 const isUIUpgrading = ref(false)
 const handlerClickUpgradeUI = async () => {
   if (isUIUpgrading.value) return
@@ -352,10 +365,6 @@ const handlerClickUpgradeUI = async () => {
     isUIUpgrading.value = false
   }
 }
-
-onMounted(async () => {
-  isUIUpdateAvailable.value = await fetchIsUIUpdateAvailable()
-})
 
 const isConfigReloading = ref(false)
 const handlerClickReloadConfigs = async () => {

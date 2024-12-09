@@ -94,4 +94,5 @@ export default {
   statistics: 'Statistics',
   unauthorizedTip: 'Unauthorized, please login again.',
   restartCore: 'Restart Core',
+  autoUpdate: 'Auto Update',
 }

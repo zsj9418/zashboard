@@ -17,6 +17,7 @@ export const language = useStorage<LANG>(
 )
 export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
+export const autoUpdate = useStorage('config/auto-update', false)
 
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)

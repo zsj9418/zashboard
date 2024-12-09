@@ -59,6 +59,7 @@ import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
 import { useProxies } from '@/composables/proxies'
 import { rulesTabShow } from '@/composables/rules'
+import { useSettings } from '@/composables/settings'
 import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
@@ -90,7 +91,7 @@ const ctrlComp = computed(() => {
 })
 
 const { proxiesTabShow } = useProxies()
-
+const { checkUIUpdate } = useSettings()
 watch(
   activeUuid,
   () => {
@@ -102,6 +103,7 @@ watch(
     initConnections()
     initLogs()
     initSatistic()
+    checkUIUpdate()
   },
   {
     immediate: true,
