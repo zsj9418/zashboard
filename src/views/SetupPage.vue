@@ -1,5 +1,8 @@
 <template>
-  <div class="flex h-full w-full items-center justify-center">
+  <div
+    class="flex h-full w-full items-center justify-center bg-base-200/40"
+    @keydown.enter="handleSubmit(form)"
+  >
     <div
       class="toast toast-start toast-top max-w-64 whitespace-normal text-sm"
       v-if="tipShowModel"
@@ -16,14 +19,14 @@
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
-    <div class="card p-6">
+    <div class="card px-6 py-2">
       <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control mb-4">
         <label class="label">
           <span class="label-text">{{ $t('protocol') }}</span>
         </label>
         <select
-          class="select select-bordered w-full"
+          class="select select-bordered select-sm w-full"
           v-model="form.protocol"
         >
           <option value="http">HTTP</option>
@@ -36,7 +39,9 @@
         </label>
         <input
           type="text"
-          class="input input-bordered w-full"
+          class="input input-sm input-bordered w-full"
+          name="username"
+          autocomplete="username"
           v-model="form.host"
         />
       </div>
@@ -46,7 +51,7 @@
         </label>
         <input
           type="text"
-          class="input input-bordered w-full"
+          class="input input-sm input-bordered w-full"
           v-model="form.port"
         />
       </div>
@@ -56,7 +61,7 @@
         </label>
         <input
           type="password"
-          class="input input-bordered w-full"
+          class="input input-sm input-bordered w-full"
           v-model="form.password"
         />
       </div>
@@ -127,24 +132,37 @@ const handleSubmit = async (
     showTip('protocolTips')
   }
 
-  const data = await fetch(`${protocol}://${host}:${port}/version`, {
-    method: 'GET',
-    headers: {
-      Authorization: `Bearer ${password}`,
-    },
-  })
+  try {
+    const data = await fetch(`${protocol}://${host}:${port}/version`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${password}`,
+      },
+    })
 
-  const { version, message } = await data.json()
-
-  if (!version) {
-    if (!quiet) {
-      alert(message)
+    if (data.status !== 200) {
+      if (!quiet) {
+        alert(data.statusText)
+      }
+      return
     }
-    return
-  }
 
-  addBackend(form)
-  router.push({ name: 'proxies' })
+    const { version, message } = await data.json()
+
+    if (!version) {
+      if (!quiet) {
+        alert(message)
+      }
+      return
+    }
+
+    addBackend(form)
+    router.push({ name: 'proxies' })
+  } catch (e) {
+    if (!quiet) {
+      alert(e)
+    }
+  }
 }
 
 const query = new URLSearchParams(
