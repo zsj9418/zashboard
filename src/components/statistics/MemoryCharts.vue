@@ -7,6 +7,10 @@
     class="hidden text-base-content"
     ref="text"
   ></span>
+  <span
+    class="hidden text-primary"
+    ref="line"
+  ></span>
 </template>
 
 <script setup lang="ts">
@@ -25,15 +29,18 @@ import { useI18n } from 'vue-i18n'
 echarts.use([LineChart, GridComponent, LegendComponent, CanvasRenderer])
 
 const text = ref()
+const line = ref()
 const t = useI18n().t
 const chart = ref()
 
 onMounted(() => {
   let color = getComputedStyle(text.value)?.color
+  let lineColor = getComputedStyle(line.value)?.color
   watch(
     () => theme.value,
     () => {
       color = getComputedStyle(text.value)?.color
+      lineColor = getComputedStyle(line.value)?.color
     },
   )
   const options = computed(() => {
@@ -87,7 +94,7 @@ onMounted(() => {
             disabled: true,
           },
           type: 'line',
-          color: color,
+          color: lineColor,
           smooth: true,
         },
       ],

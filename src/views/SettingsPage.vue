@@ -187,7 +187,7 @@
             v-model="showGlobalProxy"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 max-sm:hidden">
           {{ $t('twoColumnProxyGroup') }}:
           <input
             class="toggle"
@@ -255,7 +255,7 @@
           {{ $t('card') }}
         </div>
         <div
-          class="flex items-center gap-2"
+          class="flex items-center gap-2 max-sm:hidden"
           v-if="useConnectionCard"
         >
           {{ $t('compactCard') }}:
