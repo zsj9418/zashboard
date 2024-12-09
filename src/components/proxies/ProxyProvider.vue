@@ -27,7 +27,7 @@
         :value="subscriptionInfo.percentage"
         max="100"
       />
-      <div class="flex gap-4">
+      <div class="flex flex-col sm:flex-row sm:gap-4">
         <template v-if="subscriptionInfo">
           <div class="text-sm text-slate-500">
             {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} (
