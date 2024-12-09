@@ -19,17 +19,6 @@
         </div>
       </div>
       <div class="card-body gap-4">
-        <div
-          class="flex items-center gap-2"
-          v-if="!isSingBox"
-        >
-          {{ $t('autoUpdate') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="autoUpdate"
-          />
-        </div>
         <div class="flex items-center gap-2">
           {{ $t('theme') }}:
           <select
@@ -59,6 +48,17 @@
               :label="opt"
             />
           </select>
+        </div>
+        <div
+          class="flex items-center gap-2"
+          v-if="!isSingBox"
+        >
+          {{ $t('autoUpgrade') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="autoUpgrade"
+          />
         </div>
         <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
           <template v-if="!isSingBox">
@@ -310,7 +310,7 @@ import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
-  autoUpdate,
+  autoUpgrade,
   compactConnectionCard,
   font,
   lowLatency,
