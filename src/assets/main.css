@@ -9,9 +9,9 @@
 
 @layer components {
   .card {
-    @apply rounded-xl bg-base-100 shadow-xl;
+    @apply rounded-xl bg-base-100 shadow-md;
   }
   .collapse {
-    @apply rounded-xl bg-base-100 shadow-xl;
+    @apply rounded-xl bg-base-100 shadow-md;
   }
 }

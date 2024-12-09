@@ -36,7 +36,7 @@
         <VerticalInfos />
       </template>
       <template v-else>
-        <div class="card shadow-sm">
+        <div class="card">
           <component
             v-if="sidebarComp"
             :is="sidebarComp"
@@ -44,7 +44,7 @@
           <CommonSidebar />
         </div>
         <div
-          class="card overflow-hidden shadow-sm"
+          class="card overflow-hidden"
           v-if="route.name !== ROUTE_NAME.settings"
         >
           <SpeedCharts />

@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-lg">
+  <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-md">
     <thead class="">
       <tr
         v-for="headerGroup in table.getHeaderGroups()"
