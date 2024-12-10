@@ -55,6 +55,22 @@
           v-model="form.port"
         />
       </div>
+      <div class="form-control mb-4">
+        <label class="label flex items-center justify-start gap-1">
+          <span class="label-text">{{ $t('secondaryPath') }}</span>
+          <span
+            class="tooltip"
+            :data-tip="$t('secondaryPathTip')"
+          >
+            <QuestionMarkCircleIcon class="h-4 w-4" />
+          </span>
+        </label>
+        <input
+          type="text"
+          class="input input-sm input-bordered w-full"
+          v-model="form.secondaryPath"
+        />
+      </div>
       <div class="form-control">
         <label class="label">
           <span class="label-text">{{ $t('password') }}</span>
@@ -81,7 +97,8 @@
             class="btn btn-xs flex-1"
             @click="activeUuid = backend.uuid"
           >
-            {{ backend.protocol }}://{{ backend.host }}:{{ backend.port }}
+            {{ backend.protocol }}://{{ backend.host }}:{{ backend.port
+            }}{{ backend.secondaryPath }}
           </button>
           <button
             class="btn btn-circle btn-xs"
@@ -100,13 +117,14 @@ import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSetup } from '@/composables/setup'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
-import { MinusCircleIcon } from '@heroicons/vue/24/outline'
+import { MinusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
 
 const form = reactive({
   protocol: 'http',
   host: '127.0.0.1',
   port: 9090,
+  secondaryPath: '',
   password: '',
 })
 
@@ -117,11 +135,12 @@ const handleSubmit = async (
     protocol: string
     host: string
     port: number
+    secondaryPath: string
     password: string
   },
   quiet = false,
 ) => {
-  const { protocol, host, port, password } = form
+  const { protocol, host, port, password, secondaryPath } = form
 
   if (!protocol || !host || !port) {
     alert('Please fill in all the fields.')
@@ -133,7 +152,7 @@ const handleSubmit = async (
   }
 
   try {
-    const data = await fetch(`${protocol}://${host}:${port}/version`, {
+    const data = await fetch(`${protocol}://${host}:${port}${secondaryPath}/version`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${password}`,
@@ -175,6 +194,7 @@ if (query.has('hostname')) {
       : query.get('https')
         ? 'https'
         : window.location.protocol.replace(':', ''),
+    secondaryPath: query.get('secondaryPath') as string,
     host: query.get('hostname') as string,
     port: Number(query.get('port')),
     password: query.get('secret') as string,

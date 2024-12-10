@@ -6,6 +6,7 @@ import { computed } from 'vue'
 type Backend = {
   host: string
   port: number
+  secondaryPath: string
   password: string
   protocol: string
   uuid: string

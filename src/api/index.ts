@@ -13,6 +13,10 @@ axios.interceptors.request.use((config) => {
     ':' +
     activeBackend.value?.port
 
+  if (activeBackend.value?.secondaryPath) {
+    config.baseURL += activeBackend.value?.secondaryPath
+  }
+
   config.headers['Authorization'] = 'Bearer ' + activeBackend.value?.password
   return config
 })
