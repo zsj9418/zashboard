@@ -44,7 +44,7 @@
           <CommonSidebar />
         </div>
         <div
-          class="card overflow-hidden"
+          class="card"
           v-if="route.name !== ROUTE_NAME.settings"
         >
           <SpeedCharts />
