@@ -4,7 +4,7 @@
     class="h-28 w-full"
   ></div>
   <span
-    class="hidden text-base-content"
+    class="hidden bg-base-100 text-base-content"
     ref="text"
   ></span>
   <span
@@ -18,20 +18,26 @@
 </template>
 
 <script setup lang="ts">
-import { prettyBytesHelper } from '@/helper'
+import { getToolTipForParams, prettyBytesHelper } from '@/helper'
 import { theme } from '@/store/settings'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
 import { useElementSize } from '@vueuse/core'
 import { LineChart } from 'echarts/charts'
-import { GridComponent, LegendComponent } from 'echarts/components'
+import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components'
 import * as echarts from 'echarts/core'
 import { CanvasRenderer } from 'echarts/renderers'
 import { debounce } from 'lodash'
 import { computed, onMounted, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-echarts.use([LineChart, GridComponent, LegendComponent, CanvasRenderer])
+echarts.use([LineChart, GridComponent, LegendComponent, TooltipComponent, CanvasRenderer])
 
+const props = defineProps({
+  toolTip: {
+    type: Boolean,
+    default: false,
+  },
+})
 const text = ref()
 const primaryText = ref()
 const secondaryText = ref()
@@ -46,6 +52,7 @@ onMounted(() => {
     secondaryColor: getComputedStyle(secondaryText.value)?.color,
   }
   const fontFamily = getComputedStyle(text.value)?.fontFamily
+  const backgroundColor = getComputedStyle(text.value)?.backgroundColor
 
   watch(
     () => theme.value,
@@ -72,6 +79,23 @@ onMounted(() => {
         right: 10,
         bottom: 25,
       },
+      tooltip: {
+        show: props.toolTip,
+        trigger: 'axis',
+        backgroundColor: backgroundColor,
+        borderColor: backgroundColor,
+        textStyle: {
+          color: colorMap.color,
+          fontFamily,
+        },
+        formatter: (params: ToolTipParams[]) => {
+          return params
+            .map((item) => {
+              return getToolTipForParams(item, '/s')
+            })
+            .join('')
+        },
+      },
       xAxis: {
         type: 'category',
         axisLine: { show: false },
@@ -86,6 +110,13 @@ onMounted(() => {
           return Math.max(value.max, 100 * 1024)
         },
         axisLine: { show: false },
+        splitLine: {
+          show: true,
+          lineStyle: {
+            type: 'dashed',
+            color: colorMap.color,
+          },
+        },
         axisLabel: {
           align: 'left',
           padding: [0, 0, 0, -45],
@@ -97,7 +128,6 @@ onMounted(() => {
           color: colorMap.color,
           fontFamily,
         },
-        splitLine: { show: false },
       },
       series: [
         {
