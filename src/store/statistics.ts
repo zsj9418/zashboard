@@ -1,11 +1,14 @@
 import { fetchMemoryAPI, fetchTrafficAPI } from '@/api'
 import { ref, watch } from 'vue'
+import { activeConnections } from './connections'
 
 export const timeSaved = 60
 const initValue = new Array(timeSaved).fill(0).map((v, i) => ({ name: i, value: v }))
 
 export const memory = ref<number>(0)
 export const memoryHistory = ref([...initValue])
+export const connectionsHistory = ref([...initValue])
+
 export const downloadSpeed = ref<number>(0)
 export const uploadSpeed = ref<number>(0)
 export const downloadSpeedHistory = ref([...initValue])
@@ -27,15 +30,20 @@ export const initSatistic = () => {
     () => memoryWsData.value,
     (data) => {
       if (!data) return
+      const timestamp = Date.now().valueOf()
 
       memory.value = data.inuse
-
       memoryHistory.value.push({
         value: data.inuse,
-        name: Date.now().valueOf(),
+        name: timestamp,
+      })
+      connectionsHistory.value.push({
+        value: activeConnections.value.length,
+        name: timestamp,
       })
 
       memoryHistory.value = memoryHistory.value.slice(-1 * timeSaved)
+      connectionsHistory.value = connectionsHistory.value.slice(-1 * timeSaved)
     },
   )
 

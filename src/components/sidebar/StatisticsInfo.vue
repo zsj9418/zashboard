@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-2 gap-2">
+  <div class="grid grid-cols-2 gap-1">
     <div>{{ $t('connections') }}: {{ activeConnections.length }}</div>
     <div>{{ $t('memoryUsage') }}: {{ prettyBytesHelper(memory, { binary: true }) }}</div>
     <div>{{ $t('download') }}: {{ prettyBytesHelper(downloadTotal) }}</div>

@@ -95,10 +95,13 @@
         {{ $t('statistics') }}
       </div>
       <div class="card-body gap-4">
-        <StatisticsInfo class="block sm:hidden" />
-        <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
+        <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
+          <div class="card flex items-center justify-start bg-base-200 p-4">
+            <StatisticsInfo class="h-20 w-full" />
+          </div>
+          <SpeedCharts />
           <MemoryCharts />
-          <SpeedCharts :tool-tip="true" />
+          <ConnectionsCharts />
         </div>
       </div>
     </div>
@@ -303,6 +306,7 @@ import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
 import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
+import ConnectionsCharts from '@/components/statistics/ConnectionsCharts.vue'
 import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
 import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'

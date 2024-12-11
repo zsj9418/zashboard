@@ -5,7 +5,7 @@
       class="h-full w-full"
     ></div>
     <span
-      class="hidden border-base-content/30 bg-base-100 text-base-content"
+      class="hidden border-base-content/10 bg-base-100/70 text-base-content"
       ref="baseColorRef"
     ></span>
     <span
@@ -25,12 +25,9 @@
 </template>
 
 <script setup lang="ts">
-import { prettyBytesHelper } from '@/helper'
 import { font, theme } from '@/store/settings'
-import { timeSaved } from '@/store/statistics'
 import { PauseCircleIcon, PlayCircleIcon } from '@heroicons/vue/24/outline'
 import { useElementSize } from '@vueuse/core'
-import dayjs from 'dayjs'
 import { LineChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components'
 import * as echarts from 'echarts/core'
@@ -40,37 +37,18 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 echarts.use([LineChart, GridComponent, LegendComponent, TooltipComponent, CanvasRenderer])
 
-const props = withDefaults(
-  defineProps<{
-    toolTip?: boolean
-    binary?: boolean
-    data: { name: string; data: { name: number; value: number }[] }[]
-    suffix?: string
-  }>(),
-  {
-    binary: false,
-    suffix: '',
-  },
-)
+const props = defineProps<{
+  data: { name: string; color?: number; data: { name: number; value: number }[] }[]
+  labelFormatter: (value: number) => string
+  toolTipFormatter: (value: ToolTipParams[]) => string
+  min: number
+}>()
+
 const baseColorRef = ref()
 const themeColorRef = ref()
 
 const isPaused = ref(false)
 const chart = ref()
-const getToolTipForParams = (params: ToolTipParams, suffix = '') => {
-  // fake data
-  if (params.data.name < timeSaved + 1) {
-    return
-  }
-  return `
-    <div class="flex items-center my-2 gap-1">
-      <div class="w-4 h-4 rounded-full" style="background-color: ${params.color}"></div>
-      ${params.seriesName}
-      (${dayjs(params.data.name).format('HH:mm:ss')}): ${prettyBytesHelper(params.data.value, {
-        binary: props.binary,
-      })}${suffix}
-    </div>`
-}
 
 onMounted(() => {
   const baseColorStyle = getComputedStyle(baseColorRef.value)
@@ -121,7 +99,7 @@ onMounted(() => {
         bottom: 25,
       },
       tooltip: {
-        show: props.toolTip,
+        show: true,
         trigger: 'axis',
         backgroundColor: backgroundColor,
         borderColor: backgroundColor,
@@ -130,13 +108,7 @@ onMounted(() => {
           color: color,
           fontFamily,
         },
-        formatter: (params: ToolTipParams[]) => {
-          return params
-            .map((item) => {
-              return getToolTipForParams(item, props.suffix)
-            })
-            .join('')
-        },
+        formatter: props.toolTipFormatter,
       },
       xAxis: {
         type: 'category',
@@ -149,7 +121,7 @@ onMounted(() => {
         type: 'value',
         splitNumber: 4,
         max: (value: { max: number }) => {
-          return Math.max(value.max, props.binary ? 100 * 1024 * 1024 : 100 * 1000)
+          return Math.max(value.max, props.min)
         },
         axisLine: { show: false },
         splitLine: {
@@ -162,17 +134,14 @@ onMounted(() => {
         axisLabel: {
           align: 'left',
           padding: [0, 0, 0, -45],
-          formatter: (value: number) => {
-            return `${prettyBytesHelper(value, {
-              maximumFractionDigits: 1,
-              binary: props.binary,
-            })}${props.suffix}`
-          },
+          formatter: props.labelFormatter,
           color: color,
           fontFamily,
         },
       },
       series: props.data.map((item, index) => {
+        const colorIndex = item?.color ?? index
+
         return {
           name: item.name,
           symbol: 'none',
@@ -181,7 +150,7 @@ onMounted(() => {
           },
           data: item.data,
           type: 'line',
-          color: index === props.data.length - 1 ? primaryColor : secondaryColor,
+          color: colorIndex === 1 ? primaryColor : secondaryColor,
           smooth: true,
         }
       }),

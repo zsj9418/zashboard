@@ -1,6 +1,7 @@
 import { PROXY_SORT_TYPE } from '@/config'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import { hideUnavailableProxies, language, proxySortType, sourceIPLabelMap } from '@/store/settings'
+import { timeSaved } from '@/store/statistics'
 import type { Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
@@ -82,4 +83,27 @@ export const getProcessFromConnection = (connection: Connection) => {
     connection.metadata.processPath.replace(/^.*[/\\](.*)$/, '$1') ||
     '-'
   )
+}
+
+export const getToolTipForParams = (
+  params: ToolTipParams,
+  config: {
+    suffix: string
+    binary: boolean
+  },
+) => {
+  const { suffix = '', binary = false } = config
+
+  // fake data
+  if (params.data.name < timeSaved + 1) {
+    return ``
+  }
+  return `
+    <div class="flex items-center my-2 gap-1">
+      <div class="w-4 h-4 rounded-full" style="background-color: ${params.color}"></div>
+      ${params.seriesName}
+      (${dayjs(params.data.name).format('HH:mm:ss')}): ${prettyBytesHelper(params.data.value, {
+        binary: binary,
+      })}${suffix}
+    </div>`
 }

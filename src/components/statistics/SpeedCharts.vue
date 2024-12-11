@@ -1,19 +1,21 @@
 <template>
   <BasicCharts
-    :data="speedChartsData"
-    :tool-tip="true"
-    :suffix="'/s'"
+    :data="chartsData"
+    :label-formatter="labelFormatter"
+    :tool-tip-formatter="tooltipFormatter"
+    :min="100 * 1000"
   />
 </template>
 
 <script setup lang="ts">
+import { getToolTipForParams, prettyBytesHelper } from '@/helper'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import BasicCharts from './BasicCharts.vue'
 
 const { t } = useI18n()
-const speedChartsData = computed(() => {
+const chartsData = computed(() => {
   return [
     {
       name: t('ulSpeed'),
@@ -25,4 +27,21 @@ const speedChartsData = computed(() => {
     },
   ]
 })
+
+const labelFormatter = (value: number) => {
+  return `${prettyBytesHelper(value, {
+    maximumFractionDigits: 1,
+    binary: false,
+  })}/s`
+}
+const tooltipFormatter = (value: ToolTipParams[]) => {
+  return value
+    .map((item) => {
+      return getToolTipForParams(item, {
+        binary: false,
+        suffix: '/s',
+      })
+    })
+    .join('')
+}
 </script>
