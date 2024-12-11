@@ -199,7 +199,7 @@ if (query.has('hostname')) {
     port: Number(query.get('port')),
     password: query.get('secret') as string,
   })
-} else {
+} else if (backendList.value.length === 0) {
   handleSubmit(form, true)
 }
 </script>

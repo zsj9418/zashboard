@@ -1,7 +1,7 @@
 <template>
-  <div class="flex gap-2">
+  <div class="join flex">
     <select
-      class="select select-bordered select-xs w-48"
+      class="join-item select select-bordered select-xs w-48"
       v-model="activeUuid"
     >
       <option
@@ -13,7 +13,7 @@
       </option>
     </select>
     <button
-      class="btn btn-circle btn-xs"
+      class="btn join-item btn-xs"
       @click="addBackend"
     >
       <PlusIcon class="h-4 w-4" />

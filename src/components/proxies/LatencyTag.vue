@@ -30,6 +30,7 @@ let countUp: CountUp | null = null
 onMounted(() => {
   countUp = new CountUp(latencyRef.value, latency.value, {
     duration: 1,
+    separator: '',
     enableScrollSpy: true,
   })
   countUp.start()
