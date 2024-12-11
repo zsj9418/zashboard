@@ -2,6 +2,7 @@
   <BasicCharts
     :data="memoryChartsData"
     :tool-tip="true"
+    :binary="true"
   />
 </template>
 

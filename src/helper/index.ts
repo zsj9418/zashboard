@@ -83,16 +83,3 @@ export const getProcessFromConnection = (connection: Connection) => {
     '-'
   )
 }
-
-export const getToolTipForParams = (params: ToolTipParams, suffix = '') => {
-  // fake data
-  if (params.data.name < 100) {
-    return
-  }
-  return `
-    <div class="flex items-center my-2 gap-1">
-      <div class="w-4 h-4 rounded-full" style="background-color: ${params.color}"></div>
-      ${params.seriesName}
-      (${dayjs(params.data.name).format('HH:mm:ss')}): ${prettyBytesHelper(params.data.value)}${suffix}
-    </div>`
-}

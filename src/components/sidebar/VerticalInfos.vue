@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4 text-xs">
+  <div class="card mx-1 flex flex-col gap-4 py-2 text-xs">
     <div class="flex flex-col items-center justify-center">
       <ArrowsRightLeftIcon class="h-4 w-4" />
       {{ activeConnections.length }}
@@ -20,7 +20,7 @@
     </div>
     <div class="flex flex-col items-center justify-center">
       <button
-        class="btn btn-circle btn-sm"
+        class="btn btn-circle btn-xs"
         @click="isSiderbarCollapsed = false"
       >
         <ArrowRightCircleIcon class="h-5 w-5" />

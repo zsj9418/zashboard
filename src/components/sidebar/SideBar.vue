@@ -8,7 +8,7 @@
     <div
       :class="
         twMerge(
-          'flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content !transition-all duration-500',
+          'scrollbar-hidden flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content !transition-all duration-500',
           isSiderbarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
         )
       "

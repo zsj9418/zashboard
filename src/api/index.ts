@@ -147,7 +147,7 @@ export const restartCoreAPI = () => {
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
   const backend = activeBackend.value
   const resurl = new URL(
-    `${backend?.protocol === 'https' ? 'wss' : 'ws'}://${backend?.host}:${backend?.port}/${url}`,
+    `${backend?.protocol === 'https' ? 'wss' : 'ws'}://${backend?.host}:${backend?.port}${backend?.secondaryPath || ''}/${url}`,
   )
 
   resurl.searchParams.append('token', backend?.password || '')

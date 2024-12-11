@@ -19,9 +19,9 @@
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
-    <div class="card px-6 py-2">
-      <h1 class="mb-4 text-2xl font-semibold">{{ $t('setup') }}</h1>
-      <div class="form-control mb-4">
+    <div class="card w-64 gap-2 px-6 py-2 sm:gap-4">
+      <h1 class="text-2xl font-semibold">{{ $t('setup') }}</h1>
+      <div class="form-control">
         <label class="label">
           <span class="label-text">{{ $t('protocol') }}</span>
         </label>
@@ -33,7 +33,7 @@
           <option value="https">HTTPS</option>
         </select>
       </div>
-      <div class="form-control mb-4">
+      <div class="form-control">
         <label class="label">
           <span class="label-text">{{ $t('host') }}</span>
         </label>
@@ -45,7 +45,7 @@
           v-model="form.host"
         />
       </div>
-      <div class="form-control mb-4">
+      <div class="form-control">
         <label class="label">
           <span class="label-text">{{ $t('port') }}</span>
         </label>
@@ -55,7 +55,7 @@
           v-model="form.port"
         />
       </div>
-      <div class="form-control mb-4">
+      <div class="form-control">
         <label class="label flex items-center justify-start gap-1">
           <span class="label-text">{{ $t('secondaryPath') }}</span>
           <span
@@ -82,12 +82,12 @@
         />
       </div>
       <button
-        class="btn btn-primary mt-4 w-full"
+        class="btn btn-primary btn-sm w-full"
         @click="handleSubmit(form)"
       >
         {{ $t('submit') }}
       </button>
-      <div class="flex flex-col gap-2 pt-4">
+      <div class="flex flex-col gap-2">
         <div
           v-for="backend in backendList"
           :key="backend.uuid"

@@ -1,20 +1,16 @@
 <template>
-  <div class="relative h-28 w-full">
+  <div class="relative h-28 w-full overflow-hidden">
     <div
       ref="chart"
       class="h-full w-full"
     ></div>
     <span
-      class="hidden bg-base-100 text-base-content"
-      ref="text"
+      class="hidden border-base-content/30 bg-base-100 text-base-content"
+      ref="baseColorRef"
     ></span>
     <span
-      class="hidden text-primary"
-      ref="primaryText"
-    ></span>
-    <span
-      class="hidden text-info"
-      ref="secondaryText"
+      class="hidden bg-info text-primary"
+      ref="themeColorRef"
     ></span>
     <button
       class="btn btn-ghost btn-xs absolute bottom-0 right-1"
@@ -29,10 +25,12 @@
 </template>
 
 <script setup lang="ts">
-import { getToolTipForParams, prettyBytesHelper } from '@/helper'
-import { theme } from '@/store/settings'
+import { prettyBytesHelper } from '@/helper'
+import { font, theme } from '@/store/settings'
+import { timeSaved } from '@/store/statistics'
 import { PauseCircleIcon, PlayCircleIcon } from '@heroicons/vue/24/outline'
 import { useElementSize } from '@vueuse/core'
+import dayjs from 'dayjs'
 import { LineChart } from 'echarts/charts'
 import { GridComponent, LegendComponent, TooltipComponent } from 'echarts/components'
 import * as echarts from 'echarts/core'
@@ -42,33 +40,67 @@ import { computed, onMounted, ref, watch } from 'vue'
 
 echarts.use([LineChart, GridComponent, LegendComponent, TooltipComponent, CanvasRenderer])
 
-const props = defineProps<{
-  toolTip?: boolean
-  data: { name: string; data: { name: number; value: number }[] }[]
-  suffix?: string
-}>()
-const text = ref()
-const primaryText = ref()
-const secondaryText = ref()
+const props = withDefaults(
+  defineProps<{
+    toolTip?: boolean
+    binary?: boolean
+    data: { name: string; data: { name: number; value: number }[] }[]
+    suffix?: string
+  }>(),
+  {
+    binary: false,
+    suffix: '',
+  },
+)
+const baseColorRef = ref()
+const themeColorRef = ref()
+
 const isPaused = ref(false)
 const chart = ref()
+const getToolTipForParams = (params: ToolTipParams, suffix = '') => {
+  // fake data
+  if (params.data.name < timeSaved + 1) {
+    return
+  }
+  return `
+    <div class="flex items-center my-2 gap-1">
+      <div class="w-4 h-4 rounded-full" style="background-color: ${params.color}"></div>
+      ${params.seriesName}
+      (${dayjs(params.data.name).format('HH:mm:ss')}): ${prettyBytesHelper(params.data.value, {
+        binary: props.binary,
+      })}${suffix}
+    </div>`
+}
 
 onMounted(() => {
-  const colorMap = {
-    color: getComputedStyle(text.value)?.color,
-    primaryColor: getComputedStyle(primaryText.value)?.color,
-    secondaryColor: getComputedStyle(secondaryText.value)?.color,
-    backgroundColor: getComputedStyle(text.value)?.backgroundColor,
-  }
-  const fontFamily = getComputedStyle(text.value)?.fontFamily
+  const baseColorStyle = getComputedStyle(baseColorRef.value)
+  const themeColorStyle = getComputedStyle(themeColorRef.value)
 
+  let color = baseColorStyle.color
+  let backgroundColor = baseColorStyle.backgroundColor
+  let lineColor = baseColorStyle.borderColor
+  let fontFamily = baseColorStyle.fontFamily
+  let primaryColor = themeColorStyle.color
+  let secondaryColor = themeColorStyle.backgroundColor
   watch(
     () => theme.value,
     () => {
-      colorMap.color = getComputedStyle(text.value)?.color
-      colorMap.primaryColor = getComputedStyle(primaryText.value)?.color
-      colorMap.secondaryColor = getComputedStyle(secondaryText.value)?.color
-      colorMap.backgroundColor = getComputedStyle(text.value)?.backgroundColor
+      const baseColorStyle = getComputedStyle(baseColorRef.value)
+      const themeColorStyle = getComputedStyle(themeColorRef.value)
+
+      color = baseColorStyle.color
+      backgroundColor = baseColorStyle.backgroundColor
+      lineColor = baseColorStyle.borderColor
+      primaryColor = themeColorStyle.color
+      secondaryColor = themeColorStyle.backgroundColor
+    },
+  )
+  watch(
+    () => font.value,
+    () => {
+      const baseColorStyle = getComputedStyle(baseColorRef.value)
+
+      fontFamily = baseColorStyle.fontFamily
     },
   )
 
@@ -78,7 +110,7 @@ onMounted(() => {
         bottom: 0,
         data: props.data.map((item) => item.name),
         textStyle: {
-          color: colorMap.color,
+          color: color,
           fontFamily,
         },
       },
@@ -91,10 +123,11 @@ onMounted(() => {
       tooltip: {
         show: props.toolTip,
         trigger: 'axis',
-        backgroundColor: colorMap.backgroundColor,
-        borderColor: colorMap.backgroundColor,
+        backgroundColor: backgroundColor,
+        borderColor: backgroundColor,
+        confine: true,
         textStyle: {
-          color: colorMap.color,
+          color: color,
           fontFamily,
         },
         formatter: (params: ToolTipParams[]) => {
@@ -116,14 +149,14 @@ onMounted(() => {
         type: 'value',
         splitNumber: 4,
         max: (value: { max: number }) => {
-          return Math.max(value.max, 100 * 1024)
+          return Math.max(value.max, props.binary ? 100 * 1024 * 1024 : 100 * 1000)
         },
         axisLine: { show: false },
         splitLine: {
           show: true,
           lineStyle: {
             type: 'dashed',
-            color: colorMap.color,
+            color: lineColor,
           },
         },
         axisLabel: {
@@ -132,9 +165,10 @@ onMounted(() => {
           formatter: (value: number) => {
             return `${prettyBytesHelper(value, {
               maximumFractionDigits: 1,
-            })}/s`
+              binary: props.binary,
+            })}${props.suffix}`
           },
-          color: colorMap.color,
+          color: color,
           fontFamily,
         },
       },
@@ -147,7 +181,7 @@ onMounted(() => {
           },
           data: item.data,
           type: 'line',
-          color: index === props.data.length - 1 ? colorMap.primaryColor : colorMap.secondaryColor,
+          color: index === props.data.length - 1 ? primaryColor : secondaryColor,
           smooth: true,
         }
       }),
