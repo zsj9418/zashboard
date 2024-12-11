@@ -3,6 +3,7 @@ import { LOG_LEVEL } from '@/config'
 import type { Log, LogWithSeq } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { ref, watch } from 'vue'
+import { sourceIPLabelMap } from './settings'
 
 export const logs = ref<LogWithSeq[]>([])
 export const logFilter = ref('')
@@ -25,6 +26,13 @@ export const initLogs = () => {
     if (isPaused.value) {
       idx++
       return
+    }
+
+    for (const ip in sourceIPLabelMap.value) {
+      if (data.payload.includes(ip)) {
+        data.payload = data.payload.replace(ip, `${ip}(${sourceIPLabelMap.value[ip]})`)
+        break
+      }
     }
 
     logs.value.unshift({
