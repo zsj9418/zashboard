@@ -1,7 +1,7 @@
 <template>
   <div
     ref="parentRef"
-    class="h-full overflow-y-auto"
+    class="h-full overflow-y-auto p-2"
   >
     <div :style="{ height: `${totalSize}px` }">
       <table class="table table-zebra table-xs rounded-none shadow-md">

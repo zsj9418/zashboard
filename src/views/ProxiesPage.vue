@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full overflow-y-auto overflow-x-hidden p-2">
+  <div class="overflow-y-auto p-2">
     <template v-if="isLargeScreen && twoColumnProxyGroup && renderGroups.length > 1">
       <div class="grid grid-cols-2 gap-1">
         <div

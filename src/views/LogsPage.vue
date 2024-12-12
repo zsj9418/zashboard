@@ -1,39 +1,52 @@
 <template>
-  <div class="flex h-full flex-col overflow-y-auto overflow-x-hidden p-2">
+  <div class="flex flex-col">
     <template v-if="!renderLogs.length">
-      <div class="card w-full flex-row gap-1 p-2 text-sm">
+      <div class="card m-2 flex-row p-2 text-sm">
         {{ $t('noContent') }}
       </div>
     </template>
-
-    <DynamicScroller
-      :items="renderLogs"
-      :min-item-size="38"
-      key-field="seq"
-      class="scroller h-full w-full"
+    <div
+      ref="parentRef"
+      class="h-full w-full overflow-auto"
     >
-      <template v-slot="{ item: log, active }">
-        <DynamicScrollerItem
-          :item="log"
-          :size-dependencies="[]"
-          :active="active"
-          :data-index="log.seq"
+      <div
+        :style="{
+          height: `${totalSize}px`,
+        }"
+        class="relative w-full"
+      >
+        <div
+          class="absolute left-0 top-0 w-full"
+          :style="{
+            transform: `translateY(${virtualRows[0]?.start ?? 0}px)`,
+          }"
         >
-          <div class="pb-1">
-            <div class="card block p-2 text-sm">
-              <span>{{ log.seq }}</span>
-              <span class="mx-2 text-primary">{{
-                dayjs(log.time).locale(language).format('HH:mm:ss')
-              }}</span>
-              <span :class="textColorMapForType[log.type as keyof typeof textColorMapForType]">{{
-                log.type
-              }}</span>
-              <span class="ml-2">{{ log.payload }}</span>
+          <div
+            v-for="virtualLog in virtualRows"
+            :key="virtualLog.key.toString()"
+            :data-index="virtualLog.index"
+            :ref="measureElement"
+          >
+            <div class="card mx-2 mb-1 block p-2 text-sm">
+              <span>{{ renderLogs[virtualLog.index].seq }}</span>
+              <span class="mx-2 text-primary">
+                {{ dayjs(renderLogs[virtualLog.index].time).locale(language).format('HH:mm:ss') }}
+              </span>
+              <span
+                :class="
+                  textColorMapForType[
+                    renderLogs[virtualLog.index].type as keyof typeof textColorMapForType
+                  ]
+                "
+              >
+                {{ renderLogs[virtualLog.index].type }}
+              </span>
+              <span class="ml-2">{{ renderLogs[virtualLog.index].payload }}</span>
             </div>
           </div>
-        </DynamicScrollerItem>
-      </template>
-    </DynamicScroller>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -41,10 +54,9 @@
 import { LOG_LEVEL } from '@/config'
 import { logFilter, logs } from '@/store/logs'
 import { language } from '@/store/settings'
+import { useVirtualizer } from '@tanstack/vue-virtual'
 import dayjs from 'dayjs'
-import { computed } from 'vue'
-import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
-import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import { computed, ref } from 'vue'
 
 const textColorMapForType = {
   [LOG_LEVEL.Error]: 'text-error',
@@ -62,4 +74,30 @@ const renderLogs = computed(() => {
     return true
   })
 })
+
+const parentRef = ref<HTMLElement | null>(null)
+
+const virutalOptions = computed(() => {
+  return {
+    count: renderLogs.value.length,
+    getScrollElement: () => parentRef.value,
+    estimateSize: () => 55,
+    overscan: 48,
+  }
+})
+
+const rowVirtualizer = useVirtualizer(virutalOptions)
+
+const virtualRows = computed(() => rowVirtualizer.value.getVirtualItems())
+const totalSize = computed(() => rowVirtualizer.value.getTotalSize())
+
+const measureElement = (el: Element) => {
+  if (!el) {
+    return
+  }
+
+  rowVirtualizer.value.measureElement(el)
+
+  return undefined
+}
 </script>

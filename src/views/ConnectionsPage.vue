@@ -1,20 +1,21 @@
 <template>
-  <div class="h-full overflow-auto p-2">
-    <template v-if="useConnectionCard">
+  <div class="flex flex-col">
+    <div
+      class="flex flex-col gap-1 overflow-auto p-2"
+      v-if="useConnectionCard"
+    >
       <template v-if="!renderConnections.length">
         <div class="card w-full flex-row gap-1 p-2 text-sm">
           {{ $t('noContent') }}
         </div>
       </template>
-      <div class="flex flex-col gap-1">
-        <ConnectionCard
-          v-for="conn in renderConnections"
-          :key="conn.id"
-          :conn="conn"
-          @info="handlerInfo"
-        ></ConnectionCard>
-      </div>
-    </template>
+      <ConnectionCard
+        v-for="conn in renderConnections"
+        :key="conn.id"
+        :conn="conn"
+        @info="handlerInfo"
+      ></ConnectionCard>
+    </div>
     <ConnectionTable
       v-else
       @info="handlerInfo"
