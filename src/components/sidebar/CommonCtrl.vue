@@ -11,13 +11,14 @@
     </div>
 
     <div class="flex">
-      <BackendSwitch class="flex-1" />
       <button
         class="btn btn-circle btn-ghost btn-xs"
         @click="isSiderbarCollapsed = true"
       >
         <ArrowLeftCircleIcon class="h-5 w-5" />
       </button>
+      <div class="flex-1"></div>
+      <BackendSwitch />
     </div>
   </div>
 </template>

@@ -36,18 +36,18 @@
         <VerticalInfos />
       </template>
       <template v-else>
+        <div
+          class="card"
+          v-if="route.name !== ROUTE_NAME.settings"
+        >
+          <SpeedCharts />
+        </div>
         <div class="card">
           <component
             v-if="sidebarComp"
             :is="sidebarComp"
           />
           <CommonSidebar />
-        </div>
-        <div
-          class="card"
-          v-if="route.name !== ROUTE_NAME.settings"
-        >
-          <SpeedCharts />
         </div>
       </template>
     </div>

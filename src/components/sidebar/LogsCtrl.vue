@@ -13,9 +13,8 @@
         {{ opt }}
       </option>
     </select>
-    <input
+    <TextInput
       type="text"
-      class="input input-sm join-item input-bordered w-0 flex-1"
       v-model="logFilter"
     />
     <button
@@ -35,6 +34,7 @@ import { LOG_LEVEL } from '@/config'
 import { initLogs, isPaused, logFilter, logLevel } from '@/store/logs'
 import { PauseIcon, PlayIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
+import TextInput from '../common/TextInput.vue'
 
 defineProps<{
   horizontal?: boolean

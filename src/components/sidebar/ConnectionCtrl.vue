@@ -60,10 +60,9 @@
     <SourceIPFilter v-if="!horizontal" />
     <div class="join w-full flex-1">
       <SourceIPFilter v-if="horizontal" />
-      <input
-        type="text"
-        class="input input-sm join-item input-bordered w-32 flex-1"
+      <TextInput
         v-model="connectionFilter"
+        class="join-item"
       />
       <button
         class="btn-bordered btn join-item btn-sm"
@@ -99,6 +98,7 @@ import {
 import { useConnectionCard } from '@/store/settings'
 import { PauseIcon, PlayIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
+import TextInput from '../common/TextInput.vue'
 import SourceIPFilter from './SourceIPFilter.vue'
 defineProps<{
   horizontal?: boolean
