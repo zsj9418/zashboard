@@ -1,8 +1,11 @@
 <template>
-  <div ref="parentRef">
+  <div
+    ref="parentRef"
+    class="h-full overflow-y-auto"
+  >
     <div :style="{ height: `${totalSize}px` }">
-      <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-md">
-        <thead class="">
+      <table class="table table-zebra table-xs rounded-none shadow-md">
+        <thead>
           <tr
             v-for="headerGroup in table.getHeaderGroups()"
             :key="headerGroup.id"
@@ -49,70 +52,63 @@
         </thead>
         <tbody>
           <tr
-            v-for="virtualRow in virtualRows"
+            v-for="(virtualRow, index) in virtualRows"
             :key="virtualRow.key.toString()"
             :style="{
-              transform: `translateY(${virtualRow.start - virtualRow.index * virtualRow.size}px)`,
+              height: `${virtualRow.size}px`,
+              transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
             }"
-            class="h-9 hover:!bg-primary hover:text-primary-content"
+            class="hover:!bg-primary hover:text-primary-content"
           >
             <td
               v-for="cell in rows[virtualRow.index].getVisibleCells()"
               :key="cell.id"
-              class="text-sm"
+              :class="
+                twMerge(
+                  'whitespace-nowrap text-sm',
+                  [
+                    CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
+                    CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
+                    CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
+                    CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
+                  ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'w-24',
+                  [CONNECTIONS_TABLE_ACCESSOR_KEY.Host].includes(
+                    cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY,
+                  ) && 'max-w-[32rem] truncate',
+                )
+              "
             >
-              <div
-                :class="
-                  twMerge(
-                    'flex items-center gap-2 whitespace-nowrap',
-                    [
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
-                    ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'w-14',
-                    [CONNECTIONS_TABLE_ACCESSOR_KEY.Host].includes(
-                      cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY,
-                    ) && 'max-w-[32rem] truncate',
-                  )
-                "
-              >
-                <template v-if="cell.column.getIsGrouped()">
-                  <template v-if="rows[virtualRow.index].getCanExpand()">
-                    <button
-                      @click="() => rows[virtualRow.index].getToggleExpandedHandler()()"
-                      class="cursor-pointer"
-                    >
-                      <MagnifyingGlassMinusIcon
-                        v-if="rows[virtualRow.index].getIsExpanded()"
-                        class="h-4 w-4"
-                      />
-                      <MagnifyingGlassPlusIcon
-                        v-else
-                        class="h-4 w-4"
-                      />
-                    </button>
-                    <FlexRender
-                      :render="cell.column.columnDef.cell"
-                      :props="cell.getContext()"
+              <template v-if="cell.column.getIsGrouped()">
+                <template v-if="rows[virtualRow.index].getCanExpand()">
+                  <button
+                    @click="() => rows[virtualRow.index].getToggleExpandedHandler()()"
+                    class="relative top-1 cursor-pointer"
+                  >
+                    <MagnifyingGlassMinusIcon
+                      v-if="rows[virtualRow.index].getIsExpanded()"
+                      class="h-4 w-4"
                     />
-                    <div v-if="cell.column.getIsGrouped()">
-                      ({{ rows[virtualRow.index].subRows.length }})
-                    </div>
-                  </template>
-                </template>
-                <template v-else-if="cell.getIsAggregated()">
+                    <MagnifyingGlassPlusIcon
+                      v-else
+                      class="h-4 w-4"
+                    />
+                  </button>
                   <FlexRender
-                    :render="cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell"
+                    :render="cell.column.columnDef.cell"
                     :props="cell.getContext()"
                   />
+                  <span> ({{ rows[virtualRow.index].subRows.length }}) </span>
                 </template>
-                <FlexRender
-                  v-else-if="!cell.getIsPlaceholder()"
-                  :render="cell.column.columnDef.cell"
-                  :props="cell.getContext()"
-                />
-              </div>
+              </template>
+              <FlexRender
+                v-else
+                :render="
+                  cell.getIsAggregated()
+                    ? cell.column.columnDef.aggregatedCell
+                    : cell.column.columnDef.cell
+                "
+                :props="cell.getContext()"
+              />
             </td>
           </tr>
         </tbody>
@@ -356,7 +352,7 @@ const rowVirtualizerOptions = computed(() => {
     count: rows.value.length,
     getScrollElement: () => parentRef.value,
     estimateSize: () => 36,
-    overscan: 5,
+    overscan: 48,
   }
 })
 
