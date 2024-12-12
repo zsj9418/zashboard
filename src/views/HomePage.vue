@@ -16,8 +16,8 @@
         :is="ctrlComp"
         :horizontal="true"
       />
-      <RouterView :class="`${isPWA ? 'pb-[6.5rem]' : 'pb-14'} h-0 flex-1 md:pb-2`" />
-
+      <RouterView class="h-0 flex-1" />
+      <div :class="`${isPWA ? 'pb-24' : 'pb-12'} md:hidden`"></div>
       <div
         ref="navBarRef"
         :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-24 pb-12' : 'h-12'}`"

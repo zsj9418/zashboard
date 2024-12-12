@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col p-2">
+  <div class="flex flex-col">
     <template v-if="!renderLogs.length">
       <div class="card m-2 flex-row p-2 text-sm">
         {{ $t('noContent') }}

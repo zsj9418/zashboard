@@ -7,11 +7,10 @@
   <VirtualScroller
     v-else
     :data="renderConnections"
-    class="pt-2"
   >
     <template v-slot="{ item }: { item: Connection }">
       <ConnectionCard
-        class="mx-2 mb-1"
+        class="mb-1"
         :conn="item"
       ></ConnectionCard>
     </template>

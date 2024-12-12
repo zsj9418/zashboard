@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
+  <div class="flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
     <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
       <RuleProvider
         v-for="ruleProvider in ruleProviderList"

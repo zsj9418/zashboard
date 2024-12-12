@@ -1,7 +1,7 @@
 <template>
   <div
     ref="parentRef"
-    class="h-full w-full overflow-auto"
+    class="h-full w-full overflow-auto p-2"
   >
     <div
       :style="{
