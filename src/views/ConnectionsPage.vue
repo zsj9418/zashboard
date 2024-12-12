@@ -1,25 +1,7 @@
 <template>
   <div class="flex flex-col">
-    <div
-      class="flex flex-col gap-1 overflow-auto p-2"
-      v-if="useConnectionCard"
-    >
-      <template v-if="!renderConnections.length">
-        <div class="card w-full flex-row gap-1 p-2 text-sm">
-          {{ $t('noContent') }}
-        </div>
-      </template>
-      <ConnectionCard
-        v-for="conn in renderConnections"
-        :key="conn.id"
-        :conn="conn"
-        @info="handlerInfo"
-      ></ConnectionCard>
-    </div>
-    <ConnectionTable
-      v-else
-      @info="handlerInfo"
-    />
+    <ConnectionCardList v-if="useConnectionCard" />
+    <ConnectionTable v-else />
     <dialog
       ref="modalRef"
       class="modal"
@@ -38,22 +20,12 @@
 </template>
 
 <script setup lang="ts">
-import ConnectionCard from '@/components/connections/ConnectionCard'
+import ConnectionCardList from '@/components/connections/ConnectionCardList.vue'
 import ConnectionTable from '@/components/connections/ConnectionTable.vue'
-import { renderConnections } from '@/store/connections'
+import { useConnections } from '@/composables/connections'
 import { useConnectionCard } from '@/store/settings'
-import type { Connection } from '@/types'
-import { ref } from 'vue'
 import VueJsonPretty from 'vue-json-pretty'
 import 'vue-json-pretty/lib/styles.css'
 
-const infoConn = ref<Connection>()
-const modalRef = ref<{
-  showModal: () => void
-}>()
-
-const handlerInfo = (conn: Connection) => {
-  infoConn.value = conn
-  modalRef.value?.showModal()
-}
+const { infoConn, modalRef } = useConnections()
 </script>

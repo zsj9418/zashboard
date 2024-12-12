@@ -1,4 +1,5 @@
 import { disconnectByIdAPI } from '@/api'
+import { useConnections } from '@/composables/connections'
 import { LANG } from '@/config'
 import {
   fromNow,
@@ -26,7 +27,8 @@ export default defineComponent<{
     conn: Object,
   },
   name: 'ConnectionCard',
-  setup(props, { emit }) {
+  setup(props) {
+    const { handlerInfo } = useConnections()
     return () => {
       const flex1 = <span class="flex-1"></span>
       const host = (
@@ -63,7 +65,7 @@ export default defineComponent<{
         <div class="flex w-12 gap-1">
           <button
             class="btn btn-circle btn-xs"
-            onClick={() => emit('info', props.conn)}
+            onClick={() => handlerInfo(props.conn)}
           >
             <InformationCircleIcon class="h-4 w-4" />
           </button>
@@ -133,7 +135,7 @@ export default defineComponent<{
 
       if (isLargeScreen.value && compactConnectionCard.value) {
         return (
-          <div class="card w-full flex-row items-center justify-between gap-1 px-2 py-1">
+          <div class="card flex-row items-center justify-between gap-1 px-2 py-1">
             {host}
             {chians}
             {connectionCompact}
@@ -146,7 +148,7 @@ export default defineComponent<{
         )
       } else {
         return (
-          <div class="card w-full gap-[1px] px-2 py-[1px]">
+          <div class="card gap-[1px] px-2 py-[1px]">
             <div class="flex flex-row items-center gap-1 px-1">
               {host}
               {flex1}

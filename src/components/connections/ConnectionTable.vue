@@ -119,6 +119,7 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
+import { useConnections } from '@/composables/connections'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
 import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
 import { renderConnections } from '@/store/connections'
@@ -152,7 +153,7 @@ import { twMerge } from 'tailwind-merge'
 import { computed, h, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const emits = defineEmits(['info'])
+const { handlerInfo } = useConnections()
 const { t } = useI18n()
 const columns: ColumnDef<Connection>[] = [
   {
@@ -167,7 +168,7 @@ const columns: ColumnDef<Connection>[] = [
           onClick: () => {
             const connection = row.original
 
-            emits('info', connection)
+            handlerInfo(connection)
           },
         },
         [
