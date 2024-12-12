@@ -1,5 +1,6 @@
 <template>
   <div
+    ref="cardRef"
     :class="
       twMerge(
         'flex h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
@@ -63,10 +64,16 @@ import ProxyIcon from './ProxyIcon.vue'
 const props = defineProps<{
   name: string
   active?: boolean
-  showContent: boolean
 }>()
 const nameRef = ref()
 const isTruncated = ref(false)
+const showContent = ref(false)
+const cardRef = ref<HTMLDivElement | null>(null)
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    showContent.value = entry.isIntersecting
+  })
+})
 
 let resizeObserver: ResizeObserver | null = null
 
@@ -78,6 +85,9 @@ const checkTruncation = () => {
 }
 
 onMounted(() => {
+  if (cardRef.value) {
+    observer.observe(cardRef.value)
+  }
   if (nameRef.value) {
     resizeObserver = new ResizeObserver(() => {
       checkTruncation()

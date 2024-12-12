@@ -40,17 +40,13 @@
       type="checkbox"
       v-model="showCollapse"
     />
-    <div
-      class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @transitionstart="showContent = showCollapse"
-    >
+    <div class="collapse-content flex flex-col gap-2 max-sm:px-2">
       <ProxyNodeGrid>
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
           :active="node === proxyGroup.now"
-          :show-content="showContent"
           @click="selectProxy(proxyGroup.name, node)"
         />
       </ProxyNodeGrid>
@@ -83,7 +79,6 @@ const showCollapse = computed({
     collapseGroupMap.value[props.name] = value
   },
 })
-const showContent = ref(showCollapse.value)
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyGroup.value.all ?? [])

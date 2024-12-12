@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'grid gap-2',
+        'grid max-h-96 gap-2 overflow-y-auto',
         twoColumnNodeForMobile ? 'grid-cols-2' : 'grid-cols-1',
         isSiderbarCollapsed
           ? hasTwoColumns
