@@ -8,19 +8,24 @@
       />
     </template>
     <template v-else>
-      <RuleCard
-        v-for="rule in rules"
-        :key="rule.payload"
-        :rule="rule"
-      />
+      <VirtualScroller :data="rules">
+        <template v-slot="{ item: rule }: { item: Rule }">
+          <RuleCard
+            :key="rule.payload"
+            :rule="rule"
+          />
+        </template>
+      </VirtualScroller>
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
+import VirtualScroller from '@/components/common/VirtualScroller.vue'
 import RuleCard from '@/components/rules/RuleCard.vue'
 import RuleProvider from '@/components/rules/RuleProvider.vue'
 import { rulesTabShow } from '@/composables/rules'
 import { RULE_TAB_TYPE } from '@/config'
 import { ruleProviderList, rules } from '@/store/rules'
+import type { Rule } from '@/types'
 </script>

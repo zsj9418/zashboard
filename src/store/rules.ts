@@ -2,7 +2,7 @@ import { fetchRuleProvidersAPI, fetchRulesAPI } from '@/api'
 import type { Rule, RuleProvider } from '@/types'
 import { ref } from 'vue'
 
-export const rules = ref<Rule[]>()
+export const rules = ref<Rule[]>([])
 export const ruleProviderList = ref<RuleProvider[]>([])
 
 export const fetchRules = async () => {
