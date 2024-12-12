@@ -3,7 +3,7 @@ import { LOG_LEVEL } from '@/config'
 import type { Log, LogWithSeq } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { ref, watch } from 'vue'
-import { sourceIPLabelMap } from './settings'
+import { logRetentionLimit, sourceIPLabelMap } from './settings'
 
 export const logs = ref<LogWithSeq[]>([])
 export const logFilter = ref('')
@@ -41,7 +41,7 @@ export const initLogs = () => {
       seq: idx++,
     })
 
-    logs.value = logs.value.slice(0, 1000)
+    logs.value = logs.value.slice(0, logRetentionLimit.value)
   })
 
   cancel = () => {

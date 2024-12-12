@@ -96,4 +96,5 @@ export default {
   autoUpgrade: '自动更新',
   secondaryPath: '二级路径',
   secondaryPathTip: '如果有的话以/开头，没有则留空不填',
+  logRetentionLimit: '日志保留条数',
 }

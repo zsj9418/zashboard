@@ -59,3 +59,6 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
 )
 export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
 export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
+
+// logs
+export const logRetentionLimit = useStorage<number>('config/log-retention-limit', 1000)

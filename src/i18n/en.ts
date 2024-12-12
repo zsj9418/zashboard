@@ -97,4 +97,5 @@ export default {
   autoUpgrade: 'Auto Upgrade',
   secondaryPath: 'Secondary Path',
   secondaryPathTip: 'If present, start with a "/", otherwise leave it empty.',
+  logRetentionLimit: 'Log Retention Limit',
 }

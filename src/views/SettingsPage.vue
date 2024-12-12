@@ -288,6 +288,24 @@
         <SourceIPLabels />
       </div>
     </div>
+
+    <!-- logs -->
+    <div class="card card-compact">
+      <div class="card-title px-4 pt-4">
+        {{ $t('logs') }}
+      </div>
+      <div class="card-body">
+        <div class="flex items-center gap-2">
+          {{ $t('logRetentionLimit') }}:
+          <input
+            class="input input-sm input-bordered w-20"
+            type="number"
+            max="9999"
+            v-model="logRetentionLimit"
+          />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -317,6 +335,7 @@ import {
   autoUpgrade,
   compactConnectionCard,
   font,
+  logRetentionLimit,
   lowLatency,
   mediumLatency,
   proxyPreviewType,
