@@ -40,13 +40,17 @@
       type="checkbox"
       v-model="showCollapse"
     />
-    <div class="collapse-content flex flex-col gap-2 max-sm:px-2">
-      <ProxyNodeGrid v-if="showContent">
+    <div
+      class="collapse-content flex flex-col gap-2 max-sm:px-2"
+      @transitionstart="showContent = showCollapse"
+    >
+      <ProxyNodeGrid>
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
           :active="node === proxyGroup.now"
+          :show-content="showContent"
           @click="selectProxy(proxyGroup.name, node)"
         />
       </ProxyNodeGrid>
@@ -60,7 +64,7 @@ import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { collapseGroupMap } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
@@ -80,19 +84,6 @@ const showCollapse = computed({
   },
 })
 const showContent = ref(showCollapse.value)
-
-watch(showCollapse, (value) => {
-  if (value) {
-    showContent.value = value
-  } else {
-    setTimeout(() => {
-      if (value === showCollapse.value) {
-        showContent.value = value
-      }
-    }, 1000)
-  }
-})
-
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyGroup.value.all ?? [])

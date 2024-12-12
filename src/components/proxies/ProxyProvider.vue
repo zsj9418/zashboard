@@ -50,12 +50,16 @@
       type="checkbox"
       v-model="showCollapse"
     />
-    <div class="collapse-content flex flex-col gap-2">
-      <ProxyNodeGrid v-if="showContent">
+    <div
+      class="collapse-content flex flex-col gap-2"
+      @transitionstart="showContent = showCollapse"
+    >
+      <ProxyNodeGrid>
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
+          :show-content="showContent"
         />
       </ProxyNodeGrid>
     </div>
@@ -72,7 +76,7 @@ import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
 import { toFinite } from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import ProxyNodeCard from './ProxyNodeCard.vue'
 import ProxyNodeGrid from './ProxyNodeGrid.vue'
@@ -90,18 +94,6 @@ const showCollapse = computed({
   },
 })
 const showContent = ref(showCollapse.value)
-
-watch(showCollapse, (value) => {
-  if (value) {
-    showContent.value = value
-  } else {
-    setTimeout(() => {
-      if (value === showCollapse.value) {
-        showContent.value = value
-      }
-    }, 1000)
-  }
-})
 
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo

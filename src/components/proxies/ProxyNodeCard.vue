@@ -2,49 +2,53 @@
   <div
     :class="
       twMerge(
-        'flex cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
+        'flex h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'shadow sm:hover:bg-base-300',
         truncateProxyName && isTruncated && 'tooltip text-left',
       )
     "
     :data-tip="node.name"
   >
-    <ProxyIcon
-      v-if="node.icon"
-      :icon="node.icon"
-      :fill="active ? 'fill-primary-content' : 'fill-base-content'"
-    />
-    <div
-      :class="
-        twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
-      "
-      ref="nameRef"
-    >
-      {{ node.name }}
-    </div>
-    <div
-      :class="
-        twMerge(
-          'flex items-center text-xs sm:gap-2',
-          twoColumnNodeForMobile ? 'gap-[2px]' : 'gap-1',
-        )
-      "
-    >
-      <div class="flex-1">
-        <span>{{ typeFormatter(node.type) }}</span>
-        <template v-if="node.udp">
-          <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')">:udp</span>
-          <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
-            | udp
-          </span>
-        </template>
-      </div>
-      <LatencyTag
-        :class="isLatencyTesting ? 'animate-pulse' : ''"
-        :name="node.name"
-        @click.stop="handlerLatencyTest"
+    <template v-if="showContent">
+      <ProxyIcon
+        v-if="node.icon"
+        :icon="node.icon"
+        :fill="active ? 'fill-primary-content' : 'fill-base-content'"
       />
-    </div>
+      <div
+        :class="
+          twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
+        "
+        ref="nameRef"
+      >
+        {{ node.name }}
+      </div>
+      <div
+        :class="
+          twMerge(
+            'flex items-center text-xs sm:gap-2',
+            twoColumnNodeForMobile ? 'gap-[2px]' : 'gap-1',
+          )
+        "
+      >
+        <div class="flex-1">
+          <span>{{ typeFormatter(node.type) }}</span>
+          <template v-if="node.udp">
+            <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')"
+              >:udp</span
+            >
+            <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
+              | udp
+            </span>
+          </template>
+        </div>
+        <LatencyTag
+          :class="isLatencyTesting ? 'animate-pulse' : ''"
+          :name="node.name"
+          @click.stop="handlerLatencyTest"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -59,6 +63,7 @@ import ProxyIcon from './ProxyIcon.vue'
 const props = defineProps<{
   name: string
   active?: boolean
+  showContent: boolean
 }>()
 const nameRef = ref()
 const isTruncated = ref(false)
