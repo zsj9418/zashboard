@@ -1,22 +1,39 @@
 <template>
-  <div class="flex h-full flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
+  <div class="flex h-full flex-col overflow-y-auto overflow-x-hidden p-2">
     <template v-if="!renderLogs.length">
       <div class="card w-full flex-row gap-1 p-2 text-sm">
         {{ $t('noContent') }}
       </div>
     </template>
-    <div
-      v-for="log in renderLogs"
-      :key="log.seq"
-      class="card block p-2 text-sm"
+
+    <DynamicScroller
+      :items="renderLogs"
+      :min-item-size="38"
+      key-field="seq"
+      class="scroller h-full w-full"
     >
-      <span>{{ log.seq }}</span>
-      <span class="mx-2 text-primary">{{
-        dayjs(log.time).locale(language).format('HH:mm:ss')
-      }}</span>
-      <span :class="textColorMapForType[log.type]">{{ log.type }}</span>
-      <span class="ml-2">{{ log.payload }}</span>
-    </div>
+      <template v-slot="{ item: log, active }">
+        <DynamicScrollerItem
+          :item="log"
+          :size-dependencies="[]"
+          :active="active"
+          :data-index="log.seq"
+        >
+          <div class="pb-1">
+            <div class="card block p-2 text-sm">
+              <span>{{ log.seq }}</span>
+              <span class="mx-2 text-primary">{{
+                dayjs(log.time).locale(language).format('HH:mm:ss')
+              }}</span>
+              <span :class="textColorMapForType[log.type as keyof typeof textColorMapForType]">{{
+                log.type
+              }}</span>
+              <span class="ml-2">{{ log.payload }}</span>
+            </div>
+          </div>
+        </DynamicScrollerItem>
+      </template>
+    </DynamicScroller>
   </div>
 </template>
 
@@ -26,6 +43,8 @@ import { logFilter, logs } from '@/store/logs'
 import { language } from '@/store/settings'
 import dayjs from 'dayjs'
 import { computed } from 'vue'
+import { DynamicScroller, DynamicScrollerItem } from 'vue-virtual-scroller'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 
 const textColorMapForType = {
   [LOG_LEVEL.Error]: 'text-error',

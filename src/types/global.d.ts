@@ -1,5 +1,6 @@
 declare const __APP_VERSION__: string
 
+declare module 'vue-virtual-scroller'
 declare interface Navigator {
   standalone?: boolean
 }
