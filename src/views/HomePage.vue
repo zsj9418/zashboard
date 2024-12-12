@@ -19,6 +19,7 @@
       <RouterView :class="`${isPWA ? 'mb-24' : 'mb-12'} md:mb-0`" />
 
       <div
+        ref="navBarRef"
         :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-24 pb-12' : 'h-12'}`"
       >
         <div class="flex h-12 w-full items-center justify-center gap-1 p-2">
@@ -70,8 +71,9 @@ import { isSiderbarCollapsed } from '@/store/settings'
 import { activeUuid } from '@/store/setup'
 import { initSatistic } from '@/store/statistics'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
-import { computed, watch } from 'vue'
-import { RouterView, useRoute } from 'vue-router'
+import { useSwipe } from '@vueuse/core'
+import { computed, ref, watch } from 'vue'
+import { RouterView, useRoute, useRouter } from 'vue-router'
 
 const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
@@ -84,10 +86,29 @@ const ctrlsMap = {
   [ROUTE_NAME.rules]: RulesCtrl,
 }
 
+const router = useRouter()
 const route = useRoute()
 const routes = Object.values(ROUTE_NAME)
 const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
+})
+
+const navBarRef = ref()
+const { direction } = useSwipe(navBarRef, { threshold: 15 })
+
+const getNextRouteName = () => {
+  return routes[(routes.indexOf(route.name as ROUTE_NAME) + 1) % routes.length]
+}
+const getPrevRouteName = () => {
+  return routes[(routes.indexOf(route.name as ROUTE_NAME) - 1 + routes.length) % routes.length]
+}
+
+watch(direction, () => {
+  if (direction.value === 'right') {
+    router.push({ name: getPrevRouteName() })
+  } else if (direction.value === 'left') {
+    router.push({ name: getNextRouteName() })
+  }
 })
 
 const { proxiesTabShow } = useProxies()
