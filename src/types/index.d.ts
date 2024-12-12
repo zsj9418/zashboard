@@ -1,5 +1,3 @@
-declare module '*.vue' {}
-
 export type Config = {
   port: number
   'socks-port': number
