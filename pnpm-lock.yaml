@@ -20,6 +20,9 @@ importers:
       '@tanstack/vue-table':
         specifier: ^8.20.5
         version: 8.20.5(vue@3.5.13(typescript@5.6.3))
+      '@tanstack/vue-virtual':
+        specifier: ^3.11.1
+        version: 3.11.1(vue@3.5.13(typescript@5.6.3))
       '@types/echarts':
         specifier: ^4.9.22
         version: 4.9.22
@@ -1102,11 +1105,19 @@ packages:
     resolution: {integrity: sha512-P9dF7XbibHph2PFRz8gfBKEXEY/HJPOhym8CHmjF8y3q5mWpKx9xtZapXQUWCgkqvsK0R46Azuz+VaxD4Xl+Tg==}
     engines: {node: '>=12'}
 
+  '@tanstack/virtual-core@3.10.9':
+    resolution: {integrity: sha512-kBknKOKzmeR7lN+vSadaKWXaLS0SZZG+oqpQ/k80Q6g9REn6zRHS/ZYdrIzHnpHgy/eWs00SujveUN/GJT2qTw==}
+
   '@tanstack/vue-table@8.20.5':
     resolution: {integrity: sha512-2xixT3BEgSDw+jOSqPt6ylO/eutDI107t2WdFMVYIZZ45UmTHLySqNriNs0+dMaKR56K5z3t+97P6VuVnI2L+Q==}
     engines: {node: '>=12'}
     peerDependencies:
       vue: '>=3.2'
+
+  '@tanstack/vue-virtual@3.11.1':
+    resolution: {integrity: sha512-HEmblQrCkbadvcuis8MBCHvlTy9iUTFlEWfXy5nTxvSrauWPZ4Pyv0yOzXrDhnTXUMxJtpdUrov05RCusrBQ3A==}
+    peerDependencies:
+      vue: ^2.7.0 || ^3.0.0
 
   '@tsconfig/node22@22.0.0':
     resolution: {integrity: sha512-twLQ77zevtxobBOD4ToAtVmuYrpeYUh3qh+TEp+08IWhpsrIflVHqQ1F1CiPxQGL7doCdBIOOCF+1Tm833faNg==}
@@ -4099,9 +4110,16 @@ snapshots:
 
   '@tanstack/table-core@8.20.5': {}
 
+  '@tanstack/virtual-core@3.10.9': {}
+
   '@tanstack/vue-table@8.20.5(vue@3.5.13(typescript@5.6.3))':
     dependencies:
       '@tanstack/table-core': 8.20.5
+      vue: 3.5.13(typescript@5.6.3)
+
+  '@tanstack/vue-virtual@3.11.1(vue@3.5.13(typescript@5.6.3))':
+    dependencies:
+      '@tanstack/virtual-core': 3.10.9
       vue: 3.5.13(typescript@5.6.3)
 
   '@tsconfig/node22@22.0.0': {}

@@ -1,85 +1,27 @@
 <template>
-  <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-md">
-    <thead class="">
-      <tr
-        v-for="headerGroup in table.getHeaderGroups()"
-        :key="headerGroup.id"
-      >
-        <th
-          v-for="header in headerGroup.headers"
-          :key="header.id"
-          :colSpan="header.colSpan"
-          :class="header.column.getCanSort() ? 'cursor-pointer select-none' : ''"
-          @click="header.column.getToggleSortingHandler()?.($event)"
-        >
-          <div class="flex items-center gap-1">
-            <button
-              v-if="header.column.getCanGroup()"
-              class="cursor-pointer"
-              @click.stop="() => header.column.getToggleGroupingHandler()()"
-            >
-              <MagnifyingGlassMinusIcon
-                v-if="header.column.getIsGrouped()"
-                class="h-4 w-4"
-              />
-              <MagnifyingGlassPlusIcon
-                v-else
-                class="h-4 w-4"
-              />
-            </button>
-            <FlexRender
-              v-if="!header.isPlaceholder"
-              :render="header.column.columnDef.header"
-              :props="header.getContext()"
-            >
-            </FlexRender>
-            <ArrowUpCircleIcon
-              class="h-4 w-4"
-              v-if="header.column.getIsSorted() === 'asc'"
-            />
-            <ArrowDownCircleIcon
-              class="h-4 w-4"
-              v-if="header.column.getIsSorted() === 'desc'"
-            />
-          </div>
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="row in table.getRowModel().rows"
-        :key="row.id"
-        class="h-9 hover:!bg-primary hover:text-primary-content"
-      >
-        <td
-          v-for="cell in row.getVisibleCells()"
-          :key="cell.id"
-          class="text-sm"
-        >
-          <div
-            :class="
-              twMerge(
-                'flex items-center gap-2 whitespace-nowrap',
-                [
-                  CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
-                  CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-                  CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
-                  CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
-                ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'w-14',
-                [CONNECTIONS_TABLE_ACCESSOR_KEY.Host].includes(
-                  cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY,
-                ) && 'max-w-[32rem] truncate',
-              )
-            "
+  <div ref="parentRef">
+    <div :style="{ height: `${totalSize}px` }">
+      <table class="table table-zebra table-xs overflow-hidden rounded-xl shadow-md">
+        <thead class="">
+          <tr
+            v-for="headerGroup in table.getHeaderGroups()"
+            :key="headerGroup.id"
           >
-            <template v-if="cell.column.getIsGrouped()">
-              <template v-if="row.getCanExpand()">
+            <th
+              v-for="header in headerGroup.headers"
+              :key="header.id"
+              :colSpan="header.colSpan"
+              :class="header.column.getCanSort() ? 'cursor-pointer select-none' : ''"
+              @click="header.column.getToggleSortingHandler()?.($event)"
+            >
+              <div class="flex items-center gap-1">
                 <button
-                  @click="() => row.getToggleExpandedHandler()()"
+                  v-if="header.column.getCanGroup()"
                   class="cursor-pointer"
+                  @click.stop="() => header.column.getToggleGroupingHandler()()"
                 >
                   <MagnifyingGlassMinusIcon
-                    v-if="row.getIsExpanded()"
+                    v-if="header.column.getIsGrouped()"
                     class="h-4 w-4"
                   />
                   <MagnifyingGlassPlusIcon
@@ -88,28 +30,95 @@
                   />
                 </button>
                 <FlexRender
+                  v-if="!header.isPlaceholder"
+                  :render="header.column.columnDef.header"
+                  :props="header.getContext()"
+                >
+                </FlexRender>
+                <ArrowUpCircleIcon
+                  class="h-4 w-4"
+                  v-if="header.column.getIsSorted() === 'asc'"
+                />
+                <ArrowDownCircleIcon
+                  class="h-4 w-4"
+                  v-if="header.column.getIsSorted() === 'desc'"
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            v-for="virtualRow in virtualRows"
+            :key="virtualRow.key.toString()"
+            :style="{
+              transform: `translateY(${virtualRow.start - virtualRow.index * virtualRow.size}px)`,
+            }"
+            class="h-9 hover:!bg-primary hover:text-primary-content"
+          >
+            <td
+              v-for="cell in rows[virtualRow.index].getVisibleCells()"
+              :key="cell.id"
+              class="text-sm"
+            >
+              <div
+                :class="
+                  twMerge(
+                    'flex items-center gap-2 whitespace-nowrap',
+                    [
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
+                    ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'w-14',
+                    [CONNECTIONS_TABLE_ACCESSOR_KEY.Host].includes(
+                      cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY,
+                    ) && 'max-w-[32rem] truncate',
+                  )
+                "
+              >
+                <template v-if="cell.column.getIsGrouped()">
+                  <template v-if="rows[virtualRow.index].getCanExpand()">
+                    <button
+                      @click="() => rows[virtualRow.index].getToggleExpandedHandler()()"
+                      class="cursor-pointer"
+                    >
+                      <MagnifyingGlassMinusIcon
+                        v-if="rows[virtualRow.index].getIsExpanded()"
+                        class="h-4 w-4"
+                      />
+                      <MagnifyingGlassPlusIcon
+                        v-else
+                        class="h-4 w-4"
+                      />
+                    </button>
+                    <FlexRender
+                      :render="cell.column.columnDef.cell"
+                      :props="cell.getContext()"
+                    />
+                    <div v-if="cell.column.getIsGrouped()">
+                      ({{ rows[virtualRow.index].subRows.length }})
+                    </div>
+                  </template>
+                </template>
+                <template v-else-if="cell.getIsAggregated()">
+                  <FlexRender
+                    :render="cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell"
+                    :props="cell.getContext()"
+                  />
+                </template>
+                <FlexRender
+                  v-else-if="!cell.getIsPlaceholder()"
                   :render="cell.column.columnDef.cell"
                   :props="cell.getContext()"
                 />
-                <div v-if="cell.column.getIsGrouped()">({{ row.subRows.length }})</div>
-              </template>
-            </template>
-            <template v-else-if="cell.getIsAggregated()">
-              <FlexRender
-                :render="cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell"
-                :props="cell.getContext()"
-              />
-            </template>
-            <FlexRender
-              v-else-if="!cell.getIsPlaceholder()"
-              :render="cell.column.columnDef.cell"
-              :props="cell.getContext()"
-            />
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -140,10 +149,11 @@ import {
   type GroupingState,
   type SortingState,
 } from '@tanstack/vue-table'
+import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { twMerge } from 'tailwind-merge'
-import { h, ref } from 'vue'
+import { computed, h, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const emits = defineEmits(['info'])
@@ -335,4 +345,22 @@ const table = useVueTable({
   getExpandedRowModel: getExpandedRowModel(),
   getCoreRowModel: getCoreRowModel(),
 })
+
+const rows = computed(() => {
+  return table.getRowModel().rows
+})
+
+const parentRef = ref<HTMLElement | null>(null)
+const rowVirtualizerOptions = computed(() => {
+  return {
+    count: rows.value.length,
+    getScrollElement: () => parentRef.value,
+    estimateSize: () => 36,
+    overscan: 5,
+  }
+})
+
+const rowVirtualizer = useVirtualizer(rowVirtualizerOptions)
+const virtualRows = computed(() => rowVirtualizer.value.getVirtualItems())
+const totalSize = computed(() => rowVirtualizer.value.getTotalSize())
 </script>
