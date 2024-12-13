@@ -1,13 +1,13 @@
 <template>
   <div
     ref="parentRef"
-    class="h-full w-full overflow-auto p-2"
+    class="flex h-full w-full overflow-y-auto overscroll-y-none p-2"
   >
     <div
       :style="{
         height: `${totalSize}px`,
       }"
-      class="relative w-full"
+      class="relative w-full max-sm:min-h-[calc(100%+1px)]"
     >
       <div
         class="absolute left-0 top-0 w-full"

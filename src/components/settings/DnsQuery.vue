@@ -16,7 +16,6 @@
     </select>
     <button
       class="btn join-item btn-sm"
-      type="submit"
       @click="query"
     >
       {{ $t('DNSQuery') }}
