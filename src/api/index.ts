@@ -1,6 +1,6 @@
 import { useSetup } from '@/composables/setup'
 import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
-import type { Config, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
+import type { Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import axios from 'axios'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
 import { computed, nextTick, ref, watch } from 'vue'
@@ -142,6 +142,12 @@ export const upgradeCoreAPI = () => {
 
 export const restartCoreAPI = () => {
   return axios.post('/restart')
+}
+
+export const queryDNSAPI = (params: { name: string; type: string }) => {
+  return axios.get<DNSQuery>('/dns/query', {
+    params,
+  })
 }
 
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {

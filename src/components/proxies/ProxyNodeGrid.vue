@@ -25,3 +25,9 @@ import { twMerge } from 'tailwind-merge'
 
 const { hasTwoColumns } = useProxies()
 </script>
+
+<style scoped>
+.grid {
+  scrollbar-width: thin;
+}
+</style>

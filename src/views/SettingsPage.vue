@@ -112,6 +112,8 @@
         {{ $t('backend') }}
       </div>
       <div class="card-body gap-4">
+        <DnsQuery />
+        <div class="divider"></div>
         <BackendSwitch />
         <div
           class="flex items-center gap-2"
@@ -254,6 +256,14 @@
             v-model="mediumLatency"
           />
         </div>
+        <div class="flex items-center gap-2">
+          <span class="shrink-0"> {{ $t('latencyRollingEffect') }}: </span>
+          <input
+            type="checkbox"
+            class="toggle"
+            v-model="latencyRollingEffect"
+          />
+        </div>
       </div>
     </div>
 
@@ -320,6 +330,7 @@ import {
   zashboardVersion,
 } from '@/api'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
+import DnsQuery from '@/components/settings/DnsQuery.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
@@ -335,6 +346,7 @@ import {
   autoUpgrade,
   compactConnectionCard,
   font,
+  latencyRollingEffect,
   logRetentionLimit,
   lowLatency,
   mediumLatency,

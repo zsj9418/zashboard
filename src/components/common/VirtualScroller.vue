@@ -46,7 +46,7 @@ const virutalOptions = computed(() => {
     count: props.data.length,
     getScrollElement: () => parentRef.value,
     estimateSize: () => 55,
-    overscan: 48,
+    overscan: 24,
   }
 })
 

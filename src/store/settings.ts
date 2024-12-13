@@ -39,6 +39,7 @@ export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PR
 export const hideUnavailableProxies = useStorage('config/hide-unavailable-proxies', false)
 export const lowLatency = useStorage('config/low-latency', 300)
 export const mediumLatency = useStorage('config/medium-latency', 800)
+export const latencyRollingEffect = useStorage('config/latency-rolling-effect', false)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)

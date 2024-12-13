@@ -1,20 +1,34 @@
 <template>
   <div class="badge flex w-8 items-center justify-center shadow-sm">
-    <div
-      :class="twMerge('text-xs', color)"
-      ref="latencyRef"
-      v-show="latency > 0"
-    />
-    <BoltIcon
-      v-show="latency === 0"
-      class="h-4 w-4"
-    />
+    <template v-if="latencyRollingEffect">
+      <div
+        :class="twMerge('text-xs', color)"
+        ref="latencyRef"
+        v-show="latency > 0"
+      />
+      <BoltIcon
+        v-show="latency === 0"
+        class="h-4 w-4"
+      />
+    </template>
+    <template v-else>
+      <div
+        :class="twMerge('text-xs', color)"
+        v-if="latency > 0"
+      >
+        {{ latency }}
+      </div>
+      <BoltIcon
+        v-else
+        class="h-4 w-4"
+      />
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getLatencyByName } from '@/store/proxies'
-import { lowLatency, mediumLatency } from '@/store/settings'
+import { latencyRollingEffect, lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
@@ -25,20 +39,23 @@ const props = defineProps<{
 }>()
 const latencyRef = ref()
 const latency = computed(() => getLatencyByName(props.name))
-let countUp: CountUp | null = null
 
-onMounted(() => {
-  countUp = new CountUp(latencyRef.value, latency.value, {
-    duration: 1,
-    separator: '',
-    enableScrollSpy: true,
-  })
-  countUp.start()
+if (latencyRollingEffect.value) {
+  let countUp: CountUp | null = null
 
-  watch(latency, () => {
-    countUp?.update(latency.value)
+  onMounted(() => {
+    countUp = new CountUp(latencyRef.value, latency.value, {
+      duration: 1,
+      separator: '',
+      enableScrollSpy: true,
+    })
+    countUp.start()
+
+    watch(latency, () => {
+      countUp?.update(latency.value)
+    })
   })
-})
+}
 
 const color = computed(() => {
   if (latency.value < lowLatency.value) {
