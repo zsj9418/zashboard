@@ -3,12 +3,10 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
-        active ? 'bg-primary text-primary-content' : 'shadow sm:hover:bg-base-300',
-        truncateProxyName && isTruncated && 'tooltip text-left',
+        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow',
+        active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
       )
     "
-    :data-tip="node.name"
   >
     <template v-if="showContent">
       <ProxyIcon
@@ -57,7 +55,8 @@
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
-import { computed, onMounted, onUnmounted, ref } from 'vue'
+import tippy, { type Instance as TippyInstance } from 'tippy.js'
+import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 
@@ -66,41 +65,69 @@ const props = defineProps<{
   active?: boolean
 }>()
 const nameRef = ref()
-const isTruncated = ref(false)
 const showContent = ref(false)
 const cardRef = ref<HTMLDivElement | null>(null)
 let intersectionObserver: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
-
+let tippyInstance: TippyInstance | null = null
 const checkTruncation = () => {
   if (nameRef.value) {
     const { scrollWidth, clientWidth } = nameRef.value
-    isTruncated.value = scrollWidth > clientWidth
+
+    if (scrollWidth > clientWidth) {
+      tippyInstance?.enable()
+    } else {
+      tippyInstance?.disable()
+    }
+  }
+}
+
+const observeResize = () => {
+  if (nameRef.value) {
+    resizeObserver?.observe(nameRef.value)
+    checkTruncation()
+  }
+}
+
+const unobserveResize = () => {
+  if (resizeObserver && nameRef.value) {
+    resizeObserver.unobserve(nameRef.value)
   }
 }
 
 onMounted(() => {
   if (cardRef.value) {
+    if (truncateProxyName.value) {
+      resizeObserver = new ResizeObserver(() => {
+        checkTruncation()
+      })
+      tippyInstance = tippy(cardRef.value, {
+        content: props.name,
+        placement: 'top',
+        delay: [600, 0],
+        appendTo: 'parent',
+        animation: 'scale',
+      })
+    }
     intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         showContent.value = entry.isIntersecting
+        if (truncateProxyName.value) {
+          if (showContent.value) {
+            nextTick(observeResize)
+          } else {
+            unobserveResize()
+          }
+        }
       })
     })
     intersectionObserver.observe(cardRef.value)
   }
-  if (nameRef.value) {
-    resizeObserver = new ResizeObserver(() => {
-      checkTruncation()
-    })
-    resizeObserver.observe(nameRef.value)
-  }
-
-  checkTruncation()
 })
 
 onUnmounted(() => {
-  if (resizeObserver && nameRef.value) {
-    resizeObserver.unobserve(nameRef.value)
+  if (resizeObserver && cardRef.value) {
+    resizeObserver.unobserve(cardRef.value)
   }
   resizeObserver?.disconnect()
   resizeObserver = null
@@ -110,6 +137,9 @@ onUnmounted(() => {
   }
   intersectionObserver?.disconnect()
   intersectionObserver = null
+
+  tippyInstance?.destroy()
+  tippyInstance = null
 })
 
 const node = computed(() => proxyMap.value[props.name])

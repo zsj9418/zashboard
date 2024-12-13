@@ -23,3 +23,10 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+.tippy-box {
+  @apply bg-base-100 text-base-content shadow-md;
+}
+.tippy-box[data-placement^='top'] > .tippy-arrow:before {
+  @apply border-t-base-100;
+}
