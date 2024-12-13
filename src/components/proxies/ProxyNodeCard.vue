@@ -69,12 +69,7 @@ const nameRef = ref()
 const isTruncated = ref(false)
 const showContent = ref(false)
 const cardRef = ref<HTMLDivElement | null>(null)
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    showContent.value = entry.isIntersecting
-  })
-})
-
+let intersectionObserver: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
 
 const checkTruncation = () => {
@@ -86,7 +81,12 @@ const checkTruncation = () => {
 
 onMounted(() => {
   if (cardRef.value) {
-    observer.observe(cardRef.value)
+    intersectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        showContent.value = entry.isIntersecting
+      })
+    })
+    intersectionObserver.observe(cardRef.value)
   }
   if (nameRef.value) {
     resizeObserver = new ResizeObserver(() => {
@@ -102,7 +102,14 @@ onUnmounted(() => {
   if (resizeObserver && nameRef.value) {
     resizeObserver.unobserve(nameRef.value)
   }
+  resizeObserver?.disconnect()
   resizeObserver = null
+
+  if (intersectionObserver && cardRef.value) {
+    intersectionObserver.unobserve(cardRef.value)
+  }
+  intersectionObserver?.disconnect()
+  intersectionObserver = null
 })
 
 const node = computed(() => proxyMap.value[props.name])

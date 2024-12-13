@@ -47,7 +47,7 @@ const form = reactive({
 const resultList = ref<DNSQuery['Answer']>([])
 const query = async () => {
   const { data } = await queryDNSAPI(form)
-  console.log(data)
+
   resultList.value = data.Answer
 }
 </script>

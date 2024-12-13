@@ -41,7 +41,7 @@ export const initConnections = () => {
     closedConnections.value = [
       ...closedConnections.value,
       ...differenceWith(activeConnections.value, data.connections, (a, b) => a.id === b.id),
-    ]
+    ].slice(-500)
     activeConnections.value =
       data.connections?.map((connection) => {
         const preConnection = activeConnections.value.find((c) => c.id === connection.id)
@@ -117,14 +117,17 @@ export const connectionFilter = ref('')
 export const isPaused = ref(false)
 
 export const renderConnections = computed(() => {
+  let regex: RegExp | null = null
+  if (quickFilterEnabled.value && quickFilterRegex.value) {
+    regex = new RegExp(quickFilterRegex.value, 'i')
+  }
   return (
     connectionTabShow.value === CONNECTION_TAB_TYPE.ACTIVE
       ? activeConnections.value
       : closedConnections.value
   )
     .filter((conn) => {
-      if (quickFilterEnabled.value && quickFilterRegex.value) {
-        const regex = new RegExp(quickFilterRegex.value, 'i')
+      if (regex) {
         const quickFilterMatch =
           regex.test(conn.chains.join('')) ||
           regex.test(conn.metadata.host) ||
