@@ -1,38 +1,24 @@
 <template>
   <div class="badge flex w-8 items-center justify-center shadow-sm">
-    <template v-if="latencyRollingEffect">
-      <div
-        :class="twMerge('text-xs', color)"
-        ref="latencyRef"
-        v-show="latency > 0"
-      />
-      <BoltIcon
-        v-show="latency === 0"
-        class="h-4 w-4"
-      />
-    </template>
-    <template v-else>
-      <div
-        :class="twMerge('text-xs', color)"
-        v-if="latency > 0"
-      >
-        {{ latency }}
-      </div>
-      <BoltIcon
-        v-else
-        class="h-4 w-4"
-      />
-    </template>
+    <div
+      :class="twMerge('text-xs', color)"
+      ref="latencyRef"
+      v-show="latency > 0"
+    />
+    <BoltIcon
+      v-show="latency === 0"
+      class="h-4 w-4"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import { getLatencyByName } from '@/store/proxies'
-import { latencyRollingEffect, lowLatency, mediumLatency } from '@/store/settings'
+import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
   name: string
@@ -40,22 +26,24 @@ const props = defineProps<{
 const latencyRef = ref()
 const latency = computed(() => getLatencyByName(props.name))
 
-if (latencyRollingEffect.value) {
-  let countUp: CountUp | null = null
+let countUp: CountUp | null = null
 
-  onMounted(() => {
-    countUp = new CountUp(latencyRef.value, latency.value, {
-      duration: 1,
-      separator: '',
-      enableScrollSpy: true,
-    })
-    countUp.start()
-
-    watch(latency, () => {
-      countUp?.update(latency.value)
-    })
+onMounted(() => {
+  countUp = new CountUp(latencyRef.value, latency.value, {
+    duration: 1,
+    separator: '',
+    enableScrollSpy: false,
+    startVal: latency.value,
   })
-}
+
+  watch(latency, () => {
+    countUp?.update(latency.value)
+  })
+})
+
+onUnmounted(() => {
+  countUp = null
+})
 
 const color = computed(() => {
   if (latency.value < lowLatency.value) {

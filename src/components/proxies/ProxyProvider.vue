@@ -4,6 +4,7 @@
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
+          <span class="text-sm"> ({{ proxyProvider.proxies.length }}) </span>
         </div>
         <div class="flex-1" />
         <div class="flex gap-2">
