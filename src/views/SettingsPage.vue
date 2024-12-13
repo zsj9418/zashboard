@@ -165,7 +165,7 @@
       <div class="card-title px-4 pt-4">
         {{ $t('proxies') }}
       </div>
-      <div class="card-body">
+      <div class="card-body grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div class="flex items-center gap-2">
           {{ $t('proxyPreviewType') }}:
           <select
@@ -195,17 +195,6 @@
             class="toggle"
             type="checkbox"
             v-model="automaticDisconnection"
-          />
-        </div>
-        <div
-          v-if="isSingBox"
-          class="flex items-center gap-2"
-        >
-          {{ $t('showGlobalProxy') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="showGlobalProxy"
           />
         </div>
         <div class="flex items-center gap-2 max-sm:hidden">
@@ -254,6 +243,17 @@
             type="number"
             class="input input-sm input-bordered w-20"
             v-model="mediumLatency"
+          />
+        </div>
+        <div
+          v-if="isSingBox"
+          class="flex items-center gap-2"
+        >
+          {{ $t('showGlobalProxy') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="showGlobalProxy"
           />
         </div>
       </div>

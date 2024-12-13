@@ -81,7 +81,7 @@ export default {
   bar: 'Bar',
   exportSettings: 'Export Settings',
   importSettings: 'Import Settings',
-  hideUnavailable: 'Hide Unavailable',
+  hideUnavailable: 'Hide Unavail',
   protocolTips:
     'You are trying to connect a http backend but the zashboard is served by https. This may cause connection error. Please allow the insecure content in your browser settings. The settings is on the left of the browser address bar.',
   global: 'Global',

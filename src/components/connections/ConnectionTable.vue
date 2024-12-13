@@ -359,5 +359,5 @@ const rowVirtualizerOptions = computed(() => {
 
 const rowVirtualizer = useVirtualizer(rowVirtualizerOptions)
 const virtualRows = computed(() => rowVirtualizer.value.getVirtualItems())
-const totalSize = computed(() => rowVirtualizer.value.getTotalSize())
+const totalSize = computed(() => rowVirtualizer.value.getTotalSize() + 24)
 </script>

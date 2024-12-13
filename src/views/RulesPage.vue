@@ -1,23 +1,23 @@
 <template>
-  <div class="flex flex-col gap-1 overflow-y-auto overflow-x-hidden">
-    <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
+  <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
+    <div class="flex flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
       <RuleProvider
         v-for="ruleProvider in ruleProviderList"
         :key="ruleProvider.name"
         :ruleProvider="ruleProvider"
       />
-    </template>
-    <template v-else>
-      <VirtualScroller :data="rules">
-        <template v-slot="{ item: rule }: { item: Rule }">
-          <RuleCard
-            :key="rule.payload"
-            :rule="rule"
-          />
-        </template>
-      </VirtualScroller>
-    </template>
-  </div>
+    </div>
+  </template>
+  <template v-else>
+    <VirtualScroller :data="rules">
+      <template v-slot="{ item: rule }: { item: Rule }">
+        <RuleCard
+          :key="rule.payload"
+          :rule="rule"
+        />
+      </template>
+    </VirtualScroller>
+  </template>
 </template>
 
 <script setup lang="ts">
