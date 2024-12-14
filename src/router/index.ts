@@ -7,6 +7,7 @@ import LogsPage from '@/views/LogsPage.vue'
 import ProxiesPage from '@/views/ProxiesPage.vue'
 import RulesPage from '@/views/RulesPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
+import SetupPage from '@/views/SetupPage.vue'
 import { useTitle } from '@vueuse/core'
 import { watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/settings',
       name: ROUTE_NAME.settings,
       component: SettingsPage,
+    },
+    {
+      path: '/setup',
+      name: 'setup',
+      component: SetupPage,
     },
     {
       path: '/:catchAll(.*)',
