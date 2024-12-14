@@ -99,4 +99,5 @@ export default {
   secondaryPathTip: 'If present, start with a "/", otherwise leave it empty.',
   logRetentionLimit: 'Log Retention Limit',
   DNSQuery: 'DNS Query',
+  latencyRollingEffect: 'Latency Rolling Effect',
 }

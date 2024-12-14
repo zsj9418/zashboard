@@ -4,9 +4,11 @@
       :class="twMerge('text-xs', color)"
       ref="latencyRef"
       v-show="latency > 0"
-    />
+    >
+      {{ latency }}
+    </div>
     <BoltIcon
-      v-show="latency === 0"
+      v-if="latency === 0"
       class="h-4 w-4"
     />
   </div>
@@ -14,7 +16,7 @@
 
 <script setup lang="ts">
 import { getLatencyByName } from '@/store/proxies'
-import { lowLatency, mediumLatency } from '@/store/settings'
+import { latencyRollingEffect, lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
@@ -26,24 +28,28 @@ const props = defineProps<{
 const latencyRef = ref()
 const latency = computed(() => getLatencyByName(props.name))
 
-let countUp: CountUp | null = null
+if (latencyRollingEffect.value) {
+  let countUp: CountUp | null = null
 
-onMounted(() => {
-  countUp = new CountUp(latencyRef.value, latency.value, {
-    duration: 1,
-    separator: '',
-    enableScrollSpy: false,
-    startVal: latency.value,
+  onMounted(() => {
+    watch(latency, (value, OldValue) => {
+      if (!countUp) {
+        countUp = new CountUp(latencyRef.value, latency.value, {
+          duration: 1,
+          separator: '',
+          enableScrollSpy: false,
+          startVal: OldValue,
+        })
+      }
+
+      countUp?.update(value)
+    })
   })
 
-  watch(latency, () => {
-    countUp?.update(latency.value)
+  onUnmounted(() => {
+    countUp = null
   })
-})
-
-onUnmounted(() => {
-  countUp = null
-})
+}
 
 const color = computed(() => {
   if (latency.value < lowLatency.value) {

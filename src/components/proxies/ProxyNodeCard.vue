@@ -71,10 +71,19 @@ let intersectionObserver: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
 let tippyInstance: TippyInstance | null = null
 const checkTruncation = () => {
-  if (nameRef.value) {
+  if (nameRef.value && cardRef.value) {
     const { scrollWidth, clientWidth } = nameRef.value
 
     if (scrollWidth > clientWidth) {
+      if (!tippyInstance) {
+        tippyInstance = tippy(cardRef.value, {
+          content: props.name,
+          placement: 'top',
+          delay: [600, 0],
+          appendTo: 'parent',
+          animation: 'scale',
+        })
+      }
       tippyInstance?.enable()
     } else {
       tippyInstance?.disable()
@@ -100,13 +109,6 @@ onMounted(() => {
     if (truncateProxyName.value) {
       resizeObserver = new ResizeObserver(() => {
         checkTruncation()
-      })
-      tippyInstance = tippy(cardRef.value, {
-        content: props.name,
-        placement: 'top',
-        delay: [600, 0],
-        appendTo: 'parent',
-        animation: 'scale',
       })
     }
     intersectionObserver = new IntersectionObserver((entries) => {
