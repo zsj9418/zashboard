@@ -5,8 +5,10 @@
       twMerge(
         'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
+        isTruncated && 'tooltip tooltip-bottom',
       )
     "
+    :data-tip="node.name"
   >
     <template v-if="showContent">
       <ProxyIcon
@@ -55,7 +57,6 @@
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
-import tippy, { type Instance as TippyInstance } from 'tippy.js'
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
@@ -67,27 +68,14 @@ const props = defineProps<{
 const nameRef = ref()
 const showContent = ref(false)
 const cardRef = ref<HTMLDivElement | null>(null)
+const isTruncated = ref(false)
 let intersectionObserver: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
-let tippyInstance: TippyInstance | null = null
 const checkTruncation = () => {
   if (nameRef.value && cardRef.value) {
     const { scrollWidth, clientWidth } = nameRef.value
 
-    if (scrollWidth > clientWidth) {
-      if (!tippyInstance) {
-        tippyInstance = tippy(cardRef.value, {
-          content: props.name,
-          placement: 'top',
-          delay: [600, 0],
-          appendTo: 'parent',
-          animation: 'scale',
-        })
-      }
-      tippyInstance?.enable()
-    } else {
-      tippyInstance?.disable()
-    }
+    isTruncated.value = scrollWidth > clientWidth
   }
 }
 
@@ -139,9 +127,6 @@ onUnmounted(() => {
   }
   intersectionObserver?.disconnect()
   intersectionObserver = null
-
-  tippyInstance?.destroy()
-  tippyInstance = null
 })
 
 const node = computed(() => proxyMap.value[props.name])

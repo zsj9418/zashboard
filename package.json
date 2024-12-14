@@ -37,7 +37,6 @@
     "sort-package-json": "^2.12.0",
     "subsetted-fonts": "^1.0.4",
     "theme-change": "^2.5.0",
-    "tippy.js": "^6.3.7",
     "uuid": "^11.0.3",
     "vite-plugin-pwa": "^0.21.1",
     "vue": "^3.5.13",

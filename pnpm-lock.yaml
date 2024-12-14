@@ -73,9 +73,6 @@ importers:
       theme-change:
         specifier: ^2.5.0
         version: 2.5.0
-      tippy.js:
-        specifier: ^6.3.7
-        version: 6.3.7
       uuid:
         specifier: ^11.0.3
         version: 11.0.3
@@ -1403,12 +1400,6 @@ packages:
         integrity: sha512-cq8o4cWH0ibXh9VGi5P20Tu9XF/0fFXl9EUinr9QfTM7a7p0oTA4iJRCQWppXR1Pg8dSM0UCItCkPwsk9qWWYA==,
       }
     engines: { node: ^12.20.0 || ^14.18.0 || >=16.0.0 }
-
-  '@popperjs/core@2.11.8':
-    resolution:
-      {
-        integrity: sha512-P1st0aksCrn9sGZhp8GMYwBnQsbvAWsZAX44oXNNvLHGqAOcoVxmjZiohstwQ7SqKnbR47akdNi+uleWD8+g6A==,
-      }
 
   '@rollup/plugin-babel@5.3.1':
     resolution:
@@ -4737,12 +4728,6 @@ packages:
       }
     engines: { node: '>=12.0.0' }
 
-  tippy.js@6.3.7:
-    resolution:
-      {
-        integrity: sha512-E1d3oP2emgJ9dRQZdf3Kkn0qJgI6ZLpyS5z6ZkY1DF3kaQaBsGZsndEpHwx+eC+tYM41HaSNvNtLx8tU57FzTQ==,
-      }
-
   to-regex-range@5.0.1:
     resolution:
       {
@@ -6173,8 +6158,6 @@ snapshots:
     optional: true
 
   '@pkgr/core@0.1.1': {}
-
-  '@popperjs/core@2.11.8': {}
 
   '@rollup/plugin-babel@5.3.1(@babel/core@7.26.0)(rollup@2.79.2)':
     dependencies:
@@ -8206,10 +8189,6 @@ snapshots:
     dependencies:
       fdir: 6.4.2(picomatch@4.0.2)
       picomatch: 4.0.2
-
-  tippy.js@6.3.7:
-    dependencies:
-      '@popperjs/core': 2.11.8
 
   to-regex-range@5.0.1:
     dependencies:
