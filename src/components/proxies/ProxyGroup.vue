@@ -2,21 +2,21 @@
   <div class="collapse collapse-arrow">
     <div class="collapse-title">
       <div class="flex items-center gap-2">
-        <div class="flex items-center gap-1">
+        <div class="flex flex-1 items-center gap-1">
           <ProxyIcon
             v-if="proxyGroup.icon"
             :icon="proxyGroup.icon"
           />
           <span class="text-lg font-medium sm:text-xl">{{ proxyGroup.name }}</span>
-          <span class="text-xs">:: {{ proxyGroup.type }}</span>
+          <span class="text-xs sm:text-sm">({{ proxyGroup.all?.length }})</span>
+          <span class="text-xs text-slate-500 sm:text-sm"> : {{ proxyGroup.type }}</span>
+          <span
+            class="text-sm max-sm:hidden"
+            v-if="proxyGroup.now"
+          >
+            -> {{ proxyGroup.now }}
+          </span>
         </div>
-        <div
-          class="flex hidden items-center gap-2 text-xs sm:flex sm:text-sm"
-          v-if="proxyGroup.now"
-        >
-          -> {{ proxyGroup.now }}
-        </div>
-        <div class="flex-1"></div>
         <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
         <LatencyTag
           :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')"
@@ -25,7 +25,7 @@
         />
       </div>
       <div
-        class="flex items-center gap-2 text-xs sm:hidden sm:text-sm"
+        class="flex items-center gap-2 text-xs sm:hidden"
         v-if="proxyGroup.now"
       >
         -> {{ proxyGroup.now }}

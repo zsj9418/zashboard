@@ -9,7 +9,7 @@
       ref="baseColorRef"
     ></span>
     <span
-      class="hidden bg-info text-primary"
+      class="hidden border-b-primary/10 border-t-info/10 bg-info text-primary"
       ref="themeColorRef"
     ></span>
     <button
@@ -60,6 +60,8 @@ onMounted(() => {
   let fontFamily = baseColorStyle.fontFamily
   let primaryColor = themeColorStyle.color
   let secondaryColor = themeColorStyle.backgroundColor
+  let primaryColorOpacity = themeColorStyle.borderBottomColor
+  let secondaryColorOpacity = themeColorStyle.borderTopColor
   watch(
     () => theme.value,
     () => {
@@ -71,6 +73,8 @@ onMounted(() => {
       lineColor = baseColorStyle.borderColor
       primaryColor = themeColorStyle.color
       secondaryColor = themeColorStyle.backgroundColor
+      primaryColorOpacity = themeColorStyle.borderBottomColor
+      secondaryColorOpacity = themeColorStyle.borderTopColor
     },
   )
   watch(
@@ -140,7 +144,9 @@ onMounted(() => {
         },
       },
       series: props.data.map((item, index) => {
-        const colorIndex = item?.color ?? index
+        const seriesColor = index === props.data.length - 1 ? primaryColor : secondaryColor
+        const areaColor =
+          index === props.data.length - 1 ? primaryColorOpacity : secondaryColorOpacity
 
         return {
           name: item.name,
@@ -149,8 +155,11 @@ onMounted(() => {
             disabled: true,
           },
           data: item.data,
+          areaStyle: {
+            color: areaColor,
+          },
           type: 'line',
-          color: colorIndex === 1 ? primaryColor : secondaryColor,
+          color: seriesColor,
           smooth: true,
         }
       }),

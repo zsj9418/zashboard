@@ -19,7 +19,6 @@ const chartsData = computed(() => {
   return [
     {
       name: t('connections'),
-      color: 1,
       data: connectionsHistory.value,
     },
   ]
