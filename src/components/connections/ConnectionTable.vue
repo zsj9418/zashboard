@@ -237,7 +237,7 @@ const columns: ColumnDef<Connection>[] = [
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime,
     accessorFn: (original) => fromNow(original.start),
     sortingFn: (prev, next) =>
-      dayjs(prev.original.start).valueOf() - dayjs(next.original.start).valueOf(),
+      dayjs(next.original.start).valueOf() - dayjs(prev.original.start).valueOf(),
   },
   {
     header: () => t('dlSpeed'),
