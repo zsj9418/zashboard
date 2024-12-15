@@ -8,8 +8,8 @@
             :icon="proxyGroup.icon"
           />
           <span class="text-lg font-medium sm:text-xl">{{ proxyGroup.name }}</span>
-          <span class="text-xs sm:text-sm">({{ proxyGroup.all?.length }})</span>
-          <span class="text-xs text-slate-500 sm:text-sm"> : {{ proxyGroup.type }}</span>
+          <span class="text-xs">({{ proxyGroup.all?.length }})</span>
+          <span class="text-xs text-slate-500">: {{ proxyGroup.type }}</span>
           <span
             class="text-sm max-sm:hidden"
             v-if="proxyGroup.now"

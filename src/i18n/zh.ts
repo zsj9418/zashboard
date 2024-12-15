@@ -98,5 +98,4 @@ export default {
   secondaryPathTip: '如果有的话以/开头，没有则留空不填',
   logRetentionLimit: '日志保留条数',
   DNSQuery: 'DNS 查询',
-  latencyRollingEffect: '延迟滚动效果',
 }

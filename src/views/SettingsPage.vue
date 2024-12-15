@@ -245,14 +245,6 @@
             v-model="mediumLatency"
           />
         </div>
-        <div class="flex items-center gap-2">
-          <span class="shrink-0"> {{ $t('latencyRollingEffect') }}: </span>
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="latencyRollingEffect"
-          />
-        </div>
         <div
           v-if="isSingBox"
           class="flex items-center gap-2"
@@ -295,6 +287,7 @@
           />
         </div>
         <TableSettings v-else />
+        <div class="divider"></div>
         <SourceIPLabels />
       </div>
     </div>
@@ -346,7 +339,6 @@ import {
   autoUpgrade,
   compactConnectionCard,
   font,
-  latencyRollingEffect,
   logRetentionLimit,
   lowLatency,
   mediumLatency,

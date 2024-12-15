@@ -16,7 +16,7 @@
 
 <script setup lang="ts">
 import { getLatencyByName } from '@/store/proxies'
-import { latencyRollingEffect, lowLatency, mediumLatency } from '@/store/settings'
+import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
@@ -28,28 +28,26 @@ const props = defineProps<{
 const latencyRef = ref()
 const latency = computed(() => getLatencyByName(props.name))
 
-if (latencyRollingEffect.value) {
-  let countUp: CountUp | null = null
+let countUp: CountUp | null = null
 
-  onMounted(() => {
-    watch(latency, (value, OldValue) => {
-      if (!countUp) {
-        countUp = new CountUp(latencyRef.value, latency.value, {
-          duration: 1,
-          separator: '',
-          enableScrollSpy: false,
-          startVal: OldValue,
-        })
-      }
+onMounted(() => {
+  watch(latency, (value, OldValue) => {
+    if (!countUp) {
+      countUp = new CountUp(latencyRef.value, latency.value, {
+        duration: 1,
+        separator: '',
+        enableScrollSpy: false,
+        startVal: OldValue,
+      })
+    }
 
-      countUp?.update(value)
-    })
+    countUp?.update(value)
   })
+})
 
-  onUnmounted(() => {
-    countUp = null
-  })
-}
+onUnmounted(() => {
+  countUp = null
+})
 
 const color = computed(() => {
   if (latency.value < lowLatency.value) {
