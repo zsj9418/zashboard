@@ -3,6 +3,7 @@ import { i18n } from '@/i18n'
 import { language } from '@/store/settings'
 import { activeBackend } from '@/store/setup'
 import ConnectionsPage from '@/views/ConnectionsPage.vue'
+import HomePage from '@/views/HomePage.vue'
 import LogsPage from '@/views/LogsPage.vue'
 import ProxiesPage from '@/views/ProxiesPage.vue'
 import RulesPage from '@/views/RulesPage.vue'
@@ -16,33 +17,40 @@ const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/proxies',
-      name: ROUTE_NAME.proxies,
-      component: ProxiesPage,
-    },
-    {
-      path: '/connections',
-      name: ROUTE_NAME.connections,
-      component: ConnectionsPage,
-    },
-    {
-      path: '/logs',
-      name: ROUTE_NAME.logs,
-      component: LogsPage,
-    },
-    {
-      path: '/rules',
-      name: ROUTE_NAME.rules,
-      component: RulesPage,
-    },
-    {
-      path: '/settings',
-      name: ROUTE_NAME.settings,
-      component: SettingsPage,
+      path: '/',
+      redirect: ROUTE_NAME.proxies,
+      component: HomePage,
+      children: [
+        {
+          path: 'proxies',
+          name: ROUTE_NAME.proxies,
+          component: ProxiesPage,
+        },
+        {
+          path: 'connections',
+          name: ROUTE_NAME.connections,
+          component: ConnectionsPage,
+        },
+        {
+          path: 'logs',
+          name: ROUTE_NAME.logs,
+          component: LogsPage,
+        },
+        {
+          path: 'rules',
+          name: ROUTE_NAME.rules,
+          component: RulesPage,
+        },
+        {
+          path: 'settings',
+          name: ROUTE_NAME.settings,
+          component: SettingsPage,
+        },
+      ],
     },
     {
       path: '/setup',
-      name: 'setup',
+      name: ROUTE_NAME.setup,
       component: SetupPage,
     },
     {
@@ -60,6 +68,12 @@ const setTitleByName = (name: string | symbol | undefined) => {
     title.value = 'zashboard'
   }
 }
+
+router.beforeEach((to) => {
+  if (!activeBackend.value && to.name !== ROUTE_NAME.setup) {
+    router.push({ name: ROUTE_NAME.setup })
+  }
+})
 
 router.afterEach((to) => {
   setTitleByName(to.name)

@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import { ROUTE_NAME } from '@/config'
+import router from '@/router'
 import { activeUuid, backendList } from '@/store/setup'
 import { PlusIcon } from '@heroicons/vue/24/outline'
 import { computed } from 'vue'
@@ -37,5 +39,6 @@ const opts = computed(() => {
 
 const addBackend = () => {
   activeUuid.value = null
+  router.push({ name: ROUTE_NAME.setup })
 }
 </script>

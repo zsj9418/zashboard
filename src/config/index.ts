@@ -94,6 +94,7 @@ export enum ROUTE_NAME {
   logs = 'logs',
   rules = 'rules',
   settings = 'settings',
+  setup = 'setup',
 }
 
 export const ROUTE_ICON_MAP = {

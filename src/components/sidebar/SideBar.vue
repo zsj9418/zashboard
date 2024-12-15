@@ -85,5 +85,5 @@ const sidebarComp = computed(() => {
 })
 
 const route = useRoute()
-const routes = Object.values(ROUTE_NAME)
+const routes = Object.values(ROUTE_NAME).filter((r) => r !== ROUTE_NAME.setup)
 </script>

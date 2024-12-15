@@ -72,14 +72,14 @@ import { activeUuid } from '@/store/setup'
 import { initSatistic } from '@/store/statistics'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { useSwipe } from '@vueuse/core'
-import { computed, ref, watch } from 'vue'
+import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 
 const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
 })()
 
-const ctrlsMap = {
+const ctrlsMap: Record<string, Component> = {
   [ROUTE_NAME.connections]: ConnectionCtrl,
   [ROUTE_NAME.logs]: LogsCtrl,
   [ROUTE_NAME.proxies]: ProxiesCtrl,
@@ -88,7 +88,7 @@ const ctrlsMap = {
 
 const router = useRouter()
 const route = useRoute()
-const routes = Object.values(ROUTE_NAME)
+const routes = Object.values(ROUTE_NAME).filter((r) => r !== ROUTE_NAME.setup)
 const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
 })
@@ -97,10 +97,22 @@ const navBarRef = ref()
 const { direction } = useSwipe(navBarRef, { threshold: 15 })
 
 const getNextRouteName = () => {
-  return routes[(routes.indexOf(route.name as ROUTE_NAME) + 1) % routes.length]
+  const routeName = route.name as ROUTE_NAME
+
+  if (routeName === ROUTE_NAME.setup) {
+    return ROUTE_NAME.proxies
+  }
+
+  return routes[(routes.indexOf(routeName) + 1) % routes.length]
 }
 const getPrevRouteName = () => {
-  return routes[(routes.indexOf(route.name as ROUTE_NAME) - 1 + routes.length) % routes.length]
+  const routeName = route.name as ROUTE_NAME
+
+  if (routeName === ROUTE_NAME.setup) {
+    return ROUTE_NAME.proxies
+  }
+
+  return routes[(routes.indexOf(routeName) - 1 + routes.length) % routes.length]
 }
 
 watch(direction, () => {

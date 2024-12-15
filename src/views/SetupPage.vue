@@ -95,7 +95,7 @@
         >
           <button
             class="btn btn-xs flex-1"
-            @click="activeUuid = backend.uuid"
+            @click="selectBackend(backend.uuid)"
           >
             {{ backend.protocol }}://{{ backend.host }}:{{ backend.port
             }}{{ backend.secondaryPath }}
@@ -115,6 +115,7 @@
 <script setup lang="ts">
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSetup } from '@/composables/setup'
+import { ROUTE_NAME } from '@/config'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import { MinusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
@@ -129,6 +130,11 @@ const form = reactive({
 })
 
 const { tipContent, tipShowModel, showTip } = useSetup()
+
+const selectBackend = (uuid: string) => {
+  activeUuid.value = uuid
+  router.push({ name: ROUTE_NAME.proxies })
+}
 
 const handleSubmit = async (
   form: {
@@ -176,7 +182,7 @@ const handleSubmit = async (
     }
 
     addBackend(form)
-    router.push({ name: 'proxies' })
+    router.push({ name: ROUTE_NAME.proxies })
   } catch (e) {
     if (!quiet) {
       alert(e)

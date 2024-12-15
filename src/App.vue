@@ -1,10 +1,8 @@
 <script setup lang="ts">
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { RouterView } from 'vue-router'
 import { FONTS } from './config'
 import { font, theme } from './store/settings'
-import { activeBackend } from './store/setup'
-import Home from './views/HomePage.vue'
-import SetupPage from './views/SetupPage.vue'
 
 const app = ref<HTMLElement>()
 const setThemeColor = () => {
@@ -38,7 +36,6 @@ const fontClassName = computed(() => fontClassMap[font.value])
     :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName}`"
     :data-theme="theme"
   >
-    <SetupPage v-if="!activeBackend"></SetupPage>
-    <Home v-else></Home>
+    <RouterView />
   </div>
 </template>
