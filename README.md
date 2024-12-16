@@ -1,5 +1,6 @@
 # zashboard
 
+http://b.zash.run.place
 ![alt text](image-1.png)
 
 ## Tips
@@ -13,8 +14,6 @@
 docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 ```
 
-5. GitHub Pages no longer allows disabling HTTPS. If you are using the https://zephyruso.github.io/ and the backend IP you are accessing is not local, please set your browser to allow insecure content for the https://zephyruso.github.io/.
-
 ## 提示
 
 1. 移动端可切换单列/双列卡片布局
@@ -25,7 +24,3 @@ docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 ```
 docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 ```
-
-5. GitHub Pages现在不允许关闭https，如果你使用在线面板并且访问的后端IP不是本机，请将浏览器中在线面板的不安全的内容设置为允许。
-
-![alt text](image.png)
