@@ -22,7 +22,7 @@ import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
   name: string
@@ -33,19 +33,20 @@ const latency = computed(() => getLatencyByName(props.name))
 let countUp: CountUp | null = null
 
 onMounted(() => {
-  setTimeout(() => {
-    watch(latency, (value, OldValue) => {
-      if (!countUp) {
+  watch(latency, (value, OldValue) => {
+    if (!countUp) {
+      nextTick(() => {
         countUp = new CountUp(latencyRef.value, latency.value, {
           duration: 1,
           separator: '',
           enableScrollSpy: false,
           startVal: OldValue,
         })
-      }
-
+        countUp?.update(value)
+      })
+    } else {
       countUp?.update(value)
-    })
+    }
   })
 })
 

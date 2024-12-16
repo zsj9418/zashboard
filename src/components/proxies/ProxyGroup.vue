@@ -1,34 +1,29 @@
 <template>
   <div class="collapse collapse-arrow">
-    <div class="collapse-title">
-      <div class="flex items-center gap-2">
+    <div class="collapse-title pr-4">
+      <div class="flex items-center gap-2 pr-6">
         <div class="flex flex-1 items-center gap-1">
           <ProxyIcon
             v-if="proxyGroup.icon"
             :icon="proxyGroup.icon"
           />
-          <span class="text-lg font-medium sm:text-xl">{{ proxyGroup.name }}</span>
-          <span class="text-xs">({{ proxyGroup.all?.length }})</span>
-          <span class="text-xs text-slate-500">: {{ proxyGroup.type }}</span>
+          <span class="text-lg font-medium">{{ proxyGroup.name }}</span>
           <span
-            class="text-sm max-sm:hidden"
+            class="text-sm"
             v-if="proxyGroup.now"
           >
             -> {{ proxyGroup.now }}
           </span>
         </div>
-        <div class="text-sm">{{ prettyBytesHelper(downloadTotal) }}/s</div>
         <LatencyTag
-          :class="twMerge('z-10', isLatencyTesting ? 'animate-pulse' : '')"
+          :class="twMerge('z-10 bg-base-200/40', isLatencyTesting ? 'animate-pulse' : '')"
           :name="proxyGroup.now"
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div
-        class="flex items-center gap-2 text-xs sm:hidden"
-        v-if="proxyGroup.now"
-      >
-        -> {{ proxyGroup.now }}
+      <div class="flex items-center gap-2 text-xs text-slate-500">
+        <div class="flex-1">{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</div>
+        <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
       <ProxyPreview
         v-if="!showCollapse"
