@@ -1,20 +1,22 @@
 <template>
-  <div class="badge flex w-8 items-center justify-center border-none">
-    <div
-      :class="twMerge('text-xs', color)"
-      ref="latencyRef"
-      v-show="latency > 0"
-    >
-      {{ latency }}
-    </div>
+  <div
+    :class="
+      twMerge('flex h-4 w-8 items-center justify-center rounded-lg bg-base-100 text-xs', color)
+    "
+    ref="latencyRef"
+  >
     <BoltIcon
       v-if="latency === 0"
-      class="h-4 w-4"
+      class="h-3 w-3 text-base-content"
     />
+    <template v-else>
+      {{ latency }}
+    </template>
   </div>
 </template>
 
 <script setup lang="ts">
+import { NOT_CONNECTED } from '@/config'
 import { getLatencyByName } from '@/store/proxies'
 import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
@@ -31,17 +33,19 @@ const latency = computed(() => getLatencyByName(props.name))
 let countUp: CountUp | null = null
 
 onMounted(() => {
-  watch(latency, (value, OldValue) => {
-    if (!countUp) {
-      countUp = new CountUp(latencyRef.value, latency.value, {
-        duration: 1,
-        separator: '',
-        enableScrollSpy: false,
-        startVal: OldValue,
-      })
-    }
+  setTimeout(() => {
+    watch(latency, (value, OldValue) => {
+      if (!countUp) {
+        countUp = new CountUp(latencyRef.value, latency.value, {
+          duration: 1,
+          separator: '',
+          enableScrollSpy: false,
+          startVal: OldValue,
+        })
+      }
 
-    countUp?.update(value)
+      countUp?.update(value)
+    })
   })
 })
 
@@ -50,7 +54,9 @@ onUnmounted(() => {
 })
 
 const color = computed(() => {
-  if (latency.value < lowLatency.value) {
+  if (latency.value === NOT_CONNECTED) {
+    return ''
+  } else if (latency.value < lowLatency.value) {
     return 'text-green-500'
   } else if (latency.value < mediumLatency.value) {
     return 'text-yellow-500'

@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
+        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 text-xs sm:gap-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -24,36 +24,18 @@
       >
         {{ node.name }}
       </div>
-      <div
-        :class="
-          twMerge(
-            'flex items-center text-xs sm:gap-2',
-            twoColumnNodeForMobile ? 'gap-[2px]' : 'gap-1',
-          )
-        "
-      >
-        <div class="flex-1">
-          <span>{{ typeFormatter(node.type) }}</span>
-          <template v-if="node.udp">
-            <span :class="twMerge('hidden sm:hidden', twoColumnNodeForMobile && 'inline')"
-              >:udp</span
-            >
-            <span :class="twMerge('hidden sm:inline', !twoColumnNodeForMobile && 'inline')">
-              | udp
-            </span>
-          </template>
-        </div>
-        <LatencyTag
-          :class="isLatencyTesting ? 'animate-pulse' : ''"
-          :name="node.name"
-          @click.stop="handlerLatencyTest"
-        />
-      </div>
+      <span>{{ typeDescription }}</span>
+      <LatencyTag
+        :class="isLatencyTesting ? 'animate-pulse' : ''"
+        :name="node.name"
+        @click.stop="handlerLatencyTest"
+      />
     </template>
   </div>
 </template>
 
 <script setup lang="ts">
+import { isSmallScreen } from '@/helper'
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
 import { debounce } from 'lodash'
@@ -137,6 +119,18 @@ const typeFormatter = (type: string) => {
 
   return type
 }
+const typeDescription = computed(() => {
+  const type = typeFormatter(node.value.type)
+
+  if (node.value.udp) {
+    if (isSmallScreen.value && twoColumnNodeForMobile.value) {
+      return `${type}:udp`
+    }
+    return `${type} | udp`
+  }
+
+  return type
+})
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
 

@@ -21,6 +21,10 @@ export const isLargeScreen = computed(() => {
   return windowSize.width.value > 1280
 })
 
+export const isSmallScreen = computed(() => {
+  return windowSize.width.value < 640
+})
+
 export const fromNow = (timestamp: string) => {
   return dayjs(timestamp).locale(language.value).fromNow()
 }
