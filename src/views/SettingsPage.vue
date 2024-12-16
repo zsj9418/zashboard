@@ -129,14 +129,26 @@
         </div>
         <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
           <template v-if="!isSingBox">
-            <button
-              :class="
-                twMerge('btn btn-primary btn-xs sm:btn-sm', isCoreUpgrading ? 'animate-pulse' : '')
-              "
-              @click="handlerClickUpgradeCore"
-            >
-              {{ $t('upgradeCore') }}
-            </button>
+            <div class="indicator w-full">
+              <span
+                v-if="isCoreUpdateAvailable"
+                class="indicator-item flex"
+              >
+                <span class="badge badge-xs absolute animate-ping bg-secondary"></span>
+                <span class="badge badge-xs bg-secondary"></span>
+              </span>
+              <button
+                :class="
+                  twMerge(
+                    'btn btn-primary btn-xs flex-1 sm:btn-sm',
+                    isCoreUpgrading ? 'animate-pulse' : '',
+                  )
+                "
+                @click="handlerClickUpgradeCore"
+              >
+                {{ $t('upgradeCore') }}
+              </button>
+            </div>
             <button
               :class="twMerge('btn btn-xs sm:btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
               @click="handlerClickRestartCore"
@@ -315,6 +327,7 @@
 <script setup lang="ts">
 import {
   flushFakeIPAPI,
+  isCoreUpdateAvailable,
   isSingBox,
   reloadConfigsAPI,
   restartCoreAPI,

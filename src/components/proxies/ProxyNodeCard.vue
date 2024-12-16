@@ -76,21 +76,26 @@ onMounted(() => {
         checkTruncation()
       })
     }
-    intersectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          showContent.value = true
-          nextTick(() => {
-            if (cardRef.value) {
-              intersectionObserver?.unobserve(cardRef.value)
-            }
-            intersectionObserver?.disconnect()
-            intersectionObserver = null
-            observeResize()
-          })
-        }
-      })
-    })
+    intersectionObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            showContent.value = true
+            nextTick(() => {
+              if (cardRef.value) {
+                intersectionObserver?.unobserve(cardRef.value)
+              }
+              intersectionObserver?.disconnect()
+              intersectionObserver = null
+              observeResize()
+            })
+          }
+        })
+      },
+      {
+        rootMargin: '200px 0px 200px 0px',
+      },
+    )
     intersectionObserver.observe(cardRef.value)
   }
 })

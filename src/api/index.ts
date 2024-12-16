@@ -1,4 +1,6 @@
 import { useSetup } from '@/composables/setup'
+import { ROUTE_NAME } from '@/config'
+import router from '@/router'
 import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
 import type { Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import axios from 'axios'
@@ -25,16 +27,21 @@ axios.interceptors.response.use(null, (error) => {
   if (error.status === 401 && activeUuid.value) {
     removeBackend(activeUuid.value)
     activeUuid.value = null
+    router.push({ name: ROUTE_NAME.setup })
     nextTick(() => {
       const { showTip } = useSetup()
 
       showTip('unauthorizedTip')
     })
+  } else if (error.status === 404) {
+    activeUuid.value = null
+    router.push({ name: ROUTE_NAME.setup })
   }
   return error
 })
 
 export const version = ref()
+export const isCoreUpdateAvailable = ref(false)
 export const fetchVersionAPI = () => {
   return axios.get<{ version: string }>('/version')
 }
@@ -48,6 +55,8 @@ watch(
       const { data } = await fetchVersionAPI()
 
       version.value = data.version
+      if (isSingBox.value) return
+      isCoreUpdateAvailable.value = await fetchBackendUpdateAvailableAPI()
     }
   },
   { immediate: true },
@@ -202,4 +211,31 @@ export const fetchIsUIUpdateAvailable = async () => {
   const { tag_name } = await response.json()
 
   return tag_name && tag_name !== `v${zashboardVersion.value}`
+}
+
+const check = async (url: string, versionNumber: string) => {
+  const response = await fetch(`https://api.github.com/repos/MetaCubeX/mihomo${url}`)
+  const { assets } = await response.json()
+  const alreadyLatest = assets.some(({ name }: { name: string }) => name.includes(versionNumber))
+
+  return !alreadyLatest
+}
+
+export const fetchBackendUpdateAvailableAPI = async () => {
+  const match = /(alpha|beta|meta)-?(\w+)/.exec(version.value)
+
+  if (!match) {
+    const response = await fetch(`https://api.github.com/repos/MetaCubeX/mihomo/releases/latest`)
+    const { tag_name } = await response.json()
+
+    return tag_name && tag_name !== `v${zashboardVersion.value}`
+  }
+
+  const channel = match[1],
+    versionNumber = match[2]
+
+  if (channel === 'meta') return await check('/releases/latest', versionNumber)
+  if (channel === 'alpha') return await check('/releases/tags/Prerelease-Alpha', versionNumber)
+
+  return false
 }

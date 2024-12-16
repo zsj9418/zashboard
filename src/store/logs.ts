@@ -28,6 +28,15 @@ export const initLogs = () => {
   const ws = fetchLogsAPI<Log>({
     level: logLevel.value,
   })
+  const ipSourceMatchs: [RegExp, string][] = []
+
+  for (const ip in sourceIPLabelMap.value) {
+    if (ip.startsWith('/')) continue
+    const regex = new RegExp(ip + ':', 'ig')
+
+    ipSourceMatchs.push([regex, `${ip} (${sourceIPLabelMap.value[ip]}) :`])
+  }
+
   const unwatch = watch(ws.data, (data) => {
     if (!data) return
 
@@ -36,10 +45,9 @@ export const initLogs = () => {
       return
     }
 
-    for (const ip in sourceIPLabelMap.value) {
-      if (data.payload.includes(ip)) {
-        data.payload = data.payload.replace(ip, `${ip}(${sourceIPLabelMap.value[ip]})`)
-        break
+    for (const [regex, label] of ipSourceMatchs) {
+      if (regex.test(data.payload)) {
+        data.payload = data.payload.replace(regex, label)
       }
     }
 
