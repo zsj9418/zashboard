@@ -1,5 +1,5 @@
 <template>
-  <div class="badge flex w-8 items-center justify-center shadow-sm">
+  <div class="badge flex w-8 items-center justify-center border-none">
     <div
       :class="twMerge('text-xs', color)"
       ref="latencyRef"

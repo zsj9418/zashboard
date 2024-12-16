@@ -70,7 +70,13 @@ export const getIPLabelFromMap = (ip: string) => {
   const isIPv6 = ip.includes(':')
 
   for (const key in sourceIPLabelMap.value) {
-    if (ip === key || (isIPv6 && ip.endsWith(key))) {
+    if (key.startsWith('/')) {
+      const regex = new RegExp(key, 'i')
+
+      if (regex.test(ip)) {
+        return sourceIPLabelMap.value[key]
+      }
+    } else if (ip === key || (isIPv6 && ip.endsWith(key))) {
       return sourceIPLabelMap.value[key]
     }
   }

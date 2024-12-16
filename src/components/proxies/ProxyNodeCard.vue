@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 shadow',
+        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -56,6 +56,7 @@
 <script setup lang="ts">
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
+import { debounce } from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -71,24 +72,18 @@ const cardRef = ref<HTMLDivElement | null>(null)
 const isTruncated = ref(false)
 let intersectionObserver: IntersectionObserver | null = null
 let resizeObserver: ResizeObserver | null = null
-const checkTruncation = () => {
+const checkTruncation = debounce(() => {
   if (nameRef.value && cardRef.value) {
     const { scrollWidth, clientWidth } = nameRef.value
 
     isTruncated.value = scrollWidth > clientWidth
   }
-}
+}, 1000)
 
 const observeResize = () => {
   if (nameRef.value) {
     resizeObserver?.observe(nameRef.value)
     checkTruncation()
-  }
-}
-
-const unobserveResize = () => {
-  if (resizeObserver && nameRef.value) {
-    resizeObserver.unobserve(nameRef.value)
   }
 }
 
@@ -101,13 +96,16 @@ onMounted(() => {
     }
     intersectionObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        showContent.value = entry.isIntersecting
-        if (truncateProxyName.value) {
-          if (showContent.value) {
-            nextTick(observeResize)
-          } else {
-            unobserveResize()
-          }
+        if (entry.isIntersecting) {
+          showContent.value = true
+          nextTick(() => {
+            if (cardRef.value) {
+              intersectionObserver?.unobserve(cardRef.value)
+            }
+            intersectionObserver?.disconnect()
+            intersectionObserver = null
+            observeResize()
+          })
         }
       })
     })
