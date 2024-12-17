@@ -1,8 +1,12 @@
 <template>
-  <div class="card mb-1 flex-row gap-1 p-2 text-sm">
-    <span>{{ rule.type }}</span>
-    <span v-if="rule.payload"> : {{ rule.payload }} </span>
-    <span>-></span>
+  <div class="card mb-1 block p-2 text-sm">
+    <span class="mr-1">{{ rule.type }}</span>
+    <span
+      class="mr-1"
+      v-if="rule.payload"
+      >: {{ rule.payload }}</span
+    >
+    <span class="mr-1">-></span>
     <span class="text-primary">{{ rule.proxy }}</span>
   </div>
 </template>

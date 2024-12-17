@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2 text-xs sm:gap-2',
+        'relative flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -18,15 +18,23 @@
     />
     <div
       :class="
-        twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
+        twMerge(
+          'flex-1 whitespace-nowrap text-xs md:text-sm',
+          truncateProxyName && 'truncate',
+          tightMode && 'pr-6',
+        )
       "
       ref="nameRef"
     >
       {{ node.name }}
     </div>
-    <span>{{ typeDescription }}</span>
+    <span
+      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-0 scale-75' : ''}`"
+    >
+      {{ typeDescription }}
+    </span>
     <LatencyTag
-      :class="isLatencyTesting ? 'animate-pulse' : ''"
+      :class="[isLatencyTesting ? 'animate-pulse' : '', tightMode ? 'absolute right-2 top-1' : '']"
       :name="node.name"
       @click.stop="handlerLatencyTest"
     />
@@ -71,14 +79,12 @@ const typeDescription = computed(() => {
   const type = typeFormatter(node.value.type)
 
   if (node.value.udp) {
-    if (isSmallScreen.value && twoColumnNodeForMobile.value) {
-      return `${type}:udp`
-    }
     return `${type} | udp`
   }
 
   return type
 })
+const tightMode = computed(() => isSmallScreen.value && twoColumnNodeForMobile.value)
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
 
