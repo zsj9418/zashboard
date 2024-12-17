@@ -46,12 +46,13 @@
         </div>
       </div>
       <ProxyPreview
-        v-if="!showContent"
+        v-if="showPreview"
         :nodes="sortedProxies"
       />
     </div>
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
+      @transitionstart="handlerTransitionStart"
       @transitionend="handlerTransitionEnd"
     >
       <ProxyNodeGrid v-if="showContent">
@@ -84,7 +85,8 @@ const props = defineProps<{
   name: string
 }>()
 
-const { showCollapse, showContent, handlerTransitionEnd } = useCollapse(props.name)
+const { showCollapse, showContent, showPreview, handlerTransitionStart, handlerTransitionEnd } =
+  useCollapse(props.name)
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 

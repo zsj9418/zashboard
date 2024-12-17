@@ -29,13 +29,14 @@
         <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
       <ProxyPreview
-        v-if="!showContent"
+        v-if="showPreview"
         :nodes="sortedProxies"
         :now="proxyGroup.now"
       />
     </div>
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
+      @transitionstart="handlerTransitionStart"
       @transitionend="handlerTransitionEnd"
     >
       <ProxyNodeGrid v-if="showContent">
@@ -68,7 +69,8 @@ const props = defineProps<{
   name: string
 }>()
 
-const { showCollapse, showContent, handlerTransitionEnd } = useCollapse(props.name)
+const { showCollapse, showContent, showPreview, handlerTransitionStart, handlerTransitionEnd } =
+  useCollapse(props.name)
 
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {

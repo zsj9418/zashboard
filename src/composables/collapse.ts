@@ -8,6 +8,7 @@ export const useCollapse = (name: string) => {
     },
     set(value) {
       if (value) {
+        showPreview.value = false
         showContent.value = true
         nextTick(() => {
           collapseGroupMap.value[name] = true
@@ -19,11 +20,19 @@ export const useCollapse = (name: string) => {
   })
 
   const showContent = ref(showCollapse.value)
+  const showPreview = ref(!showCollapse.value)
+  const handlerTransitionStart = () => {
+    if (!showCollapse.value) {
+      setTimeout(() => {
+        showPreview.value = !showCollapse.value
+      }, 100)
+    }
+  }
   const handlerTransitionEnd = () => {
     if (!showCollapse.value) {
       showContent.value = false
     }
   }
 
-  return { showCollapse, showContent, handlerTransitionEnd }
+  return { showCollapse, showContent, showPreview, handlerTransitionEnd, handlerTransitionStart }
 }
