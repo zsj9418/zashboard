@@ -53,8 +53,7 @@
     />
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @transitionend="!showCollapse && (showContent = showCollapse)"
-      @transitionstart="showCollapse && (showContent = showCollapse)"
+      @transitionend="handlerTransitionEnd"
     >
       <ProxyNodeGrid v-if="showContent">
         <ProxyNodeCard
@@ -69,9 +68,9 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
+import { useCollapse } from '@/composables/collapse'
 import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
-import { collapseGroupMap } from '@/store/settings'
 import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
@@ -86,16 +85,7 @@ const props = defineProps<{
   name: string
 }>()
 
-const showCollapse = computed({
-  get() {
-    return collapseGroupMap.value[props.name]
-  },
-  set(value) {
-    collapseGroupMap.value[props.name] = value
-  },
-})
-const showContent = ref(showCollapse.value)
-
+const { showCollapse, showContent, handlerTransitionEnd } = useCollapse(props.name)
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 

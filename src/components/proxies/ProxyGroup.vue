@@ -37,8 +37,7 @@
     />
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @transitionend="!showCollapse && (showContent = showCollapse)"
-      @transitionstart="showCollapse && (showContent = showCollapse)"
+      @animationend="handlerTransitionEnd"
     >
       <ProxyNodeGrid v-if="showContent">
         <ProxyNodeCard
@@ -54,10 +53,10 @@
 </template>
 
 <script setup lang="ts">
+import { useCollapse } from '@/composables/collapse'
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import { collapseGroupMap } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -70,15 +69,8 @@ const props = defineProps<{
   name: string
 }>()
 
-const showCollapse = computed({
-  get() {
-    return collapseGroupMap.value[props.name]
-  },
-  set(value) {
-    collapseGroupMap.value[props.name] = value
-  },
-})
-const showContent = ref(showCollapse.value)
+const { showCollapse, showContent, handlerTransitionEnd } = useCollapse(props.name)
+
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyGroup.value.all ?? [])

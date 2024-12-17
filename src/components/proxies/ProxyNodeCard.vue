@@ -9,28 +9,27 @@
       )
     "
     :data-tip="node.name"
+    @mouseenter="checkTruncation"
   >
-    <template v-if="showContent">
-      <ProxyIcon
-        v-if="node.icon"
-        :icon="node.icon"
-        :fill="active ? 'fill-primary-content' : 'fill-base-content'"
-      />
-      <div
-        :class="
-          twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
-        "
-        ref="nameRef"
-      >
-        {{ node.name }}
-      </div>
-      <span>{{ typeDescription }}</span>
-      <LatencyTag
-        :class="isLatencyTesting ? 'animate-pulse' : ''"
-        :name="node.name"
-        @click.stop="handlerLatencyTest"
-      />
-    </template>
+    <ProxyIcon
+      v-if="node.icon"
+      :icon="node.icon"
+      :fill="active ? 'fill-primary-content' : 'fill-base-content'"
+    />
+    <div
+      :class="
+        twMerge('flex-1 whitespace-nowrap text-xs md:text-sm', truncateProxyName && 'truncate')
+      "
+      ref="nameRef"
+    >
+      {{ node.name }}
+    </div>
+    <span>{{ typeDescription }}</span>
+    <LatencyTag
+      :class="isLatencyTesting ? 'animate-pulse' : ''"
+      :name="node.name"
+      @click.stop="handlerLatencyTest"
+    />
   </div>
 </template>
 
@@ -38,9 +37,8 @@
 import { isSmallScreen } from '@/helper'
 import { proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
-import { debounce } from 'lodash'
 import { twMerge } from 'tailwind-merge'
-import { computed, nextTick, onMounted, onUnmounted, ref } from 'vue'
+import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 
@@ -48,71 +46,16 @@ const props = defineProps<{
   name: string
   active?: boolean
 }>()
-const nameRef = ref()
-const showContent = ref(false)
-const cardRef = ref<HTMLDivElement | null>(null)
+
+const nameRef = ref<HTMLDivElement | null>(null)
 const isTruncated = ref(false)
-let intersectionObserver: IntersectionObserver | null = null
-let resizeObserver: ResizeObserver | null = null
-const checkTruncation = debounce(() => {
-  if (nameRef.value && cardRef.value) {
+const checkTruncation = () => {
+  if (nameRef.value) {
     const { scrollWidth, clientWidth } = nameRef.value
 
     isTruncated.value = scrollWidth > clientWidth
   }
-}, 1000)
-
-const observeResize = () => {
-  if (nameRef.value) {
-    resizeObserver?.observe(nameRef.value)
-    checkTruncation()
-  }
 }
-
-onMounted(() => {
-  if (cardRef.value) {
-    if (truncateProxyName.value) {
-      resizeObserver = new ResizeObserver(() => {
-        checkTruncation()
-      })
-    }
-    intersectionObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            showContent.value = true
-            nextTick(() => {
-              if (cardRef.value) {
-                intersectionObserver?.unobserve(cardRef.value)
-              }
-              intersectionObserver?.disconnect()
-              intersectionObserver = null
-              observeResize()
-            })
-          }
-        })
-      },
-      {
-        rootMargin: '200px 0px 200px 0px',
-      },
-    )
-    intersectionObserver.observe(cardRef.value)
-  }
-})
-
-onUnmounted(() => {
-  if (resizeObserver && cardRef.value) {
-    resizeObserver.unobserve(cardRef.value)
-  }
-  resizeObserver?.disconnect()
-  resizeObserver = null
-
-  if (intersectionObserver && cardRef.value) {
-    intersectionObserver.unobserve(cardRef.value)
-  }
-  intersectionObserver?.disconnect()
-  intersectionObserver = null
-})
 
 const node = computed(() => proxyMap.value[props.name])
 const isLatencyTesting = ref(false)
