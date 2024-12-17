@@ -1,5 +1,5 @@
 <template>
-  <form class="join w-96 max-sm:w-full">
+  <div class="join w-96 max-sm:w-full">
     <TextInput
       v-model="form.name"
       type="text"
@@ -20,7 +20,7 @@
     >
       {{ $t('DNSQuery') }}
     </button>
-  </form>
+  </div>
   <div class="max-h-96 overflow-y-auto">
     <div
       class="flex gap-1"
@@ -41,7 +41,7 @@ import { reactive, ref } from 'vue'
 import TextInput from '../common/TextInput.vue'
 
 const form = reactive({
-  name: '',
+  name: 'www.google.com',
   type: 'A',
 })
 const resultList = ref<DNSQuery['Answer']>([])

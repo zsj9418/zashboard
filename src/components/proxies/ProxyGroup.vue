@@ -1,6 +1,9 @@
 <template>
   <div :class="`collapse collapse-arrow ${showCollapse ? 'collapse-open' : 'collapse-close'}`">
-    <div class="collapse-title pr-4">
+    <div
+      class="collapse-title cursor-pointer pr-4"
+      @click="showCollapse = !showCollapse"
+    >
       <div class="flex items-center gap-2 pr-6">
         <div class="flex flex-1 items-center gap-1">
           <ProxyIcon
@@ -26,18 +29,14 @@
         <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
       <ProxyPreview
-        v-if="!showCollapse"
+        v-if="!showContent"
         :nodes="sortedProxies"
         :now="proxyGroup.now"
       />
     </div>
-    <input
-      type="checkbox"
-      v-model="showCollapse"
-    />
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @animationend="handlerTransitionEnd"
+      @transitionend="handlerTransitionEnd"
     >
       <ProxyNodeGrid v-if="showContent">
         <ProxyNodeCard

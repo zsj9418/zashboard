@@ -1,6 +1,9 @@
 <template>
   <div :class="`collapse collapse-arrow ${showCollapse ? 'collapse-open' : 'collapse-close'}`">
-    <div class="collapse-title">
+    <div
+      class="collapse-title cursor-pointer"
+      @click="showCollapse = !showCollapse"
+    >
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
@@ -43,14 +46,10 @@
         </div>
       </div>
       <ProxyPreview
-        v-if="!showCollapse"
+        v-if="!showContent"
         :nodes="sortedProxies"
       />
     </div>
-    <input
-      type="checkbox"
-      v-model="showCollapse"
-    />
     <div
       class="collapse-content flex flex-col gap-2 max-sm:px-2"
       @transitionend="handlerTransitionEnd"
