@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse collapse-arrow">
+  <div :class="`collapse collapse-arrow ${showCollapse ? 'collapse-open' : 'collapse-close'}`">
     <div class="collapse-title pr-4">
       <div class="flex items-center gap-2 pr-6">
         <div class="flex flex-1 items-center gap-1">

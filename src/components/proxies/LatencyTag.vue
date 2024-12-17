@@ -3,15 +3,17 @@
     :class="
       twMerge('flex h-4 w-8 items-center justify-center rounded-lg bg-base-100 text-xs', color)
     "
-    ref="latencyRef"
   >
     <BoltIcon
-      v-if="latency === 0"
+      v-if="latency === NOT_CONNECTED"
       class="h-3 w-3 text-base-content"
     />
-    <template v-else>
+    <div
+      v-show="latency !== NOT_CONNECTED"
+      ref="latencyRef"
+    >
       {{ latency }}
-    </template>
+    </div>
   </div>
 </template>
 

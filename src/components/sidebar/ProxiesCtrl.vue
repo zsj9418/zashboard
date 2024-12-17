@@ -49,7 +49,7 @@
         />
       </select>
     </div>
-    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'w-64 max-sm:flex-1')">
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'w-72 max-sm:flex-1')">
       <select
         class="select select-bordered select-sm w-1/2 flex-1"
         v-model="proxySortType"
