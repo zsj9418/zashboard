@@ -228,7 +228,7 @@ export const fetchBackendUpdateAvailableAPI = async () => {
     const response = await fetch(`https://api.github.com/repos/MetaCubeX/mihomo/releases/latest`)
     const { tag_name } = await response.json()
 
-    return tag_name && tag_name !== `v${zashboardVersion.value}`
+    return tag_name && tag_name !== `v${version.value}`
   }
 
   const channel = match[1],
