@@ -19,6 +19,27 @@ const sliceLogs = throttle(() => {
   logsTemp = []
 }, 500)
 
+const ipSourceMatchs: [RegExp, string][] = []
+const restructMatchs = () => {
+  ipSourceMatchs.length = 0
+  for (const ip in sourceIPLabelMap.value) {
+    if (ip.startsWith('/')) continue
+    const regex = new RegExp(ip + ':', 'ig')
+
+    ipSourceMatchs.push([regex, `${ip} (${sourceIPLabelMap.value[ip]}) :`])
+  }
+}
+
+watch(
+  sourceIPLabelMap,
+  () => {
+    restructMatchs()
+  },
+  {
+    immediate: true,
+  },
+)
+
 export const initLogs = () => {
   cancel?.()
   logs.value = []
@@ -28,14 +49,6 @@ export const initLogs = () => {
   const ws = fetchLogsAPI<Log>({
     level: logLevel.value,
   })
-  const ipSourceMatchs: [RegExp, string][] = []
-
-  for (const ip in sourceIPLabelMap.value) {
-    if (ip.startsWith('/')) continue
-    const regex = new RegExp(ip + ':', 'ig')
-
-    ipSourceMatchs.push([regex, `${ip} (${sourceIPLabelMap.value[ip]}) :`])
-  }
 
   const unwatch = watch(ws.data, (data) => {
     if (!data) return
@@ -46,9 +59,7 @@ export const initLogs = () => {
     }
 
     for (const [regex, label] of ipSourceMatchs) {
-      if (regex.test(data.payload)) {
-        data.payload = data.payload.replace(regex, label)
-      }
+      data.payload = data.payload.replace(regex, label)
     }
 
     logsTemp.unshift({
