@@ -1,9 +1,6 @@
 <template>
-  <div :class="`collapse collapse-arrow ${showCollapse ? 'collapse-open' : 'collapse-close'}`">
-    <div
-      class="collapse-title cursor-pointer pr-4"
-      @click="showCollapse = !showCollapse"
-    >
+  <CollapseCard :name="proxyGroup.name">
+    <template v-slot:title>
       <div class="flex items-center gap-2 pr-6">
         <div class="flex flex-1 items-center gap-1">
           <ProxyIcon
@@ -28,18 +25,15 @@
         <div class="flex-1">{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</div>
         <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
+    </template>
+    <template v-slot:preview>
       <ProxyPreview
-        v-if="showPreview"
         :nodes="sortedProxies"
         :now="proxyGroup.now"
       />
-    </div>
-    <div
-      class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @transitionstart="handlerTransitionStart"
-      @transitionend="handlerTransitionEnd"
-    >
-      <ProxyNodeGrid v-if="showContent">
+    </template>
+    <template v-slot:content>
+      <ProxyNodeGrid>
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
@@ -48,17 +42,17 @@
           @click="selectProxy(proxyGroup.name, node)"
         />
       </ProxyNodeGrid>
-    </div>
-  </div>
+    </template>
+  </CollapseCard>
 </template>
 
 <script setup lang="ts">
-import { useCollapse } from '@/composables/collapse'
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
+import CollapseCard from '../common/CollapseCard.vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
@@ -68,9 +62,6 @@ import ProxyPreview from './ProxyPreview.vue'
 const props = defineProps<{
   name: string
 }>()
-
-const { showCollapse, showContent, showPreview, handlerTransitionStart, handlerTransitionEnd } =
-  useCollapse(props.name)
 
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {

@@ -1,9 +1,6 @@
 <template>
-  <div :class="`collapse collapse-arrow ${showCollapse ? 'collapse-open' : 'collapse-close'}`">
-    <div
-      class="collapse-title cursor-pointer"
-      @click="showCollapse = !showCollapse"
-    >
+  <CollapseCard :name="proxyProvider.name">
+    <template v-slot:title>
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
@@ -45,30 +42,24 @@
           {{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}
         </div>
       </div>
-      <ProxyPreview
-        v-if="showPreview"
-        :nodes="sortedProxies"
-      />
-    </div>
-    <div
-      class="collapse-content flex flex-col gap-2 max-sm:px-2"
-      @transitionstart="handlerTransitionStart"
-      @transitionend="handlerTransitionEnd"
-    >
-      <ProxyNodeGrid v-if="showContent">
+    </template>
+    <template v-slot:preview>
+      <ProxyPreview :nodes="sortedProxies" />
+    </template>
+    <template v-slot:content>
+      <ProxyNodeGrid>
         <ProxyNodeCard
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
         />
       </ProxyNodeGrid>
-    </div>
-  </div>
+    </template>
+  </CollapseCard>
 </template>
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
-import { useCollapse } from '@/composables/collapse'
 import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import type { SubscriptionInfo } from '@/types'
@@ -78,15 +69,15 @@ import { toFinite } from 'lodash'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import CollapseCard from '../common/CollapseCard.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
 import ProxyNodeGrid from './ProxyNodeGrid.vue'
 import ProxyPreview from './ProxyPreview.vue'
+
 const props = defineProps<{
   name: string
 }>()
 
-const { showCollapse, showContent, showPreview, handlerTransitionStart, handlerTransitionEnd } =
-  useCollapse(props.name)
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 
