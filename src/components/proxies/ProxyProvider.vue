@@ -10,13 +10,13 @@
         <div class="flex gap-2">
           <button
             :class="twMerge('btn btn-circle btn-xs z-30', isHealthChecking ? 'animate-pulse' : '')"
-            @click="healthCheckClickHandler"
+            @click.stop="healthCheckClickHandler"
           >
             <BoltIcon class="h-4 w-4" />
           </button>
           <button
             :class="twMerge('btn btn-circle btn-xs z-30', isUpdating ? 'animate-spin' : '')"
-            @click="updateProviderClickHandler"
+            @click.stop="updateProviderClickHandler"
           >
             <ArrowPathIcon class="h-4 w-4" />
           </button>
