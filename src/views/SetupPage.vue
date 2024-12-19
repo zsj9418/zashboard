@@ -16,6 +16,14 @@
         </a>
       </div>
     </div>
+    <div class="absolute right-4 top-4">
+      <button
+        class="btn btn-sm"
+        @click="importSettings"
+      >
+        {{ $t('importSettings') }}
+      </button>
+    </div>
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
@@ -116,6 +124,7 @@
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSetup } from '@/composables/setup'
 import { ROUTE_NAME } from '@/config'
+import { importSettings } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import { MinusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'

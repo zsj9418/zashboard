@@ -76,13 +76,13 @@
 
           <button
             class="btn btn-xs sm:btn-sm"
-            @click="handlerClickExport"
+            @click="exportSettings"
           >
             {{ $t('exportSettings') }}
           </button>
           <button
             class="btn btn-xs sm:btn-sm"
-            @click="handlerClickImport"
+            @click="importSettings"
           >
             {{ $t('importSettings') }}
           </button>
@@ -349,6 +349,7 @@ import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
 import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
+import { exportSettings, importSettings } from '@/helper'
 import { configs, updateConfigs } from '@/store/config'
 import {
   automaticDisconnection,
@@ -461,42 +462,4 @@ const themes = [
   'nord',
   'sunset',
 ]
-
-const handlerClickExport = () => {
-  const settings: Record<string, string | null> = {}
-
-  for (const key in localStorage) {
-    if (key.startsWith('config/') || key.startsWith('setup/')) {
-      settings[key] = localStorage.getItem(key)
-    }
-  }
-
-  const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' })
-  const url = URL.createObjectURL(blob)
-  const a = document.createElement('a')
-  a.href = url
-  a.download = 'zashboard-settings'
-  a.click()
-  URL.revokeObjectURL(url)
-}
-
-const handlerClickImport = () => {
-  const input = document.createElement('input')
-  input.type = 'file'
-  input.accept = '.json'
-  input.onchange = async () => {
-    const file = input.files?.[0]
-    if (!file) return
-    const reader = new FileReader()
-    reader.onload = async () => {
-      const settings = JSON.parse(reader.result as string)
-      for (const key in settings) {
-        localStorage.setItem(key, settings[key])
-      }
-      location.reload()
-    }
-    reader.readAsText(file)
-  }
-  input.click()
-}
 </script>

@@ -5,7 +5,7 @@
 
     <div class="flex">
       <button
-        class="btn btn-circle btn-ghost btn-xs"
+        class="btn btn-circle btn-xs"
         @click="isSiderbarCollapsed = true"
       >
         <ArrowLeftCircleIcon class="h-5 w-5" />
