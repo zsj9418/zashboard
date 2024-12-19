@@ -4,21 +4,20 @@
     class="join-item select select-bordered select-sm"
     v-model="sourceIPFilter"
   >
-    <option
-      value=""
-      label="all"
-    ></option>
+    <option value="">all</option>
     <option
       v-if="sourceIPOpts.every((i) => i.value !== sourceIPFilter) && sourceIPFilter !== ''"
       :value="sourceIPFilter"
-      :label="getIPLabelFromMap(sourceIPFilter)"
-    />
+    >
+      {{ getIPLabelFromMap(sourceIPFilter) }}
+    </option>
     <option
       v-for="opt in sourceIPOpts"
       :key="opt.value"
       :value="opt.value"
-      :label="opt.label"
-    />
+    >
+      {{ opt.label }}
+    </option>
   </select>
 </template>
 

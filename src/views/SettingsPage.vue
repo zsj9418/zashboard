@@ -45,8 +45,9 @@
               v-for="opt in Object.values(FONTS)"
               :key="opt"
               :value="opt"
-              :label="opt"
-            />
+            >
+              {{ opt }}
+            </option>
           </select>
         </div>
         <div

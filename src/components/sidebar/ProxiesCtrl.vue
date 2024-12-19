@@ -44,9 +44,10 @@
         <option
           v-for="mode in modeList"
           :key="mode"
-          :label="$t(mode.toLowerCase()) || mode"
           :value="mode"
-        />
+        >
+          {{ $t(mode.toLowerCase()) || mode }}
+        </option>
       </select>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'w-72 max-sm:flex-1')">
@@ -57,9 +58,10 @@
         <option
           v-for="type in Object.values(PROXY_SORT_TYPE)"
           :key="type"
-          :label="$t(type)"
           :value="type"
-        />
+        >
+          {{ $t(type) }}
+        </option>
       </select>
       <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
       <input

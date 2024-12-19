@@ -10,8 +10,9 @@
         v-for="opt in Object.values(LANG)"
         :key="opt"
         :value="opt"
-        :label="langLabelMap[opt] || opt"
-      />
+      >
+        {{ langLabelMap[opt] || opt }}
+      </option>
     </select>
   </div>
 </template>
