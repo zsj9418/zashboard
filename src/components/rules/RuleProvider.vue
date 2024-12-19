@@ -4,7 +4,7 @@
       <div class="w-48 flex-1 text-primary">
         {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }})
       </div>
-      <div class="flex gap-1">
+      <div class="flex gap-3">
         <span>{{ ruleProvider.behavior }}</span>
         <span>{{ ruleProvider.vehicleType }}</span>
         <span>{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>

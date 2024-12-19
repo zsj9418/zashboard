@@ -402,6 +402,7 @@ const handlerClickUpgradeUI = async () => {
   try {
     await upgradeUIAPI()
     isUIUpgrading.value = false
+    window.location.reload()
   } catch {
     isUIUpgrading.value = false
   }
