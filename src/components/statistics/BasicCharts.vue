@@ -108,6 +108,7 @@ onMounted(() => {
         backgroundColor: backgroundColor,
         borderColor: backgroundColor,
         confine: true,
+        padding: [0, 5],
         textStyle: {
           color: color,
           fontFamily,
