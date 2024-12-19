@@ -113,7 +113,7 @@
         {{ $t('backend') }}
       </div>
       <div class="card-body gap-4">
-        <BackendSwitch />
+        <BackendVersion />
         <div
           class="flex items-center gap-2"
           v-if="!isSingBox && configs?.tun"
@@ -126,6 +126,7 @@
             @change="hanlderTunModeChange"
           />
         </div>
+        <BackendSwitch />
         <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
           <template v-if="!isSingBox">
             <div class="indicator w-full">
@@ -336,6 +337,7 @@ import {
   upgradeUIAPI,
   zashboardVersion,
 } from '@/api'
+import BackendVersion from '@/components/common/BackendVersion.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
 import DnsQuery from '@/components/settings/DnsQuery.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'

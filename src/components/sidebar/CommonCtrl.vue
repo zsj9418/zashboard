@@ -1,14 +1,7 @@
 <template>
   <div class="flex flex-col gap-2 p-2 text-xs">
     <StatisticsInfo />
-    <div class="flex gap-1">
-      {{ $t('version') }}:
-      <img
-        :src="isSingBox ? SingBoxLogo : MetacubexLogo"
-        class="w-4"
-      />
-      {{ version }}
-    </div>
+    <BackendVersion />
 
     <div class="flex">
       <button
@@ -24,11 +17,9 @@
 </template>
 
 <script setup lang="ts">
-import { isSingBox, version } from '@/api'
-import MetacubexLogo from '@/assets/metacubex.jpeg'
-import SingBoxLogo from '@/assets/sing-box.svg'
 import { isSiderbarCollapsed } from '@/store/settings'
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
+import BackendVersion from '../common/BackendVersion.vue'
 import BackendSwitch from '../settings/BackendSwitch.vue'
 import StatisticsInfo from './StatisticsInfo.vue'
 </script>
