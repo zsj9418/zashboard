@@ -1,6 +1,7 @@
 <template>
   <div class="card w-full flex-row items-center gap-2 p-1 px-2 text-sm">
     <div class="flex flex-1 flex-col sm:flex-row">
+      <div class="mr-2">{{ index }}.</div>
       <div class="w-48 flex-1 text-primary">
         {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }})
       </div>
@@ -30,6 +31,7 @@ import { ref } from 'vue'
 const isUpdating = ref(false)
 const props = defineProps<{
   ruleProvider: RuleProvider
+  index: number
 }>()
 
 const updateRuleProviderClickHandler = async () => {

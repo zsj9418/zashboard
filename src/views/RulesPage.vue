@@ -2,9 +2,10 @@
   <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
     <div class="flex flex-col gap-1 overflow-y-auto overflow-x-hidden p-2">
       <RuleProvider
-        v-for="ruleProvider in ruleProviderList"
+        v-for="(ruleProvider, index) in ruleProviderList"
         :key="ruleProvider.name"
         :ruleProvider="ruleProvider"
+        :index="index + 1"
       />
     </div>
   </template>
