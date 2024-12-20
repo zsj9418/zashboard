@@ -5,7 +5,10 @@
     "
     v-if="configs"
   >
-    <template v-if="proxyProviederList.length">
+    <div
+      :class="twMerge('flex flex-col-reverse gap-2', horizontal && 'flex-row')"
+      v-if="proxyProviederList.length"
+    >
       <div
         role="tablist"
         class="tabs-boxed tabs tabs-sm"
@@ -33,7 +36,7 @@
           {{ $t('updateAllProviders') }}
         </button>
       </div>
-    </template>
+    </div>
     <div class="w-full sm:hidden"></div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'w-24')">
       <select

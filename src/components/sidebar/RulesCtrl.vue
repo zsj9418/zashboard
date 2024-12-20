@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="twMerge('flex flex-col gap-2 p-2', horizontal && 'flex-row pb-0')"
+    :class="twMerge('flex flex-col-reverse gap-2 p-2', horizontal && 'flex-row pb-0')"
     v-if="ruleProviderList.length"
   >
     <div
