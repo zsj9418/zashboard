@@ -88,7 +88,9 @@ import SideBar from '@/components/sidebar/SideBar.vue'
 import { useProxies } from '@/composables/proxies'
 import { rulesTabShow } from '@/composables/rules'
 import { useSettings } from '@/composables/settings'
+import { useTip } from '@/composables/tip'
 import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
+import { getUrlFromBackend } from '@/helper'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
@@ -174,7 +176,7 @@ watch(
 const closeModal = () => {
   modalRef.value?.close()
 }
-
+const { showTip } = useTip()
 const autoSwitchBackend = async () => {
   const otherEnds = backendList.value.filter((end) => end.uuid !== activeUuid.value)
 
@@ -189,7 +191,9 @@ const autoSwitchBackend = async () => {
 
   if (avaliable.length > 0) {
     activeUuid.value = avaliable[0].uuid
-    router.push({ name: ROUTE_NAME.proxies })
+    showTip('backendSwitchTo', {
+      backend: getUrlFromBackend(avaliable[0]),
+    })
   }
 }
 

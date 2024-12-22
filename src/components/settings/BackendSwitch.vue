@@ -23,6 +23,7 @@
 
 <script setup lang="ts">
 import { ROUTE_NAME } from '@/config'
+import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, backendList } from '@/store/setup'
 import { PlusIcon } from '@heroicons/vue/24/outline'
@@ -31,7 +32,7 @@ import { computed } from 'vue'
 const opts = computed(() => {
   return backendList.value.map((b) => {
     return {
-      label: `${b.protocol}://${b.host}:${b.port}`,
+      label: getUrlFromBackend(b),
       value: b.uuid,
     }
   })

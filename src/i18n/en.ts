@@ -101,4 +101,5 @@ export default {
   DNSQuery: 'DNS Query',
   currentBackendUnavailable: 'Current backend is unavailable. Try to switch to another backend?',
   confirm: 'Confirm',
+  backendSwitchTo: 'Automatic Switch to {backend}',
 }

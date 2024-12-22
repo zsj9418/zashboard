@@ -3,19 +3,6 @@
     class="flex h-full w-full items-center justify-center bg-base-200/40"
     @keydown.enter="handleSubmit(form)"
   >
-    <div
-      class="toast toast-start toast-top max-w-64 whitespace-normal text-sm"
-      v-if="tipShowModel"
-    >
-      <div class="breaks-all alert alert-warning w-72 whitespace-normal">
-        <a
-          href="https://github.com/Zephyruso/zashboard/blob/main/README.md"
-          target="_blank"
-        >
-          {{ $t(tipContent) }}
-        </a>
-      </div>
-    </div>
     <div class="absolute right-4 top-4">
       <button
         class="btn btn-sm"
@@ -105,8 +92,7 @@
             class="btn btn-xs flex-1"
             @click="selectBackend(backend.uuid)"
           >
-            {{ backend.protocol }}://{{ backend.host }}:{{ backend.port
-            }}{{ backend.secondaryPath }}
+            {{ getUrlFromBackend(backend) }}
           </button>
           <button
             class="btn btn-circle btn-xs"
@@ -122,9 +108,9 @@
 
 <script setup lang="ts">
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
-import { useSetup } from '@/composables/setup'
+import { useTip } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
-import { importSettings } from '@/helper'
+import { getUrlFromBackend, importSettings } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import { MinusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
@@ -138,7 +124,7 @@ const form = reactive({
   password: '',
 })
 
-const { tipContent, tipShowModel, showTip } = useSetup()
+const { showTip } = useTip()
 
 const selectBackend = (uuid: string) => {
   activeUuid.value = uuid
@@ -155,7 +141,7 @@ const handleSubmit = async (
   },
   quiet = false,
 ) => {
-  const { protocol, host, port, password, secondaryPath } = form
+  const { protocol, host, port, password } = form
 
   if (!protocol || !host || !port) {
     alert('Please fill in all the fields.')
@@ -167,7 +153,7 @@ const handleSubmit = async (
   }
 
   try {
-    const data = await fetch(`${protocol}://${host}:${port}${secondaryPath}/version`, {
+    const data = await fetch(`${getUrlFromBackend(form)}/version`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${password}`,

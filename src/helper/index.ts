@@ -2,7 +2,7 @@ import { PROXY_SORT_TYPE } from '@/config'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import { hideUnavailableProxies, language, proxySortType, sourceIPLabelMap } from '@/store/settings'
 import { timeSaved } from '@/store/statistics'
-import type { Connection } from '@/types'
+import type { Backend, Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'
@@ -154,4 +154,8 @@ export const importSettings = () => {
     reader.readAsText(file)
   }
   input.click()
+}
+
+export const getUrlFromBackend = (end: Omit<Backend, 'uuid'>) => {
+  return `${end.protocol}://${end.host}:${end.port}${end.secondaryPath || '/'}`
 }

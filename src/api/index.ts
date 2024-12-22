@@ -1,5 +1,6 @@
-import { useSetup } from '@/composables/setup'
+import { useTip } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
+import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
 import type { Backend, Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
@@ -29,7 +30,7 @@ axios.interceptors.response.use(null, (error) => {
     activeUuid.value = null
     router.push({ name: ROUTE_NAME.setup })
     nextTick(() => {
-      const { showTip } = useSetup()
+      const { showTip } = useTip()
 
       showTip('unauthorizedTip')
     })
@@ -160,10 +161,8 @@ export const queryDNSAPI = (params: { name: string; type: string }) => {
 }
 
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
-  const backend = activeBackend.value
-  const resurl = new URL(
-    `${backend?.protocol === 'https' ? 'wss' : 'ws'}://${backend?.host}:${backend?.port}${backend?.secondaryPath || ''}/${url}`,
-  )
+  const backend = activeBackend.value!
+  const resurl = new URL(`${getUrlFromBackend(backend)}${url}`)
 
   resurl.searchParams.append('token', backend?.password || '')
 
@@ -211,16 +210,13 @@ export const isBackendAvailable = async (backend: Backend, timeout: number = 500
   const timeoutId = setTimeout(() => controller.abort(), timeout)
 
   try {
-    const res = await fetch(
-      `${backend.protocol}://${backend.host}:${backend.port}${backend.secondaryPath ?? '/'}version`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer ${backend.password}`,
-        },
-        signal: controller.signal,
+    const res = await fetch(`${getUrlFromBackend(backend)}version`, {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${backend.password}`,
       },
-    )
+      signal: controller.signal,
+    })
 
     return res.ok
   } catch {

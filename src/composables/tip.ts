@@ -1,12 +1,14 @@
 import { ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
 const tipShowModel = ref(false)
 const tipContent = ref()
 
-export const useSetup = () => {
-  const showTip = (content: string) => {
+export const useTip = () => {
+  const { t } = useI18n()
+  const showTip = (content: string, params: Record<string, string> = {}) => {
     tipShowModel.value = true
-    tipContent.value = content
+    tipContent.value = t(content, params)
     setTimeout(() => {
       tipShowModel.value = false
     }, 10000)

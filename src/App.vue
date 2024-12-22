@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { XCircleIcon } from '@heroicons/vue/24/outline'
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
+import { useTip } from './composables/tip'
 import { FONTS } from './config'
 import { font, theme } from './store/settings'
 
@@ -12,6 +14,7 @@ const setThemeColor = () => {
     metaThemeColor.setAttribute('content', themeColor)
   }
 }
+const { tipContent, tipShowModel } = useTip()
 
 onMounted(() => {
   setThemeColor()
@@ -37,5 +40,25 @@ const fontClassName = computed(() => fontClassMap[font.value])
     :data-theme="theme"
   >
     <RouterView />
+    <div
+      class="toast-sm toast toast-start toast-top z-50 max-w-64 whitespace-normal text-sm"
+      v-if="tipShowModel"
+    >
+      <div class="breaks-all alert alert-warning flex w-72 whitespace-normal p-2">
+        <a
+          href="https://github.com/Zephyruso/zashboard/blob/main/README.md"
+          target="_blank"
+          class="flex-1"
+        >
+          {{ $t(tipContent) }}
+        </a>
+        <button
+          class="btn btn-circle btn-ghost btn-xs"
+          @click="tipShowModel = false"
+        >
+          <XCircleIcon class="w-4 cursor-pointer" />
+        </button>
+      </div>
+    </div>
   </div>
 </template>
