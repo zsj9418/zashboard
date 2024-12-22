@@ -1,3 +1,12 @@
+export type Backend = {
+  host: string
+  port: number
+  secondaryPath: string
+  password: string
+  protocol: string
+  uuid: string
+}
+
 export type Config = {
   port: number
   'socks-port': number

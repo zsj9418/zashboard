@@ -1,16 +1,8 @@
+import type { Backend } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { isEqual, omit } from 'lodash'
 import { v4 as uuid } from 'uuid'
 import { computed } from 'vue'
-
-type Backend = {
-  host: string
-  port: number
-  secondaryPath: string
-  password: string
-  protocol: string
-  uuid: string
-}
 
 export const backendList = useStorage<Backend[]>('setup/api-list', [])
 export const activeUuid = useStorage<string>('setup/active-uuid', '')

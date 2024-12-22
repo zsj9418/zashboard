@@ -2,7 +2,7 @@ import { useSetup } from '@/composables/setup'
 import { ROUTE_NAME } from '@/config'
 import router from '@/router'
 import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
-import type { Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
+import type { Backend, Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import axios from 'axios'
 import ReconnectingWebSocket from 'reconnectingwebsocket'
 import { computed, nextTick, ref, watch } from 'vue'
@@ -204,6 +204,30 @@ export const fetchMemoryAPI = <T>() => {
 
 export const fetchTrafficAPI = <T>() => {
   return createWebSocket<T>('traffic')
+}
+
+export const isBackendAvailable = async (backend: Backend, timeout: number = 5000) => {
+  const controller = new AbortController()
+  const timeoutId = setTimeout(() => controller.abort(), timeout)
+
+  try {
+    const res = await fetch(
+      `${backend.protocol}://${backend.host}:${backend.port}${backend.secondaryPath ?? '/'}version`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${backend.password}`,
+        },
+        signal: controller.signal,
+      },
+    )
+
+    return res.ok
+  } catch {
+    return false
+  } finally {
+    clearTimeout(timeoutId)
+  }
 }
 
 export const fetchIsUIUpdateAvailable = async () => {

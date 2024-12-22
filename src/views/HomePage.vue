@@ -51,10 +51,35 @@
         </div>
       </div>
     </div>
+
+    <dialog
+      id="autoSwitchBackend"
+      ref="modalRef"
+      class="modal"
+    >
+      <div class="modal-box">
+        <h3 class="text-lg font-bold">{{ $t('currentBackendUnavailable') }}</h3>
+        <div class="flex justify-end gap-2">
+          <button
+            class="btn btn-sm"
+            @click="closeModal"
+          >
+            {{ $t('cancel') }}
+          </button>
+          <button
+            class="btn btn-primary btn-sm"
+            @click="autoSwitchBackend"
+          >
+            {{ $t('confirm') }}
+          </button>
+        </div>
+      </div>
+    </dialog>
   </div>
 </template>
 
 <script setup lang="ts">
+import { isBackendAvailable } from '@/api'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
@@ -70,13 +95,14 @@ import { initLogs } from '@/store/logs'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { isSiderbarCollapsed } from '@/store/settings'
-import { activeUuid } from '@/store/setup'
+import { activeBackend, activeUuid, backendList } from '@/store/setup'
 import { initSatistic } from '@/store/statistics'
 import { Bars3Icon } from '@heroicons/vue/24/outline'
-import { useSwipe } from '@vueuse/core'
+import { useDocumentVisibility, useSwipe } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 
+const modalRef = ref<HTMLDialogElement | null>(null)
 const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
 })()
@@ -139,6 +165,51 @@ watch(
     initLogs()
     initSatistic()
     checkUIUpdate()
+  },
+  {
+    immediate: true,
+  },
+)
+
+const closeModal = () => {
+  modalRef.value?.close()
+}
+
+const autoSwitchBackend = async () => {
+  const otherEnds = backendList.value.filter((end) => end.uuid !== activeUuid.value)
+
+  closeModal()
+  const avaliable = (
+    await Promise.all(
+      otherEnds.map(async (end) => {
+        return (await isBackendAvailable(end)) ? end : null
+      }),
+    )
+  ).filter((end) => end !== null)
+
+  if (avaliable.length > 0) {
+    activeUuid.value = avaliable[0].uuid
+    router.push({ name: ROUTE_NAME.proxies })
+  }
+}
+
+const documentVisible = useDocumentVisibility()
+
+watch(
+  documentVisible,
+  async () => {
+    if (!activeBackend.value || backendList.value.length === 0 || !documentVisible.value) {
+      return
+    }
+    try {
+      const isAvailable = await isBackendAvailable(activeBackend.value)
+
+      if (!isAvailable) {
+        modalRef.value?.showModal()
+      }
+    } catch {
+      modalRef.value?.showModal()
+    }
   },
   {
     immediate: true,

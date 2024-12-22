@@ -99,4 +99,6 @@ export default {
   secondaryPathTip: 'If present, start with a "/", otherwise leave it empty.',
   logRetentionLimit: 'Log Retention Limit',
   DNSQuery: 'DNS Query',
+  currentBackendUnavailable: 'Current backend is unavailable. Try to switch to another backend?',
+  confirm: 'Confirm',
 }
