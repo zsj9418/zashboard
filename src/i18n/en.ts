@@ -102,4 +102,5 @@ export default {
   currentBackendUnavailable: 'Current backend is unavailable. Try to switch to another backend?',
   confirm: 'Confirm',
   backendSwitchTo: 'Automatic Switch to {backend}',
+  ipv6Test: 'IPv6 Test',
 }

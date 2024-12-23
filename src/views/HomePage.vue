@@ -158,6 +158,7 @@ const { checkUIUpdate } = useSettings()
 watch(
   activeUuid,
   () => {
+    if (!activeUuid.value) return
     rulesTabShow.value = RULE_TAB_TYPE.RULES
     proxiesTabShow.value = PROXY_TAB_TYPE.PROXIES
     fetchConfigs()

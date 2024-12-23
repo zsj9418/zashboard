@@ -148,7 +148,12 @@ const handleSubmit = async (
     return
   }
 
-  if (window.location.protocol === 'https:' && protocol === 'http' && !quiet) {
+  if (
+    window.location.protocol === 'https:' &&
+    protocol === 'http' &&
+    !['::1', '0.0.0.0', '127.0.0.1', 'localhost'].includes(host) &&
+    !quiet
+  ) {
     showTip('protocolTips')
   }
 

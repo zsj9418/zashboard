@@ -71,7 +71,7 @@ export const fetchProxyLatencyAPI = (proxyName: string, url: string, timeout: nu
 }
 
 export const fetchProxyGroupLatencyAPI = (proxyName: string, url: string, timeout: number) => {
-  return axios.get<{ delay: number }>(`/group/${encodeURIComponent(proxyName)}/delay`, {
+  return axios.get<Record<string, number>>(`/group/${encodeURIComponent(proxyName)}/delay`, {
     params: {
       url,
       timeout,

@@ -101,4 +101,5 @@ export default {
   currentBackendUnavailable: '当前后端不可用，尝试切换到其他后端?',
   confirm: '确定',
   backendSwitchTo: '自动切换到{backend}',
+  ipv6Test: 'IPv6 测试',
 }

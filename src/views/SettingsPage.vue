@@ -259,6 +259,14 @@
             v-model="mediumLatency"
           />
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('ipv6Test') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="IPv6test"
+          />
+        </div>
         <div
           v-if="isSingBox"
           class="flex items-center gap-2"
@@ -356,6 +364,7 @@ import {
   autoUpgrade,
   compactConnectionCard,
   font,
+  IPv6test,
   logRetentionLimit,
   lowLatency,
   mediumLatency,
