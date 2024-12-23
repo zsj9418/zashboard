@@ -202,7 +202,11 @@ const documentVisible = useDocumentVisibility()
 watch(
   documentVisible,
   async () => {
-    if (!activeBackend.value || backendList.value.length === 0 || !documentVisible.value) {
+    if (
+      !activeBackend.value ||
+      backendList.value.length === 0 ||
+      documentVisible.value !== 'visible'
+    ) {
       return
     }
     try {

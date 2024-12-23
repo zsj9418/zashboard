@@ -9,17 +9,7 @@ import ReconnectingWebSocket from 'reconnectingwebsocket'
 import { computed, nextTick, ref, watch } from 'vue'
 
 axios.interceptors.request.use((config) => {
-  config.baseURL =
-    activeBackend.value?.protocol +
-    '://' +
-    activeBackend.value?.host +
-    ':' +
-    activeBackend.value?.port
-
-  if (activeBackend.value?.secondaryPath) {
-    config.baseURL += activeBackend.value?.secondaryPath
-  }
-
+  config.baseURL = getUrlFromBackend(activeBackend.value!)
   config.headers['Authorization'] = 'Bearer ' + activeBackend.value?.password
   return config
 })
@@ -162,7 +152,7 @@ export const queryDNSAPI = (params: { name: string; type: string }) => {
 
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
   const backend = activeBackend.value!
-  const resurl = new URL(`${getUrlFromBackend(backend)}${url}`)
+  const resurl = new URL(`${getUrlFromBackend(backend)}/${url}`)
 
   resurl.searchParams.append('token', backend?.password || '')
 
@@ -210,7 +200,7 @@ export const isBackendAvailable = async (backend: Backend, timeout: number = 500
   const timeoutId = setTimeout(() => controller.abort(), timeout)
 
   try {
-    const res = await fetch(`${getUrlFromBackend(backend)}version`, {
+    const res = await fetch(`${getUrlFromBackend(backend)}/version`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${backend.password}`,

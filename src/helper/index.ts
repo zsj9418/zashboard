@@ -157,5 +157,5 @@ export const importSettings = () => {
 }
 
 export const getUrlFromBackend = (end: Omit<Backend, 'uuid'>) => {
-  return `${end.protocol}://${end.host}:${end.port}${end.secondaryPath || '/'}`
+  return `${end.protocol}://${end.host}:${end.port}${end.secondaryPath || ''}`
 }
