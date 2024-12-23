@@ -195,7 +195,7 @@ export const fetchTrafficAPI = <T>() => {
   return createWebSocket<T>('traffic')
 }
 
-export const isBackendAvailable = async (backend: Backend, timeout: number = 5000) => {
+export const isBackendAvailable = async (backend: Backend, timeout: number = 10000) => {
   const controller = new AbortController()
   const timeoutId = setTimeout(() => controller.abort(), timeout)
 
