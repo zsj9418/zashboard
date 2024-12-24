@@ -2935,10 +2935,7 @@ packages:
     engines: { node: '>=10' }
 
   fs.realpath@1.0.0:
-    resolution:
-      {
-        integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==,
-      }
+    resolution: { integrity: sha1-FQStJSMVjKpA20onh8sBQRmU6k8= }
 
   fsevents@2.3.3:
     resolution:
@@ -3047,7 +3044,6 @@ packages:
       {
         integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==,
       }
-    deprecated: Glob versions prior to v9 are no longer supported
 
   globals@11.12.0:
     resolution:
@@ -3197,11 +3193,7 @@ packages:
     engines: { node: '>=0.8.19' }
 
   inflight@1.0.6:
-    resolution:
-      {
-        integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==,
-      }
-    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
+    resolution: { integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk= }
 
   inherits@2.0.4:
     resolution:
@@ -3333,10 +3325,7 @@ packages:
     engines: { node: '>= 0.4' }
 
   is-module@1.0.0:
-    resolution:
-      {
-        integrity: sha512-51ypPSPCoTEIN9dy5Oy+h4pShgJmPCygKfyRCISBI+JoWT/2oJvK8QPxmwv7b/p239jXrm9M1mlQbyKJ5A152g==,
-      }
+    resolution: { integrity: sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE= }
 
   is-negative-zero@2.0.3:
     resolution:
@@ -3360,10 +3349,7 @@ packages:
     engines: { node: '>=0.12.0' }
 
   is-obj@1.0.1:
-    resolution:
-      {
-        integrity: sha512-l4RyHgRqGN4Y3+9JHVrNqO+tN0rV5My76uW5/nuO4K1b6vw5G8d/cmFjP9tRfEsdhZNt0IFdZuK/c2Vr4Nb+Qg==,
-      }
+    resolution: { integrity: sha1-PkcprB9f3gJc19g6iW2rn09n2w8= }
     engines: { node: '>=0.10.0' }
 
   is-plain-obj@4.1.0:
@@ -3381,10 +3367,7 @@ packages:
     engines: { node: '>= 0.4' }
 
   is-regexp@1.0.0:
-    resolution:
-      {
-        integrity: sha512-7zjFAPO4/gwyQAAgRRmqeEeyIICSdmCqa3tsVHMdBzaXXRiqopZL4Cyghg/XulGWrtABTpbnYYzzIRffLkP4oA==,
-      }
+    resolution: { integrity: sha1-/S2INUXEa6xaYz57mgnof6LLUGk= }
     engines: { node: '>=0.10.0' }
 
   is-set@2.0.3:
@@ -3646,10 +3629,7 @@ packages:
     engines: { node: '>=10' }
 
   lodash.debounce@4.0.8:
-    resolution:
-      {
-        integrity: sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==,
-      }
+    resolution: { integrity: sha1-gteb/zCmfEAF/9XiUVMArZyk168= }
 
   lodash.merge@4.6.2:
     resolution:
@@ -3658,10 +3638,7 @@ packages:
       }
 
   lodash.sortby@4.7.0:
-    resolution:
-      {
-        integrity: sha512-HDWXG8isMntAyRF5vZ7xKuEvOhT4AhlRt/3czTSjvGUxjYCBVRQY48ViDHyfYz9VIoBkW4TMGQNapx+l3RUwdA==,
-      }
+    resolution: { integrity: sha1-7dFMgk4sycHgsKG0K7UhBRakJDg= }
 
   lodash@4.17.21:
     resolution:
@@ -3892,10 +3869,7 @@ packages:
     engines: { node: '>= 0.4' }
 
   once@1.4.0:
-    resolution:
-      {
-        integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==,
-      }
+    resolution: { integrity: sha1-WDsap3WWHUsROsF9nFC6753Xa9E= }
 
   onetime@6.0.0:
     resolution:
@@ -3959,10 +3933,7 @@ packages:
     engines: { node: '>=8' }
 
   path-is-absolute@1.0.1:
-    resolution:
-      {
-        integrity: sha512-AVbw3UJ2e9bq64vSaS9Am0fje1Pa8pbGqTTsmXfaIiMpnr5DlDhfJOuLj9Sf95ZPVDAUerDfEk88MPmPe7UCQg==,
-      }
+    resolution: { integrity: sha1-F0uSaHNVNP+8es5r9TpanhtcX18= }
     engines: { node: '>=0.10.0' }
 
   path-key@3.1.1:
@@ -4532,7 +4503,6 @@ packages:
       {
         integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==,
       }
-    deprecated: Please use @jridgewell/sourcemap-codec instead
 
   string-argv@0.3.2:
     resolution:
@@ -4736,10 +4706,7 @@ packages:
     engines: { node: '>=8.0' }
 
   tr46@1.0.1:
-    resolution:
-      {
-        integrity: sha512-dTpowEjclQ7Kgx5SdBkqRzVhERQXov8/l9Ft9dVM9fmg0W0KQSVaXX9T4i6twCPNtYiZM53lpSSUAwJbFPOHxA==,
-      }
+    resolution: { integrity: sha1-qLE/1r/SSJUZZ0zN5VujaTtwbQk= }
 
   ts-api-utils@1.4.3:
     resolution:
@@ -5237,10 +5204,7 @@ packages:
     engines: { node: '>=18' }
 
   wrappy@1.0.2:
-    resolution:
-      {
-        integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==,
-      }
+    resolution: { integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8= }
 
   xml-name-validator@4.0.0:
     resolution:
