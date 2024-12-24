@@ -1,4 +1,5 @@
 import dayjs from 'dayjs'
+import 'dayjs/locale/ru'
 import 'dayjs/locale/zh-cn'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import { createApp } from 'vue'
