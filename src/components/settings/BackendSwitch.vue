@@ -1,7 +1,7 @@
 <template>
   <div class="join flex">
     <select
-      class="join-item select select-bordered select-sm w-48"
+      class="join-item select select-bordered select-sm w-56"
       v-model="activeUuid"
     >
       <option
