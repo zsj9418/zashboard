@@ -64,9 +64,7 @@
         <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
           <template v-if="!isSingBox">
             <button
-              :class="
-                twMerge('btn btn-primary btn-xs sm:btn-sm', isUIUpgrading ? 'animate-pulse' : '')
-              "
+              :class="twMerge('btn btn-primary btn-sm', isUIUpgrading ? 'animate-pulse' : '')"
               @click="handlerClickUpgradeUI"
             >
               {{ $t('upgradeUI') }}
@@ -75,13 +73,13 @@
           </template>
 
           <button
-            class="btn btn-xs sm:btn-sm"
+            class="btn btn-sm"
             @click="exportSettings"
           >
             {{ $t('exportSettings') }}
           </button>
           <button
-            class="btn btn-xs sm:btn-sm"
+            class="btn btn-sm"
             @click="importSettings"
           >
             {{ $t('importSettings') }}
@@ -139,10 +137,7 @@
               </span>
               <button
                 :class="
-                  twMerge(
-                    'btn btn-primary btn-xs flex-1 sm:btn-sm',
-                    isCoreUpgrading ? 'animate-pulse' : '',
-                  )
+                  twMerge('btn btn-primary btn-sm flex-1', isCoreUpgrading ? 'animate-pulse' : '')
                 "
                 @click="handlerClickUpgradeCore"
               >
@@ -150,20 +145,20 @@
               </button>
             </div>
             <button
-              :class="twMerge('btn btn-xs sm:btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
+              :class="twMerge('btn btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
               @click="handlerClickRestartCore"
             >
               {{ $t('restartCore') }}
             </button>
           </template>
           <button
-            :class="twMerge('btn btn-xs sm:btn-sm', isConfigReloading ? 'animate-pulse' : '')"
+            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
             @click="handlerClickReloadConfigs"
           >
             {{ $t('reloadConfigs') }}
           </button>
           <button
-            class="btn btn-xs sm:btn-sm"
+            class="btn btn-sm"
             @click="flushFakeIPAPI"
           >
             {{ $t('flushFakeIP') }}

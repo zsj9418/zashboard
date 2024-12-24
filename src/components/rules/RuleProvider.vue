@@ -10,7 +10,7 @@
       </div>
     </div>
     <button
-      :class="twMerge('btn btn-circle btn-xs', isUpdating ? 'animate-spin' : '')"
+      :class="twMerge('btn btn-circle btn-sm', isUpdating ? 'animate-spin' : '')"
       @click="updateRuleProviderClickHandler"
     >
       <ArrowPathIcon class="h-4 w-4" />

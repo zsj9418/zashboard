@@ -89,13 +89,13 @@
           class="flex items-center gap-2"
         >
           <button
-            class="btn btn-xs flex-1"
+            class="btn btn-sm flex-1"
             @click="selectBackend(backend.uuid)"
           >
             {{ getUrlFromBackend(backend) }}
           </button>
           <button
-            class="btn btn-circle btn-xs"
+            class="btn btn-circle btn-sm"
             @click="() => removeBackend(backend.uuid)"
           >
             <MinusCircleIcon class="h-4 w-4" />

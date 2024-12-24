@@ -9,11 +9,11 @@
       {{ ip }} ->
       <input
         type="text"
-        class="input input-xs input-bordered w-24"
+        class="input input-sm input-bordered w-24"
         v-model="sourceIPLabelMap[ip]"
       />
       <button
-        class="btn btn-circle btn-xs"
+        class="btn btn-circle btn-sm"
         @click="() => handlerLabelRemove(ip)"
       >
         <MinusCircleIcon class="h-4 w-4" />
@@ -23,16 +23,16 @@
       IP:
       <input
         type="text"
-        class="input input-xs input-bordered w-44"
+        class="input input-sm input-bordered w-44"
         v-model="newLabelForIP.ip"
       />
       <input
         type="text"
-        class="input input-xs input-bordered w-20"
+        class="input input-sm input-bordered w-20"
         v-model="newLabelForIP.label"
       />
       <button
-        class="btn btn-circle btn-xs"
+        class="btn btn-circle btn-sm"
         @click="handlerLabelAdd"
       >
         <PlusIcon class="h-4 w-4" />

@@ -21,7 +21,7 @@
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div class="flex items-center gap-2 text-xs text-slate-500">
+      <div class="flex items-center gap-2 text-sm text-slate-500">
         <div class="flex-1">{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</div>
         <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>

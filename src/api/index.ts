@@ -152,7 +152,7 @@ export const queryDNSAPI = (params: { name: string; type: string }) => {
 
 const createWebSocket = <T>(url: string, searchParams?: Record<string, string>) => {
   const backend = activeBackend.value!
-  const resurl = new URL(`${getUrlFromBackend(backend)}/${url}`)
+  const resurl = new URL(`${getUrlFromBackend(backend).replace('http', 'ws')}/${url}`)
 
   resurl.searchParams.append('token', backend?.password || '')
 

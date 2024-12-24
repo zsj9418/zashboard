@@ -53,7 +53,7 @@ const fontClassName = computed(() => fontClassMap[font.value])
           {{ $t(tipContent) }}
         </a>
         <button
-          class="btn btn-circle btn-ghost btn-xs"
+          class="btn btn-circle btn-ghost btn-sm"
           @click="tipShowModel = false"
         >
           <XCircleIcon class="w-4 cursor-pointer" />

@@ -19,7 +19,7 @@
     <div
       :class="
         twMerge(
-          'flex-1 whitespace-nowrap text-xs md:text-sm',
+          'flex-1 whitespace-nowrap text-sm',
           truncateProxyName && 'truncate',
           tightMode && 'pr-6',
         )
@@ -29,12 +29,15 @@
       {{ node.name }}
     </div>
     <span
-      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-0 scale-75' : ''}`"
+      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-1 scale-[0.9]' : ''}`"
     >
       {{ typeDescription }}
     </span>
     <LatencyTag
-      :class="[isLatencyTesting ? 'animate-pulse' : '', tightMode ? 'absolute right-2 top-1' : '']"
+      :class="[
+        isLatencyTesting ? 'animate-pulse' : '',
+        tightMode ? 'absolute right-1 top-[2px]' : '',
+      ]"
       :name="node.name"
       @click.stop="handlerLatencyTest"
     />

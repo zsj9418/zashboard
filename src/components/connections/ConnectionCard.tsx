@@ -64,7 +64,7 @@ export default defineComponent<{
       const info = (
         <div class="flex w-12 gap-1">
           <button
-            class="btn btn-circle btn-xs"
+            class="btn btn-circle btn-sm"
             onClick={() => handlerInfo(props.conn)}
           >
             <InformationCircleIcon class="h-4 w-4" />

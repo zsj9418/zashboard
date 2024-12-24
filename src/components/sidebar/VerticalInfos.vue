@@ -20,7 +20,7 @@
     </div>
     <div class="flex flex-col items-center justify-center">
       <button
-        class="btn btn-circle btn-xs"
+        class="btn btn-circle btn-sm"
         @click="isSiderbarCollapsed = false"
       >
         <ArrowRightCircleIcon class="h-5 w-5" />

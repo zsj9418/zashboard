@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col gap-2 p-2 text-xs">
+  <div class="flex flex-col gap-2 p-2 text-sm">
     <StatisticsInfo />
     <BackendVersion />
 
     <div class="flex">
       <button
-        class="btn btn-circle btn-xs"
+        class="btn btn-circle btn-sm"
         @click="isSiderbarCollapsed = true"
       >
         <ArrowLeftCircleIcon class="h-5 w-5" />
