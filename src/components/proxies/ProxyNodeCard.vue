@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'relative flex min-h-9 cursor-pointer flex-wrap items-center justify-end gap-1 rounded-md bg-base-200 p-2',
+        'flex cursor-pointer flex-col items-start rounded-md bg-base-200 px-2 py-1',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -17,37 +17,29 @@
       :fill="active ? 'fill-primary-content' : 'fill-base-content'"
     />
     <div
-      :class="
-        twMerge(
-          'flex-1 whitespace-nowrap text-sm',
-          truncateProxyName && 'truncate',
-          tightMode && 'pr-6',
-        )
-      "
+      :class="twMerge('w-full flex-1 text-sm', truncateProxyName && 'truncate')"
       ref="nameRef"
     >
       {{ node.name }}
     </div>
-    <span
-      :class="`text-xs tracking-tight ${tightMode ? 'absolute bottom-0 right-1 scale-[0.9]' : ''}`"
-    >
-      {{ typeDescription }}
-    </span>
-    <LatencyTag
-      :class="[
-        isLatencyTesting ? 'animate-pulse' : '',
-        tightMode ? 'absolute right-1 top-[2px]' : '',
-      ]"
-      :name="node.name"
-      @click.stop="handlerLatencyTest"
-    />
+    <div class="flex h-4 w-full items-center justify-between">
+      <span
+        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content/80' : 'text-slate-500'}`"
+      >
+        {{ typeDescription }}
+      </span>
+      <LatencyTag
+        :class="[isLatencyTesting ? 'animate-pulse' : '']"
+        :name="node.name"
+        @click.stop="handlerLatencyTest"
+      />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { isSmallScreen } from '@/helper'
 import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { IPv6test, truncateProxyName, twoColumnNodeForMobile } from '@/store/settings'
+import { IPv6test, truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -80,13 +72,11 @@ const typeFormatter = (type: string) => {
 }
 const typeDescription = computed(() => {
   const type = typeFormatter(node.value.type)
-  const isV6 = IPv6test.value && getIPv6ByName(node.value.name) ? 'v6' : ''
+  const isV6 = IPv6test.value && getIPv6ByName(node.value.name) ? 'IPv6' : ''
   const isUDP = node.value.udp ? 'udp' : ''
-  const attr = [isUDP, isV6].filter(Boolean).join('.')
 
-  return [type, attr].filter(Boolean).join(' | ')
+  return [type, isUDP, isV6].filter(Boolean).join(' / ')
 })
-const tightMode = computed(() => isSmallScreen.value && twoColumnNodeForMobile.value)
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return
 

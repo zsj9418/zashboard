@@ -64,12 +64,15 @@ export default defineComponent<{
       const info = (
         <div class="flex w-12 gap-1">
           <button
-            class="btn btn-circle btn-sm"
+            class="btn btn-circle btn-xs"
             onClick={() => handlerInfo(props.conn)}
           >
             <InformationCircleIcon class="h-4 w-4" />
           </button>
-          <button onClick={() => disconnectByIdAPI(props.conn.id)}>
+          <button
+            class="btn btn-circle btn-xs"
+            onClick={() => disconnectByIdAPI(props.conn.id)}
+          >
             <XMarkIcon class="h-4 w-4" />
           </button>
         </div>

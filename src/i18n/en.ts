@@ -69,7 +69,6 @@ export default {
   latencyasc: 'Latency Asc',
   language: 'Language',
   automaticDisconnection: 'Automatic Disconnection',
-  twoColumnNodeForMobile: 'Two Column Proxy Node',
   backend: 'Backend',
   tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',

@@ -214,14 +214,6 @@
             v-model="twoColumnProxyGroup"
           />
         </div>
-        <div class="flex items-center gap-2 sm:hidden">
-          {{ $t('twoColumnNodeForMobile') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="twoColumnNodeForMobile"
-          />
-        </div>
         <div class="flex w-full items-center gap-2">
           <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
           <input
@@ -369,7 +361,6 @@ import {
   speedtestUrl,
   theme,
   truncateProxyName,
-  twoColumnNodeForMobile,
   twoColumnProxyGroup,
   useConnectionCard,
 } from '@/store/settings'

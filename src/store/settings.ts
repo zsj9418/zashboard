@@ -33,7 +33,6 @@ export const proxySortType = useStorage<PROXY_SORT_TYPE>(
   PROXY_SORT_TYPE.DEFAULT,
 )
 export const automaticDisconnection = useStorage('config/automatic-disconnection', true)
-export const twoColumnNodeForMobile = useStorage('config/two-column-for-mobile', true)
 export const truncateProxyName = useStorage('config/truncate-proxy-name', true)
 export const proxyPreviewType = useStorage('config/proxy-preview-type', PROXY_PREVIEW_TYPE.AUTO)
 export const hideUnavailableProxies = useStorage('config/hide-unavailable-proxies', false)

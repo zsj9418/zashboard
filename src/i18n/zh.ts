@@ -69,7 +69,6 @@ export default {
   latencyasc: '按延迟升序',
   language: '语言',
   automaticDisconnection: '自动断开连接',
-  twoColumnNodeForMobile: '双列显示节点',
   backend: '后端',
   upgradeCore: '更新核心',
   tunMode: 'Tun 模式',
