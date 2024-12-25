@@ -11,20 +11,24 @@
     :data-tip="node.name"
     @mouseenter="checkTruncation"
   >
-    <ProxyIcon
-      v-if="node.icon"
-      :icon="node.icon"
-      :fill="active ? 'fill-primary-content' : 'fill-base-content'"
-    />
-    <div
-      :class="twMerge('w-full flex-1 text-sm', truncateProxyName && 'truncate')"
-      ref="nameRef"
-    >
-      {{ node.name }}
+    <div class="flex w-full flex-1 items-center gap-1">
+      <ProxyIcon
+        v-if="node.icon"
+        class="!h-4 !w-4 shrink-0"
+        :icon="node.icon"
+        :fill="active ? 'fill-primary-content' : 'fill-base-content'"
+      />
+      <span
+        :class="twMerge('text-sm', truncateProxyName && 'truncate')"
+        ref="nameRef"
+      >
+        {{ node.name }}
+      </span>
     </div>
+
     <div class="flex h-4 w-full items-center justify-between">
       <span
-        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content/80' : 'text-slate-500'}`"
+        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content' : 'text-slate-500'}`"
       >
         {{ typeDescription }}
       </span>
