@@ -345,7 +345,9 @@ import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import { configs, updateConfigs } from '@/store/config'
+import { configs, fetchConfigs, updateConfigs } from '@/store/config'
+import { fetchProxies } from '@/store/proxies'
+import { fetchRules } from '@/store/rules'
 import {
   automaticDisconnection,
   autoUpgrade,
@@ -369,12 +371,21 @@ import { ref } from 'vue'
 
 const { isUIUpdateAvailable } = useSettings()
 
+const reloadAll = () => {
+  fetchConfigs()
+  fetchRules()
+  fetchProxies()
+}
+
 const isCoreRestarting = ref(false)
 const handlerClickRestartCore = async () => {
   if (isCoreRestarting.value) return
   isCoreRestarting.value = true
   try {
     await restartCoreAPI()
+    setTimeout(() => {
+      reloadAll()
+    }, 500)
     isCoreRestarting.value = false
   } catch {
     isCoreRestarting.value = false
@@ -387,6 +398,7 @@ const handlerClickUpgradeCore = async () => {
   isCoreUpgrading.value = true
   try {
     await upgradeCoreAPI()
+    reloadAll()
     isCoreUpgrading.value = false
   } catch {
     isCoreUpgrading.value = false
@@ -412,6 +424,7 @@ const handlerClickReloadConfigs = async () => {
   isConfigReloading.value = true
   try {
     await reloadConfigsAPI()
+    reloadAll()
     isConfigReloading.value = false
   } catch {
     isConfigReloading.value = false
