@@ -1,4 +1,4 @@
-export default {
+const en = {
   setup: 'Setup',
   overview: 'Overview',
   proxies: 'Proxies',
@@ -103,3 +103,6 @@ export default {
   backendSwitchTo: 'Automatic Switch to {backend}',
   ipv6Test: 'IPv6 Test',
 }
+
+export type LANG_MESSAGE = typeof en
+export default en

@@ -1,4 +1,6 @@
-export default {
+import type { LANG_MESSAGE } from './en'
+
+const zh: LANG_MESSAGE = {
   setup: '配置',
   overview: '概览',
   proxies: '代理',
@@ -102,3 +104,5 @@ export default {
   backendSwitchTo: '自动切换到{backend}',
   ipv6Test: 'IPv6 测试',
 }
+
+export default zh

@@ -218,7 +218,7 @@
           <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-96"
+            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-80"
             v-model="speedtestUrl"
           />
         </div>
@@ -229,6 +229,7 @@
             class="input input-sm input-bordered w-20"
             v-model="speedtestTimeout"
           />
+          ms
         </div>
         <div class="flex items-center gap-2">
           <span class="shrink-0"> {{ $t('lowLatencyDesc') }}: </span>
@@ -237,6 +238,7 @@
             class="input input-sm input-bordered w-20"
             v-model="lowLatency"
           />
+          ms
         </div>
         <div class="flex items-center gap-2">
           <span class="shrink-0"> {{ $t('mediumLatencyDesc') }}: </span>
@@ -245,6 +247,7 @@
             class="input input-sm input-bordered w-20"
             v-model="mediumLatency"
           />
+          ms
         </div>
         <div class="flex items-center gap-2">
           {{ $t('ipv6Test') }}:

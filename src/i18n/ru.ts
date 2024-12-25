@@ -1,4 +1,6 @@
-export default {
+import type { LANG_MESSAGE } from './en'
+
+const ru: LANG_MESSAGE = {
   setup: 'Настройка',
   overview: 'Обзор',
   proxies: 'Прокси',
@@ -69,7 +71,6 @@ export default {
   latencyasc: 'Задержка по возрастанию',
   language: 'Язык',
   automaticDisconnection: 'Автоматическое отключение',
-  twoColumnNodeForMobile: 'Прокси-узел в два столбца',
   backend: 'Бэкенд',
   tunMode: 'Режим Tun',
   upgradeCore: 'Обновить ядро',
@@ -99,4 +100,11 @@ export default {
   secondaryPathTip: 'Если присутствует, начните с "/", в противном случае оставьте пустым.',
   logRetentionLimit: 'Лимит хранения журнала',
   DNSQuery: 'DNS-запрос',
+  currentBackendUnavailable:
+    'Текущий бэкенд недоступен. Попробуйте переключиться на другой бэкенд?',
+  confirm: 'Подтвердить',
+  backendSwitchTo: 'Автоматическое переключение на {backend}',
+  ipv6Test: 'IPv6-тест',
 }
+
+export default ru
