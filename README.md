@@ -3,8 +3,6 @@
 1. For localhost、127.0.0.1: https://board.zash.run.place
 2. For others like router in LAN: http://board.zash.run.place
 
-![alt text](image-1.png)
-
 ## Tips
 
 1. The connection page has two layout styles: cards and customizable tables. It is recommended to use tables on PC and cards on mobile devices.
