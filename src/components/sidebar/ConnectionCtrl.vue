@@ -21,7 +21,7 @@
       </a>
     </div>
     <div
-      :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')"
+      :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')"
       v-if="useConnectionCard"
     >
       <span class="shrink-0">{{ $t('sortBy') }}:</span>
@@ -38,11 +38,11 @@
         </option>
       </select>
     </div>
-    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'sm:w-auto')">
+    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
       <span class="shrink-0"> {{ $t('quickFilter') }}: </span>
       <input
         type="text"
-        class="input input-sm join-item input-bordered w-full"
+        :class="['input input-sm join-item input-bordered w-0 flex-1', horizontal && 'md:w-48']"
         v-model="quickFilterRegex"
       />
       <input
@@ -51,21 +51,21 @@
         v-model="quickFilterEnabled"
       />
       <div
-        :class="`tooltip ${horizontal ? 'tooltip-left sm:tooltip-bottom' : 'tooltip-left'}`"
+        :class="`tooltip ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
         :data-tip="$t('quickFilterTip')"
       >
         <QuestionMarkCircleIcon class="h-4 w-4" />
       </div>
     </div>
     <SourceIPFilter v-if="!horizontal" />
-    <div class="join w-full flex-1">
+    <div class="join flex-1">
       <SourceIPFilter v-if="horizontal" />
       <TextInput
         v-model="connectionFilter"
-        class="join-item"
+        class="join-item min-w-36"
       />
       <button
-        class="btn-bordered btn join-item btn-sm"
+        class="btn join-item btn-sm"
         @click="isPaused = !isPaused"
       >
         <component
@@ -74,7 +74,7 @@
         />
       </button>
       <button
-        class="btn-bordered btn join-item btn-sm"
+        class="btn join-item btn-sm"
         @click="handlerClickCloseAll"
       >
         <XMarkIcon class="h-4 w-4" />
