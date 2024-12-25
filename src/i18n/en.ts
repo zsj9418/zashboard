@@ -102,6 +102,11 @@ const en = {
   confirm: 'Confirm',
   backendSwitchTo: 'Automatic Switch to {backend}',
   ipv6Test: 'IPv6 Test',
+  socksPort: 'Socks Port',
+  httpPort: 'HTTP Port',
+  mixedPort: 'Mixed Port',
+  redirPort: 'Redir Port',
+  tproxyPort: 'TProxy Port',
 }
 
 export type LANG_MESSAGE = typeof en

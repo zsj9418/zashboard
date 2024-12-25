@@ -103,6 +103,11 @@ const zh: LANG_MESSAGE = {
   confirm: '确定',
   backendSwitchTo: '自动切换到{backend}',
   ipv6Test: 'IPv6 测试',
+  socksPort: 'Socks 端口',
+  httpPort: 'HTTP 端口',
+  mixedPort: 'Mixed 端口',
+  redirPort: 'Redir 端口',
+  tproxyPort: 'TProxy 端口',
 }
 
 export default zh

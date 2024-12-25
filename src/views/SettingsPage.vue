@@ -105,69 +105,7 @@
       </div>
     </div>
 
-    <!-- backend -->
-    <div class="card card-compact">
-      <div class="card-title px-4 pt-4">
-        {{ $t('backend') }}
-      </div>
-      <div class="card-body gap-4">
-        <BackendVersion />
-        <div
-          class="flex items-center gap-2"
-          v-if="!isSingBox && configs?.tun"
-        >
-          {{ $t('tunMode') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="configs.tun.enable"
-            @change="hanlderTunModeChange"
-          />
-        </div>
-        <BackendSwitch />
-        <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
-          <template v-if="!isSingBox">
-            <div class="indicator w-full">
-              <span
-                v-if="isCoreUpdateAvailable"
-                class="indicator-item flex"
-              >
-                <span class="badge badge-xs absolute animate-ping bg-secondary"></span>
-                <span class="badge badge-xs bg-secondary"></span>
-              </span>
-              <button
-                :class="
-                  twMerge('btn btn-primary btn-sm flex-1', isCoreUpgrading ? 'animate-pulse' : '')
-                "
-                @click="handlerClickUpgradeCore"
-              >
-                {{ $t('upgradeCore') }}
-              </button>
-            </div>
-            <button
-              :class="twMerge('btn btn-sm', isCoreRestarting ? 'animate-pulse' : '')"
-              @click="handlerClickRestartCore"
-            >
-              {{ $t('restartCore') }}
-            </button>
-          </template>
-          <button
-            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
-            @click="handlerClickReloadConfigs"
-          >
-            {{ $t('reloadConfigs') }}
-          </button>
-          <button
-            class="btn btn-sm"
-            @click="flushFakeIPAPI"
-          >
-            {{ $t('flushFakeIP') }}
-          </button>
-        </div>
-        <div class="divider"></div>
-        <DnsQuery />
-      </div>
-    </div>
+    <BackendSettings />
 
     <!-- proxies -->
     <div class="card card-compact">
@@ -218,7 +156,7 @@
           <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 max-sm:flex-1 sm:w-80"
+            class="input input-sm input-bordered w-60 flex-1 sm:max-w-80"
             v-model="speedtestUrl"
           />
         </div>
@@ -325,19 +263,8 @@
 </template>
 
 <script setup lang="ts">
-import {
-  flushFakeIPAPI,
-  isCoreUpdateAvailable,
-  isSingBox,
-  reloadConfigsAPI,
-  restartCoreAPI,
-  upgradeCoreAPI,
-  upgradeUIAPI,
-  zashboardVersion,
-} from '@/api'
-import BackendVersion from '@/components/common/BackendVersion.vue'
-import BackendSwitch from '@/components/settings/BackendSwitch.vue'
-import DnsQuery from '@/components/settings/DnsQuery.vue'
+import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
+import BackendSettings from '@/components/settings/BackendSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
@@ -348,9 +275,6 @@ import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import { configs, fetchConfigs, updateConfigs } from '@/store/config'
-import { fetchProxies } from '@/store/proxies'
-import { fetchRules } from '@/store/rules'
 import {
   automaticDisconnection,
   autoUpgrade,
@@ -374,40 +298,6 @@ import { ref } from 'vue'
 
 const { isUIUpdateAvailable } = useSettings()
 
-const reloadAll = () => {
-  fetchConfigs()
-  fetchRules()
-  fetchProxies()
-}
-
-const isCoreRestarting = ref(false)
-const handlerClickRestartCore = async () => {
-  if (isCoreRestarting.value) return
-  isCoreRestarting.value = true
-  try {
-    await restartCoreAPI()
-    setTimeout(() => {
-      reloadAll()
-    }, 500)
-    isCoreRestarting.value = false
-  } catch {
-    isCoreRestarting.value = false
-  }
-}
-
-const isCoreUpgrading = ref(false)
-const handlerClickUpgradeCore = async () => {
-  if (isCoreUpgrading.value) return
-  isCoreUpgrading.value = true
-  try {
-    await upgradeCoreAPI()
-    reloadAll()
-    isCoreUpgrading.value = false
-  } catch {
-    isCoreUpgrading.value = false
-  }
-}
-
 const isUIUpgrading = ref(false)
 const handlerClickUpgradeUI = async () => {
   if (isUIUpgrading.value) return
@@ -419,23 +309,6 @@ const handlerClickUpgradeUI = async () => {
   } catch {
     isUIUpgrading.value = false
   }
-}
-
-const isConfigReloading = ref(false)
-const handlerClickReloadConfigs = async () => {
-  if (isConfigReloading.value) return
-  isConfigReloading.value = true
-  try {
-    await reloadConfigsAPI()
-    reloadAll()
-    isConfigReloading.value = false
-  } catch {
-    isConfigReloading.value = false
-  }
-}
-
-const hanlderTunModeChange = async () => {
-  await updateConfigs({ tun: { enable: configs.value?.tun.enable } })
 }
 
 const themes = [

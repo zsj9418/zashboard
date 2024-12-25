@@ -105,6 +105,11 @@ const ru: LANG_MESSAGE = {
   confirm: 'Подтвердить',
   backendSwitchTo: 'Автоматическое переключение на {backend}',
   ipv6Test: 'IPv6-тест',
+  socksPort: 'Порт Socks',
+  httpPort: 'Порт HTTP',
+  mixedPort: 'Порт Mixed',
+  redirPort: 'Порт Redir',
+  tproxyPort: 'Порт TProxy',
 }
 
 export default ru
