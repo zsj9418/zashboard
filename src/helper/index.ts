@@ -29,12 +29,6 @@ export const fromNow = (timestamp: string) => {
   return dayjs(timestamp).locale(language.value).fromNow()
 }
 
-export const getLatencyExceptZero = (name: string) => {
-  const latency = getLatencyByName(name)
-
-  return latency === 0 ? Infinity : latency
-}
-
 const isProxyGroup = (name: string) => {
   const proxyNode = proxyMap.value[name]
 
@@ -46,6 +40,15 @@ const isProxyGroup = (name: string) => {
     ['direct', 'reject', 'reject-drop', 'pass'].includes(proxyNode.type.toLowerCase()) ||
     !!proxyNode.all
   )
+}
+
+const getLatencyExceptZero = (name: string) => {
+  if (isProxyGroup(name)) {
+    return -1
+  }
+  const latency = getLatencyByName(name)
+
+  return latency === 0 ? Infinity : latency
 }
 
 export const sortAndFilterProxyNodes = (proxies: string[]) => {
