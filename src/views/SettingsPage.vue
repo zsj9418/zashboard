@@ -94,10 +94,8 @@
         {{ $t('statistics') }}
       </div>
       <div class="card-body gap-4">
-        <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
-          <div class="card flex items-center justify-start bg-base-200/40 p-4">
-            <StatisticsInfo class="h-20 w-full" />
-          </div>
+        <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 3xl:grid-cols-4">
+          <StatisticsInfo class="bg-base-200/40 p-4" />
           <SpeedCharts />
           <MemoryCharts />
           <ConnectionsCharts />
