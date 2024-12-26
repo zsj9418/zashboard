@@ -106,108 +106,7 @@
     </div>
 
     <BackendSettings />
-
-    <!-- proxies -->
-    <div class="card card-compact">
-      <div class="card-title px-4 pt-4">
-        {{ $t('proxies') }}
-      </div>
-      <div class="card-body grid grid-cols-1 gap-2 lg:grid-cols-2">
-        <div class="flex items-center gap-2">
-          {{ $t('proxyPreviewType') }}:
-          <select
-            class="select select-bordered select-sm"
-            v-model="proxyPreviewType"
-          >
-            <option
-              v-for="opt in Object.values(PROXY_PREVIEW_TYPE)"
-              :key="opt"
-              :value="opt"
-            >
-              {{ $t(opt) }}
-            </option>
-          </select>
-        </div>
-        <div class="flex items-center gap-2">
-          {{ $t('truncateProxyName') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="truncateProxyName"
-          />
-        </div>
-        <div class="flex items-center gap-2">
-          {{ $t('automaticDisconnection') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="automaticDisconnection"
-          />
-        </div>
-        <div class="flex items-center gap-2 max-sm:hidden">
-          {{ $t('twoColumnProxyGroup') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="twoColumnProxyGroup"
-          />
-        </div>
-        <div class="flex w-full items-center gap-2">
-          <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
-          <input
-            type="text"
-            class="input input-sm input-bordered w-60 flex-1 sm:max-w-80"
-            v-model="speedtestUrl"
-          />
-        </div>
-        <div class="flex w-full items-center gap-2">
-          <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
-          <input
-            type="text"
-            class="input input-sm input-bordered w-20"
-            v-model="speedtestTimeout"
-          />
-          ms
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="shrink-0"> {{ $t('lowLatencyDesc') }}: </span>
-          <input
-            type="number"
-            class="input input-sm input-bordered w-20"
-            v-model="lowLatency"
-          />
-          ms
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="shrink-0"> {{ $t('mediumLatencyDesc') }}: </span>
-          <input
-            type="number"
-            class="input input-sm input-bordered w-20"
-            v-model="mediumLatency"
-          />
-          ms
-        </div>
-        <div class="flex items-center gap-2">
-          {{ $t('ipv6Test') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="IPv6test"
-          />
-        </div>
-        <div
-          v-if="isSingBox"
-          class="flex items-center gap-2"
-        >
-          {{ $t('showGlobalProxy') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="showGlobalProxy"
-          />
-        </div>
-      </div>
-    </div>
+    <ProxiesSettings />
 
     <!-- connections -->
     <div class="card card-compact">
@@ -266,6 +165,7 @@
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
 import BackendSettings from '@/components/settings/BackendSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
+import ProxiesSettings from '@/components/settings/ProxiesSettings.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
 import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
@@ -273,24 +173,14 @@ import ConnectionsCharts from '@/components/statistics/ConnectionsCharts.vue'
 import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
 import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'
-import { FONTS, PROXY_PREVIEW_TYPE } from '@/config'
+import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
 import {
-  automaticDisconnection,
   autoUpgrade,
   compactConnectionCard,
   font,
-  IPv6test,
   logRetentionLimit,
-  lowLatency,
-  mediumLatency,
-  proxyPreviewType,
-  showGlobalProxy,
-  speedtestTimeout,
-  speedtestUrl,
   theme,
-  truncateProxyName,
-  twoColumnProxyGroup,
   useConnectionCard,
 } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'

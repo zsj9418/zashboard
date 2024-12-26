@@ -9,6 +9,7 @@
       <BackendVersion />
 
       <template v-if="!isSingBox">
+        <div class="divider"></div>
         <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
           <div
             class="flex items-center gap-2"
