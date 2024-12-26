@@ -9,11 +9,11 @@
       ref="baseColorRef"
     ></span>
     <span
-      class="hidden border-b-primary/10 border-t-info/10 bg-info text-primary"
+      class="hidden border-b-primary/30 border-t-info/30 bg-info/60 text-primary/60"
       ref="themeColorRef"
     ></span>
     <button
-      class="btn btn-ghost btn-sm absolute bottom-0 right-1"
+      class="btn btn-ghost btn-xs absolute bottom-0 right-1"
       @click="isPaused = !isPaused"
     >
       <component
@@ -54,27 +54,27 @@ onMounted(() => {
   const baseColorStyle = getComputedStyle(baseColorRef.value)
   const themeColorStyle = getComputedStyle(themeColorRef.value)
 
-  let color = baseColorStyle.color
-  let backgroundColor = baseColorStyle.backgroundColor
-  let lineColor = baseColorStyle.borderColor
+  let baseContentColor = baseColorStyle.color
+  let baseColor = baseColorStyle.backgroundColor
+  let baseContent10Color = baseColorStyle.borderColor
   let fontFamily = baseColorStyle.fontFamily
   let primaryColor = themeColorStyle.color
   let secondaryColor = themeColorStyle.backgroundColor
-  let primaryColorOpacity = themeColorStyle.borderBottomColor
-  let secondaryColorOpacity = themeColorStyle.borderTopColor
+  let primaryColor10 = themeColorStyle.borderBottomColor
+  let secondaryColor10 = themeColorStyle.borderTopColor
   watch(
     () => theme.value,
     () => {
       const baseColorStyle = getComputedStyle(baseColorRef.value)
       const themeColorStyle = getComputedStyle(themeColorRef.value)
 
-      color = baseColorStyle.color
-      backgroundColor = baseColorStyle.backgroundColor
-      lineColor = baseColorStyle.borderColor
+      baseContentColor = baseColorStyle.color
+      baseColor = baseColorStyle.backgroundColor
+      baseContent10Color = baseColorStyle.borderColor
       primaryColor = themeColorStyle.color
       secondaryColor = themeColorStyle.backgroundColor
-      primaryColorOpacity = themeColorStyle.borderBottomColor
-      secondaryColorOpacity = themeColorStyle.borderTopColor
+      primaryColor10 = themeColorStyle.borderBottomColor
+      secondaryColor10 = themeColorStyle.borderTopColor
     },
   )
   watch(
@@ -92,7 +92,7 @@ onMounted(() => {
         bottom: 0,
         data: props.data.map((item) => item.name),
         textStyle: {
-          color: color,
+          color: baseContentColor,
           fontFamily,
         },
       },
@@ -105,12 +105,12 @@ onMounted(() => {
       tooltip: {
         show: true,
         trigger: 'axis',
-        backgroundColor: backgroundColor,
-        borderColor: backgroundColor,
+        backgroundColor: baseColor,
+        borderColor: baseColor,
         confine: true,
         padding: [0, 5],
         textStyle: {
-          color: color,
+          color: baseContentColor,
           fontFamily,
         },
         formatter: props.toolTipFormatter,
@@ -133,21 +133,20 @@ onMounted(() => {
           show: true,
           lineStyle: {
             type: 'dashed',
-            color: lineColor,
+            color: baseContent10Color,
           },
         },
         axisLabel: {
           align: 'left',
           padding: [0, 0, 0, -45],
           formatter: props.labelFormatter,
-          color: color,
+          color: baseContentColor,
           fontFamily,
         },
       },
       series: props.data.map((item, index) => {
         const seriesColor = index === props.data.length - 1 ? primaryColor : secondaryColor
-        const areaColor =
-          index === props.data.length - 1 ? primaryColorOpacity : secondaryColorOpacity
+        const areaColor = index === props.data.length - 1 ? primaryColor10 : secondaryColor10
 
         return {
           name: item.name,
@@ -155,9 +154,21 @@ onMounted(() => {
           emphasis: {
             disabled: true,
           },
+          lineStyle: {
+            width: 1,
+          },
           data: item.data,
           areaStyle: {
-            color: areaColor,
+            color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+              {
+                offset: 0,
+                color: seriesColor,
+              },
+              {
+                offset: 1,
+                color: areaColor,
+              },
+            ]),
           },
           type: 'line',
           color: seriesColor,

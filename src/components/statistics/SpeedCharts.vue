@@ -3,7 +3,7 @@
     :data="chartsData"
     :label-formatter="labelFormatter"
     :tool-tip-formatter="tooltipFormatter"
-    :min="100 * 1000"
+    :min="60 * 1000"
   />
 </template>
 
