@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex cursor-pointer flex-col items-start rounded-md bg-base-200 px-2 py-1',
+        'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200 p-2',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
       )
@@ -34,7 +34,7 @@
         {{ typeDescription }}
       </span>
       <LatencyTag
-        :class="['h-4 w-8', isLatencyTesting ? 'animate-pulse cursor-wait' : '']"
+        :class="[isLatencyTesting ? 'animate-pulse cursor-wait' : '']"
         :name="node.name"
         @click.stop="handlerLatencyTest"
       />

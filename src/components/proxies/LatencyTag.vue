@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'flex items-center justify-center rounded-xl bg-base-100 text-xs hover:bg-base-200',
+        'flex h-5 w-10 items-center justify-center rounded-xl bg-base-100 text-xs hover:bg-base-200',
         color,
       )
     "
