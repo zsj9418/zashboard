@@ -11,6 +11,6 @@
 
 <script setup lang="ts">
 import { isSingBox, version } from '@/api'
-import MetacubexLogo from '@/assets/metacubex.jpeg'
+import MetacubexLogo from '@/assets/metacubex.jpg'
 import SingBoxLogo from '@/assets/sing-box.svg'
 </script>
