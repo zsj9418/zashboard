@@ -42,7 +42,7 @@ const isProxyGroup = (name: string) => {
   )
 }
 
-const getLatencyExceptZero = (name: string) => {
+const getLatencyForSort = (name: string) => {
   if (isProxyGroup(name)) {
     return -1
   }
@@ -67,9 +67,9 @@ export const sortAndFilterProxyNodes = (proxies: string[]) => {
     case PROXY_SORT_TYPE.NAME_DESC:
       return proxies.sort((prev, next) => next.localeCompare(prev))
     case PROXY_SORT_TYPE.LATENCY_ASC:
-      return proxies.sort((prev, next) => getLatencyExceptZero(prev) - getLatencyExceptZero(next))
+      return proxies.sort((prev, next) => getLatencyForSort(prev) - getLatencyForSort(next))
     case PROXY_SORT_TYPE.LATENCY_DESC:
-      return proxies.sort((prev, next) => getLatencyExceptZero(next) - getLatencyExceptZero(prev))
+      return proxies.sort((prev, next) => getLatencyForSort(next) - getLatencyForSort(prev))
   }
 }
 
