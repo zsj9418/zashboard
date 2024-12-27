@@ -110,6 +110,10 @@ const ru: LANG_MESSAGE = {
   mixedPort: 'Порт Mixed',
   redirPort: 'Порт Redir',
   tproxyPort: 'Порт TProxy',
+  tableSize: 'Размер таблицы',
+  small: 'Маленький',
+  normal: 'Нормальный',
+  large: 'Большой',
 }
 
 export default ru

@@ -1,4 +1,19 @@
 <template>
+  <div class="flex items-center gap-2">
+    <div>{{ $t('tableSize') }}:</div>
+    <select
+      class="select select-bordered select-sm"
+      v-model="tableSize"
+    >
+      <option
+        v-for="opt in Object.values(TABLE_SIZE)"
+        :key="opt"
+        :value="opt"
+      >
+        {{ $t(opt) }}
+      </option>
+    </select>
+  </div>
   <div>{{ $t('customTableColumns') }}:</div>
   <div class="flex rounded lg:flex-col">
     <VueDraggable
@@ -35,8 +50,8 @@
 </template>
 
 <script setup lang="ts">
-import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
-import { connectionTableColumns } from '@/store/settings'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
+import { connectionTableColumns, tableSize } from '@/store/settings'
 import { ref } from 'vue'
 import { VueDraggable } from 'vue-draggable-plus'
 

@@ -107,6 +107,10 @@ const en = {
   mixedPort: 'Mixed Port',
   redirPort: 'Redir Port',
   tproxyPort: 'TProxy Port',
+  tableSize: 'Table Size',
+  small: 'Small',
+  normal: 'Normal',
+  large: 'Large',
 }
 
 export type LANG_MESSAGE = typeof en

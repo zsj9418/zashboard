@@ -4,6 +4,7 @@ import {
   LANG,
   PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
+  TABLE_SIZE,
 } from '@/config'
 import { useStorage } from '@vueuse/core'
 
@@ -41,6 +42,7 @@ export const mediumLatency = useStorage('config/medium-latency', 800)
 export const IPv6test = useStorage('config/ipv6-test', false)
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', false)
+export const tableSize = useStorage<TABLE_SIZE>('config/table-size', TABLE_SIZE.NORMAL)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
   'config/connection-table-columns',
   [

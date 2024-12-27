@@ -108,6 +108,10 @@ const zh: LANG_MESSAGE = {
   mixedPort: 'Mixed 端口',
   redirPort: 'Redir 端口',
   tproxyPort: 'TProxy 端口',
+  tableSize: '表格尺寸',
+  small: '小',
+  normal: '正常',
+  large: '大',
 }
 
 export default zh

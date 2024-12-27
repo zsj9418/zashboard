@@ -106,3 +106,9 @@ export const ROUTE_ICON_MAP = {
   [ROUTE_NAME.logs]: DocumentTextIcon,
   [ROUTE_NAME.settings]: Cog6ToothIcon,
 }
+
+export enum TABLE_SIZE {
+  SMALL = 'small',
+  NORMAL = 'normal',
+  LARGE = 'large',
+}

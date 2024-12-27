@@ -4,7 +4,7 @@
     class="h-full overflow-y-auto p-2"
   >
     <div :style="{ height: `${totalSize}px` }">
-      <table class="table table-zebra table-xs rounded-none shadow-md">
+      <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">
         <thead>
           <tr
             v-for="headerGroup in table.getHeaderGroups()"
@@ -120,10 +120,10 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
 import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
 import { renderConnections } from '@/store/connections'
-import { connectionTableColumns } from '@/store/settings'
+import { connectionTableColumns, tableSize } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
@@ -360,4 +360,13 @@ const rowVirtualizerOptions = computed(() => {
 const rowVirtualizer = useVirtualizer(rowVirtualizerOptions)
 const virtualRows = computed(() => rowVirtualizer.value.getVirtualItems())
 const totalSize = computed(() => rowVirtualizer.value.getTotalSize() + 24)
+
+const classMap = {
+  [TABLE_SIZE.SMALL]: 'table-xs',
+  [TABLE_SIZE.NORMAL]: 'table-sm',
+  [TABLE_SIZE.LARGE]: 'table-md',
+}
+const sizeOfTable = computed(() => {
+  return classMap[tableSize.value]
+})
 </script>
