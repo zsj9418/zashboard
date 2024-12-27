@@ -66,13 +66,13 @@
           >
             {{ $t('restartCore') }}
           </button>
+          <button
+            :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
+            @click="handlerClickReloadConfigs"
+          >
+            {{ $t('reloadConfigs') }}
+          </button>
         </template>
-        <button
-          :class="twMerge('btn btn-sm', isConfigReloading ? 'animate-pulse' : '')"
-          @click="handlerClickReloadConfigs"
-        >
-          {{ $t('reloadConfigs') }}
-        </button>
         <button
           class="btn btn-sm"
           @click="flushFakeIPAPI"
