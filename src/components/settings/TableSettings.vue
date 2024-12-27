@@ -2,7 +2,7 @@
   <div class="flex items-center gap-2">
     <div>{{ $t('tableSize') }}:</div>
     <select
-      class="select select-bordered select-sm"
+      class="select select-bordered select-sm min-w-24"
       v-model="tableSize"
     >
       <option

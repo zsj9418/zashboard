@@ -3,9 +3,10 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200 p-2',
+        'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isTruncated && 'tooltip tooltip-bottom',
+        isSmallCard ? 'p-1' : 'p-2',
       )
     "
     :data-tip="node.name"
@@ -34,7 +35,7 @@
         {{ typeDescription }}
       </span>
       <LatencyTag
-        :class="[isLatencyTesting ? 'animate-pulse cursor-wait' : '']"
+        :class="[isLatencyTesting ? 'animate-pulse cursor-wait' : '', isSmallCard && '!h-4 !w-8']"
         :name="node.name"
         @click.stop="handlerLatencyTest"
       />
@@ -43,8 +44,9 @@
 </template>
 
 <script setup lang="ts">
+import { PROXY_CARD_SIZE } from '@/config'
 import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
-import { IPv6test, truncateProxyName } from '@/store/settings'
+import { IPv6test, proxyCardSize, truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
@@ -75,12 +77,13 @@ const typeFormatter = (type: string) => {
 
   return type
 }
+const isSmallCard = computed(() => proxyCardSize.value === PROXY_CARD_SIZE.SMALL)
 const typeDescription = computed(() => {
   const type = typeFormatter(node.value.type)
   const isV6 = IPv6test.value && getIPv6ByName(node.value.name) ? 'IPv6' : ''
   const isUDP = node.value.udp ? 'udp' : ''
 
-  return [type, isUDP, isV6].filter(Boolean).join(' / ')
+  return [type, isUDP, isV6].filter(Boolean).join(isSmallCard.value ? '/' : ' / ')
 })
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return

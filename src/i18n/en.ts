@@ -108,6 +108,7 @@ const en = {
   redirPort: 'Redir Port',
   tproxyPort: 'TProxy Port',
   tableSize: 'Table Size',
+  proxyCardSize: 'Proxy Card Size',
   small: 'Small',
   normal: 'Normal',
   large: 'Large',

@@ -363,8 +363,7 @@ const totalSize = computed(() => rowVirtualizer.value.getTotalSize() + 24)
 
 const classMap = {
   [TABLE_SIZE.SMALL]: 'table-xs',
-  [TABLE_SIZE.NORMAL]: 'table-sm',
-  [TABLE_SIZE.LARGE]: 'table-md',
+  [TABLE_SIZE.LARGE]: 'table-sm',
 }
 const sizeOfTable = computed(() => {
   return classMap[tableSize.value]

@@ -111,6 +111,7 @@ const ru: LANG_MESSAGE = {
   redirPort: 'Порт Redir',
   tproxyPort: 'Порт TProxy',
   tableSize: 'Размер таблицы',
+  proxyCardSize: 'Размер карточки прокси',
   small: 'Маленький',
   normal: 'Нормальный',
   large: 'Большой',

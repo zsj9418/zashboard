@@ -70,7 +70,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyPreviewType') }}:
           <select
-            class="select select-bordered select-sm"
+            class="select select-bordered select-sm min-w-24"
             v-model="proxyPreviewType"
           >
             <option
@@ -90,6 +90,21 @@
             v-model="truncateProxyName"
           />
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('proxyCardSize') }}:
+          <select
+            class="select select-bordered select-sm min-w-24"
+            v-model="proxyCardSize"
+          >
+            <option
+              v-for="opt in Object.values(PROXY_CARD_SIZE)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ $t(opt) }}
+            </option>
+          </select>
+        </div>
         <div
           v-if="isSingBox"
           class="flex items-center gap-2"
@@ -108,12 +123,13 @@
 
 <script setup lang="ts">
 import { isSingBox } from '@/api'
-import { PROXY_PREVIEW_TYPE } from '@/config'
+import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
 import {
   automaticDisconnection,
   IPv6test,
   lowLatency,
   mediumLatency,
+  proxyCardSize,
   proxyPreviewType,
   showGlobalProxy,
   speedtestTimeout,

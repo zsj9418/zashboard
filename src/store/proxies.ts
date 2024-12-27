@@ -61,6 +61,7 @@ export const selectProxy = async (proxyGroup: string, name: string) => {
       .filter((c) => c.chains.includes(proxyGroup))
       .forEach((c) => disconnectByIdAPI(c.id))
   }
+  fetchProxies()
 }
 
 export const proxyLatencyTest = async (proxyName: string) => {

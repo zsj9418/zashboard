@@ -109,6 +109,10 @@ export const ROUTE_ICON_MAP = {
 
 export enum TABLE_SIZE {
   SMALL = 'small',
-  NORMAL = 'normal',
+  LARGE = 'large',
+}
+
+export enum PROXY_CARD_SIZE {
+  SMALL = 'small',
   LARGE = 'large',
 }
