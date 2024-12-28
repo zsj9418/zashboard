@@ -249,3 +249,11 @@ export const fetchBackendUpdateAvailableAPI = async () => {
 
   return false
 }
+
+export const getIPForMainlandChinaAPI = () => {
+  return fetch('https://api-v3.speedtest.cn/ip')
+}
+
+export const getIPForGlobalAPI = () => {
+  return fetch('https://api.ip.sb/geoip')
+}

@@ -99,6 +99,7 @@
           <SpeedCharts />
           <MemoryCharts />
           <ConnectionsCharts />
+          <IPCheck />
         </div>
       </div>
     </div>
@@ -168,6 +169,7 @@ import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
 import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import ConnectionsCharts from '@/components/statistics/ConnectionsCharts.vue'
+import IPCheck from '@/components/statistics/IPCheck.vue'
 import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
 import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { useSettings } from '@/composables/settings'

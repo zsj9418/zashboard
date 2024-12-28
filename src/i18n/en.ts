@@ -112,6 +112,9 @@ const en = {
   small: 'Small',
   normal: 'Normal',
   large: 'Large',
+  ipCheck: 'IP Check',
+  ipForMainlandChina: 'IP for Mainland China',
+  ipForGlobal: 'IP for Global',
 }
 
 export type LANG_MESSAGE = typeof en

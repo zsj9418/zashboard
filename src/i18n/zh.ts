@@ -113,6 +113,9 @@ const zh: LANG_MESSAGE = {
   small: '小',
   normal: '正常',
   large: '大',
+  ipCheck: 'IP 检查',
+  ipForMainlandChina: '中国大陆 IP',
+  ipForGlobal: '全球 IP',
 }
 
 export default zh
