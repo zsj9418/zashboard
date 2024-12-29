@@ -7,11 +7,9 @@
         <span :class="getColorForLatency(Number(baiduLatency))">{{ baiduLatency }}ms </span>
       </div>
       <div>
-        <span class="inline-block w-28">NeteaseMusic </span>
+        <span class="inline-block w-28">OpenAI </span>
         :
-        <span :class="getColorForLatency(Number(neteaseMusicLatency))"
-          >{{ neteaseMusicLatency }}ms
-        </span>
+        <span :class="getColorForLatency(Number(openAILatency))">{{ openAILatency }}ms </span>
       </div>
       <div>
         <span class="inline-block w-28">Github </span>
@@ -45,7 +43,7 @@
 import {
   getBaiduLatencyAPI,
   getGithubLatencyAPI,
-  getNeteaseMusicLatencyAPI,
+  getOpenAILatencyAPI,
   getYouTubeLatencyAPI,
 } from '@/api'
 import { getColorForLatency } from '@/helper'
@@ -54,7 +52,7 @@ import { useStorage } from '@vueuse/core'
 import { onMounted, ref } from 'vue'
 
 const baiduLatency = ref('')
-const neteaseMusicLatency = ref('')
+const openAILatency = ref('')
 const githubLatency = ref('')
 const youtubeLatency = ref('')
 const autoConnectionCheck = useStorage('config/auto-connection-check', true)
@@ -64,8 +62,8 @@ const getLatency = async () => {
     baiduLatency.value = res.toFixed(0)
   })
 
-  getNeteaseMusicLatencyAPI().then((res) => {
-    neteaseMusicLatency.value = res.toFixed(0)
+  getOpenAILatencyAPI().then((res) => {
+    openAILatency.value = res.toFixed(0)
   })
 
   getGithubLatencyAPI().then((res) => {

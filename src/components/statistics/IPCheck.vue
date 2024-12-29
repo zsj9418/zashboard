@@ -1,5 +1,5 @@
 <template>
-  <div class="relative flex h-28 flex-col gap-2 rounded-lg bg-base-200/40 p-2">
+  <div class="relative flex h-28 flex-col rounded-lg bg-base-200/40 p-2">
     <div><span class="inline-block w-24">speedtest.cn</span>: {{ mainlangChinaIP }}</div>
     <div><span class="inline-block w-24">api.ip.sb</span>: {{ globalIP }}</div>
     <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs">

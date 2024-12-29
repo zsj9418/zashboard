@@ -1,5 +1,5 @@
 <template>
-  <div class="card carousel carousel-vertical h-28 text-sm">
+  <div class="card carousel carousel-vertical h-28 shrink-0 text-sm">
     <IPCheck class="carousel-item box-border" />
     <ConnectionStatus class="carousel-item box-border" />
     <div

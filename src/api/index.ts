@@ -288,8 +288,8 @@ export const getGithubLatencyAPI = () => {
   return getLatencyFromUrlAPI('https://github.githubassets.com/favicon.ico')
 }
 
-export const getNeteaseMusicLatencyAPI = () => {
-  return getLatencyFromUrlAPI('https://s1.music.126.net/style/favicon.ico')
+export const getOpenAILatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://openai.com/favicon.ico')
 }
 
 export const getBaiduLatencyAPI = () => {

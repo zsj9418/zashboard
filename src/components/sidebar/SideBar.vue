@@ -36,7 +36,7 @@
         <VerticalInfos />
       </template>
       <template v-else>
-        <CarouselList v-if="route.name !== ROUTE_NAME.settings" />
+        <OverviewCarousel v-if="route.name !== ROUTE_NAME.settings" />
         <div class="card">
           <component
             v-if="sidebarComp"
@@ -61,7 +61,7 @@ import { isSiderbarCollapsed } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
-import CarouselList from './CarouselList.vue'
+import OverviewCarousel from './OverviewCarousel.vue'
 import VerticalInfos from './VerticalInfos.vue'
 
 const sidebarCompMap = {
