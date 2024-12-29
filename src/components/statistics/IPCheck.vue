@@ -1,21 +1,34 @@
 <template>
-  <div class="flex flex-col gap-2 rounded-lg bg-base-200/40 p-4">
-    <div>
-      {{ $t('ipCheck') }}
-    </div>
+  <div class="relative flex h-28 flex-col gap-2 rounded-lg bg-base-200/40 p-2">
     <div>{{ $t('ipForMainlandChina') }}: {{ mainlangChinaIP }}</div>
     <div>{{ $t('ipForGlobal') }}: {{ globalIP }}</div>
+    <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs">
+      {{ $t('autoCheckWhenStart') }}:
+      <input
+        class="toggle toggle-sm"
+        type="checkbox"
+        v-model="autoIPCheck"
+      />
+    </div>
+    <button
+      class="btn btn-circle btn-sm absolute bottom-2 right-2"
+      @click="getIPs"
+    >
+      <BoltIcon class="h-4 w-4" />
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getIPForGlobalAPI, getIPForMainlandChinaAPI } from '@/api'
+import { BoltIcon } from '@heroicons/vue/24/outline'
+import { useStorage } from '@vueuse/core'
 import { onMounted, ref } from 'vue'
 
 const mainlangChinaIP = ref()
 const globalIP = ref()
-
-onMounted(() => {
+const autoIPCheck = useStorage('config/auto-ip-check', true)
+const getIPs = () => {
   getIPForMainlandChinaAPI()
     .then((res) => res.json())
     .then(
@@ -61,5 +74,11 @@ onMounted(() => {
         globalIP.value = `${res.ip} | ${res.asn_organization} (${res.country})`
       },
     )
+}
+
+onMounted(() => {
+  if (autoIPCheck.value) {
+    getIPs()
+  }
 })
 </script>

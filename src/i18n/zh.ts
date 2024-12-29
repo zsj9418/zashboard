@@ -116,6 +116,7 @@ const zh: LANG_MESSAGE = {
   ipCheck: 'IP 检查',
   ipForMainlandChina: '中国大陆 IP',
   ipForGlobal: '全球 IP',
+  autoCheckWhenStart: '启动时自动检查',
 }
 
 export default zh

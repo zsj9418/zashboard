@@ -115,6 +115,7 @@ const en = {
   ipCheck: 'IP Check',
   ipForMainlandChina: 'IP for Mainland China',
   ipForGlobal: 'IP for Global',
+  autoCheckWhenStart: 'Auto Check When Start',
 }
 
 export type LANG_MESSAGE = typeof en

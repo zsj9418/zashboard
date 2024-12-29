@@ -1,5 +1,6 @@
 <template>
   <BasicCharts
+    ref="chartRef"
     :data="chartsData"
     :label-formatter="labelFormatter"
     :tool-tip-formatter="tooltipFormatter"
@@ -10,10 +11,11 @@
 <script setup lang="ts">
 import { getToolTipForParams, prettyBytesHelper } from '@/helper'
 import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import BasicCharts from './BasicCharts.vue'
 
+const chartRef = ref()
 const { t } = useI18n()
 const chartsData = computed(() => {
   return [

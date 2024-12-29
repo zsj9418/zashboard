@@ -118,6 +118,7 @@ const ru: LANG_MESSAGE = {
   ipCheck: 'Проверка IP',
   ipForMainlandChina: 'IP для Китаи',
   ipForGlobal: 'IP для мира',
+  autoCheckWhenStart: 'Автоматическая проверка при запуске',
 }
 
 export default ru

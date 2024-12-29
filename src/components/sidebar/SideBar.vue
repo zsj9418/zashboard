@@ -36,12 +36,7 @@
         <VerticalInfos />
       </template>
       <template v-else>
-        <div
-          class="card"
-          v-if="route.name !== ROUTE_NAME.settings"
-        >
-          <SpeedCharts />
-        </div>
+        <CarouselList v-if="route.name !== ROUTE_NAME.settings" />
         <div class="card">
           <component
             v-if="sidebarComp"
@@ -60,13 +55,13 @@ import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
-import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import router from '@/router'
 import { isSiderbarCollapsed } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
+import CarouselList from './CarouselList.vue'
 import VerticalInfos from './VerticalInfos.vue'
 
 const sidebarCompMap = {
