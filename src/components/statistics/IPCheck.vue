@@ -1,11 +1,11 @@
 <template>
   <div class="relative flex h-28 flex-col gap-2 rounded-lg bg-base-200/40 p-2">
-    <div>{{ $t('ipForMainlandChina') }}: {{ mainlangChinaIP }}</div>
-    <div>{{ $t('ipForGlobal') }}: {{ globalIP }}</div>
+    <div><span class="inline-block w-24">speedtest.cn</span>: {{ mainlangChinaIP }}</div>
+    <div><span class="inline-block w-24">api.ip.sb</span>: {{ globalIP }}</div>
     <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs">
       {{ $t('autoCheckWhenStart') }}:
       <input
-        class="toggle toggle-sm"
+        class="toggle toggle-xs"
         type="checkbox"
         v-model="autoIPCheck"
       />
@@ -48,7 +48,7 @@ const getIPs = () => {
         }
         msg: string
       }) => {
-        mainlangChinaIP.value = `${res.data.ip} | ${res.data.operator} (${res.data.country})`
+        mainlangChinaIP.value = `${res.data.operator} (${res.data.country}) | ${res.data.ip}`
       },
     )
   getIPForGlobalAPI()
@@ -71,7 +71,7 @@ const getIPs = () => {
         country_code: string
       }) => {
         console.log(res)
-        globalIP.value = `${res.ip} | ${res.asn_organization} (${res.country})`
+        globalIP.value = `${res.asn_organization} (${res.country}) | ${res.ip}`
       },
     )
 }

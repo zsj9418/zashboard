@@ -5,7 +5,7 @@
   >
     <div :style="{ height: `${totalSize}px` }">
       <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">
-        <thead>
+        <thead class="sticky -top-2 z-10 bg-base-100">
           <tr
             v-for="headerGroup in table.getHeaderGroups()"
             :key="headerGroup.id"

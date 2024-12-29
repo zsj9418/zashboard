@@ -115,9 +115,6 @@ const ru: LANG_MESSAGE = {
   small: 'Маленький',
   normal: 'Нормальный',
   large: 'Большой',
-  ipCheck: 'Проверка IP',
-  ipForMainlandChina: 'IP для Китаи',
-  ipForGlobal: 'IP для мира',
   autoCheckWhenStart: 'Автоматическая проверка при запуске',
 }
 
