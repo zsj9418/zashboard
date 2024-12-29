@@ -1,6 +1,13 @@
-import { PROXY_SORT_TYPE } from '@/config'
+import { NOT_CONNECTED, PROXY_SORT_TYPE } from '@/config'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
-import { hideUnavailableProxies, language, proxySortType, sourceIPLabelMap } from '@/store/settings'
+import {
+  hideUnavailableProxies,
+  language,
+  lowLatency,
+  mediumLatency,
+  proxySortType,
+  sourceIPLabelMap,
+} from '@/store/settings'
 import { timeSaved } from '@/store/statistics'
 import type { Backend, Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
@@ -161,4 +168,16 @@ export const importSettings = () => {
 
 export const getUrlFromBackend = (end: Omit<Backend, 'uuid'>) => {
   return `${end.protocol}://${end.host}:${end.port}${end.secondaryPath || ''}`
+}
+
+export const getColorForLatency = (latency: number) => {
+  if (latency === NOT_CONNECTED) {
+    return ''
+  } else if (latency < lowLatency.value) {
+    return 'text-green-500'
+  } else if (latency < mediumLatency.value) {
+    return 'text-yellow-500'
+  } else {
+    return 'text-red-500'
+  }
 }

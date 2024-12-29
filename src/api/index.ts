@@ -257,3 +257,41 @@ export const getIPForMainlandChinaAPI = () => {
 export const getIPForGlobalAPI = () => {
   return fetch('https://api.ip.sb/geoip')
 }
+
+export const getLatencyFromUrlAPI = (url: string) => {
+  return new Promise<number>((resolve) => {
+    const startTime = performance.now()
+    const img = document.createElement('img')
+    img.src = url + '?_=' + new Date().getTime()
+    img.style.display = 'none'
+    img.onload = () => {
+      const endTime = performance.now()
+      img.remove()
+
+      resolve(endTime - startTime)
+    }
+    img.onerror = () => {
+      img.remove()
+
+      resolve(0)
+    }
+
+    document.body.appendChild(img)
+  })
+}
+
+export const getYouTubeLatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://yt3.ggpht.com/favicon.ico')
+}
+
+export const getGithubLatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://github.githubassets.com/favicon.ico')
+}
+
+export const getNeteaseMusicLatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://s1.music.126.net/style/favicon.ico')
+}
+
+export const getBaiduLatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://apps.bdimg.com/favicon.ico')
+}

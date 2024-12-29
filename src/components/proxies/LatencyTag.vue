@@ -22,8 +22,8 @@
 
 <script setup lang="ts">
 import { NOT_CONNECTED } from '@/config'
+import { getColorForLatency } from '@/helper'
 import { getLatencyByName } from '@/store/proxies'
-import { lowLatency, mediumLatency } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { CountUp } from 'countup.js'
 import { twMerge } from 'tailwind-merge'
@@ -60,14 +60,6 @@ onUnmounted(() => {
 })
 
 const color = computed(() => {
-  if (latency.value === NOT_CONNECTED) {
-    return ''
-  } else if (latency.value < lowLatency.value) {
-    return 'text-green-500'
-  } else if (latency.value < mediumLatency.value) {
-    return 'text-yellow-500'
-  } else {
-    return 'text-red-500'
-  }
+  return getColorForLatency(latency.value)
 })
 </script>
