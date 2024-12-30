@@ -12,5 +12,5 @@
 <script setup lang="ts">
 import { prettyBytesHelper } from '@/helper'
 import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
-import { downloadSpeed, memory, uploadSpeed } from '@/store/statistics'
+import { downloadSpeed, memory, uploadSpeed } from '@/store/overview'
 </script>

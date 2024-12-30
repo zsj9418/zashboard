@@ -47,7 +47,7 @@ export const proxyCardSize = useStorage<PROXY_CARD_SIZE>(
 )
 
 // connections
-export const useConnectionCard = useStorage('config/use-connecticon-card', false)
+export const useConnectionCard = useStorage('config/use-connecticon-card', window.innerWidth < 640)
 export const tableSize = useStorage<TABLE_SIZE>('config/connecticon-table-size', TABLE_SIZE.SMALL)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
   'config/connection-table-columns',

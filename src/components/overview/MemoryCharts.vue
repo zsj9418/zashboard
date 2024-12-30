@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { getToolTipForParams, prettyBytesHelper } from '@/helper'
-import { memoryHistory } from '@/store/statistics'
+import { memoryHistory } from '@/store/overview'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import BasicCharts from './BasicCharts.vue'

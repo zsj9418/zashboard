@@ -1,4 +1,5 @@
 import { NOT_CONNECTED, PROXY_SORT_TYPE } from '@/config'
+import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
   hideUnavailableProxies,
@@ -8,7 +9,6 @@ import {
   proxySortType,
   sourceIPLabelMap,
 } from '@/store/settings'
-import { timeSaved } from '@/store/statistics'
 import type { Backend, Connection } from '@/types'
 import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'

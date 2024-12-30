@@ -10,7 +10,7 @@
 
 <script setup lang="ts">
 import { getToolTipForParams, prettyBytesHelper } from '@/helper'
-import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/statistics'
+import { downloadSpeedHistory, uploadSpeedHistory } from '@/store/overview'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import BasicCharts from './BasicCharts.vue'
