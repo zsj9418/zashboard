@@ -26,7 +26,7 @@
       </div>
     </div>
     <div class="flex-1"></div>
-    <div class="card flex-row justify-center gap-2 p-2 text-center">
+    <div class="card items-center justify-center gap-2 p-2 sm:flex-row">
       {{ getUrlFromBackend(activeBackend!) }}
       <BackendVersion />
     </div>

@@ -2,7 +2,7 @@
   <div>{{ $t('customCardLines') }}:</div>
   <div class="relative flex flex-col rounded">
     <button
-      class="btn btn-primary btn-sm absolute right-2 top-2"
+      class="btn btn-circle btn-neutral btn-sm absolute right-2 top-2"
       @click="addLine"
     >
       <PlusCircleIcon class="h-4 w-4" />
