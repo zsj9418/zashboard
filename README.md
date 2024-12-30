@@ -7,8 +7,8 @@
 
 ### Download zashboard
 
-1. dist.zip (about 8MB): https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
-2. dist-cdn-fonts.zip (about 2MB): https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
+1. dist.zip (about 7.64MB): https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip
+2. dist-cdn-fonts.zip (about 1.27MB): https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip
 
 ### Docker
 
