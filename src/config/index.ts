@@ -4,7 +4,7 @@ import {
   CubeTransparentIcon,
   DocumentTextIcon,
   GlobeAltIcon,
-  WrenchScrewdriverIcon,
+  SwatchIcon,
 } from '@heroicons/vue/24/outline'
 
 export const IPV6_TEST_URL = 'https://ipv6.google.com/generate_204'
@@ -105,7 +105,7 @@ export const ROUTE_ICON_MAP = {
   [ROUTE_NAME.overview]: CubeTransparentIcon,
   [ROUTE_NAME.proxies]: GlobeAltIcon,
   [ROUTE_NAME.connections]: ArrowsRightLeftIcon,
-  [ROUTE_NAME.rules]: WrenchScrewdriverIcon,
+  [ROUTE_NAME.rules]: SwatchIcon,
   [ROUTE_NAME.logs]: DocumentTextIcon,
   [ROUTE_NAME.settings]: Cog6ToothIcon,
 }
