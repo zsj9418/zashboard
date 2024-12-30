@@ -1,6 +1,7 @@
 import {
   ArrowsRightLeftIcon,
   Cog6ToothIcon,
+  CubeTransparentIcon,
   DocumentTextIcon,
   GlobeAltIcon,
   WrenchScrewdriverIcon,
@@ -91,6 +92,7 @@ export enum LOG_LEVEL {
 }
 
 export enum ROUTE_NAME {
+  overview = 'overview',
   proxies = 'proxies',
   connections = 'connections',
   logs = 'logs',
@@ -100,6 +102,7 @@ export enum ROUTE_NAME {
 }
 
 export const ROUTE_ICON_MAP = {
+  [ROUTE_NAME.overview]: CubeTransparentIcon,
   [ROUTE_NAME.proxies]: GlobeAltIcon,
   [ROUTE_NAME.connections]: ArrowsRightLeftIcon,
   [ROUTE_NAME.rules]: WrenchScrewdriverIcon,

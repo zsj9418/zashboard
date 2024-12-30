@@ -9,7 +9,7 @@
       :class="
         twMerge(
           'scrollbar-hidden flex h-full flex-col gap-2 overflow-x-hidden bg-base-200 p-2 text-base-content !transition-all duration-500',
-          isSiderbarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
+          isSidebarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
         )
       "
     >
@@ -26,17 +26,17 @@
               :is="ROUTE_ICON_MAP[r]"
               class="h-5 w-5"
             />
-            <template v-if="!isSiderbarCollapsed">
+            <template v-if="!isSidebarCollapsed">
               {{ $t(r) }}
             </template>
           </a>
         </li>
       </ul>
-      <template v-if="isSiderbarCollapsed">
+      <template v-if="isSidebarCollapsed">
         <VerticalInfos />
       </template>
       <template v-else>
-        <OverviewCarousel v-if="route.name !== ROUTE_NAME.settings" />
+        <OverviewCarousel />
         <div class="card">
           <component
             v-if="sidebarComp"
@@ -57,7 +57,7 @@ import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import router from '@/router'
-import { isSiderbarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'

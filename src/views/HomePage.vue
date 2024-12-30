@@ -12,7 +12,7 @@
       class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
     >
       <component
-        v-if="ctrlComp && isSiderbarCollapsed"
+        v-if="ctrlComp && isSidebarCollapsed"
         :is="ctrlComp"
         :horizontal="true"
       />
@@ -43,11 +43,6 @@
               </a>
             </li>
           </ul>
-          <label for="sidebar">
-            <div class="btn btn-circle drawer-button btn-sm bg-neutral text-neutral-content">
-              <Bars3Icon class="h-4 w-4" />
-            </div>
-          </label>
         </div>
       </div>
     </div>
@@ -97,9 +92,8 @@ import { initLogs } from '@/store/logs'
 import { initSatistic } from '@/store/overview'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
-import { isSiderbarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed } from '@/store/settings'
 import { activeBackend, activeUuid, backendList } from '@/store/setup'
-import { Bars3Icon } from '@heroicons/vue/24/outline'
 import { useDocumentVisibility, useSwipe } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'

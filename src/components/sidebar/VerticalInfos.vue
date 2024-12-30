@@ -21,7 +21,7 @@
     <div class="flex flex-col items-center justify-center">
       <button
         class="btn btn-circle btn-sm"
-        @click="isSiderbarCollapsed = false"
+        @click="isSidebarCollapsed = false"
       >
         <ArrowRightCircleIcon class="h-5 w-5" />
       </button>
@@ -33,7 +33,7 @@
 import { prettyBytesHelper } from '@/helper'
 import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
 import { downloadSpeed, memory, uploadSpeed } from '@/store/overview'
-import { isSiderbarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed } from '@/store/settings'
 import {
   ArrowDownCircleIcon,
   ArrowRightCircleIcon,

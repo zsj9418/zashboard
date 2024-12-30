@@ -7,7 +7,9 @@ import {
   PROXY_SORT_TYPE,
   TABLE_SIZE,
 } from '@/config'
+import { isSmallScreen } from '@/helper/utils'
 import { useStorage } from '@vueuse/core'
+import { computed } from 'vue'
 
 // global
 export const theme = useStorage<string>('config/theme', 'default')
@@ -17,7 +19,19 @@ export const language = useStorage<LANG>(
     ? (navigator.language as LANG)
     : LANG.EN_US,
 )
-export const isSiderbarCollapsed = useStorage('config/is-sidebar-collapsed', true)
+export const isSidebarCollapsedConfig = useStorage('config/is-sidebar-collapsed', true)
+export const isSidebarCollapsed = computed({
+  get: () => {
+    if (isSmallScreen.value) {
+      return true
+    }
+
+    return isSidebarCollapsedConfig.value
+  },
+  set: (value) => {
+    isSidebarCollapsedConfig.value = value
+  },
+})
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
 

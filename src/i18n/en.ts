@@ -112,6 +112,7 @@ const en = {
   autoCheckWhenStart: 'Auto Check When Start',
   chinaIP: 'China IP',
   globalIP: 'Global IP',
+  networkInfo: 'Network Info',
 }
 
 export type LANG_MESSAGE = typeof en

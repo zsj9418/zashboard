@@ -35,7 +35,7 @@ import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
 import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { useProxies } from '@/composables/proxies'
 import { PROXY_TAB_TYPE } from '@/config'
-import { isLargeScreen } from '@/helper'
+import { isLargeScreen } from '@/helper/utils'
 import { twoColumnProxyGroup } from '@/store/settings'
 import { computed } from 'vue'
 

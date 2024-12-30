@@ -10,10 +10,8 @@ import {
   sourceIPLabelMap,
 } from '@/store/settings'
 import type { Backend, Connection } from '@/types'
-import { useWindowSize } from '@vueuse/core'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'
-import { computed } from 'vue'
 
 export const prettyBytesHelper = (bytes: number, opts?: Options) => {
   return prettyBytes(bytes, {
@@ -21,16 +19,6 @@ export const prettyBytesHelper = (bytes: number, opts?: Options) => {
     ...opts,
   })
 }
-
-const windowSize = useWindowSize()
-
-export const isLargeScreen = computed(() => {
-  return windowSize.width.value > 1280
-})
-
-export const isSmallScreen = computed(() => {
-  return windowSize.width.value < 640
-})
 
 export const fromNow = (timestamp: string) => {
   return dayjs(timestamp).locale(language.value).fromNow()

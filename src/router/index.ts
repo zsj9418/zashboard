@@ -5,6 +5,7 @@ import { activeBackend } from '@/store/setup'
 import ConnectionsPage from '@/views/ConnectionsPage.vue'
 import HomePage from '@/views/HomePage.vue'
 import LogsPage from '@/views/LogsPage.vue'
+import OverviewPage from '@/views/OverviewPage.vue'
 import ProxiesPage from '@/views/ProxiesPage.vue'
 import RulesPage from '@/views/RulesPage.vue'
 import SettingsPage from '@/views/SettingsPage.vue'
@@ -21,6 +22,11 @@ const router = createRouter({
       redirect: ROUTE_NAME.proxies,
       component: HomePage,
       children: [
+        {
+          path: 'overview',
+          name: ROUTE_NAME.overview,
+          component: OverviewPage,
+        },
         {
           path: 'proxies',
           name: ROUTE_NAME.proxies,

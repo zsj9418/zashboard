@@ -115,6 +115,7 @@ const ru: LANG_MESSAGE = {
   autoCheckWhenStart: 'Автоматическая проверка при запуске',
   chinaIP: 'МЦ IP',
   globalIP: 'IP для Мира',
+  networkInfo: 'Информация о сети',
 }
 
 export default ru

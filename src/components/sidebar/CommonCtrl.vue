@@ -6,7 +6,7 @@
     <div class="flex">
       <button
         class="btn btn-circle btn-sm"
-        @click="isSiderbarCollapsed = true"
+        @click="isSidebarCollapsed = true"
       >
         <ArrowLeftCircleIcon class="h-5 w-5" />
       </button>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { isSiderbarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed } from '@/store/settings'
 import { ArrowLeftCircleIcon } from '@heroicons/vue/24/outline'
 import BackendVersion from '../common/BackendVersion.vue'
 import BackendSwitch from '../settings/BackendSwitch.vue'

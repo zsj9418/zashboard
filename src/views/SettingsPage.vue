@@ -88,23 +88,6 @@
       </div>
     </div>
 
-    <!-- overview -->
-    <div class="card card-compact">
-      <div class="card-title px-4 pt-4">
-        {{ $t('overview') }}
-      </div>
-      <div class="card-body gap-4">
-        <div class="grid grid-cols-1 gap-2 lg:grid-cols-2 2xl:grid-cols-3">
-          <StatisticsInfo class="bg-base-200/40 p-4" />
-          <IPCheck />
-          <ConnectionStatus />
-          <SpeedCharts />
-          <MemoryCharts />
-          <ConnectionsCharts />
-        </div>
-      </div>
-    </div>
-
     <BackendSettings />
     <ProxiesSettings />
 
@@ -153,18 +136,12 @@
 
 <script setup lang="ts">
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
-import ConnectionsCharts from '@/components/overview/ConnectionsCharts.vue'
-import ConnectionStatus from '@/components/overview/ConnectionStatus.vue'
-import IPCheck from '@/components/overview/IPCheck.vue'
-import MemoryCharts from '@/components/overview/MemoryCharts.vue'
-import SpeedCharts from '@/components/overview/SpeedCharts.vue'
 import BackendSettings from '@/components/settings/BackendSettings.vue'
 import ConnectionCardSettings from '@/components/settings/ConnectionCardSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import ProxiesSettings from '@/components/settings/ProxiesSettings.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
 import TableSettings from '@/components/settings/TableSettings.vue'
-import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
