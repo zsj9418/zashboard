@@ -1,4 +1,5 @@
 import daisyui from 'daisyui'
+import plugin from 'tailwindcss/plugin'
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -30,5 +31,14 @@ export default {
   daisyui: {
     themes: true,
   },
-  plugins: [daisyui],
+  plugins: [
+    plugin(({ addUtilities }) => {
+      addUtilities({
+        '.scrollbar-thin': {
+          'scrollbar-width': 'thin',
+        },
+      })
+    }),
+    daisyui,
+  ],
 }

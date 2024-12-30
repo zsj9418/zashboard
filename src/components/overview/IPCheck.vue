@@ -1,7 +1,21 @@
 <template>
-  <div class="relative flex h-28 flex-col rounded-lg bg-base-200/40 p-2">
-    <div><span class="inline-block w-24">speedtest.cn</span>: {{ mainlangChinaIP }}</div>
-    <div><span class="inline-block w-24">api.ip.sb</span>: {{ globalIP }}</div>
+  <div class="relative flex h-28 flex-col gap-1 rounded-lg bg-base-200/40 p-2">
+    <div>
+      <span
+        class="tooltip tooltip-bottom inline-block w-24 text-left"
+        data-tip="api-v3.speedtest.cn"
+        >{{ $t('chinaIP') }}</span
+      >
+      : {{ mainlangChinaIP }}
+    </div>
+    <div>
+      <span
+        class="tooltip tooltip-bottom inline-block w-24 text-left"
+        data-tip="api.ip.sb"
+        >{{ $t('globalIP') }}</span
+      >
+      : {{ globalIP }}
+    </div>
     <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs">
       {{ $t('autoCheckWhenStart') }}:
       <input
@@ -21,12 +35,11 @@
 
 <script setup lang="ts">
 import { getIPForGlobalAPI, getIPForMainlandChinaAPI } from '@/api'
+import { globalIP, mainlangChinaIP } from '@/composables/overview'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { useStorage } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
-const mainlangChinaIP = ref()
-const globalIP = ref()
 const autoIPCheck = useStorage('config/auto-ip-check', true)
 const getIPs = () => {
   getIPForMainlandChinaAPI()
@@ -48,7 +61,7 @@ const getIPs = () => {
         }
         msg: string
       }) => {
-        mainlangChinaIP.value = `${res.data.operator} (${res.data.country}) | ${res.data.ip}`
+        mainlangChinaIP.value = `${res.data.operator} (${res.data.country})  ${res.data.ip}`
       },
     )
   getIPForGlobalAPI()
@@ -70,14 +83,13 @@ const getIPs = () => {
         continent_code: string
         country_code: string
       }) => {
-        console.log(res)
-        globalIP.value = `${res.asn_organization} (${res.country}) | ${res.ip}`
+        globalIP.value = `${res.asn_organization} (${res.country})  ${res.ip}`
       },
     )
 }
 
 onMounted(() => {
-  if (autoIPCheck.value) {
+  if (autoIPCheck.value && [mainlangChinaIP, globalIP].some((item) => item.value === '')) {
     getIPs()
   }
 })

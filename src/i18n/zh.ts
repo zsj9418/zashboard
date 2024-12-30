@@ -114,6 +114,8 @@ const zh: LANG_MESSAGE = {
   normal: '正常',
   large: '大',
   autoCheckWhenStart: '启动时自动检查',
+  chinaIP: '中国大陆 IP',
+  globalIP: '全球 IP',
 }
 
 export default zh

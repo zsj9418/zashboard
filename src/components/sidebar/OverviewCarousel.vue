@@ -1,5 +1,7 @@
 <template>
-  <div class="card carousel carousel-vertical h-28 shrink-0 text-sm">
+  <div
+    class="card carousel carousel-vertical h-28 shrink-0 overflow-x-hidden text-sm hover:scrollbar-thin"
+  >
     <IPCheck class="carousel-item box-border" />
     <ConnectionStatus class="carousel-item box-border" />
     <div
@@ -14,11 +16,11 @@
 </template>
 
 <script setup lang="ts">
-import ConnectionsCharts from '@/components/statistics/ConnectionsCharts.vue'
-import ConnectionStatus from '@/components/statistics/ConnectionStatus.vue'
-import IPCheck from '@/components/statistics/IPCheck.vue'
-import MemoryCharts from '@/components/statistics/MemoryCharts.vue'
-import SpeedCharts from '@/components/statistics/SpeedCharts.vue'
+import ConnectionsCharts from '@/components/overview/ConnectionsCharts.vue'
+import ConnectionStatus from '@/components/overview/ConnectionStatus.vue'
+import IPCheck from '@/components/overview/IPCheck.vue'
+import MemoryCharts from '@/components/overview/MemoryCharts.vue'
+import SpeedCharts from '@/components/overview/SpeedCharts.vue'
 import { onMounted, ref } from 'vue'
 
 const speedCharts = ref()

@@ -46,15 +46,12 @@ import {
   getOpenAILatencyAPI,
   getYouTubeLatencyAPI,
 } from '@/api'
+import { baiduLatency, githubLatency, openAILatency, youtubeLatency } from '@/composables/overview'
 import { getColorForLatency } from '@/helper'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { useStorage } from '@vueuse/core'
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 
-const baiduLatency = ref('')
-const openAILatency = ref('')
-const githubLatency = ref('')
-const youtubeLatency = ref('')
 const autoConnectionCheck = useStorage('config/auto-connection-check', true)
 
 const getLatency = async () => {
@@ -76,7 +73,10 @@ const getLatency = async () => {
 }
 
 onMounted(() => {
-  if (autoConnectionCheck.value) {
+  if (
+    autoConnectionCheck.value &&
+    [baiduLatency, openAILatency, githubLatency, youtubeLatency].some((item) => item.value === '')
+  ) {
     getLatency()
   }
 })

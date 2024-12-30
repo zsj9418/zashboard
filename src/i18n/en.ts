@@ -113,6 +113,8 @@ const en = {
   normal: 'Normal',
   large: 'Large',
   autoCheckWhenStart: 'Auto Check When Start',
+  chinaIP: 'China IP',
+  globalIP: 'Global IP',
 }
 
 export type LANG_MESSAGE = typeof en
