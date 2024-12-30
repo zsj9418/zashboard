@@ -47,6 +47,7 @@ const en = {
   card: 'Card',
   table: 'Table',
   customTableColumns: 'Custom Table Columns',
+  customCardLines: 'Custom Card Lines',
   close: 'Close',
   details: 'Details',
   showGlobalProxy: 'Show Global Proxy Node',

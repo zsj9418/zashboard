@@ -49,6 +49,7 @@ const zh: LANG_MESSAGE = {
   card: '卡片',
   table: '表格',
   customTableColumns: '自定义表格列',
+  customCardLines: '自定义卡片行',
   close: '关闭',
   details: '详情',
   showGlobalProxy: '显示全局代理节点',

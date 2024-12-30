@@ -49,6 +49,7 @@ const ru: LANG_MESSAGE = {
   card: 'Карточка',
   table: 'Таблица',
   customTableColumns: 'Пользовательские столбцы таблицы',
+  customCardLines: 'Пользовательские линии карточки',
   close: 'Закрыть',
   details: 'Детали',
   showGlobalProxy: 'Показать глобальный прокси-узел',

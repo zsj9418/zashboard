@@ -64,7 +64,18 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
     CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime,
   ],
 )
-export const compactConnectionCard = useStorage<boolean>('config/compact-connection-card', true)
+export const connectionCardLines = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[][]>(
+  'config/connection-card-lines',
+  [
+    [CONNECTIONS_TABLE_ACCESSOR_KEY.Host, CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed],
+    [
+      CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
+      CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime,
+      CONNECTIONS_TABLE_ACCESSOR_KEY.Details,
+      CONNECTIONS_TABLE_ACCESSOR_KEY.Close,
+    ],
+  ],
+)
 export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
 
 // logs

@@ -7,7 +7,7 @@
         <span :class="getColorForLatency(Number(baiduLatency))">{{ baiduLatency }}ms </span>
       </div>
       <div>
-        <span class="inline-block w-28">OpenAI </span>
+        <span class="inline-block w-28">OpenAI CDN</span>
         :
         <span :class="getColorForLatency(Number(openAILatency))">{{ openAILatency }}ms </span>
       </div>

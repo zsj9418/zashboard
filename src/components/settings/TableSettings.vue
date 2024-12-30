@@ -16,36 +16,32 @@
   </div>
   <div>{{ $t('customTableColumns') }}:</div>
   <div class="flex rounded lg:flex-col">
-    <VueDraggable
+    <Draggable
       class="flex flex-1 flex-col gap-2 bg-base-200 p-2 lg:flex-row"
       v-model="connectionTableColumns"
-      :animation="150"
       group="list"
-      ghostClass="ghost"
+      :animation="150"
+      :item-key="(id: string) => id"
     >
-      <div
-        v-for="item in connectionTableColumns"
-        :key="item"
-        class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content"
-      >
-        {{ $t(item) }}
-      </div>
-    </VueDraggable>
-    <VueDraggable
+      <template #item="{ element }">
+        <div class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content">
+          {{ $t(element) }}
+        </div>
+      </template>
+    </Draggable>
+    <Draggable
       class="flex flex-1 flex-col gap-2 p-2 lg:flex-row"
       v-model="restOfColumns"
-      :animation="150"
       group="list"
-      ghostClass="ghost"
+      :animation="150"
+      :item-key="(id: string) => id"
     >
-      <div
-        v-for="item in restOfColumns"
-        :key="item"
-        class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content"
-      >
-        {{ $t(item) }}
-      </div>
-    </VueDraggable>
+      <template #item="{ element }">
+        <div class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content">
+          {{ $t(element) }}
+        </div>
+      </template>
+    </Draggable>
   </div>
 </template>
 
@@ -53,7 +49,7 @@
 import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
 import { connectionTableColumns, tableSize } from '@/store/settings'
 import { ref } from 'vue'
-import { VueDraggable } from 'vue-draggable-plus'
+import Draggable from 'vuedraggable'
 
 const restOfColumns = ref(
   Object.values(CONNECTIONS_TABLE_ACCESSOR_KEY).filter(

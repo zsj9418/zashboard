@@ -124,17 +124,7 @@
           />
           {{ $t('card') }}
         </div>
-        <div
-          class="flex items-center gap-2 max-sm:hidden"
-          v-if="useConnectionCard"
-        >
-          {{ $t('compactCard') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="compactConnectionCard"
-          />
-        </div>
+        <ConnectionCardSettings v-if="useConnectionCard" />
         <TableSettings v-else />
         <div class="divider"></div>
         <SourceIPLabels />
@@ -169,6 +159,7 @@ import IPCheck from '@/components/overview/IPCheck.vue'
 import MemoryCharts from '@/components/overview/MemoryCharts.vue'
 import SpeedCharts from '@/components/overview/SpeedCharts.vue'
 import BackendSettings from '@/components/settings/BackendSettings.vue'
+import ConnectionCardSettings from '@/components/settings/ConnectionCardSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import ProxiesSettings from '@/components/settings/ProxiesSettings.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
@@ -177,17 +168,9 @@ import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import {
-  autoUpgrade,
-  compactConnectionCard,
-  font,
-  logRetentionLimit,
-  theme,
-  useConnectionCard,
-} from '@/store/settings'
+import { autoUpgrade, font, logRetentionLimit, theme, useConnectionCard } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
-
 const { isUIUpdateAvailable } = useSettings()
 
 const isUIUpgrading = ref(false)
