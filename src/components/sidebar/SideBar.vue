@@ -36,7 +36,7 @@
         <VerticalInfos />
       </template>
       <template v-else>
-        <OverviewCarousel />
+        <OverviewCarousel v-if="route.name !== ROUTE_NAME.overview" />
         <div class="card">
           <component
             v-if="sidebarComp"

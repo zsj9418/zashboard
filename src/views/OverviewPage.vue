@@ -25,14 +25,22 @@
         </div>
       </div>
     </div>
+    <div class="flex-1"></div>
+    <div class="card flex-row justify-center gap-2 p-2 text-center">
+      {{ getUrlFromBackend(activeBackend!) }}
+      <BackendVersion />
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import BackendVersion from '@/components/common/BackendVersion.vue'
 import ConnectionsCharts from '@/components/overview/ConnectionsCharts.vue'
 import ConnectionStatus from '@/components/overview/ConnectionStatus.vue'
 import IPCheck from '@/components/overview/IPCheck.vue'
 import MemoryCharts from '@/components/overview/MemoryCharts.vue'
 import SpeedCharts from '@/components/overview/SpeedCharts.vue'
 import StatisticsStats from '@/components/overview/StatisticsStats.vue'
+import { getUrlFromBackend } from '@/helper'
+import { activeBackend } from '@/store/setup'
 </script>

@@ -109,7 +109,7 @@ const en = {
   small: 'Small',
   normal: 'Normal',
   large: 'Large',
-  autoCheckWhenStart: 'Auto Check When Start',
+  autoCheckWhenStart: 'Auto Check',
   chinaIP: 'China IP',
   globalIP: 'Global IP',
   networkInfo: 'Network Info',

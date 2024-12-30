@@ -81,6 +81,10 @@ const props = defineProps<{
 const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
   const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
 
+  if (Download === 0 && Upload === 0 && Total === 0 && Expire === 0) {
+    return null
+  }
+
   const total = prettyBytesHelper(Total, { binary: true })
   const used = prettyBytesHelper(Download + Upload, { binary: true })
   const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))

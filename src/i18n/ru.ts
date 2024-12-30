@@ -112,7 +112,7 @@ const ru: LANG_MESSAGE = {
   small: 'Маленький',
   normal: 'Нормальный',
   large: 'Большой',
-  autoCheckWhenStart: 'Автоматическая проверка при запуске',
+  autoCheckWhenStart: 'Автоматическая проверка',
   chinaIP: 'МЦ IP',
   globalIP: 'IP для Мира',
   networkInfo: 'Информация о сети',
