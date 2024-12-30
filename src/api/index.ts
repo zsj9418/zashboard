@@ -280,6 +280,10 @@ export const getLatencyFromUrlAPI = (url: string) => {
   })
 }
 
+export const getCloudflareLatencyAPI = () => {
+  return getLatencyFromUrlAPI('https://www.cloudflare.com/favicon.ico')
+}
+
 export const getYouTubeLatencyAPI = () => {
   return getLatencyFromUrlAPI('https://yt3.ggpht.com/favicon.ico')
 }

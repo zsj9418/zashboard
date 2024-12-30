@@ -1,10 +1,17 @@
 <template>
   <div class="relative h-28 rounded-lg bg-base-200/40 p-2 text-sm">
-    <div class="flex flex-col gap-1">
+    <div class="flex flex-col">
       <div>
         <span class="inline-block w-28">Baidu </span>
         :
         <span :class="getColorForLatency(Number(baiduLatency))">{{ baiduLatency }}ms </span>
+      </div>
+      <div>
+        <span class="inline-block w-28">Cloudflare </span>
+        :
+        <span :class="getColorForLatency(Number(cloudflareLatency))"
+          >{{ cloudflareLatency }}ms
+        </span>
       </div>
       <div>
         <span class="inline-block w-28">OpenAI CDN</span>
@@ -42,11 +49,18 @@
 <script setup lang="ts">
 import {
   getBaiduLatencyAPI,
+  getCloudflareLatencyAPI,
   getGithubLatencyAPI,
   getOpenAILatencyAPI,
   getYouTubeLatencyAPI,
 } from '@/api'
-import { baiduLatency, githubLatency, openAILatency, youtubeLatency } from '@/composables/overview'
+import {
+  baiduLatency,
+  cloudflareLatency,
+  githubLatency,
+  openAILatency,
+  youtubeLatency,
+} from '@/composables/overview'
 import { getColorForLatency } from '@/helper'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { useStorage } from '@vueuse/core'
@@ -57,6 +71,10 @@ const autoConnectionCheck = useStorage('config/auto-connection-check', true)
 const getLatency = async () => {
   getBaiduLatencyAPI().then((res) => {
     baiduLatency.value = res.toFixed(0)
+  })
+
+  getCloudflareLatencyAPI().then((res) => {
+    cloudflareLatency.value = res.toFixed(0)
   })
 
   getOpenAILatencyAPI().then((res) => {
@@ -75,7 +93,9 @@ const getLatency = async () => {
 onMounted(() => {
   if (
     autoConnectionCheck.value &&
-    [baiduLatency, openAILatency, githubLatency, youtubeLatency].some((item) => item.value === '')
+    [baiduLatency, cloudflareLatency, openAILatency, githubLatency, youtubeLatency].some(
+      (item) => item.value === '',
+    )
   ) {
     getLatency()
   }
