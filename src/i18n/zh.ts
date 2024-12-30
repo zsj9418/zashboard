@@ -114,6 +114,7 @@ const zh: LANG_MESSAGE = {
   chinaIP: '中国大陆 IP',
   globalIP: '全球 IP',
   networkInfo: '网络信息',
+  autoSwitch: '自动切换',
 }
 
 export default zh

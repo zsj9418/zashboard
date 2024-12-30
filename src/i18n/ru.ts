@@ -116,6 +116,7 @@ const ru: LANG_MESSAGE = {
   chinaIP: 'МЦ IP',
   globalIP: 'IP для Мира',
   networkInfo: 'Информация о сети',
+  autoSwitch: 'Автоматическое',
 }
 
 export default ru

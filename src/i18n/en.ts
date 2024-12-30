@@ -113,6 +113,7 @@ const en = {
   chinaIP: 'China IP',
   globalIP: 'Global IP',
   networkInfo: 'Network Info',
+  autoSwitch: 'Auto Switch',
 }
 
 export type LANG_MESSAGE = typeof en

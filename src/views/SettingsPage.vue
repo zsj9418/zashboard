@@ -30,7 +30,7 @@
               :key="opt"
               :value="opt"
             >
-              {{ opt }}
+              {{ opt === 'default' ? $t('autoSwitch') : opt }}
             </option>
           </select>
         </div>
