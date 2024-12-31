@@ -8,5 +8,5 @@ export const isLargeScreen = computed(() => {
 })
 
 export const isSmallScreen = computed(() => {
-  return windowSize.width.value < 640
+  return windowSize.width.value < 768
 })
