@@ -121,7 +121,13 @@
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
-import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
+import {
+  fromNow,
+  getDestinationFromConnection,
+  getIPLabelFromMap,
+  getProcessFromConnection,
+  prettyBytesHelper,
+} from '@/helper'
 import { renderConnections } from '@/store/connections'
 import { connectionTableColumns, tableSize } from '@/store/settings'
 import type { Connection } from '@/types'
@@ -283,7 +289,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('destination'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Destination,
-    accessorFn: (original) => original.metadata.destinationIP || original.metadata.host,
+    accessorFn: getDestinationFromConnection,
   },
 ]
 

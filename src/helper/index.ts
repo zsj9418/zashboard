@@ -101,6 +101,14 @@ export const getProcessFromConnection = (connection: Connection) => {
   )
 }
 
+export const getDestinationFromConnection = (connection: Connection) => {
+  return (
+    connection.metadata.remoteDestination ||
+    connection.metadata.destinationIP ||
+    connection.metadata.host
+  )
+}
+
 export const getToolTipForParams = (
   params: ToolTipParams,
   config: {

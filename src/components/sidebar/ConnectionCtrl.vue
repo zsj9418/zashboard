@@ -141,5 +141,6 @@ const handlerClickCloseAll = () => {
 <style scoped>
 .tooltip:before {
   width: 200px;
+  z-index: 20;
 }
 </style>

@@ -43,6 +43,7 @@ export type Proxy = {
   >
   all?: string[]
   udp: boolean
+  xudp?: boolean
   now: string
   icon: string
   hidden?: boolean
@@ -93,6 +94,7 @@ export type ConnectionRawMessage = {
   metadata: {
     network: string
     type: string
+    remoteDestination: string
     destinationIP: string
     destinationPort: string
     dnsMode: string

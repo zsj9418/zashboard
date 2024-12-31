@@ -1,7 +1,13 @@
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
-import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
+import {
+  fromNow,
+  getDestinationFromConnection,
+  getIPLabelFromMap,
+  getProcessFromConnection,
+  prettyBytesHelper,
+} from '@/helper'
 import { connectionCardLines } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
@@ -34,7 +40,7 @@ export default defineComponent<{
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Destination]: (
-          <span class="w-80 grow break-all">{props.conn.metadata.destinationIP}</span>
+          <span class="w-80 grow break-all">{getDestinationFromConnection(props.conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: (
           <span class="w-80 grow break-all">{getIPLabelFromMap(props.conn.metadata.sourceIP)}</span>
