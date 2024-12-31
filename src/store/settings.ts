@@ -65,7 +65,7 @@ export const proxyCardSize = useStorage<PROXY_CARD_SIZE>(
   'config/proxy-card-size',
   PROXY_CARD_SIZE.LARGE,
 )
-
+export const showHiddenGroup = useStorage('config/show-hidden-group', false)
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', window.innerWidth < 640)
 export const tableSize = useStorage<TABLE_SIZE>('config/connecticon-table-size', TABLE_SIZE.SMALL)

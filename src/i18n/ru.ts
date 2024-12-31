@@ -120,6 +120,7 @@ const ru: LANG_MESSAGE = {
   autoSwitch: 'Автоматическое',
   customBackgroundURL: 'Пользовательский URL фона',
   splitOverviewPage: 'Разделить страницу с обзором',
+  showHiddenGroup: 'Показать скрытые группы',
 }
 
 export default ru

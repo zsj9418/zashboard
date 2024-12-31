@@ -117,6 +117,7 @@ const en = {
   autoSwitch: 'Auto Switch',
   customBackgroundURL: 'Custom Background URL',
   splitOverviewPage: 'Split Overview Page',
+  showHiddenGroup: 'Show Hidden Group',
 }
 
 export type LANG_MESSAGE = typeof en

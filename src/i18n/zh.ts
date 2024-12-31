@@ -118,6 +118,7 @@ const zh: LANG_MESSAGE = {
   autoSwitch: '自动切换',
   customBackgroundURL: '自定义背景 URL',
   splitOverviewPage: '分离概览页',
+  showHiddenGroup: '显示隐藏分组',
 }
 
 export default zh

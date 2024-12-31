@@ -2,7 +2,7 @@ import { isSingBox } from '@/api'
 import { PROXY_TAB_TYPE } from '@/config'
 import { configs } from '@/store/config'
 import { GLOBAL, proxyGroupList, proxyMap, proxyProviederList } from '@/store/proxies'
-import { showGlobalProxy, twoColumnProxyGroup } from '@/store/settings'
+import { showGlobalProxy, showHiddenGroup, twoColumnProxyGroup } from '@/store/settings'
 import { computed, ref } from 'vue'
 
 const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
@@ -11,8 +11,14 @@ const renderGroups = computed(() => {
     return proxyProviederList.value.map((group) => group.name)
   }
 
+  const proxyGroups = !showHiddenGroup.value
+    ? proxyGroupList.value.filter((group) => {
+        return proxyMap.value[group]?.hidden !== true
+      })
+    : proxyGroupList.value
+
   if (isSingBox.value && showGlobalProxy.value && proxyMap.value[GLOBAL]) {
-    return [...proxyGroupList.value, GLOBAL]
+    return [...proxyGroups, GLOBAL]
   }
 
   if (
@@ -22,7 +28,7 @@ const renderGroups = computed(() => {
   ) {
     return [GLOBAL]
   }
-  return proxyGroupList.value
+  return proxyGroups
 })
 const hasTwoColumns = computed(() => twoColumnProxyGroup.value && renderGroups.value.length > 1)
 
