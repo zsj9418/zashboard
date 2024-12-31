@@ -9,7 +9,7 @@
         {{ rule.payload }}
       </span>
       <span
-        v-if="rule.size !== -1"
+        v-if="typeof rule.size === 'number' && rule.size !== -1"
         class="badge badge-sm bg-base-200"
       >
         {{ rule.size }}
