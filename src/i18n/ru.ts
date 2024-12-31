@@ -121,6 +121,7 @@ const ru: LANG_MESSAGE = {
   customBackgroundURL: 'Пользовательский URL фона',
   splitOverviewPage: 'Разделить страницу с обзором',
   showHiddenGroup: 'Показать скрытые группы',
+  showIPAndConnectionInfo: 'Показать IP и информацию о соединениях',
 }
 
 export default ru

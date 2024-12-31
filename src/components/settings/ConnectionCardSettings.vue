@@ -20,7 +20,7 @@
         <MinusCircleIcon class="h-4 w-4" />
       </button>
       <Draggable
-        class="flex flex-1 items-center gap-2"
+        class="flex flex-1 flex-wrap items-center gap-2"
         v-model="connectionCardLines[index]"
         :animation="150"
         group="list"

@@ -119,6 +119,7 @@ const zh: LANG_MESSAGE = {
   customBackgroundURL: '自定义背景 URL',
   splitOverviewPage: '分离概览页',
   showHiddenGroup: '显示隐藏分组',
+  showIPAndConnectionInfo: '显示 IP 和连接信息',
 }
 
 export default zh

@@ -118,6 +118,7 @@ const en = {
   customBackgroundURL: 'Custom Background URL',
   splitOverviewPage: 'Split Overview Page',
   showHiddenGroup: 'Show Hidden Group',
+  showIPAndConnectionInfo: 'Show IP and Connection Info',
 }
 
 export type LANG_MESSAGE = typeof en

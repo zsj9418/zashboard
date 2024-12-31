@@ -29,32 +29,32 @@ export default defineComponent<{
     return () => {
       const componentMap: Record<CONNECTIONS_TABLE_ACCESSOR_KEY, JSX.Element> = {
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: (
-          <span class="grow break-all text-primary/80">
+          <span class="w-80 grow break-all text-primary/80">
             {props.conn.metadata.host || props.conn.metadata.destinationIP}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Destination]: (
-          <span class="grow break-all">{props.conn.metadata.destinationIP}</span>
+          <span class="w-80 grow break-all">{props.conn.metadata.destinationIP}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: (
-          <span class="grow break-all">{getIPLabelFromMap(props.conn.metadata.sourceIP)}</span>
+          <span class="w-80 grow break-all">{getIPLabelFromMap(props.conn.metadata.sourceIP)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: (
-          <span class="grow break-all">{props.conn.metadata.sourcePort}</span>
+          <span class="w-80 grow break-all">{props.conn.metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
-          <span class="grow break-all">{props.conn.metadata.type}</span>
+          <span class="w-80 grow break-all">{props.conn.metadata.type}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: (
-          <span class="grow break-all">
+          <span class="w-80 grow break-all">
             {props.conn.rule} {props.conn.rulePayload}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Process]: (
-          <span class="grow break-all">{getProcessFromConnection(props.conn)}</span>
+          <span class="w-80 grow break-all">{getProcessFromConnection(props.conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Chains]: (
-          <span class="grow break-all">
+          <span class="w-80 grow break-all">
             {last(props.conn.chains)}=&gt;{first(props.conn.chains)}
           </span>
         ),
