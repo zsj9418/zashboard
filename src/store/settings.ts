@@ -7,7 +7,7 @@ import {
   PROXY_SORT_TYPE,
   TABLE_SIZE,
 } from '@/config'
-import { isSmallScreen } from '@/helper/utils'
+import { isMiddleScreen } from '@/helper/utils'
 import { useStorage } from '@vueuse/core'
 import { computed } from 'vue'
 
@@ -22,7 +22,7 @@ export const language = useStorage<LANG>(
 export const isSidebarCollapsedConfig = useStorage('config/is-sidebar-collapsed', true)
 export const isSidebarCollapsed = computed({
   get: () => {
-    if (isSmallScreen.value) {
+    if (isMiddleScreen.value) {
       return true
     }
 

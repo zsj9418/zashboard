@@ -1,3 +1,4 @@
+import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
 import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper } from '@/helper'
@@ -93,7 +94,7 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
           <button
             class="btn btn-circle btn-xs"
-            onClick={() => handlerInfo(props.conn)}
+            onClick={() => disconnectByIdAPI(props.conn.id)}
           >
             <XMarkIcon class="h-4 w-4" />
           </button>
