@@ -23,14 +23,14 @@ const router = createRouter({
       component: HomePage,
       children: [
         {
-          path: 'overview',
-          name: ROUTE_NAME.overview,
-          component: OverviewPage,
-        },
-        {
           path: 'proxies',
           name: ROUTE_NAME.proxies,
           component: ProxiesPage,
+        },
+        {
+          path: 'overview',
+          name: ROUTE_NAME.overview,
+          component: OverviewPage,
         },
         {
           path: 'connections',
