@@ -27,7 +27,7 @@
         <div class="flex h-12 w-full items-center justify-center gap-1 p-2">
           <ul class="menu menu-horizontal flex flex-1">
             <li
-              v-for="r in routes"
+              v-for="r in renderRoutes"
               :key="r"
               class="flex-1"
             >
@@ -85,7 +85,7 @@ import { rulesTabShow } from '@/composables/rules'
 import { useSettings } from '@/composables/settings'
 import { useTip } from '@/composables/tip'
 import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
-import { getUrlFromBackend } from '@/helper'
+import { getUrlFromBackend, renderRoutes } from '@/helper'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
@@ -112,7 +112,6 @@ const ctrlsMap: Record<string, Component> = {
 
 const router = useRouter()
 const route = useRoute()
-const routes = Object.values(ROUTE_NAME).filter((r) => r !== ROUTE_NAME.setup)
 const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
 })
@@ -127,7 +126,7 @@ const getNextRouteName = () => {
     return ROUTE_NAME.proxies
   }
 
-  return routes[(routes.indexOf(routeName) + 1) % routes.length]
+  return renderRoutes.value[(renderRoutes.value.indexOf(routeName) + 1) % renderRoutes.value.length]
 }
 const getPrevRouteName = () => {
   const routeName = route.name as ROUTE_NAME
@@ -136,7 +135,10 @@ const getPrevRouteName = () => {
     return ROUTE_NAME.proxies
   }
 
-  return routes[(routes.indexOf(routeName) - 1 + routes.length) % routes.length]
+  return renderRoutes.value[
+    (renderRoutes.value.indexOf(routeName) - 1 + renderRoutes.value.length) %
+      renderRoutes.value.length
+  ]
 }
 
 watch(direction, () => {

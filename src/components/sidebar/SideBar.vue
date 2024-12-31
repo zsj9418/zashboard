@@ -15,7 +15,7 @@
     >
       <ul class="menu flex-1 pb-0">
         <li
-          v-for="r in routes"
+          v-for="r in renderRoutes"
           :key="r"
         >
           <a
@@ -56,6 +56,7 @@ import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
+import { renderRoutes } from '@/helper'
 import router from '@/router'
 import { isSidebarCollapsed } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
@@ -80,5 +81,4 @@ const sidebarComp = computed(() => {
 })
 
 const route = useRoute()
-const routes = Object.values(ROUTE_NAME).filter((r) => r !== ROUTE_NAME.setup)
 </script>

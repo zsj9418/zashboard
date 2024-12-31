@@ -119,6 +119,7 @@ const ru: LANG_MESSAGE = {
   networkInfo: 'Информация о сети',
   autoSwitch: 'Автоматическое',
   customBackgroundURL: 'Пользовательский URL фона',
+  splitOverviewPage: 'Разделить страницу с обзором',
 }
 
 export default ru

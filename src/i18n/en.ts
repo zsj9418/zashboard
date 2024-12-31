@@ -116,6 +116,7 @@ const en = {
   networkInfo: 'Network Info',
   autoSwitch: 'Auto Switch',
   customBackgroundURL: 'Custom Background URL',
+  splitOverviewPage: 'Split Overview Page',
 }
 
 export type LANG_MESSAGE = typeof en

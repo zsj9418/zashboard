@@ -1,4 +1,4 @@
-import { NOT_CONNECTED, PROXY_SORT_TYPE } from '@/config'
+import { NOT_CONNECTED, PROXY_SORT_TYPE, ROUTE_NAME } from '@/config'
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
@@ -8,10 +8,12 @@ import {
   mediumLatency,
   proxySortType,
   sourceIPLabelMap,
+  splitOverviewPage,
 } from '@/store/settings'
 import type { Backend, Connection } from '@/types'
 import dayjs from 'dayjs'
 import prettyBytes, { type Options } from 'pretty-bytes'
+import { computed } from 'vue'
 
 export const prettyBytesHelper = (bytes: number, opts?: Options) => {
   return prettyBytes(bytes, {
@@ -175,3 +177,9 @@ export const getColorForLatency = (latency: number) => {
     return 'text-red-500'
   }
 }
+
+export const renderRoutes = computed(() => {
+  return Object.values(ROUTE_NAME).filter((r) => {
+    return ![ROUTE_NAME.setup, !splitOverviewPage.value && ROUTE_NAME.overview].includes(r)
+  })
+})

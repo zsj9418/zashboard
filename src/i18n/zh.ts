@@ -117,6 +117,7 @@ const zh: LANG_MESSAGE = {
   networkInfo: '网络信息',
   autoSwitch: '自动切换',
   customBackgroundURL: '自定义背景 URL',
+  splitOverviewPage: '分离概览页',
 }
 
 export default zh

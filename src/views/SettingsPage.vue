@@ -95,12 +95,27 @@
       </div>
     </div>
 
-    <!-- connections -->
+    <template v-if="!splitOverviewPage">
+      <ChartsCard />
+      <NetworkCard />
+    </template>
+
+    <BackendSettings />
+
+    <!-- overview -->
     <div class="card card-compact">
       <div class="card-title px-4 pt-4">
         {{ $t('overview') }}
       </div>
       <div class="card-body">
+        <div class="flex items-center gap-2">
+          {{ $t('splitOverviewPage') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="splitOverviewPage"
+          />
+        </div>
         <div class="flex items-center gap-2">
           {{ $t('autoIPCheckWhenStart') }}:
           <input
@@ -120,7 +135,6 @@
       </div>
     </div>
 
-    <BackendSettings />
     <ProxiesSettings />
 
     <!-- connections -->
@@ -168,6 +182,8 @@
 
 <script setup lang="ts">
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
+import ChartsCard from '@/components/overview/ChartsCard.vue'
+import NetworkCard from '@/components/overview/NetworkCard.vue'
 import BackendSettings from '@/components/settings/BackendSettings.vue'
 import ConnectionCardSettings from '@/components/settings/ConnectionCardSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
@@ -184,6 +200,7 @@ import {
   customBackgroundURL,
   font,
   logRetentionLimit,
+  splitOverviewPage,
   theme,
   useConnectionCard,
 } from '@/store/settings'
