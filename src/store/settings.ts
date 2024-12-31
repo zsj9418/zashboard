@@ -33,10 +33,7 @@ export const isSidebarCollapsed = computed({
   },
 })
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
-export const customBackgroundURL = useStorage(
-  'config/custom-background-url',
-  'https://bing.img.run/uhd.php',
-)
+export const customBackgroundURL = useStorage('config/custom-background-image', '')
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
 
 // overview

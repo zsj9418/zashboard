@@ -171,6 +171,7 @@ watch(
 const closeModal = () => {
   modalRef.value?.close()
 }
+
 const { showTip } = useTip()
 const autoSwitchBackend = async () => {
   const otherEnds = backendList.value.filter((end) => end.uuid !== activeUuid.value)
