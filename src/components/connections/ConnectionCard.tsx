@@ -5,7 +5,9 @@ import { fromNow, getIPLabelFromMap, getProcessFromConnection, prettyBytesHelper
 import { connectionCardLines } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
+  ArrowDownCircleIcon,
   ArrowDownIcon,
+  ArrowUpCircleIcon,
   ArrowUpIcon,
   InformationCircleIcon,
   XMarkIcon,
@@ -59,25 +61,25 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: (
           <div class="whitespace-nowrap text-right">
             {prettyBytesHelper(props.conn.download)}
-            <ArrowDownIcon class="-mt-1 inline-block h-4 w-4" />
+            <ArrowDownIcon class="-mt-1 ml-1 inline-block h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: (
           <div class="whitespace-nowrap text-right">
             {prettyBytesHelper(props.conn.upload)}
-            <ArrowUpIcon class="-mt-1 inline-block h-4 w-4" />
+            <ArrowUpIcon class="-mt-1 ml-1 inline-block h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: (
           <div class="whitespace-nowrap text-right">
             {prettyBytesHelper(props.conn.downloadSpeed)}/s
-            <ArrowDownIcon class="-mt-1 inline-block h-4 w-4" />
+            <ArrowDownCircleIcon class="-mt-1 ml-1 inline-block h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed]: (
           <div class="whitespace-nowrap text-right">
             {prettyBytesHelper(props.conn.uploadSpeed)}/s
-            <ArrowUpIcon class="-mt-1 inline-block h-4 w-4" />
+            <ArrowUpCircleIcon class="-mt-1 ml-1 inline-block h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (

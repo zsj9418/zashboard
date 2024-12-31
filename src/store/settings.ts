@@ -37,7 +37,7 @@ export const customBackgroundURL = useStorage('config/custom-background-image', 
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
 
 // overview
-export const splitOverviewPage = useStorage('config/split-overview-page', true)
+export const splitOverviewPage = useStorage('config/split-overview-page', false)
 export const autoIPCheck = useStorage('config/auto-ip-check', true)
 export const autoConnectionCheck = useStorage('config/auto-connection-check', true)
 

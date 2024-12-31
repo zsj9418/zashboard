@@ -78,6 +78,11 @@ export enum SORT_TYPE {
   SOURCE_IP = 'sourceIP',
 }
 
+export enum SORT_DIRECTION {
+  ASC = 'asc',
+  DESC = 'desc',
+}
+
 export enum CONNECTION_TAB_TYPE {
   ACTIVE = 'active',
   CLOSED = 'closed',

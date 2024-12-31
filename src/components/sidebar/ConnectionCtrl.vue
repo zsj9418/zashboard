@@ -37,6 +37,24 @@
           {{ $t(opt) || opt }}
         </option>
       </select>
+      <button
+        class="btn btn-circle btn-sm"
+        @click="
+          connectionSortDirection =
+            connectionSortDirection === SORT_DIRECTION.ASC
+              ? SORT_DIRECTION.DESC
+              : SORT_DIRECTION.ASC
+        "
+      >
+        <ArrowUpCircleIcon
+          class="h-4 w-4"
+          v-if="connectionSortDirection === SORT_DIRECTION.ASC"
+        />
+        <ArrowDownCircleIcon
+          class="h-4 w-4"
+          v-else
+        />
+      </button>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
       <span class="shrink-0"> {{ $t('quickFilter') }}: </span>
@@ -85,9 +103,10 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
-import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
+import { CONNECTION_TAB_TYPE, SORT_DIRECTION, SORT_TYPE } from '@/config'
 import {
   connectionFilter,
+  connectionSortDirection,
   connectionSortType,
   connectionTabShow,
   isPaused,
@@ -96,7 +115,14 @@ import {
   renderConnections,
 } from '@/store/connections'
 import { useConnectionCard } from '@/store/settings'
-import { PauseIcon, PlayIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import {
+  ArrowDownCircleIcon,
+  ArrowUpCircleIcon,
+  PauseIcon,
+  PlayIcon,
+  QuestionMarkCircleIcon,
+  XMarkIcon,
+} from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import TextInput from '../common/TextInput.vue'
 import SourceIPFilter from './SourceIPFilter.vue'

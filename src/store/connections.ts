@@ -1,5 +1,5 @@
 import { fetchConnectionsAPI } from '@/api'
-import { CONNECTION_TAB_TYPE, SORT_TYPE } from '@/config'
+import { CONNECTION_TAB_TYPE, SORT_DIRECTION, SORT_TYPE } from '@/config'
 import type { Connection, ConnectionRawMessage } from '@/types'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
@@ -72,6 +72,10 @@ export const quickFilterRegex = useStorage<string>('config/quick-filter-regex', 
 export const quickFilterEnabled = useStorage<boolean>('config/quick-filter-enabled', false)
 export const connectionTabShow = ref(CONNECTION_TAB_TYPE.ACTIVE)
 
+const isDesc = computed(() => {
+  return connectionSortDirection.value === SORT_DIRECTION.DESC
+})
+
 const sortFunctionMap: Record<SORT_TYPE, (a: Connection, b: Connection) => number> = {
   [SORT_TYPE.HOST]: (a: Connection, b: Connection) => {
     return (a.metadata.host || a.metadata.destinationIP).localeCompare(
@@ -85,16 +89,16 @@ const sortFunctionMap: Record<SORT_TYPE, (a: Connection, b: Connection) => numbe
     return a.chains.join('').localeCompare(b.chains.join(''))
   },
   [SORT_TYPE.DOWNLOAD]: (a: Connection, b: Connection) => {
-    return b.download - a.download
+    return a.download - b.download
   },
   [SORT_TYPE.DOWNLOAD_SPEED]: (a: Connection, b: Connection) => {
-    return b.downloadSpeed - a.downloadSpeed
+    return a.downloadSpeed - b.downloadSpeed
   },
   [SORT_TYPE.UPLOAD]: (a: Connection, b: Connection) => {
-    return b.upload - a.upload
+    return a.upload - b.upload
   },
   [SORT_TYPE.UPLOAD_SPEED]: (a: Connection, b: Connection) => {
-    return b.uploadSpeed - a.uploadSpeed
+    return a.uploadSpeed - b.uploadSpeed
   },
   [SORT_TYPE.SOURCE_IP]: (a: Connection, b: Connection) => {
     return a.metadata.sourceIP.localeCompare(b.metadata.sourceIP)
@@ -105,13 +109,17 @@ const sortFunctionMap: Record<SORT_TYPE, (a: Connection, b: Connection) => numbe
     )
   },
   [SORT_TYPE.CONNECT_TIME]: (a: Connection, b: Connection) => {
-    return dayjs(b.start).valueOf() - dayjs(a.start).valueOf()
+    return dayjs(a.start).valueOf() - dayjs(b.start).valueOf()
   },
 }
 
 export const connectionSortType = useStorage<SORT_TYPE>(
   'config/connection-sort-type',
   SORT_TYPE.HOST,
+)
+export const connectionSortDirection = useStorage<SORT_DIRECTION>(
+  'config/connection-sort-direction',
+  SORT_DIRECTION.ASC,
 )
 export const connectionFilter = ref('')
 export const isPaused = ref(false)
@@ -161,6 +169,9 @@ export const renderConnections = computed(() => {
       return true
     })
     .sort((a, b) => {
+      if (isDesc.value) {
+        ;[a, b] = [b, a]
+      }
       const sortResult = useConnectionCard.value
         ? sortFunctionMap[connectionSortType.value](a, b)
         : sortFunctionMap[SORT_TYPE.HOST](a, b)
@@ -173,7 +184,7 @@ export const renderConnections = computed(() => {
     })
 })
 
-export const sourceIPFilter = ref('')
+export const sourceIPFilter = ref(null)
 
 export const sourceIPs = computed(() => {
   return _.uniq(activeConnections.value.map((conn) => conn.metadata.sourceIP)).sort()
