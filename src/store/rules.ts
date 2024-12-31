@@ -12,7 +12,9 @@ export const renderRules = computed(() => {
   }
 
   return rules.value.filter((rule) => {
-    return [rule.type, rule.payload, rule.proxy].some((i) => i.includes(rulesFilter.value))
+    return [rule.type.toLowerCase(), rule.payload.toLowerCase(), rule.proxy.toLowerCase()].some(
+      (i) => i.includes(rulesFilter.value.toLowerCase()),
+    )
   })
 })
 
@@ -22,9 +24,11 @@ export const renderRulesProvider = computed(() => {
   }
 
   return ruleProviderList.value.filter((ruleProvider) => {
-    return [ruleProvider.name, ruleProvider.behavior, ruleProvider.vehicleType].some((i) =>
-      i.includes(rulesFilter.value),
-    )
+    return [
+      ruleProvider.name.toLowerCase(),
+      ruleProvider.behavior.toLowerCase(),
+      ruleProvider.vehicleType.toLowerCase(),
+    ].some((i) => i.includes(rulesFilter.value.toLowerCase()))
   })
 })
 
