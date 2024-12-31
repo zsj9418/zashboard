@@ -32,7 +32,7 @@ defineProps<{
 const sourceIPOpts = computed(() => {
   return sourceIPs.value.map((ip) => {
     return {
-      label: getIPLabelFromMap(ip),
+      label: ip ? getIPLabelFromMap(ip) : 'Inner',
       value: ip,
     }
   })

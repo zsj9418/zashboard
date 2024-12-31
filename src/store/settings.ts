@@ -35,6 +35,10 @@ export const isSidebarCollapsed = computed({
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
 
+// overview
+export const autoIPCheck = useStorage('config/auto-ip-check', true)
+export const autoConnectionCheck = useStorage('config/auto-connection-check', true)
+
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})

@@ -88,6 +88,31 @@
       </div>
     </div>
 
+    <!-- connections -->
+    <div class="card card-compact">
+      <div class="card-title px-4 pt-4">
+        {{ $t('overview') }}
+      </div>
+      <div class="card-body">
+        <div class="flex items-center gap-2">
+          {{ $t('autoIPCheckWhenStart') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="autoIPCheck"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          {{ $t('autoConnectionCheckWhenStart') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="autoConnectionCheck"
+          />
+        </div>
+      </div>
+    </div>
+
     <BackendSettings />
     <ProxiesSettings />
 
@@ -145,7 +170,15 @@ import TableSettings from '@/components/settings/TableSettings.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import { autoUpgrade, font, logRetentionLimit, theme, useConnectionCard } from '@/store/settings'
+import {
+  autoConnectionCheck,
+  autoIPCheck,
+  autoUpgrade,
+  font,
+  logRetentionLimit,
+  theme,
+  useConnectionCard,
+} from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 const { isUIUpdateAvailable } = useSettings()

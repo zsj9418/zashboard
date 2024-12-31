@@ -16,14 +16,6 @@
       >
       : {{ globalIP }}
     </div>
-    <div class="absolute bottom-2 left-2 flex items-center gap-1 text-xs">
-      {{ $t('autoCheckWhenStart') }}:
-      <input
-        class="toggle toggle-xs"
-        type="checkbox"
-        v-model="autoIPCheck"
-      />
-    </div>
     <button
       class="btn btn-circle btn-sm absolute bottom-2 right-2"
       @click="getIPs"
@@ -36,11 +28,10 @@
 <script setup lang="ts">
 import { getIPForGlobalAPI, getIPForMainlandChinaAPI } from '@/api'
 import { globalIP, mainlangChinaIP } from '@/composables/overview'
+import { autoIPCheck } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
-import { useStorage } from '@vueuse/core'
 import { onMounted } from 'vue'
 
-const autoIPCheck = useStorage('config/auto-ip-check', true)
 const getIPs = () => {
   getIPForMainlandChinaAPI()
     .then((res) => res.json())

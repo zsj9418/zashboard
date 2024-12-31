@@ -28,14 +28,6 @@
         :
         <span :class="getColorForLatency(Number(youtubeLatency))">{{ youtubeLatency }}ms </span>
       </div>
-      <div class="absolute right-2 top-2 flex items-center gap-1 text-xs">
-        {{ $t('autoCheckWhenStart') }}:
-        <input
-          class="toggle toggle-xs"
-          type="checkbox"
-          v-model="autoConnectionCheck"
-        />
-      </div>
     </div>
     <button
       class="btn btn-circle btn-sm absolute bottom-2 right-2"
@@ -62,11 +54,9 @@ import {
   youtubeLatency,
 } from '@/composables/overview'
 import { getColorForLatency } from '@/helper'
+import { autoConnectionCheck } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
-import { useStorage } from '@vueuse/core'
 import { onMounted } from 'vue'
-
-const autoConnectionCheck = useStorage('config/auto-connection-check', true)
 
 const getLatency = async () => {
   getBaiduLatencyAPI().then((res) => {
