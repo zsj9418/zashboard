@@ -122,6 +122,7 @@ const ru: LANG_MESSAGE = {
   splitOverviewPage: 'Разделить страницу с обзором',
   showHiddenGroup: 'Показать скрытые группы',
   showIPAndConnectionInfo: 'Показать IP и информацию о соединениях',
+  transparent: 'Прозрачность',
 }
 
 export default ru

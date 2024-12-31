@@ -58,6 +58,24 @@
       </div>
       <div
         class="flex items-center gap-2"
+        v-if="customBackgroundURL"
+      >
+        {{ $t('transparent') }}:
+        <select
+          class="select select-bordered select-sm w-48"
+          v-model="dashboardTransparent"
+        >
+          <option
+            v-for="opt in Object.values(DASH_TRANSPARENT)"
+            :key="opt"
+            :value="opt"
+          >
+            {{ opt }}
+          </option>
+        </select>
+      </div>
+      <div
+        class="flex items-center gap-2"
         v-if="!isSingBox"
       >
         {{ $t('autoUpgrade') }}:
@@ -99,9 +117,15 @@
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
-import { FONTS } from '@/config'
+import { DASH_TRANSPARENT, FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import { autoUpgrade, customBackgroundURL, font, theme } from '@/store/settings'
+import {
+  autoUpgrade,
+  customBackgroundURL,
+  dashboardTransparent,
+  font,
+  theme,
+} from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 const { isUIUpdateAvailable } = useSettings()

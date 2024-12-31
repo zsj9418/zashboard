@@ -125,3 +125,9 @@ export enum PROXY_CARD_SIZE {
   SMALL = 'small',
   LARGE = 'large',
 }
+
+export enum DASH_TRANSPARENT {
+  LOW = '30',
+  MEDIUM = '60',
+  HIGH = '90',
+}

@@ -119,6 +119,7 @@ const en = {
   splitOverviewPage: 'Split Overview Page',
   showHiddenGroup: 'Show Hidden Group',
   showIPAndConnectionInfo: 'Show IP and Connection Info',
+  transparent: 'Transparent',
 }
 
 export type LANG_MESSAGE = typeof en

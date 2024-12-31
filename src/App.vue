@@ -5,7 +5,7 @@ import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useTip } from './composables/tip'
 import { FONTS } from './config'
-import { customBackgroundURL, font, theme } from './store/settings'
+import { customBackgroundURL, dashboardTransparent, font, theme } from './store/settings'
 
 const app = ref<HTMLElement>()
 const setThemeColor = () => {
@@ -38,7 +38,7 @@ const date = dayjs().format('YYYY-MM-DD')
 <template>
   <div
     ref="app"
-    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} ${customBackgroundURL && 'custom-background bg-cover'}`"
+    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} custom-background-${dashboardTransparent} ${customBackgroundURL && 'custom-background bg-cover'}`"
     :data-theme="theme"
     :style="`background-image: url('${customBackgroundURL + '?' + date}');`"
   >

@@ -16,7 +16,7 @@
   }
 }
 
-.custom-background {
+.custom-background.custom-background-90 {
   .card {
     @apply bg-base-100/90;
   }
@@ -31,6 +31,35 @@
   }
 }
 
+.custom-background.custom-background-60 {
+  .card {
+    @apply bg-base-100/60;
+  }
+  .collapse {
+    @apply bg-base-100/60;
+  }
+  .table {
+    @apply bg-base-100/60;
+  }
+  .drawer-side {
+    @apply bg-base-200/60;
+  }
+}
+
+.custom-background.custom-background-30 {
+  .card {
+    @apply bg-base-100/30;
+  }
+  .collapse {
+    @apply bg-base-100/30;
+  }
+  .table {
+    @apply bg-base-100/30;
+  }
+  .drawer-side {
+    @apply bg-base-200/30;
+  }
+}
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
