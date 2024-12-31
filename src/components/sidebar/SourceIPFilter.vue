@@ -4,9 +4,9 @@
     class="join-item select select-bordered select-sm"
     v-model="sourceIPFilter"
   >
-    <option value="">all</option>
+    <option :value="null">all</option>
     <option
-      v-if="sourceIPOpts.every((i) => i.value !== sourceIPFilter) && sourceIPFilter !== ''"
+      v-if="sourceIPOpts.every((i) => i.value !== sourceIPFilter) && sourceIPFilter !== null"
       :value="sourceIPFilter"
     >
       {{ getIPLabelFromMap(sourceIPFilter) }}
@@ -32,7 +32,7 @@ defineProps<{
 const sourceIPOpts = computed(() => {
   return sourceIPs.value.map((ip) => {
     return {
-      label: ip ? getIPLabelFromMap(ip) : 'Inner',
+      label: getIPLabelFromMap(ip),
       value: ip,
     }
   })

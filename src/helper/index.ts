@@ -69,6 +69,12 @@ export const sortAndFilterProxyNodes = (proxies: string[]) => {
 }
 
 export const getIPLabelFromMap = (ip: string) => {
+  if (ip === null) {
+    return ''
+  }
+  if (ip === '') {
+    return 'Inner'
+  }
   const isIPv6 = ip.includes(':')
 
   for (const key in sourceIPLabelMap.value) {
