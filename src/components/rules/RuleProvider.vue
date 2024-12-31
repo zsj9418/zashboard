@@ -3,7 +3,10 @@
     <div class="flex flex-1 flex-col sm:flex-row">
       <div class="flex flex-1 items-center gap-2">
         <span>{{ index }}.</span>
-        <span> {{ ruleProvider.name }} ({{ ruleProvider.ruleCount }}) </span>
+        <span>{{ ruleProvider.name }}</span>
+        <span class="badge badge-sm bg-base-200">
+          {{ ruleProvider.ruleCount }}
+        </span>
       </div>
       <div class="flex gap-3 text-slate-500">
         <span>{{ ruleProvider.behavior }}</span>

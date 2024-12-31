@@ -2,8 +2,17 @@
   <div :class="twMerge('card mb-1 gap-1 p-2 text-sm', !rule.payload && 'flex-row gap-0')">
     <div>
       <span class="mr-2 inline-block min-w-4 text-center">{{ index }}.</span>
-      <span v-if="rule.payload">
+      <span
+        class="mr-2"
+        v-if="rule.payload"
+      >
         {{ rule.payload }}
+      </span>
+      <span
+        v-if="rule.size !== -1"
+        class="badge badge-sm bg-base-200"
+      >
+        {{ rule.size }}
       </span>
     </div>
     <div class="flex gap-2">
