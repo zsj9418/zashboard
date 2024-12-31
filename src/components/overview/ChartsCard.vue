@@ -7,9 +7,9 @@
     <div class="card-body gap-4">
       <StatisticsStats />
       <div class="grid grid-cols-1 gap-2 xl:grid-cols-3">
-        <SpeedCharts class="sm:h-64" />
-        <MemoryCharts class="sm:h-64" />
-        <ConnectionsCharts class="sm:h-64" />
+        <SpeedCharts class="xl:h-64" />
+        <MemoryCharts class="xl:h-64" />
+        <ConnectionsCharts class="xl:h-64" />
       </div>
     </div>
   </div>
