@@ -25,36 +25,38 @@
       v-if="useConnectionCard"
     >
       <span class="shrink-0">{{ $t('sortBy') }}:</span>
-      <select
-        class="select select-bordered select-sm w-full"
-        v-model="connectionSortType"
-      >
-        <option
-          v-for="opt in Object.values(SORT_TYPE)"
-          :key="opt"
-          :value="opt"
+      <div class="join flex-1">
+        <select
+          class="join-item select select-bordered select-sm block flex-1"
+          v-model="connectionSortType"
         >
-          {{ $t(opt) || opt }}
-        </option>
-      </select>
-      <button
-        class="btn btn-circle btn-sm"
-        @click="
-          connectionSortDirection =
-            connectionSortDirection === SORT_DIRECTION.ASC
-              ? SORT_DIRECTION.DESC
-              : SORT_DIRECTION.ASC
-        "
-      >
-        <ArrowUpCircleIcon
-          class="h-4 w-4"
-          v-if="connectionSortDirection === SORT_DIRECTION.ASC"
-        />
-        <ArrowDownCircleIcon
-          class="h-4 w-4"
-          v-else
-        />
-      </button>
+          <option
+            v-for="opt in Object.values(SORT_TYPE)"
+            :key="opt"
+            :value="opt"
+          >
+            {{ $t(opt) || opt }}
+          </option>
+        </select>
+        <button
+          class="btn join-item btn-sm w-12"
+          @click="
+            connectionSortDirection =
+              connectionSortDirection === SORT_DIRECTION.ASC
+                ? SORT_DIRECTION.DESC
+                : SORT_DIRECTION.ASC
+          "
+        >
+          <ArrowUpCircleIcon
+            class="h-4 w-4"
+            v-if="connectionSortDirection === SORT_DIRECTION.ASC"
+          />
+          <ArrowDownCircleIcon
+            class="h-4 w-4"
+            v-else
+          />
+        </button>
+      </div>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
       <span class="shrink-0"> {{ $t('quickFilter') }}: </span>
