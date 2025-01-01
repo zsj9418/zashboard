@@ -78,23 +78,28 @@
       </div>
     </div>
     <SourceIPFilter v-if="!horizontal" />
-    <div class="join flex-1">
-      <SourceIPFilter v-if="horizontal" />
-      <TextInput
-        v-model="connectionFilter"
-        class="join-item min-w-36"
-      />
-      <button
-        class="btn join-item btn-sm"
-        @click="isPaused = !isPaused"
-      >
-        <component
-          :is="!isPaused ? PauseIcon : PlayIcon"
-          class="h-4 w-4"
+    <div class="flex flex-1 items-center gap-2">
+      <div class="join flex-1">
+        <SourceIPFilter
+          v-if="horizontal"
+          class="max-w-40"
         />
-      </button>
+        <TextInput
+          v-model="connectionFilter"
+          class="join-item"
+        />
+        <button
+          class="btn join-item btn-sm"
+          @click="isPaused = !isPaused"
+        >
+          <component
+            :is="!isPaused ? PauseIcon : PlayIcon"
+            class="h-4 w-4"
+          />
+        </button>
+      </div>
       <button
-        class="btn join-item btn-sm"
+        class="btn btn-circle btn-sm"
         @click="handlerClickCloseAll"
       >
         <XMarkIcon class="h-4 w-4" />
