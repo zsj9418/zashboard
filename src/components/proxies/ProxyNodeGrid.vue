@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'grid grid-cols-2 gap-2',
+        'grid grid-cols-2 gap-2 overflow-x-hidden',
         truncateProxyName && 'max-h-96 overflow-y-auto',
         proxyCardSize === PROXY_CARD_SIZE.LARGE
           ? isSidebarCollapsed

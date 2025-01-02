@@ -16,46 +16,8 @@
   }
 }
 
-.custom-background.custom-background-90 {
-  .card {
-    @apply bg-base-100/90;
-  }
-  .collapse {
-    @apply bg-base-100/90;
-  }
-  .table {
-    @apply bg-base-100/90;
-    tr:nth-child(even) {
-      @apply bg-base-200/90;
-    }
-  }
-  .drawer-side {
-    @apply bg-base-200/90;
-  }
-}
-
-.custom-background.custom-background-60 {
-  .card {
-    @apply bg-base-100/60;
-  }
-  .collapse {
-    @apply bg-base-100/60;
-  }
-  .table {
-    @apply bg-base-100/60;
-    tbody tr:nth-child(even) {
-      @apply bg-base-200/60;
-    }
-  }
-  .drawer-side {
-    @apply bg-base-200/60;
-  }
-}
-
 .custom-background.custom-background-30 {
-  .card {
-    @apply bg-base-100/30;
-  }
+  .card,
   .collapse {
     @apply bg-base-100/30;
   }
@@ -65,10 +27,49 @@
       @apply bg-base-200/30;
     }
   }
-  .drawer-side {
+  .drawer-side,
+  .tabs,
+  .bg-base-200 {
     @apply bg-base-200/30;
   }
 }
+
+.custom-background.custom-background-60 {
+  .card,
+  .collapse {
+    @apply bg-base-100/60;
+  }
+  .table {
+    @apply bg-base-100/60;
+    tbody tr:nth-child(even) {
+      @apply bg-base-200/60;
+    }
+  }
+  .drawer-side,
+  .tabs,
+  .bg-base-200 {
+    @apply bg-base-200/60;
+  }
+}
+
+.custom-background.custom-background-90 {
+  .card,
+  .collapse {
+    @apply bg-base-100/90;
+  }
+  .table {
+    @apply bg-base-100/90;
+    tbody tr:nth-child(even) {
+      @apply bg-base-200/90;
+    }
+  }
+  .drawer-side,
+  .tabs,
+  .bg-base-200 {
+    @apply bg-base-200/90;
+  }
+}
+
 .scrollbar-hidden::-webkit-scrollbar {
   display: none;
 }
