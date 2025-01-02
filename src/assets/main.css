@@ -16,57 +16,27 @@
   }
 }
 
-.custom-background.custom-background-30 {
-  .card,
-  .collapse {
-    @apply bg-base-100/30;
-  }
-  .table {
-    @apply bg-base-100/30;
-    tbody tr:nth-child(even) {
-      @apply bg-base-200/30;
+@for $i from 0 to 100 {
+  .custom-background.custom-background-$(i) {
+    .card,
+    .collapse {
+      background-color: var(--fallback-b1, oklch(var(--b1) / calc($(i) / 100)));
     }
-  }
-  .drawer-side,
-  .tabs,
-  .bg-base-200 {
-    @apply bg-base-200/30;
-  }
-}
+    .table {
+      background-color: var(--fallback-b1, oklch(var(--b1) / calc($(i) / 100)));
 
-.custom-background.custom-background-60 {
-  .card,
-  .collapse {
-    @apply bg-base-100/60;
-  }
-  .table {
-    @apply bg-base-100/60;
-    tbody tr:nth-child(even) {
-      @apply bg-base-200/60;
+      tbody tr:nth-child(even) {
+        background-color: var(--fallback-b2, oklch(var(--b2) / calc($(i) / 100)));
+      }
     }
-  }
-  .drawer-side,
-  .tabs,
-  .bg-base-200 {
-    @apply bg-base-200/60;
-  }
-}
-
-.custom-background.custom-background-90 {
-  .card,
-  .collapse {
-    @apply bg-base-100/90;
-  }
-  .table {
-    @apply bg-base-100/90;
-    tbody tr:nth-child(even) {
-      @apply bg-base-200/90;
+    .drawer-content.bg-base-200\/40 {
+      background-color: transparent;
     }
-  }
-  .drawer-side,
-  .tabs,
-  .bg-base-200 {
-    @apply bg-base-200/90;
+    .drawer-side,
+    .tabs,
+    .bg-base-200 {
+      background-color: var(--fallback-b2, oklch(var(--b2) / calc($(i) / 100)));
+    }
   }
 }
 

@@ -1,6 +1,5 @@
 import {
   CONNECTIONS_TABLE_ACCESSOR_KEY,
-  DASH_TRANSPARENT,
   FONTS,
   LANG,
   PROXY_CARD_SIZE,
@@ -35,10 +34,7 @@ export const isSidebarCollapsed = computed({
 })
 export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const customBackgroundURL = useStorage('config/custom-background-image', '')
-export const dashboardTransparent = useStorage(
-  'config/dashboard-transparent',
-  DASH_TRANSPARENT.HIGH,
-)
+export const dashboardTransparent = useStorage('config/dashboard-transparent', 90)
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
 
 // overview

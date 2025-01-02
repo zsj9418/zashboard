@@ -61,18 +61,13 @@
         v-if="customBackgroundURL"
       >
         {{ $t('transparent') }}:
-        <select
-          class="select select-bordered select-sm w-48"
+        <input
+          type="range"
+          min="0"
+          max="100"
           v-model="dashboardTransparent"
-        >
-          <option
-            v-for="opt in Object.values(DASH_TRANSPARENT)"
-            :key="opt"
-            :value="opt"
-          >
-            {{ opt }}
-          </option>
-        </select>
+          class="range max-w-64"
+        />
       </div>
       <div
         class="flex items-center gap-2"
@@ -117,7 +112,7 @@
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
-import { DASH_TRANSPARENT, FONTS } from '@/config'
+import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
 import {
   autoUpgrade,
