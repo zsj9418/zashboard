@@ -105,6 +105,24 @@
             </option>
           </select>
         </div>
+        <template v-if="hasIcon">
+          <div class="flex items-center gap-2">
+            {{ $t('iconSize') }}:
+            <input
+              type="number"
+              class="input input-sm input-bordered w-20"
+              v-model="iconSize"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            {{ $t('iconMarginRight') }}:
+            <input
+              type="number"
+              class="input input-sm input-bordered w-20"
+              v-model="iconMarginRight"
+            />
+          </div>
+        </template>
         <div class="flex items-center gap-2">
           {{ $t('showHiddenGroup') }}:
           <input
@@ -132,8 +150,11 @@
 <script setup lang="ts">
 import { isSingBox } from '@/api'
 import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
+import { proxyMap } from '@/store/proxies'
 import {
   automaticDisconnection,
+  iconMarginRight,
+  iconSize,
   IPv6test,
   lowLatency,
   mediumLatency,
@@ -146,4 +167,10 @@ import {
   truncateProxyName,
   twoColumnProxyGroup,
 } from '@/store/settings'
+import { computed } from 'vue'
+
+const hasIcon = computed(() => {
+  console.log(proxyMap.value)
+  return Object.values(proxyMap.value).some((proxy) => !!proxy.icon)
+})
 </script>

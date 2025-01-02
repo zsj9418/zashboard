@@ -121,6 +121,8 @@ const zh: LANG_MESSAGE = {
   showHiddenGroup: '显示隐藏分组',
   showIPAndConnectionInfo: '显示 IP 和连接信息',
   transparent: '透明度',
+  iconSize: '图标尺寸',
+  iconMarginRight: '图标间距',
 }
 
 export default zh

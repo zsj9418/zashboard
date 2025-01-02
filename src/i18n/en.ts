@@ -120,6 +120,8 @@ const en = {
   showHiddenGroup: 'Show Hidden Group',
   showIPAndConnectionInfo: 'Show IP and Connection Info',
   transparent: 'Transparent',
+  iconSize: 'Icon Size',
+  iconMarginRight: 'Icon Margin Right',
 }
 
 export type LANG_MESSAGE = typeof en

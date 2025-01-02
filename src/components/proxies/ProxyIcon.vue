@@ -1,17 +1,19 @@
 <template>
   <div
     v-if="isDom"
-    :class="['inline-block', fill || 'fill-primary', style]"
+    :class="['inline-block', fill || 'fill-primary']"
+    :style="style"
     v-html="pureDom"
   />
   <img
     v-else
-    :class="style"
+    :style="style"
     :src="icon"
   />
 </template>
 
 <script setup lang="ts">
+import { iconMarginRight, iconSize } from '@/store/settings'
 import DOMPurify from 'dompurify'
 import { computed } from 'vue'
 
@@ -22,7 +24,10 @@ const props = defineProps<{
 }>()
 
 const style = computed(() => {
-  return props.size === 'small' ? 'w-4' : 'w-5'
+  return {
+    width: (props.size === 'small' ? iconSize.value : iconSize.value + 4) + 'px',
+    marginRight: iconMarginRight.value - 4 + 'px',
+  }
 })
 const DOM_STARTS_WITH = 'data:image/svg+xml,'
 const isDom = computed(() => {

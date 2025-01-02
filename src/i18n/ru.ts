@@ -123,6 +123,8 @@ const ru: LANG_MESSAGE = {
   showHiddenGroup: 'Показать скрытые группы',
   showIPAndConnectionInfo: 'Показать IP и информацию о соединениях',
   transparent: 'Прозрачность',
+  iconSize: 'Размер иконки',
+  iconMarginRight: 'Отступ правой иконки',
 }
 
 export default ru
