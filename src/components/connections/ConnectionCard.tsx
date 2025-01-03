@@ -49,11 +49,15 @@ export default defineComponent<{
           <span class="w-80 grow break-all">{props.conn.metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
-          <span class="w-80 grow break-all">{props.conn.metadata.type}</span>
+          <span class="w-80 grow break-all">
+            {props.conn.metadata.type} | {props.conn.metadata.network}
+          </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: (
           <span class="w-80 grow break-all">
-            {props.conn.rule} {props.conn.rulePayload}
+            {!props.conn.rulePayload
+              ? props.conn.rule
+              : `${props.conn.rule} -> ${props.conn.rulePayload}`}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Process]: (
