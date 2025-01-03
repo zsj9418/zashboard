@@ -1,31 +1,33 @@
 <template>
-  <div :class="twMerge('join w-full p-2', horizontal && 'max-w-96 pb-0')">
-    <select
-      class="join-item select select-bordered select-sm"
-      v-model="logLevel"
-      @change="initLogs"
-    >
-      <option
-        v-for="opt in Object.values(LOG_LEVEL)"
-        :key="opt"
-        :value="opt"
+  <div>
+    <div :class="twMerge('join w-full p-2', horizontal && 'max-w-96')">
+      <select
+        class="join-item select select-bordered select-sm"
+        v-model="logLevel"
+        @change="initLogs"
       >
-        {{ opt }}
-      </option>
-    </select>
-    <TextInput
-      type="text"
-      v-model="logFilter"
-    />
-    <button
-      class="btn-bordered btn join-item btn-sm"
-      @click="isPaused = !isPaused"
-    >
-      <component
-        :is="!isPaused ? PauseIcon : PlayIcon"
-        class="h-4 w-4"
+        <option
+          v-for="opt in Object.values(LOG_LEVEL)"
+          :key="opt"
+          :value="opt"
+        >
+          {{ opt }}
+        </option>
+      </select>
+      <TextInput
+        type="text"
+        v-model="logFilter"
       />
-    </button>
+      <button
+        class="btn-bordered btn join-item btn-sm"
+        @click="isPaused = !isPaused"
+      >
+        <component
+          :is="!isPaused ? PauseIcon : PlayIcon"
+          class="h-4 w-4"
+        />
+      </button>
+    </div>
   </div>
 </template>
 

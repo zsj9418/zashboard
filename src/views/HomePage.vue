@@ -14,6 +14,7 @@
       <component
         v-if="ctrlComp && isSidebarCollapsed"
         :is="ctrlComp"
+        class="w-full bg-base-100"
         :horizontal="true"
       />
       <div class="relative h-0 flex-1">

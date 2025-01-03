@@ -8,33 +8,30 @@
 }
 
 @layer components {
-  .card {
-    @apply rounded-xl bg-base-100 shadow-md;
-  }
+  .card,
   .collapse {
-    @apply rounded-xl bg-base-100 shadow-md;
+    background-color: var(--fallback-b1, oklch(var(--b1)));
+    @apply rounded-xl shadow-md;
   }
 }
 
 @for $i from 0 to 100 {
   .custom-background.custom-background-$(i) {
     .card,
-    .collapse {
-      background-color: var(--fallback-b1, oklch(var(--b1) / calc($(i) / 100)));
-    }
+    .collapse,
+    .bg-base-100,
     .table {
       background-color: var(--fallback-b1, oklch(var(--b1) / calc($(i) / 100)));
-
-      tbody tr:nth-child(even) {
-        background-color: var(--fallback-b2, oklch(var(--b2) / calc($(i) / 100)));
-      }
     }
+
     .drawer-content.bg-base-200\/40 {
       background-color: transparent;
     }
+
     .drawer-side,
     .tabs,
-    .bg-base-200 {
+    .bg-base-200,
+    .table tbody tr:nth-child(even) {
       background-color: var(--fallback-b2, oklch(var(--b2) / calc($(i) / 100)));
     }
   }

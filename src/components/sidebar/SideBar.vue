@@ -13,7 +13,7 @@
         )
       "
     >
-      <ul class="menu flex-1 pb-0">
+      <ul class="menu flex-1">
         <li
           v-for="r in renderRoutes"
           :key="r"
