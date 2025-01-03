@@ -82,11 +82,11 @@
       <div class="join flex-1">
         <SourceIPFilter
           v-if="horizontal"
-          class="max-w-40"
+          class="w-40"
         />
         <TextInput
           v-model="connectionFilter"
-          class="join-item"
+          class="join-item min-w-32"
         />
         <button
           class="btn join-item btn-sm"

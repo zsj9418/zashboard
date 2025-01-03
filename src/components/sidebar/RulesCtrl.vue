@@ -31,7 +31,10 @@
         </button>
       </div>
     </div>
-    <TextInput v-model="rulesFilter" />
+    <TextInput
+      class="max-w-64"
+      v-model="rulesFilter"
+    />
   </div>
 </template>
 
