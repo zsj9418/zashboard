@@ -97,7 +97,8 @@ const ru: LANG_MESSAGE = {
   secondaryPathTip: 'Если присутствует, начните с "/", в противном случае оставьте пустым.',
   logRetentionLimit: 'Лимит хранения журнала',
   DNSQuery: 'DNS-запрос',
-  currentBackendUnavailable: 'Текущий бэкенд недоступен. Попробуйте переключиться на другой бэкенд?',
+  currentBackendUnavailable:
+    'Текущий бэкенд недоступен. Попробуйте переключиться на другой бэкенд?',
   confirm: 'Подтвердить',
   backendSwitchTo: 'Автоматическое переключение на {backend}',
   ipv6Test: 'IPv6-тест',

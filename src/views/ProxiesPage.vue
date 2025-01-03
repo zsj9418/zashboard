@@ -36,6 +36,7 @@ import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { useProxies } from '@/composables/proxies'
 import { PROXY_TAB_TYPE } from '@/config'
 import { isLargeScreen } from '@/helper/utils'
+import { fetchProxies } from '@/store/proxies'
 import { twoColumnProxyGroup } from '@/store/settings'
 import { computed } from 'vue'
 
@@ -48,4 +49,6 @@ const Comp = computed(() =>
 const filterContent: <T>(all: T[], target: number) => T[] = (all, target) => {
   return all.filter((_, index: number) => index % 2 === target)
 }
+
+fetchProxies()
 </script>
