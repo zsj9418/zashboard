@@ -30,10 +30,10 @@ import { twMerge } from 'tailwind-merge'
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
-  name: string
+  name?: string
 }>()
 const latencyRef = ref()
-const latency = computed(() => getLatencyByName(props.name))
+const latency = computed(() => getLatencyByName(props.name ?? ''))
 
 let countUp: CountUp | null = null
 

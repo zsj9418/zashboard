@@ -1,9 +1,10 @@
 <template>
-  <div :class="twMerge('card mb-1 gap-1 p-2 text-sm', !rule.payload && 'flex-row gap-0')">
+  <div :class="twMerge('card mb-1 gap-1 p-2 text-sm', !rule.payload && 'gap-0')">
     <div>
       <span class="mr-2 inline-block min-w-4 text-center">{{ index }}.</span>
+      <span class="mr-2 text-slate-500">{{ rule.type }}:</span>
       <span
-        class="mr-2"
+        class="mr-2 text-primary"
         v-if="rule.payload"
       >
         {{ rule.payload }}
@@ -15,24 +16,22 @@
         {{ rule.size }}
       </span>
     </div>
-    <span class="flex gap-2">
-      <span class="text-primary">{{ rule.proxy }}</span>
-      <span
-        v-if="latency > NOT_CONNECTED"
-        :class="latencyColor"
-        >{{ latency }}ms</span
-      >
-    </span>
+    <div class="flex items-center gap-2">
+      <ArrowRightCircleIcon class="h-4 w-4" />
+      <ProxyName :name="rule.proxy" />
+      <span :class="latencyColor">{{ latency }}ms</span>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { NOT_CONNECTED } from '@/config'
 import { getColorForLatency } from '@/helper'
 import { getLatencyByName } from '@/store/proxies'
 import type { Rule } from '@/types'
+import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
+import ProxyName from '../proxies/ProxyName.vue'
 
 const props = defineProps<{
   rule: Rule

@@ -3,12 +3,11 @@
     <template v-slot:title>
       <div class="flex items-center gap-2 pr-5">
         <div class="flex flex-1 items-center gap-1">
-          <ProxyIcon
-            v-if="proxyGroup.icon"
-            :icon="proxyGroup.icon"
+          <ProxyName
+            :name="proxyGroup.name"
+            size="large"
           />
-          <span class="text-lg font-medium">{{ proxyGroup.name }}</span>
-          <span class="flex-1 text-xs text-slate-500"
+          <span class="flex-1 text-xs text-slate-400"
             >{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</span
           >
         </div>
@@ -24,25 +23,18 @@
         />
       </div>
       <div class="flex items-center gap-2">
-        <div
-          class="flex flex-1 items-center gap-1 text-sm"
-          v-if="proxyGroup.now"
-        >
-          <ArrowRightCircleIcon class="mr-1 h-4 w-4" />
-          <ProxyIcon
-            v-if="proxyMap[proxyGroup.now].icon"
-            :icon="proxyMap[proxyGroup.now].icon"
-            size="small"
-          />
-          <span>
-            {{ proxyGroup.now }}
-          </span>
+        <div class="flex flex-1 items-center gap-1">
+          <template v-if="proxyGroup.now">
+            <ProxyName
+              class="text-slate-500"
+              :name="proxyGroup.now"
+            />
+            <CheckBadgeIcon class="h-4 w-4" />
+          </template>
         </div>
-        <span
-          v-else
-          class="flex-1"
-        ></span>
-        <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+        <div class="w-12 shrink-0 text-xs text-slate-500">
+          {{ prettyBytesHelper(downloadTotal) }}/s
+        </div>
       </div>
     </template>
     <template v-slot:preview>
@@ -71,12 +63,12 @@
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import CollapseCard from '../common/CollapseCard.vue'
 import LatencyTag from './LatencyTag.vue'
-import ProxyIcon from './ProxyIcon.vue'
+import ProxyName from './ProxyName.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
 import ProxyNodeGrid from './ProxyNodeGrid.vue'
 import ProxyPreview from './ProxyPreview.vue'
