@@ -3,7 +3,7 @@
     <ProxyIcon
       v-if="icon"
       :icon="icon"
-      :size="size"
+      :size="size === 'large' ? 'large' : 'small'"
     />
     <span :class="size === 'large' ? 'text-lg font-medium' : 'text-sm'">{{ name }}</span>
   </div>

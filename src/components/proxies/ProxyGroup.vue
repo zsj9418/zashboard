@@ -8,7 +8,7 @@
             size="large"
           />
           <span class="flex-1 text-xs text-slate-400"
-            >{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</span
+            >: {{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</span
           >
         </div>
         <LatencyTag
@@ -25,16 +25,14 @@
       <div class="flex items-center gap-2">
         <div class="flex flex-1 items-center gap-1">
           <template v-if="proxyGroup.now">
+            <ArrowRightCircleIcon class="h-4 w-4" />
             <ProxyName
               class="text-slate-500"
               :name="proxyGroup.now"
             />
-            <CheckBadgeIcon class="h-4 w-4" />
           </template>
         </div>
-        <div class="w-12 shrink-0 text-xs text-slate-500">
-          {{ prettyBytesHelper(downloadTotal) }}/s
-        </div>
+        <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
     </template>
     <template v-slot:preview>
@@ -63,7 +61,7 @@
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import { CheckBadgeIcon } from '@heroicons/vue/24/outline'
+import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import CollapseCard from '../common/CollapseCard.vue'
