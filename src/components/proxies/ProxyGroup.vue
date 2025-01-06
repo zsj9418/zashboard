@@ -28,7 +28,7 @@
           class="flex flex-1 items-center gap-1 text-sm"
           v-if="proxyGroup.now"
         >
-          <ArrowRightCircleIcon class="h-4 w-4" />
+          <ArrowRightCircleIcon class="mr-1 h-4 w-4" />
           <ProxyIcon
             v-if="proxyMap[proxyGroup.now].icon"
             :icon="proxyMap[proxyGroup.now].icon"
