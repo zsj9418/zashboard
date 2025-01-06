@@ -20,10 +20,10 @@
       <div class="relative h-0 flex-1">
         <RouterView class="absolute h-full w-full" />
       </div>
-      <div :class="`${isPWA ? 'pb-18' : 'pb-12'} md:hidden`"></div>
+      <div :class="`${isPWA ? 'h-20' : 'h-12'} shrink-0 md:hidden`"></div>
       <div
         ref="navBarRef"
-        :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-18 pb-6' : 'h-12'}`"
+        :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-20 pb-8' : 'h-12'}`"
       >
         <div class="flex h-12 w-full items-center justify-center gap-1 p-2">
           <ul class="menu menu-horizontal flex flex-1">
