@@ -22,7 +22,7 @@
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div class="flex items-center gap-2">
+      <div class="mt-[2px] flex items-center gap-2">
         <div class="flex flex-1 items-center gap-1">
           <template v-if="proxyGroup.now">
             <ArrowRightCircleIcon class="h-4 w-4" />

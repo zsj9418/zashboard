@@ -133,6 +133,7 @@ import { connectionTableColumns, tableSize } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
+  ArrowRightCircleIcon,
   ArrowUpCircleIcon,
   InformationCircleIcon,
   MagnifyingGlassMinusIcon,
@@ -156,7 +157,7 @@ import { useVirtualizer } from '@tanstack/vue-virtual'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { twMerge } from 'tailwind-merge'
-import { computed, h, ref } from 'vue'
+import { computed, h, ref, type VNode } from 'vue'
 import { useI18n } from 'vue-i18n'
 
 const { handlerInfo } = useConnections()
@@ -230,12 +231,35 @@ const columns: ColumnDef<Connection>[] = [
     header: () => t('rule'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Rule,
     accessorFn: (original) =>
-      !original.rulePayload ? original.rule : `${original.rule} -> ${original.rulePayload}`,
+      !original.rulePayload ? original.rule : `${original.rule}: ${original.rulePayload}`,
   },
   {
     header: () => t('chains'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
-    accessorFn: (original) => original.chains.slice().reverse().join(' -> '),
+    accessorFn: (original) => original.chains.join(','),
+    cell: ({ row }) => {
+      const chains: VNode[] = []
+
+      row.original.chains.forEach((chain, index) => {
+        chains.push(h('span', chain))
+
+        if (index < row.original.chains.length - 1) {
+          chains.push(
+            h(ArrowRightCircleIcon, {
+              class: 'h-4 w-4',
+            }),
+          )
+        }
+      })
+
+      return h(
+        'div',
+        {
+          class: 'inline-flex items-center gap-1',
+        },
+        chains,
+      )
+    },
   },
   {
     header: () => t('connectTime'),

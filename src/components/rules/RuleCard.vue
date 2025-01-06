@@ -22,12 +22,17 @@
         <ArrowRightCircleIcon class="h-4 w-4" />
         <ProxyName :name="proxyNode.now" />
       </template>
-      <span :class="latencyColor">{{ latency }}ms</span>
+      <span
+        v-if="latency !== NOT_CONNECTED"
+        :class="latencyColor"
+        >{{ latency }}ms</span
+      >
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { NOT_CONNECTED } from '@/config'
 import { getColorForLatency } from '@/helper'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import type { Rule } from '@/types'

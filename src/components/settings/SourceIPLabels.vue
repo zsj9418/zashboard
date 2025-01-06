@@ -1,12 +1,12 @@
 <template>
   <div>{{ $t('sourceIPLabels') }}:</div>
-  <div class="flex flex-col gap-2 p-2">
+  <div class="flex flex-col gap-2 p-1">
     <div
       v-for="ip in sourceIPs"
       :key="ip"
       class="flex items-center gap-2"
     >
-      {{ ip }} ->
+      {{ ip }} <ArrowRightCircleIcon class="h-4 w-4" />
       <input
         type="text"
         class="input input-sm input-bordered w-24"
@@ -19,16 +19,17 @@
         <MinusCircleIcon class="h-4 w-4" />
       </button>
     </div>
-    <div class="flex w-full items-center gap-2">
-      IP:
+    <div class="flex w-full items-center gap-1">
+      <span class="shrink-0">IP :</span>
       <input
         type="text"
-        class="input input-sm input-bordered w-44"
+        class="input input-sm input-bordered w-36 flex-1 sm:max-w-44"
         v-model="newLabelForIP.ip"
       />
+      <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
       <input
         type="text"
-        class="input input-sm input-bordered w-20"
+        class="input input-sm input-bordered w-24 sm:w-32"
         v-model="newLabelForIP.label"
       />
       <button
@@ -43,7 +44,7 @@
 
 <script setup lang="ts">
 import { sourceIPLabelMap } from '@/store/settings'
-import { MinusCircleIcon, PlusIcon } from '@heroicons/vue/24/outline'
+import { ArrowRightCircleIcon, MinusCircleIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import { computed, reactive } from 'vue'
 
 const sourceIPs = computed(() => {
