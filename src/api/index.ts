@@ -259,8 +259,27 @@ export const getIPForMainlandChinaAPI = () => {
   return fetch('https://api-v3.speedtest.cn/ip')
 }
 
-export const getIPForGlobalAPI = () => {
-  return fetch('https://api.ip.sb/geoip')
+export type GlobalIPType = {
+  organization: string
+  longitude: number
+  city: string
+  timezone: string
+  isp: string
+  offset: number
+  asn: number
+  asn_organization: string
+  country: string
+  ip: string
+  latitude: number
+  postal_code: string
+  continent_code: string
+  country_code: string
+}
+
+export const getIPForGlobalAPI = async (ip = '') => {
+  const response = await fetch('https://api.ip.sb/geoip' + (ip ? `/${ip}` : ''))
+
+  return (await response.json()) as GlobalIPType
 }
 
 export const getLatencyFromUrlAPI = (url: string) => {

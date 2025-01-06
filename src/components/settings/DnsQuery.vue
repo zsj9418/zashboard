@@ -21,7 +21,7 @@
       {{ $t('DNSQuery') }}
     </button>
   </div>
-  <div class="max-h-96 overflow-y-auto">
+  <div class="flex max-h-96 flex-col gap-1 overflow-y-auto">
     <div
       class="flex gap-1"
       v-for="item in resultList"
@@ -32,10 +32,18 @@
       <div>{{ item.data }}</div>
     </div>
   </div>
+  <div
+    v-if="details"
+    class="flex gap-1"
+  >
+    {{ details?.ip }}: AS{{ details?.asn }}
+    {{ details?.asn_organization }}
+    {{ details?.country }}
+  </div>
 </template>
 
 <script lang="ts" setup>
-import { queryDNSAPI } from '@/api'
+import { getIPForGlobalAPI, queryDNSAPI, type GlobalIPType } from '@/api'
 import type { DNSQuery } from '@/types'
 import { reactive, ref } from 'vue'
 import TextInput from '../common/TextInput.vue'
@@ -44,10 +52,18 @@ const form = reactive({
   name: 'www.google.com',
   type: 'A',
 })
+const details = ref<GlobalIPType | null>(null)
+
 const resultList = ref<DNSQuery['Answer']>([])
 const query = async () => {
   const { data } = await queryDNSAPI(form)
 
   resultList.value = data.Answer
+
+  if (resultList.value?.length) {
+    details.value = await getIPForGlobalAPI(resultList.value[0].data)
+  } else {
+    details.value = null
+  }
 }
 </script>

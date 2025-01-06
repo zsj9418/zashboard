@@ -55,28 +55,9 @@ const getIPs = () => {
         mainlangChinaIP.value = `${res.data.operator} (${res.data.country})  ${res.data.ip}`
       },
     )
-  getIPForGlobalAPI()
-    .then((res) => res.json())
-    .then(
-      (res: {
-        organization: string
-        longitude: number
-        city: string
-        timezone: string
-        isp: string
-        offset: number
-        asn: number
-        asn_organization: string
-        country: string
-        ip: string
-        latitude: number
-        postal_code: string
-        continent_code: string
-        country_code: string
-      }) => {
-        globalIP.value = `${res.asn_organization} (${res.country})  ${res.ip}`
-      },
-    )
+  getIPForGlobalAPI().then((res) => {
+    globalIP.value = `${res.asn_organization} (${res.country})  ${res.ip}`
+  })
 }
 
 onMounted(() => {
