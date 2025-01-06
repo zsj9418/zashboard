@@ -24,12 +24,20 @@
         />
       </div>
       <div class="flex items-center gap-2">
-        <span
-          class="flex-1 text-sm"
+        <div
+          class="flex flex-1 items-center gap-1 text-sm"
           v-if="proxyGroup.now"
         >
-          => {{ proxyGroup.now }}
-        </span>
+          <ArrowRightCircleIcon class="h-4 w-4" />
+          <ProxyIcon
+            v-if="proxyMap[proxyGroup.now].icon"
+            :icon="proxyMap[proxyGroup.now].icon"
+            size="small"
+          />
+          <span>
+            {{ proxyGroup.now }}
+          </span>
+        </div>
         <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
     </template>
@@ -59,6 +67,7 @@
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import CollapseCard from '../common/CollapseCard.vue'

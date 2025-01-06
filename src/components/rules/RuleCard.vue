@@ -15,20 +15,30 @@
         {{ rule.size }}
       </span>
     </div>
-    <div class="flex gap-2">
-      <span :class="rule.payload && 'text-slate-500'">{{ rule.type }}</span>
-      <span>-></span>
+    <span class="flex gap-2">
       <span class="text-primary">{{ rule.proxy }}</span>
-    </div>
+      <span
+        v-if="latency > NOT_CONNECTED"
+        :class="latencyColor"
+        >{{ latency }}ms</span
+      >
+    </span>
   </div>
 </template>
 
 <script setup lang="ts">
+import { NOT_CONNECTED } from '@/config'
+import { getColorForLatency } from '@/helper'
+import { getLatencyByName } from '@/store/proxies'
 import type { Rule } from '@/types'
 import { twMerge } from 'tailwind-merge'
+import { computed } from 'vue'
 
-defineProps<{
+const props = defineProps<{
   rule: Rule
   index: number
 }>()
+
+const latency = computed(() => getLatencyByName(props.rule.proxy))
+const latencyColor = computed(() => getColorForLatency(Number(latency.value)))
 </script>

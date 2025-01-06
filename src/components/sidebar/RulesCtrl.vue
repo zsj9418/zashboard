@@ -32,7 +32,7 @@
       </div>
     </div>
     <TextInput
-      class="max-w-64"
+      class="w-full max-w-96"
       v-model="rulesFilter"
     />
   </div>
