@@ -120,7 +120,7 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, PROXY_CHAIN_DIRECTION, TABLE_SIZE } from '@/config'
 import {
   fromNow,
   getDestinationFromConnection,
@@ -129,7 +129,7 @@ import {
   prettyBytesHelper,
 } from '@/helper'
 import { renderConnections } from '@/store/connections'
-import { connectionTableColumns, tableSize } from '@/store/settings'
+import { connectionTableColumns, proxyChainDirection, tableSize } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
@@ -255,7 +255,7 @@ const columns: ColumnDef<Connection>[] = [
       return h(
         'div',
         {
-          class: 'inline-flex items-center gap-1',
+          class: `inline-flex items-center ${proxyChainDirection.value === PROXY_CHAIN_DIRECTION.REVERSE && 'flex-row-reverse justify-end'} gap-1`,
         },
         chains,
       )

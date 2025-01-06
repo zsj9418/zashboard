@@ -124,6 +124,8 @@ const zh: LANG_MESSAGE = {
   iconSize: '图标尺寸',
   iconMarginRight: '图标间距',
   allowLan: '允许局域网',
+  proxyChainDirection: '代理链方向',
+  reverse: '反向',
 }
 
 export default zh

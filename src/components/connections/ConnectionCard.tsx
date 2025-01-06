@@ -1,6 +1,6 @@
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, PROXY_CHAIN_DIRECTION } from '@/config'
 import {
   fromNow,
   getDestinationFromConnection,
@@ -8,7 +8,7 @@ import {
   getProcessFromConnection,
   prettyBytesHelper,
 } from '@/helper'
-import { connectionCardLines } from '@/store/settings'
+import { connectionCardLines, proxyChainDirection } from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
@@ -64,11 +64,17 @@ export default defineComponent<{
           <span class="w-80 grow break-all">{getProcessFromConnection(props.conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Chains]: (
-          <span class="flex w-80 grow items-center gap-1 break-all">
+          <span
+            class={[
+              'flex w-80 grow items-center gap-1 break-all',
+              proxyChainDirection.value === PROXY_CHAIN_DIRECTION.REVERSE &&
+                'flex-row-reverse justify-end',
+            ]}
+          >
             {last(props.conn.chains)}
             {last(props.conn.chains) !== first(props.conn.chains) && (
               <>
-                <ArrowRightCircleIcon class="h-4 w-4" />
+                <ArrowRightCircleIcon class="h-4 w-4"></ArrowRightCircleIcon>
                 {first(props.conn.chains)}
               </>
             )}

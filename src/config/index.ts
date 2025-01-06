@@ -125,3 +125,8 @@ export enum PROXY_CARD_SIZE {
   SMALL = 'small',
   LARGE = 'large',
 }
+
+export enum PROXY_CHAIN_DIRECTION {
+  NORMAL = 'normal',
+  REVERSE = 'reverse',
+}

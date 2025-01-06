@@ -6,6 +6,21 @@
     </div>
     <div class="card-body">
       <div class="flex items-center gap-2">
+        {{ $t('proxyChainDirection') }}:
+        <select
+          class="select select-bordered select-sm w-24"
+          v-model="proxyChainDirection"
+        >
+          <option
+            v-for="opt in Object.values(PROXY_CHAIN_DIRECTION)"
+            :key="opt"
+            :value="opt"
+          >
+            {{ $t(opt) }}
+          </option>
+        </select>
+      </div>
+      <div class="flex items-center gap-2">
         {{ $t('connectionStyle') }}:
         {{ $t('table') }}
         <input
@@ -26,6 +41,8 @@
 <script setup lang="ts">
 import ConnectionCardSettings from '@/components/settings/ConnectionCardSettings.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
+import { PROXY_CHAIN_DIRECTION } from '@/config'
+import { proxyChainDirection, useConnectionCard } from '@/store/settings'
 import TableSettings from '@/components/settings/TableSettings.vue'
-import { useConnectionCard } from '@/store/settings'
+
 </script>

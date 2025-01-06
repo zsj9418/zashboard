@@ -126,6 +126,8 @@ const ru: LANG_MESSAGE = {
   iconSize: 'Размер иконки',
   iconMarginRight: 'Отступ правой иконки',
   allowLan: 'Разрешить локальную сеть',
+  proxyChainDirection: 'Направление цепочки прокси',
+  reverse: 'Обратное',
 }
 
 export default ru

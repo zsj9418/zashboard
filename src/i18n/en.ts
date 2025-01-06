@@ -123,6 +123,8 @@ const en = {
   iconSize: 'Icon Size',
   iconMarginRight: 'Icon Margin Right',
   allowLan: 'Allow Lan',
+  proxyChainDirection: 'Proxy Chain Direction',
+  reverse: 'Reverse',
 }
 
 export type LANG_MESSAGE = typeof en

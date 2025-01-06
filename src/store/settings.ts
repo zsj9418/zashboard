@@ -3,6 +3,7 @@ import {
   FONTS,
   LANG,
   PROXY_CARD_SIZE,
+  PROXY_CHAIN_DIRECTION,
   PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
   TABLE_SIZE,
@@ -73,6 +74,10 @@ export const iconMarginRight = useStorage('config/icon-margin-right', 4)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', window.innerWidth < 640)
+export const proxyChainDirection = useStorage(
+  'config/proxy-chain-direction',
+  PROXY_CHAIN_DIRECTION.NORMAL,
+)
 export const tableSize = useStorage<TABLE_SIZE>('config/connecticon-table-size', TABLE_SIZE.SMALL)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
   'config/connection-table-columns',
