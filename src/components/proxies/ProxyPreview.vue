@@ -6,8 +6,10 @@
     <div
       v-for="node in nodesLatency"
       :key="node.name"
-      class="flex h-4 w-4 items-center justify-center rounded-full hover:scale-110"
+      class="flex h-4 w-4 items-center justify-center rounded-full transition hover:scale-110"
       :class="getBgColor(node.latency)"
+      ref="dotsRef"
+      @mouseenter="(e) => makeTippy(e, node)"
       @click.stop="$emit('nodeclick', node.name)"
     >
       <div
@@ -51,6 +53,7 @@
 
 <script setup lang="ts">
 import { NOT_CONNECTED, PROXY_PREVIEW_TYPE } from '@/config'
+import { useTooltip } from '@/helper/tooltip'
 import { getLatencyByName } from '@/store/proxies'
 import { lowLatency, mediumLatency, proxyPreviewType } from '@/store/settings'
 import { computed } from 'vue'
@@ -59,6 +62,12 @@ const props = defineProps<{
   nodes: string[]
   now?: string
 }>()
+
+const { showTip } = useTooltip()
+
+const makeTippy = (e: Event, node: { name: string; latency: number }) => {
+  showTip(e, `${node.name} (${node.latency}ms)`)
+}
 
 const showDots = computed(() => {
   return (
@@ -104,3 +113,10 @@ const notConnectedCounts = computed(() => {
   return nodesLatency.value.filter((node) => node.latency === NOT_CONNECTED).length
 })
 </script>
+
+<style scoped>
+.tooltip:before {
+  left: 0;
+  transform: translateX(-10px);
+}
+</style>

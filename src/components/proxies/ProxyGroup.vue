@@ -8,12 +8,9 @@
             :icon="proxyGroup.icon"
           />
           <span class="text-lg font-medium">{{ proxyGroup.name }}</span>
-          <span
-            class="text-sm"
-            v-if="proxyGroup.now"
+          <span class="flex-1 text-xs text-slate-500"
+            >{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</span
           >
-            -> {{ proxyGroup.now }}
-          </span>
         </div>
         <LatencyTag
           :class="
@@ -26,9 +23,14 @@
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div class="flex items-center gap-2 text-xs text-slate-500">
-        <div class="flex-1">{{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</div>
-        <div class="shrink-0">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+      <div class="flex items-center gap-2">
+        <span
+          class="flex-1 text-sm"
+          v-if="proxyGroup.now"
+        >
+          => {{ proxyGroup.now }}
+        </span>
+        <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
     </template>
     <template v-slot:preview>

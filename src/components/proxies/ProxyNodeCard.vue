@@ -5,12 +5,9 @@
       twMerge(
         'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
-        isTruncated && 'tooltip tooltip-bottom',
         isSmallCard ? 'p-1' : 'p-2',
       )
     "
-    :data-tip="node.name"
-    @mouseenter="checkTruncation"
   >
     <div class="flex w-full flex-1 items-center gap-1">
       <ProxyIcon
@@ -22,7 +19,7 @@
       />
       <span
         :class="twMerge('text-sm', truncateProxyName && 'truncate')"
-        ref="nameRef"
+        @mouseenter="checkTruncation"
       >
         {{ node.name }}
       </span>
@@ -45,6 +42,7 @@
 
 <script setup lang="ts">
 import { PROXY_CARD_SIZE } from '@/config'
+import { useTooltip } from '@/helper/tooltip'
 import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { IPv6test, proxyCardSize, truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
@@ -57,13 +55,13 @@ const props = defineProps<{
   active?: boolean
 }>()
 
-const nameRef = ref<HTMLDivElement | null>(null)
-const isTruncated = ref(false)
-const checkTruncation = () => {
-  if (nameRef.value) {
-    const { scrollWidth, clientWidth } = nameRef.value
+const { showTip } = useTooltip()
+const checkTruncation = (e: Event) => {
+  const target = e.target as HTMLElement
+  const { scrollWidth, clientWidth } = target
 
-    isTruncated.value = scrollWidth > clientWidth
+  if (scrollWidth > clientWidth) {
+    showTip(e, target.innerText)
   }
 }
 
