@@ -125,6 +125,7 @@ const ru: LANG_MESSAGE = {
   transparent: 'Прозрачность',
   iconSize: 'Размер иконки',
   iconMarginRight: 'Отступ правой иконки',
+  allowLan: 'Разрешить локальную сеть',
 }
 
 export default ru

@@ -8,7 +8,7 @@
     "
   >
     <BoltIcon
-      v-if="latency === NOT_CONNECTED"
+      v-if="latency === NOT_CONNECTED || !latency"
       class="h-3 w-3 text-base-content"
     />
     <div

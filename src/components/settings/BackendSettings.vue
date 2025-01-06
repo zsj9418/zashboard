@@ -13,18 +13,6 @@
         <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
           <div
             class="flex items-center gap-2"
-            v-if="configs?.tun"
-          >
-            {{ $t('tunMode') }}:
-            <input
-              class="toggle"
-              type="checkbox"
-              v-model="configs.tun.enable"
-              @change="hanlderTunModeChange"
-            />
-          </div>
-          <div
-            class="flex items-center gap-2"
             v-for="portConfig in portList"
             :key="portConfig.key"
           >
@@ -36,6 +24,37 @@
               @change="
                 updateConfigs({ [portConfig.key]: Number(configs[portConfig.key as keyof Config]) })
               "
+            />
+          </div>
+        </div>
+        <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
+          <div
+            class="flex items-center gap-2"
+            v-if="configs?.tun"
+          >
+            {{ $t('tunMode') }}:
+            <input
+              class="toggle"
+              type="checkbox"
+              v-model="configs.tun.enable"
+              @change="hanlderTunModeChange"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            {{ $t('allowLan') }}:
+            <input
+              class="toggle"
+              type="checkbox"
+              v-model="configs['allow-lan']"
+              @change="handlerAllowLanChange"
+            />
+          </div>
+          <div class="flex items-center gap-2">
+            {{ $t('autoUpgrade') }}:
+            <input
+              class="toggle"
+              type="checkbox"
+              v-model="autoUpgradeCore"
             />
           </div>
         </div>
@@ -101,6 +120,7 @@ import DnsQuery from '@/components/settings/DnsQuery.vue'
 import { configs, fetchConfigs, updateConfigs } from '@/store/config'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
+import { autoUpgradeCore } from '@/store/settings'
 import type { Config } from '@/types'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
@@ -177,5 +197,8 @@ const handlerClickReloadConfigs = async () => {
 
 const hanlderTunModeChange = async () => {
   await updateConfigs({ tun: { enable: configs.value?.tun.enable } })
+}
+const handlerAllowLanChange = async () => {
+  await updateConfigs({ ['allow-lan']: configs.value?.['allow-lan'] })
 }
 </script>

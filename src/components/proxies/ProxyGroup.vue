@@ -38,6 +38,10 @@
             {{ proxyGroup.now }}
           </span>
         </div>
+        <span
+          v-else
+          class="flex-1"
+        ></span>
         <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
     </template>

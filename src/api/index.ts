@@ -2,6 +2,7 @@ import { useTip } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
+import { autoUpgradeCore } from '@/store/settings'
 import { activeBackend, activeUuid, removeBackend } from '@/store/setup'
 import type { Backend, Config, DNSQuery, Proxy, ProxyProvider, Rule, RuleProvider } from '@/types'
 import axios from 'axios'
@@ -48,6 +49,10 @@ watch(
       version.value = data.version
       if (isSingBox.value) return
       isCoreUpdateAvailable.value = await fetchBackendUpdateAvailableAPI()
+
+      if (isCoreUpdateAvailable.value && autoUpgradeCore.value) {
+        upgradeCoreAPI()
+      }
     }
   },
   { immediate: true },

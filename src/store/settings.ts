@@ -36,7 +36,7 @@ export const font = useStorage<FONTS>('config/font', FONTS.MI_SANS)
 export const customBackgroundURL = useStorage('config/custom-background-image', '')
 export const dashboardTransparent = useStorage('config/dashboard-transparent', 90)
 export const autoUpgrade = useStorage('config/auto-upgrade', false)
-
+export const autoUpgradeCore = useStorage('config/auto-upgrade-core', false)
 // overview
 export const splitOverviewPage = useStorage('config/split-overview-page', false)
 export const showIPAndConnectionInfo = useStorage('config/show-ip-and-connection-info', true)

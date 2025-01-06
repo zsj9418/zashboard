@@ -122,6 +122,7 @@ const en = {
   transparent: 'Transparent',
   iconSize: 'Icon Size',
   iconMarginRight: 'Icon Margin Right',
+  allowLan: 'Allow Lan',
 }
 
 export type LANG_MESSAGE = typeof en

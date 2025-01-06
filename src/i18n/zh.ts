@@ -123,6 +123,7 @@ const zh: LANG_MESSAGE = {
   transparent: '透明度',
   iconSize: '图标尺寸',
   iconMarginRight: '图标间距',
+  allowLan: '允许局域网',
 }
 
 export default zh
