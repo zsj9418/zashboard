@@ -53,6 +53,7 @@
 
 <script setup lang="ts">
 import { NOT_CONNECTED, PROXY_PREVIEW_TYPE } from '@/config'
+import { getColorForLatency } from '@/helper'
 import { useTooltip } from '@/helper/tooltip'
 import { getLatencyByName } from '@/store/proxies'
 import { lowLatency, mediumLatency, proxyPreviewType } from '@/store/settings'
@@ -66,7 +67,22 @@ const props = defineProps<{
 const { showTip } = useTooltip()
 
 const makeTippy = (e: Event, node: { name: string; latency: number }) => {
-  showTip(e, `${node.name} (${node.latency}ms)`)
+  const tag = document.createElement('div')
+  const name = document.createElement('div')
+
+  name.textContent = node.name
+  tag.append(name)
+
+  if (node.latency !== NOT_CONNECTED) {
+    const latency = document.createElement('div')
+
+    latency.textContent = `${node.latency}ms`
+    latency.classList.add(getColorForLatency(node.latency))
+    tag.append(latency)
+  }
+
+  tag.classList.add('flex', 'items-center', 'gap-2')
+  showTip(e, tag)
 }
 
 const showDots = computed(() => {

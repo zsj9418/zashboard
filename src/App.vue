@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { XCircleIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
-import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useTip } from './composables/tip'
 import { FONTS } from './config'
@@ -9,22 +9,7 @@ import { getBase64FromIndexedDB, LOCAL_IMAGE } from './helper/utils'
 import { customBackgroundURL, dashboardTransparent, font, theme } from './store/settings'
 
 const app = ref<HTMLElement>()
-const setThemeColor = () => {
-  const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
-  const metaThemeColor = document.querySelector('meta[name="theme-color"]')
-  if (metaThemeColor) {
-    metaThemeColor.setAttribute('content', themeColor)
-  }
-}
 const { tipContent, tipShowModel } = useTip()
-
-onMounted(() => {
-  setThemeColor()
-  watch(theme, () => {
-    nextTick(setThemeColor)
-  })
-})
-
 const fontClassMap = {
   [FONTS.MI_SANS]: 'font-MiSans',
   [FONTS.SARASA_UI]: 'font-SarasaUI',
@@ -58,13 +43,33 @@ const backgroundImage = computed(() => {
   }
   return customBackgroundURL.value + `?v=${date}`
 })
+
+const setThemeColor = () => {
+  const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]')
+  if (metaThemeColor) {
+    metaThemeColor.setAttribute('content', themeColor)
+  }
+}
+
+onMounted(() => {
+  watch(
+    theme,
+    () => {
+      document.body.setAttribute('data-theme', theme.value)
+      setThemeColor()
+    },
+    {
+      immediate: true,
+    },
+  )
+})
 </script>
 
 <template>
   <div
     ref="app"
     :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} custom-background-${dashboardTransparent} ${customBackgroundURL && 'custom-background bg-cover'}`"
-    :data-theme="theme"
     :style="`background-image: url('${backgroundImage}');`"
   >
     <RouterView />
