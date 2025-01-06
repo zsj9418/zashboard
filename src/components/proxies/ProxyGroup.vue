@@ -35,6 +35,8 @@
       <ProxyPreview
         :nodes="sortedProxies"
         :now="proxyGroup.now"
+        :groupName="proxyGroup.name"
+        @nodeclick="selectProxy(proxyGroup.name, $event)"
       />
     </template>
     <template v-slot:content>

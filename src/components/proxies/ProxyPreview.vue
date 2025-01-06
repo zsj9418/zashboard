@@ -6,8 +6,9 @@
     <div
       v-for="node in nodesLatency"
       :key="node.name"
-      class="flex h-4 w-4 items-center justify-center rounded-full"
+      class="flex h-4 w-4 items-center justify-center rounded-full hover:scale-110"
       :class="getBgColor(node.latency)"
+      @click.stop="$emit('nodeclick', node.name)"
     >
       <div
         class="h-2 w-2 rounded-full bg-white"
