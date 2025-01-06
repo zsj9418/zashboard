@@ -1,13 +1,13 @@
 <template>
   <div
     ref="parentRef"
-    class="h-full overflow-y-auto p-2"
+    class="h-full overflow-y-auto bg-clip-content p-2"
   >
     <div :style="{ height: `${totalSize}px` }">
-      <table :class="`table table-zebra bg-base-100 ${sizeOfTable} rounded-none shadow-md`">
+      <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">
         <thead class="sticky -top-2 z-10 bg-base-100">
           <tr
-            v-for="headerGroup in table.getHeaderGroups()"
+            v-for="headerGroup in tanstackTable.getHeaderGroups()"
             :key="headerGroup.id"
           >
             <th
@@ -58,7 +58,7 @@
               height: `${virtualRow.size}px`,
               transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
             }"
-            class="hover:!bg-primary hover:text-primary-content"
+            class="bg-base-100 hover:!bg-primary hover:text-primary-content"
           >
             <td
               v-for="cell in rows[virtualRow.index].getVisibleCells()"
@@ -241,10 +241,10 @@ const columns: ColumnDef<Connection>[] = [
       const chains: VNode[] = []
 
       row.original.chains.forEach((chain, index) => {
-        chains.push(h('span', chain))
+        chains.unshift(h('span', chain))
 
         if (index < row.original.chains.length - 1) {
-          chains.push(
+          chains.unshift(
             h(ArrowRightCircleIcon, {
               class: 'h-4 w-4',
             }),
@@ -321,7 +321,7 @@ const grouping = ref<GroupingState>([])
 const expanded = ref<ExpandedState>({})
 const sorting = useStorage<SortingState>('config/table-sorting', [])
 
-const table = useVueTable({
+const tanstackTable = useVueTable({
   get data() {
     return renderConnections.value
   },
@@ -374,7 +374,7 @@ const table = useVueTable({
 })
 
 const rows = computed(() => {
-  return table.getRowModel().rows
+  return tanstackTable.getRowModel().rows
 })
 
 const parentRef = ref<HTMLElement | null>(null)

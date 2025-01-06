@@ -10,29 +10,37 @@
 @layer components {
   .card,
   .collapse {
-    background-color: var(--fallback-b1, oklch(var(--b1)));
+    background-color: var(--fallback-b1, oklch(var(--b1) / var(--tw-bg-opacity, 1)));
     @apply rounded-xl shadow-md;
+  }
+
+  .table tr {
+    @apply border-b-0;
   }
 }
 
 @for $i from 0 to 100 {
   .custom-background.custom-background-$(i) {
+    .bg-base-100,
+    .bg-base-200,
+    .bg-primary,
+    .bg-neutral,
     .card,
     .collapse,
-    .bg-base-100,
-    .table {
-      background-color: var(--fallback-b1, oklch(var(--b1) / calc($(i) / 100)));
+    .table,
+    .drawer-side,
+    .tabs,
+    .input,
+    .btn,
+    .select,
+    .menu .active,
+    .table tbody tr {
+      --tw-border-opacity: calc($(i) / 100);
+      --tw-bg-opacity: calc($(i) / 100);
     }
 
     .drawer-content.bg-base-200\/40 {
       background-color: transparent;
-    }
-
-    .drawer-side,
-    .tabs,
-    .bg-base-200,
-    .table tbody tr:nth-child(even) {
-      background-color: var(--fallback-b2, oklch(var(--b2) / calc($(i) / 100)));
     }
   }
 }
