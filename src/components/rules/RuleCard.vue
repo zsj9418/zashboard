@@ -16,7 +16,7 @@
         {{ rule.size }}
       </span>
     </div>
-    <div class="flex items-center gap-2">
+    <div class="flex items-center gap-1">
       <ProxyName :name="rule.proxy" />
       <template v-if="proxyNode?.now">
         <ArrowRightCircleIcon class="h-4 w-4" />
@@ -25,6 +25,7 @@
       <span
         v-if="latency !== NOT_CONNECTED"
         :class="latencyColor"
+        class="ml-1"
         >{{ latency }}ms</span
       >
     </div>
