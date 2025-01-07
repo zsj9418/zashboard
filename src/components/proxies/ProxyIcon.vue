@@ -8,14 +8,15 @@
   <img
     v-else
     :style="style"
-    :src="icon"
+    :src="cachedIcon"
   />
 </template>
 
 <script setup lang="ts">
+import { getIconFromIndexedDB, saveIconToIndexedDB } from '@/helper/utils'
 import { iconMarginRight, iconSize } from '@/store/settings'
 import DOMPurify from 'dompurify'
-import { computed } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 
 const props = defineProps<{
   icon: string
@@ -37,5 +38,42 @@ const isDom = computed(() => {
 const pureDom = computed(() => {
   if (!isDom.value) return
   return DOMPurify.sanitize(props.icon.replace(DOM_STARTS_WITH, ''))
+})
+
+const cachedIcon = ref('')
+
+const fetchAndCacheIcon = async (key: string, iconUrl: string) => {
+  const response = await fetch(iconUrl)
+  const blob = await response.blob()
+  const reader = new FileReader()
+  reader.onload = async () => {
+    const dataUrl = reader.result as string
+    await saveIconToIndexedDB(key, dataUrl)
+    cachedIcon.value = dataUrl
+  }
+  reader.readAsDataURL(blob)
+}
+
+const loadIcon = async () => {
+  const key = props.icon
+  try {
+    const cachedData = await getIconFromIndexedDB(key)
+    if (cachedData) {
+      cachedIcon.value = cachedData
+    } else {
+      await fetchAndCacheIcon(key, key)
+    }
+  } catch (error) {
+    console.error('Fallback to original icon:', error)
+    cachedIcon.value = props.icon
+  }
+}
+
+onMounted(() => {
+  if (!isDom.value) {
+    loadIcon()
+  } else {
+    cachedIcon.value = props.icon
+  }
 })
 </script>

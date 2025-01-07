@@ -111,7 +111,12 @@
           >
             {{ $t('upgradeUI') }}
           </button>
-          <div class="sm:hidden"></div>
+          <button
+            class="btn btn-sm"
+            @click="clearIconCache"
+          >
+            {{ $t('clearIconCache') }}
+          </button>
         </template>
 
         <button
@@ -137,7 +142,12 @@ import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/config'
 import { exportSettings, importSettings } from '@/helper'
-import { deleteBase64FromIndexedDB, LOCAL_IMAGE, saveBase64ToIndexedDB } from '@/helper/utils'
+import {
+  clearIconFromIndexedDB,
+  deleteBase64FromIndexedDB,
+  LOCAL_IMAGE,
+  saveBase64ToIndexedDB,
+} from '@/helper/utils'
 import {
   autoUpgrade,
   customBackgroundURL,
@@ -183,6 +193,10 @@ const handlerClickUpgradeUI = async () => {
   } catch {
     isUIUpgrading.value = false
   }
+}
+
+const clearIconCache = async () => {
+  clearIconFromIndexedDB()
 }
 
 const themes = [
