@@ -18,33 +18,32 @@
         :horizontal="true"
       />
       <div class="relative h-0 flex-1">
-        <RouterView class="absolute h-full w-full" />
-      </div>
-      <div :class="`${isPWA ? 'h-20' : 'h-12'} shrink-0 md:hidden`"></div>
-      <div
-        ref="navBarRef"
-        :class="`fixed bottom-0 z-30 w-full bg-base-200 md:hidden ${isPWA ? 'h-20 pb-8' : 'h-12'}`"
-      >
-        <div class="flex h-12 w-full items-center justify-center gap-1 p-2">
-          <ul class="menu menu-horizontal flex flex-1">
-            <li
-              v-for="r in renderRoutes"
-              :key="r"
-              class="flex-1"
-            >
-              <a
-                class="flex items-center justify-center"
-                :class="r === route.name ? 'active' : 'inactive'"
-                :href="`#${r}`"
-              >
-                <component
-                  :is="ROUTE_ICON_MAP[r]"
-                  class="h-5 w-5"
-                />
-              </a>
-            </li>
-          </ul>
+        <div class="absolute flex h-full w-full flex-col overflow-y-auto">
+          <RouterView />
+          <div
+            class="shrink-0 md:hidden"
+            :class="isPWA ? 'max-md:h-[5.5rem]' : 'max-md:h-14'"
+          />
         </div>
+      </div>
+      <div
+        :class="`btm-nav glass z-30 bg-none md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`"
+        ref="swiperRef"
+      >
+        <button
+          v-for="r in renderRoutes"
+          :key="r"
+          @click="router.push({ name: r })"
+          :class="r === route.name ? 'active bg-inherit' : ''"
+        >
+          <component
+            :is="ROUTE_ICON_MAP[r]"
+            class="h-5 w-5"
+          />
+          <span class="text-xs">
+            {{ $t(r) }}
+          </span>
+        </button>
       </div>
     </div>
 
@@ -117,8 +116,8 @@ const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
 })
 
-const navBarRef = ref()
-const { direction } = useSwipe(navBarRef, { threshold: 15 })
+const swiperRef = ref()
+const { direction } = useSwipe(swiperRef, { threshold: 15 })
 
 const getNextRouteName = () => {
   const routeName = route.name as ROUTE_NAME

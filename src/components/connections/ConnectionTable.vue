@@ -1,7 +1,10 @@
 <template>
   <div
     ref="parentRef"
-    class="h-full overflow-y-auto bg-clip-content p-2"
+    class="h-full overflow-y-auto p-2"
+    @touchstart.stop
+    @touchmove.stop
+    @touchend.stop
   >
     <div :style="{ height: `${totalSize}px` }">
       <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">

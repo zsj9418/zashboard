@@ -46,6 +46,13 @@ export const initConnections = () => {
       data.connections?.map((connection) => {
         const preConnection = activeConnections.value.find((c) => c.id === connection.id)
 
+        if (
+          (connection.metadata.destinationPort === '443' || connection.metadata.sniffHost) &&
+          connection.metadata.network === 'udp'
+        ) {
+          connection.metadata.network = 'quic'
+        }
+
         if (!preConnection) {
           return {
             ...connection,

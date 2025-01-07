@@ -99,6 +99,7 @@ export type ConnectionRawMessage = {
     destinationPort: string
     dnsMode: string
     host: string
+    sniffHost: string
     processPath: string
     process: string
     sourceIP: string

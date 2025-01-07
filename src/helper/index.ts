@@ -110,13 +110,7 @@ export const getDestinationFromConnection = (connection: Connection) => {
 }
 
 export const getNetworkTypeFromConnection = (connection: Connection) => {
-  const network = connection.metadata.network.toLowerCase()
-
-  if (connection.metadata.destinationPort === '443' && network === 'udp') {
-    return `${connection.metadata.type} | quic`
-  }
-
-  return `${connection.metadata.type} | ${network}`
+  return `${connection.metadata.type} | ${connection.metadata.network}`
 }
 
 export const getToolTipForParams = (

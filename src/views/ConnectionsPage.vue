@@ -1,22 +1,20 @@
 <template>
-  <div class="flex flex-col">
-    <ConnectionCardList v-if="useConnectionCard" />
-    <ConnectionTable v-else />
-    <dialog
-      ref="modalRef"
-      class="modal"
+  <ConnectionCardList v-if="useConnectionCard" />
+  <ConnectionTable v-else />
+  <dialog
+    ref="modalRef"
+    class="modal"
+  >
+    <div class="modal-box">
+      <VueJsonPretty :data="infoConn" />
+    </div>
+    <form
+      method="dialog"
+      class="modal-backdrop"
     >
-      <div class="modal-box">
-        <VueJsonPretty :data="infoConn" />
-      </div>
-      <form
-        method="dialog"
-        class="modal-backdrop"
-      >
-        <button>close</button>
-      </form>
-    </dialog>
-  </div>
+      <button>close</button>
+    </form>
+  </dialog>
 </template>
 
 <script setup lang="ts">

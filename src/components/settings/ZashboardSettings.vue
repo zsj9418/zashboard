@@ -79,6 +79,9 @@
           <div
             class="flex items-center gap-2"
             v-if="customBackgroundURL"
+            @touchstart.stop
+            @touchmove.stop
+            @touchend.stop
           >
             {{ $t('transparent') }}:
             <input
