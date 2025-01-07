@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import { defineProps, ref, watch } from 'vue'
+import { computed, defineProps } from 'vue'
 
 const props = defineProps({
   label: {
@@ -26,13 +26,10 @@ const props = defineProps({
     required: true,
   },
 })
-
-const inputValue = ref(props.modelValue)
-
 const emit = defineEmits(['update:modelValue'])
-
-watch(inputValue, (newValue) => {
-  emit('update:modelValue', newValue)
+const inputValue = computed({
+  get: () => props.modelValue,
+  set: (value) => emit('update:modelValue', value),
 })
 
 const clearInput = () => {

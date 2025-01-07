@@ -5,6 +5,7 @@ import {
   fromNow,
   getDestinationFromConnection,
   getIPLabelFromMap,
+  getNetworkTypeFromConnection,
   getProcessFromConnection,
   prettyBytesHelper,
 } from '@/helper'
@@ -50,9 +51,7 @@ export default defineComponent<{
           <span class="w-80 grow break-all">{props.conn.metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
-          <span class="w-80 grow break-all">
-            {props.conn.metadata.type} | {props.conn.metadata.network}
-          </span>
+          <span class="w-80 grow break-all">{getNetworkTypeFromConnection(props.conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: (
           <span class="w-80 grow break-all">

@@ -23,17 +23,11 @@
   .custom-background.custom-background-$(i) {
     .bg-base-100,
     .bg-base-200,
-    .bg-primary,
-    .bg-neutral,
     .card,
     .collapse,
     .table,
     .drawer-side,
     .tabs,
-    .input,
-    .btn,
-    .select,
-    .menu .active,
     .table tbody tr {
       --tw-border-opacity: calc($(i) / 100);
       --tw-bg-opacity: calc($(i) / 100);

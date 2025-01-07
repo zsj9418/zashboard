@@ -125,6 +125,7 @@ import {
   fromNow,
   getDestinationFromConnection,
   getIPLabelFromMap,
+  getNetworkTypeFromConnection,
   getProcessFromConnection,
   prettyBytesHelper,
 } from '@/helper'
@@ -212,7 +213,7 @@ const columns: ColumnDef<Connection>[] = [
   {
     header: () => t('type'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Type,
-    accessorFn: (original) => `${original.metadata.type} | ${original.metadata.network}`,
+    accessorFn: (original) => getNetworkTypeFromConnection(original),
   },
   {
     header: () => t('process'),

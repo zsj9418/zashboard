@@ -56,10 +56,10 @@
           <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
             <span class="shrink-0"> {{ $t('customBackgroundURL') }}: </span>
             <div class="join">
-              <input
-                class="input input-sm join-item input-bordered w-64"
+              <TextInput
+                class="join-item"
                 v-model="customBackgroundURL"
-                @change="handlerBackgroundURLChange"
+                @update:modelValue="handlerBackgroundURLChange"
               />
               <button
                 class="btn join-item btn-sm"
@@ -158,6 +158,7 @@ import {
 import { ArrowUpCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
+import TextInput from '../common/TextInput.vue'
 
 const inputFileRef = ref()
 const handlerClickUpload = () => {
