@@ -9,7 +9,7 @@ export const useTooltip = () => {
       content,
       placement: 'top',
       animation: 'scale',
-      appendTo: document.body,
+      appendTo: 'parent',
       allowHTML: true,
       onHidden: () => {
         tippyInstance?.destroy()
