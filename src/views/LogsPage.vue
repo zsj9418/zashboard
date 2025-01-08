@@ -4,7 +4,10 @@
       {{ $t('noContent') }}
     </div>
   </template>
-  <VirtualScroller :data="renderLogs">
+  <VirtualScroller
+    :data="renderLogs"
+    :size="64"
+  >
     <template v-slot="{ item }: { item: LogWithSeq }">
       <div class="card mb-1 block p-2 text-sm">
         <span>{{ item.seq }}</span>

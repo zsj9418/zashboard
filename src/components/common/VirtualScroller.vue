@@ -36,17 +36,23 @@ import { useVirtualizer } from '@tanstack/vue-virtual'
 import { computed, ref } from 'vue'
 
 const parentRef = ref<HTMLElement | null>(null)
-const props = defineProps<{
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any[]
-}>()
-
+const props = withDefaults(
+  defineProps<{
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    data: any[]
+    size?: number
+  }>(),
+  {
+    data: () => [],
+    size: 64,
+  },
+)
 const virutalOptions = computed(() => {
   return {
     count: props.data.length,
     getScrollElement: () => parentRef.value,
-    estimateSize: () => 55,
-    overscan: 24,
+    estimateSize: () => props.size,
+    overscan: 36,
   }
 })
 

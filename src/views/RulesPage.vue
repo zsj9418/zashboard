@@ -9,8 +9,21 @@
       />
     </div>
   </template>
+  <template v-else-if="renderRules.length < 200">
+    <div class="flex flex-col overflow-x-hidden p-2">
+      <RuleCard
+        v-for="rule in renderRules"
+        :key="rule.payload"
+        :rule="rule"
+        :index="rules.indexOf(rule) + 1"
+      />
+    </div>
+  </template>
   <template v-else>
-    <VirtualScroller :data="renderRules">
+    <VirtualScroller
+      :data="renderRules"
+      :size="64"
+    >
       <template v-slot="{ item: rule }: { item: Rule }">
         <RuleCard
           :key="rule.payload"
