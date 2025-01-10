@@ -232,6 +232,11 @@ const columns: ColumnDef<Connection>[] = [
       }:${original.metadata.destinationPort}`,
   },
   {
+    header: () => t('sniffHost'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost,
+    accessorFn: (original) => original.metadata.sniffHost || '-',
+  },
+  {
     header: () => t('rule'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Rule,
     accessorFn: (original) =>

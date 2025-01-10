@@ -6,7 +6,7 @@
         data-tip="api-v3.speedtest.cn"
         >{{ $t('chinaIP') }}</span
       >
-      : {{ mainlangChinaIP }}
+      : {{ mainlandChinaIP }}
     </div>
     <div>
       <span
@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { getIPForGlobalAPI, getIPForMainlandChinaAPI } from '@/api'
-import { globalIP, mainlangChinaIP } from '@/composables/overview'
+import { globalIP, mainlandChinaIP } from '@/composables/overview'
 import { autoIPCheck } from '@/store/settings'
 import { BoltIcon } from '@heroicons/vue/24/outline'
 import { onMounted } from 'vue'
@@ -52,7 +52,7 @@ const getIPs = () => {
         }
         msg: string
       }) => {
-        mainlangChinaIP.value = `${res.data.operator} (${res.data.country})  ${res.data.ip}`
+        mainlandChinaIP.value = `${res.data.operator} (${res.data.country})  ${res.data.ip}`
       },
     )
   getIPForGlobalAPI().then((res) => {
@@ -61,7 +61,7 @@ const getIPs = () => {
 }
 
 onMounted(() => {
-  if (autoIPCheck.value && [mainlangChinaIP, globalIP].some((item) => item.value === '')) {
+  if (autoIPCheck.value && [mainlandChinaIP, globalIP].some((item) => item.value === '')) {
     getIPs()
   }
 })

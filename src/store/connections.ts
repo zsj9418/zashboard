@@ -164,6 +164,7 @@ export const renderConnections = computed(() => {
           conn.metadata.destinationPort,
           conn.metadata.sourceIP,
           conn.metadata.sourcePort,
+          conn.metadata.sniffHost,
           conn.metadata.processPath,
           conn.metadata.type,
           conn.metadata.network,

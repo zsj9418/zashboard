@@ -129,6 +129,7 @@ const ru: LANG_MESSAGE = {
   allowLan: 'Разрешить локальную сеть',
   proxyChainDirection: 'Направление цепочки прокси',
   reverse: 'Обратное',
+  sniffHost: 'Sniff Host',
 }
 
 export default ru

@@ -126,6 +126,7 @@ const en = {
   allowLan: 'Allow Lan',
   proxyChainDirection: 'Proxy Chain Direction',
   reverse: 'Reverse',
+  sniffHost: 'Sniff Host',
 }
 
 export type LANG_MESSAGE = typeof en

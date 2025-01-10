@@ -50,6 +50,9 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: (
           <span class="w-80 grow break-all">{props.conn.metadata.sourcePort}</span>
         ),
+        [CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost]: (
+          <span class="w-80 grow break-all">{props.conn.metadata.sniffHost || '-'}</span>
+        ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
           <span class="w-80 grow break-all">{getNetworkTypeFromConnection(props.conn)}</span>
         ),

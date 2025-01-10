@@ -127,6 +127,7 @@ const zh: LANG_MESSAGE = {
   allowLan: '允许局域网',
   proxyChainDirection: '代理链方向',
   reverse: '反向',
+  sniffHost: '嗅探主机',
 }
 
 export default zh

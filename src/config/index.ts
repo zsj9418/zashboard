@@ -38,6 +38,7 @@ export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   ConnectTime = 'connectTime',
   SourceIP = 'sourceIP',
   SourcePort = 'sourcePort',
+  SniffHost = 'sniffHost',
   Destination = 'destination',
 }
 
