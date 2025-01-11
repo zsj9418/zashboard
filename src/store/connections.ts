@@ -3,7 +3,7 @@ import { CONNECTION_TAB_TYPE, SORT_DIRECTION, SORT_TYPE } from '@/config'
 import type { Connection, ConnectionRawMessage } from '@/types'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'
-import _, { differenceWith } from 'lodash'
+import { differenceWith } from 'lodash'
 import { computed, ref, watch } from 'vue'
 import { useConnectionCard } from './settings'
 
@@ -129,6 +129,7 @@ export const connectionSortDirection = useStorage<SORT_DIRECTION>(
   SORT_DIRECTION.ASC,
 )
 export const connectionFilter = ref('')
+export const sourceIPFilter = ref(null)
 export const isPaused = ref(false)
 
 export const renderConnections = computed(() => {
@@ -190,10 +191,4 @@ export const renderConnections = computed(() => {
 
       return sortResult
     })
-})
-
-export const sourceIPFilter = ref(null)
-
-export const sourceIPs = computed(() => {
-  return _.uniq(activeConnections.value.map((conn) => conn.metadata.sourceIP)).sort()
 })

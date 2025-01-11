@@ -23,18 +23,30 @@
 
 <script setup lang="ts">
 import { getIPLabelFromMap } from '@/helper'
-import { sourceIPFilter, sourceIPs } from '@/store/connections'
-import { computed } from 'vue'
+import { renderConnections, sourceIPFilter } from '@/store/connections'
+import { isEqual, uniq } from 'lodash'
+import { computed, ref, watch } from 'vue'
 defineProps<{
   horizontal?: boolean
 }>()
 
-const sourceIPOpts = computed(() => {
-  return sourceIPs.value.map((ip) => {
-    return {
+const sourceIPs = computed(() => {
+  return uniq(renderConnections.value.map((conn) => conn.metadata.sourceIP)).sort()
+})
+const sourceIPOpts = ref<{ label: string; value: string }[]>([])
+
+// do not use computed here for firefox
+watch(
+  sourceIPs,
+  (value, oldValue) => {
+    if (isEqual(value, oldValue)) return
+    sourceIPOpts.value = sourceIPs.value.map((ip) => ({
       label: getIPLabelFromMap(ip),
       value: ip,
-    }
-  })
-})
+    }))
+  },
+  {
+    immediate: true,
+  },
+)
 </script>

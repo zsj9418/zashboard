@@ -1,25 +1,6 @@
 <template>
   <div :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row flex-wrap')">
-    <div class="tabs-boxed tabs tabs-sm">
-      <a
-        role="tab"
-        :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.ACTIVE && 'tab-active')"
-        @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.ACTIVE)"
-        >{{ $t('activeConnections') }}
-        <template v-if="connectionTabShow === CONNECTION_TAB_TYPE.ACTIVE">
-          ({{ renderConnections.length }})
-        </template>
-      </a>
-      <a
-        role="tab"
-        :class="twMerge('tab', connectionTabShow === CONNECTION_TAB_TYPE.CLOSED && 'tab-active')"
-        @click="() => (connectionTabShow = CONNECTION_TAB_TYPE.CLOSED)"
-        >{{ $t('closedConnections') }}
-        <template v-if="connectionTabShow === CONNECTION_TAB_TYPE.CLOSED">
-          ({{ renderConnections.length }})
-        </template>
-      </a>
-    </div>
+    <ConnectionTabs />
     <div
       :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')"
       v-if="useConnectionCard"
@@ -110,12 +91,11 @@
 
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
-import { CONNECTION_TAB_TYPE, SORT_DIRECTION, SORT_TYPE } from '@/config'
+import { SORT_DIRECTION, SORT_TYPE } from '@/config'
 import {
   connectionFilter,
   connectionSortDirection,
   connectionSortType,
-  connectionTabShow,
   isPaused,
   quickFilterEnabled,
   quickFilterRegex,
@@ -132,6 +112,7 @@ import {
 } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import TextInput from '../common/TextInput.vue'
+import ConnectionTabs from './ConnectionTabs.vue'
 import SourceIPFilter from './SourceIPFilter.vue'
 defineProps<{
   horizontal?: boolean
