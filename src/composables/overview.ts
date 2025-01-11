@@ -1,7 +1,17 @@
 import { ref } from 'vue'
 
-export const mainlandChinaIP = ref('')
-export const globalIP = ref('')
+export const speedtestcnIP = ref({
+  location: '',
+  ip: '',
+})
+export const ipsbIP = ref({
+  location: '',
+  ip: '',
+})
+export const ipipnetIP = ref({
+  location: '',
+  ip: '',
+})
 
 export const baiduLatency = ref('')
 export const openAILatency = ref('')
