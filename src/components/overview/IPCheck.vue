@@ -7,9 +7,13 @@
         >ipip.net</span
       >
       : {{ ipipnetIP.location }}
-      <template v-if="showIP && ipipnetIP.ip">
-        <span class="text-xs">({{ ipipnetIP.ip }})</span>
-      </template>
+      <span
+        class="text-xs"
+        v-if="ipipnetIP.ip"
+      >
+        <template v-if="showIP"> ({{ ipipnetIP.ip }}) </template>
+        <template v-else> (***.***.***.***) </template>
+      </span>
     </div>
     <div>
       <span
@@ -18,9 +22,13 @@
         >api.ip.sb</span
       >
       : {{ ipsbIP.location }}
-      <template v-if="showIP && ipsbIP.ip">
-        <span class="text-xs">({{ ipsbIP.ip }})</span>
-      </template>
+      <span
+        class="text-xs"
+        v-if="ipsbIP.ip"
+      >
+        <template v-if="showIP"> ({{ ipsbIP.ip }}) </template>
+        <template v-else> (***.***.***.***) </template>
+      </span>
     </div>
     <div class="absolute bottom-2 right-2 flex items-center gap-2">
       <button
@@ -64,17 +72,9 @@ const getIPs = () => {
     }
   })
   getIPFromIpipnetAPI().then((res) => {
-    res = res.trim()
-
-    const ipRegex = /\b(?:\d{1,3}\.){3}\d{1,3}\b|(?:[A-Fa-f0-9]{1,4}:){7}[A-Fa-f0-9]{1,4}\b/
-    const asnRegex = /来自于：(.*)$/
-
-    const ip = ipRegex.exec(res)?.[0] || ''
-    const asn = asnRegex.exec(res)?.[1] || ''
-
     ipipnetIP.value = {
-      location: asn,
-      ip,
+      location: res.data.location.join(' '),
+      ip: res.data.ip,
     }
   })
 }

@@ -286,9 +286,14 @@ export const getIPFromIpsbAPI = async (ip = '') => {
 }
 
 export const getIPFromIpipnetAPI = async () => {
-  const response = await fetch('https://myip.ipip.net')
+  const response = await fetch('https://myip.ipip.net/json')
 
-  return await response.text()
+  return (await response.json()) as {
+    data: {
+      ip: string
+      location: string[]
+    }
+  }
 }
 
 export const getLatencyFromUrlAPI = (url: string) => {
