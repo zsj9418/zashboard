@@ -32,9 +32,9 @@
     </div>
     <div class="absolute bottom-2 right-2 flex items-center gap-2">
       <button
-        class="btn btn-circle btn-sm tooltip tooltip-bottom flex items-center justify-center"
+        class="btn btn-circle btn-sm flex items-center justify-center"
         @click="showIP = !showIP"
-        :data-tip="$t('ipScreenshotTip')"
+        @mouseenter="handlerShowIPTip"
       >
         <EyeSlashIcon
           v-if="showIP"
@@ -58,11 +58,18 @@
 <script setup lang="ts">
 import { getIPFromIpipnetAPI, getIPFromIpsbAPI } from '@/api'
 import { ipipnetIP, ipsbIP } from '@/composables/overview'
+import { useTooltip } from '@/helper/tooltip'
 import { autoIPCheck } from '@/store/settings'
 import { BoltIcon, EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 import { onMounted, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n()
 const showIP = ref(false)
+const { showTip } = useTooltip()
+const handlerShowIPTip = (e: Event) => {
+  showTip(e, t('ipScreenshotTip'))
+}
 
 const getIPs = () => {
   getIPFromIpsbAPI().then((res) => {

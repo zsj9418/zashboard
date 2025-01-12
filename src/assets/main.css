@@ -48,9 +48,8 @@
 }
 
 .tippy-box {
-  background-color: var(--fallback-b1, oklch(var(--b1)));
-  @apply text-base-content shadow-md;
+  @apply bg-neutral text-neutral-content shadow-md;
 }
 .tippy-box[data-placement^='top'] > .tippy-arrow:before {
-  @apply border-t-base-100;
+  @apply border-t-neutral;
 }

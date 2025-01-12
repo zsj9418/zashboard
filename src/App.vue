@@ -69,6 +69,7 @@ onMounted(() => {
 <template>
   <div
     ref="app"
+    id="app-content"
     :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} custom-background-${dashboardTransparent} ${customBackgroundURL && 'custom-background bg-cover'}`"
     :style="`background-image: url('${backgroundImage}');`"
   >

@@ -1,6 +1,12 @@
 import tippy, { type Instance } from 'tippy.js'
 
+let appContent: HTMLElement
+
 export const useTooltip = () => {
+  if (!appContent) {
+    appContent = document.getElementById('app-content')!
+  }
+
   let tippyInstance: Instance | null = null
 
   const showTip = (event: Event, content: string | HTMLElement) => {
@@ -9,7 +15,7 @@ export const useTooltip = () => {
       content,
       placement: 'top',
       animation: 'scale',
-      appendTo: 'parent',
+      appendTo: appContent,
       allowHTML: true,
       onHidden: () => {
         tippyInstance?.destroy()
