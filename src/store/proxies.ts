@@ -75,13 +75,17 @@ export const proxyLatencyTest = async (proxyName: string) => {
       IPv6Map.value[getNowProxyNodeName(proxyName)] = false
     }
   }
-  const { data: latencyResult } = await fetchProxyLatencyAPI(
-    proxyName,
-    speedtestUrl.value,
-    speedtestTimeout.value,
-  )
+  try {
+    const { data: latencyResult } = await fetchProxyLatencyAPI(
+      proxyName,
+      speedtestUrl.value,
+      speedtestTimeout.value,
+    )
 
-  latencyMap.value[getNowProxyNodeName(proxyName)] = latencyResult.delay
+    latencyMap.value[getNowProxyNodeName(proxyName)] = latencyResult.delay
+  } catch {
+    latencyMap.value[getNowProxyNodeName(proxyName)] = NOT_CONNECTED
+  }
 }
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
