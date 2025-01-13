@@ -28,6 +28,7 @@
     .table,
     .drawer-side,
     .tabs,
+    .btm-nav,
     .table tbody tr {
       --tw-border-opacity: calc($(i) / 100);
       --tw-bg-opacity: calc($(i) / 100);

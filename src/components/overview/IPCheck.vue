@@ -36,11 +36,11 @@
         @click="showIP = !showIP"
         @mouseenter="handlerShowIPTip"
       >
-        <EyeSlashIcon
+        <EyeIcon
           v-if="showIP"
           class="h-4 w-4"
         />
-        <EyeIcon
+        <EyeSlashIcon
           v-else
           class="h-4 w-4"
         />
