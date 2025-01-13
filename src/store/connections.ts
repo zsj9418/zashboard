@@ -132,16 +132,18 @@ export const connectionFilter = ref('')
 export const sourceIPFilter = ref(null)
 export const isPaused = ref(false)
 
+export const connections = computed(() => {
+  return connectionTabShow.value === CONNECTION_TAB_TYPE.ACTIVE
+    ? activeConnections.value
+    : closedConnections.value
+})
+
 export const renderConnections = computed(() => {
   let regex: RegExp | null = null
   if (quickFilterEnabled.value && quickFilterRegex.value) {
     regex = new RegExp(quickFilterRegex.value, 'i')
   }
-  return (
-    connectionTabShow.value === CONNECTION_TAB_TYPE.ACTIVE
-      ? activeConnections.value
-      : closedConnections.value
-  )
+  return connections.value
     .filter((conn) => {
       if (regex) {
         const quickFilterMatch =

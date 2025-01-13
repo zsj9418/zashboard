@@ -23,7 +23,7 @@
 
 <script setup lang="ts">
 import { getIPLabelFromMap } from '@/helper'
-import { renderConnections, sourceIPFilter } from '@/store/connections'
+import { connections, sourceIPFilter } from '@/store/connections'
 import { isEqual, uniq } from 'lodash'
 import { computed, ref, watch } from 'vue'
 defineProps<{
@@ -31,7 +31,7 @@ defineProps<{
 }>()
 
 const sourceIPs = computed(() => {
-  return uniq(renderConnections.value.map((conn) => conn.metadata.sourceIP)).sort()
+  return uniq(connections.value.map((conn) => conn.metadata.sourceIP)).sort()
 })
 const sourceIPOpts = ref<{ label: string; value: string }[]>([])
 
