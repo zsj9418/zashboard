@@ -64,12 +64,20 @@
           {{ $t(type) }}
         </option>
       </select>
-      <span class="shrink-0"> {{ $t('hideUnavailable') }}: </span>
-      <input
-        class="toggle"
-        type="checkbox"
-        v-model="hideUnavailableProxies"
-      />
+      <button
+        class="btn btn-sm"
+        @click="() => (hideUnavailableProxies = !hideUnavailableProxies)"
+      >
+        <span class="shrink-0">{{ $t('unavailableProxy') }}</span>
+        <EyeSlashIcon
+          v-if="hideUnavailableProxies"
+          class="h-4 w-4"
+        />
+        <EyeIcon
+          v-else
+          class="h-4 w-4"
+        />
+      </button>
     </div>
   </div>
 </template>
@@ -81,6 +89,7 @@ import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { configs, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { hideUnavailableProxies, proxySortType } from '@/store/settings'
+import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 
