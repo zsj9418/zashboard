@@ -228,7 +228,7 @@ const columns: ColumnDef<Connection>[] = [
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Host,
     accessorFn: (original) =>
       `${
-        original.metadata.host ? original.metadata.host : original.metadata.destinationIP
+        original.metadata.host || original.metadata.sniffHost || original.metadata.destinationIP
       }:${original.metadata.destinationPort}`,
   },
   {

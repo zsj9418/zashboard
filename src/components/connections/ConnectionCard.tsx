@@ -35,35 +35,37 @@ export default defineComponent<{
     const { handlerInfo } = useConnections()
 
     return () => {
+      const conn = props.conn
+      const metadata = conn.metadata
       const componentMap: Record<CONNECTIONS_TABLE_ACCESSOR_KEY, JSX.Element> = {
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: (
           <span class="w-80 grow break-all text-primary/80">
-            {props.conn.metadata.host || props.conn.metadata.destinationIP}
+            {metadata.host || metadata.sniffHost || metadata.destinationIP}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Destination]: (
-          <span class="w-80 grow break-all">{getDestinationFromConnection(props.conn)}</span>
+          <span class="w-80 grow break-all">{getDestinationFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: (
-          <span class="w-80 grow break-all">{getIPLabelFromMap(props.conn.metadata.sourceIP)}</span>
+          <span class="w-80 grow break-all">{getIPLabelFromMap(metadata.sourceIP)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: (
-          <span class="w-80 grow break-all">{props.conn.metadata.sourcePort}</span>
+          <span class="w-80 grow break-all">{metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost]: (
-          <span class="w-80 grow break-all">{props.conn.metadata.sniffHost || '-'}</span>
+          <span class="w-80 grow break-all">{metadata.sniffHost || '-'}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
-          <span class="w-80 grow break-all">{getNetworkTypeFromConnection(props.conn)}</span>
+          <span class="w-80 grow break-all">{getNetworkTypeFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: (
           <span class="w-80 grow break-all">
-            {props.conn.rule}
-            {props.conn.rulePayload && <>: {props.conn.rulePayload}</>}
+            {conn.rule}
+            {conn.rulePayload && <>: {conn.rulePayload}</>}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Process]: (
-          <span class="w-80 grow break-all">{getProcessFromConnection(props.conn)}</span>
+          <span class="w-80 grow break-all">{getProcessFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Chains]: (
           <span
@@ -73,46 +75,46 @@ export default defineComponent<{
                 'flex-row-reverse justify-end',
             ]}
           >
-            {last(props.conn.chains)}
-            {last(props.conn.chains) !== first(props.conn.chains) && (
+            {last(conn.chains)}
+            {last(conn.chains) !== first(conn.chains) && (
               <>
                 <ArrowRightCircleIcon class="h-4 w-4"></ArrowRightCircleIcon>
-                {first(props.conn.chains)}
+                {first(conn.chains)}
               </>
             )}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
-            {prettyBytesHelper(props.conn.download)}
+            {prettyBytesHelper(conn.download)}
             <ArrowDownIcon class="h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
-            {prettyBytesHelper(props.conn.upload)}
+            {prettyBytesHelper(conn.upload)}
             <ArrowUpIcon class="h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
-            {prettyBytesHelper(props.conn.downloadSpeed)}/s
+            {prettyBytesHelper(conn.downloadSpeed)}/s
             <ArrowDownCircleIcon class="h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
-            {prettyBytesHelper(props.conn.uploadSpeed)}/s
+            {prettyBytesHelper(conn.uploadSpeed)}/s
             <ArrowUpCircleIcon class="h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (
-          <div class="gap-1 whitespace-nowrap">{fromNow(props.conn.start)}</div>
+          <div class="gap-1 whitespace-nowrap">{fromNow(conn.start)}</div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Details]: (
           <button
             class="btn btn-circle btn-xs"
-            onClick={() => handlerInfo(props.conn)}
+            onClick={() => handlerInfo(conn)}
           >
             <InformationCircleIcon class="h-4 w-4" />
           </button>
@@ -120,7 +122,7 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
           <button
             class="btn btn-circle btn-xs"
-            onClick={() => disconnectByIdAPI(props.conn.id)}
+            onClick={() => disconnectByIdAPI(conn.id)}
           >
             <XMarkIcon class="h-4 w-4" />
           </button>

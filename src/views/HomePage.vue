@@ -150,7 +150,7 @@ watch(direction, () => {
 })
 
 const { proxiesTabShow } = useProxies()
-const { checkUIUpdate } = useSettings()
+
 watch(
   activeUuid,
   () => {
@@ -163,7 +163,6 @@ watch(
     initConnections()
     initLogs()
     initSatistic()
-    checkUIUpdate()
   },
   {
     immediate: true,
@@ -221,4 +220,8 @@ watch(
     immediate: true,
   },
 )
+
+const { checkUIUpdate } = useSettings()
+
+checkUIUpdate()
 </script>
