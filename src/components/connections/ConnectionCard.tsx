@@ -122,14 +122,20 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
           <button
             class="btn btn-circle btn-xs"
-            onClick={() => disconnectByIdAPI(conn.id)}
+            onClick={(e) => {
+              e.stopPropagation()
+              disconnectByIdAPI(conn.id)
+            }}
           >
             <XMarkIcon class="h-4 w-4" />
           </button>
         ),
       }
       return (
-        <div class="card gap-1 p-1">
+        <div
+          class="card cursor-pointer gap-1 p-1"
+          onClick={() => handlerInfo(conn)}
+        >
           {connectionCardLines.value.map((line) => (
             <div class="flex items-center gap-1 text-sm">
               {line.map((key) => {

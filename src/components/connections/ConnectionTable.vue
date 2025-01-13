@@ -61,7 +61,8 @@
               height: `${virtualRow.size}px`,
               transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
             }"
-            class="bg-base-100 hover:!bg-primary hover:text-primary-content"
+            class="cursor-pointer bg-base-100 hover:!bg-primary hover:text-primary-content"
+            @click="handlerInfo(rows[virtualRow.index].original)"
           >
             <td
               v-for="cell in rows[virtualRow.index].getVisibleCells()"
@@ -199,9 +200,10 @@ const columns: ColumnDef<Connection>[] = [
         'button',
         {
           class: 'btn btn-xs btn-circle',
-          onClick: () => {
+          onClick: (e) => {
             const connection = row.original
 
+            e.stopPropagation()
             disconnectByIdAPI(connection.id)
           },
         },
