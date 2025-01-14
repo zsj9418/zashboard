@@ -1,6 +1,6 @@
 <template>
   <div
-    :class="twMerge('flex flex-col gap-1 p-2 text-sm sm:gap-2', horizontal && 'flex-row flex-wrap')"
+    :class="twMerge('flex flex-col gap-2 p-2 text-sm', horizontal && 'flex-row flex-wrap')"
     v-if="configs"
   >
     <div
