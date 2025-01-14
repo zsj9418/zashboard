@@ -68,6 +68,14 @@
             v-model="autoConnectionCheck"
           />
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('showStatisticsWhenSidebarCollapsed') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="showStatisticsWhenSidebarCollapsed"
+          />
+        </div>
       </div>
     </div>
 
@@ -107,6 +115,7 @@ import {
   autoIPCheck,
   logRetentionLimit,
   showIPAndConnectionInfo,
+  showStatisticsWhenSidebarCollapsed,
   splitOverviewPage,
 } from '@/store/settings'
 </script>

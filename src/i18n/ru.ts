@@ -131,6 +131,7 @@ const ru: LANG_MESSAGE = {
   reverse: 'Обратное',
   sniffHost: 'Захватывать хост',
   ipScreenshotTip: 'Пожалуйста, убедитесь, что реальный IP скрыт при создании скриншотов.',
+  showStatisticsWhenSidebarCollapsed: 'Показать статистику при сворачивании панели',
 }
 
 export default ru

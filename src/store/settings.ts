@@ -43,7 +43,10 @@ export const splitOverviewPage = useStorage('config/split-overview-page', false)
 export const showIPAndConnectionInfo = useStorage('config/show-ip-and-connection-info', true)
 export const autoIPCheck = useStorage('config/auto-ip-check', true)
 export const autoConnectionCheck = useStorage('config/auto-connection-check', true)
-
+export const showStatisticsWhenSidebarCollapsed = useStorage(
+  'config/show-statistics-when-sidebar-collapsed',
+  true,
+)
 // proxies
 export const showGlobalProxy = useStorage('config/show-global-proxy', true)
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})

@@ -33,7 +33,18 @@
         </li>
       </ul>
       <template v-if="isSidebarCollapsed">
-        <VerticalInfos />
+        <VerticalInfos v-if="showStatisticsWhenSidebarCollapsed" />
+        <div
+          v-else
+          class="flex w-full items-center justify-center"
+        >
+          <button
+            class="btn btn-circle btn-sm bg-base-300"
+            @click="isSidebarCollapsed = false"
+          >
+            <ArrowRightCircleIcon class="h-5 w-5" />
+          </button>
+        </div>
       </template>
       <template v-else>
         <OverviewCarousel v-if="route.name !== ROUTE_NAME.overview" />
@@ -58,7 +69,8 @@ import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import { renderRoutes } from '@/helper'
 import router from '@/router'
-import { isSidebarCollapsed } from '@/store/settings'
+import { isSidebarCollapsed, showStatisticsWhenSidebarCollapsed } from '@/store/settings'
+import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
