@@ -11,7 +11,7 @@
             size="large"
           />
           <span class="flex-1 text-xs text-slate-400"
-            >: {{ proxyGroup.type }} ({{ proxyGroup.all?.length }})</span
+            >: {{ proxyGroup.type }} ({{ sortedProxies?.length }})</span
           >
         </div>
         <LatencyTag
