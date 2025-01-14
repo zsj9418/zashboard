@@ -1,7 +1,10 @@
 <template>
   <CollapseCard :name="proxyGroup.name">
     <template v-slot:title>
-      <div class="flex items-center gap-2 pr-5">
+      <div
+        class="flex items-center gap-2 pr-5"
+        @contextmenu.prevent.stop="handlerLatencyTest"
+      >
         <div class="flex flex-1 items-center gap-1">
           <ProxyName
             :name="proxyGroup.name"
@@ -22,7 +25,10 @@
           @click.stop="handlerLatencyTest"
         />
       </div>
-      <div class="mt-[2px] flex items-center gap-2">
+      <div
+        class="mt-[2px] flex items-center gap-2"
+        @contextmenu.prevent.stop="handlerLatencyTest"
+      >
         <div class="flex flex-1 items-center gap-1">
           <template v-if="proxyGroup.now">
             <ArrowRightCircleIcon class="h-4 w-4" />
