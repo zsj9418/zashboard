@@ -30,6 +30,14 @@
           />
         </div>
         <div class="flex w-full items-center gap-2">
+          <span class="shrink-0"> {{ $t('overrideUrlWithConfig') }}: </span>
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="overrideUrlWithConfigIfExists"
+          />
+        </div>
+        <div class="flex w-full items-center gap-2">
           <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
           <input
             type="text"
@@ -158,6 +166,7 @@ import {
   IPv6test,
   lowLatency,
   mediumLatency,
+  overrideUrlWithConfigIfExists,
   proxyCardSize,
   proxyPreviewType,
   showGlobalProxy,

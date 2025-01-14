@@ -129,6 +129,7 @@ const en = {
   sniffHost: 'Sniff Host',
   ipScreenshotTip: 'Please make sure to hide the IP when taking screenshots.',
   showStatisticsWhenSidebarCollapsed: 'Display Statistics When Sidebar Collapsed',
+  overrideUrlWithConfig: 'Override Speedtest URL With Config',
 }
 
 export type LANG_MESSAGE = typeof en

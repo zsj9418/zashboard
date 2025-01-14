@@ -132,6 +132,7 @@ const ru: LANG_MESSAGE = {
   sniffHost: 'Захватывать хост',
   ipScreenshotTip: 'Пожалуйста, убедитесь, что реальный IP скрыт при создании скриншотов.',
   showStatisticsWhenSidebarCollapsed: 'Показать статистику при сворачивании панели',
+  overrideUrlWithConfig: 'Переопределить URL с помощью конфигурации',
 }
 
 export default ru

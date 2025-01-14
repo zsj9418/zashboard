@@ -13,7 +13,13 @@ import { useStorage } from '@vueuse/core'
 import { compact, difference, last } from 'lodash'
 import { computed, ref, watch } from 'vue'
 import { activeConnections } from './connections'
-import { automaticDisconnection, IPv6test, speedtestTimeout, speedtestUrl } from './settings'
+import {
+  automaticDisconnection,
+  IPv6test,
+  overrideUrlWithConfigIfExists,
+  speedtestTimeout,
+  speedtestUrl,
+} from './settings'
 
 export const GLOBAL = 'GLOBAL'
 export const proxyGroupList = ref<string[]>([])
@@ -89,27 +95,31 @@ export const proxyLatencyTest = async (proxyName: string) => {
 }
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
-  const all = proxyMap.value[proxyGroupName].all ?? []
+  const proxyNode = proxyMap.value[proxyGroupName]
+  const all = proxyNode.all ?? []
   const timeout = Math.ceil(all.length / 20) * speedtestTimeout.value
+  const url = overrideUrlWithConfigIfExists.value
+    ? proxyNode.testUrl || speedtestUrl.value
+    : speedtestUrl.value
 
   if (IPv6test.value) {
     try {
       const { data: ipv6LatencyResult } = await fetchProxyGroupLatencyAPI(
         proxyGroupName,
         IPV6_TEST_URL,
-        Math.max(10000, timeout),
+        Math.max(5000, timeout),
       )
 
-      proxyMap.value[proxyGroupName].all?.forEach((name) => {
+      all?.forEach((name) => {
         IPv6Map.value[getNowProxyNodeName(name)] = ipv6LatencyResult[name] > NOT_CONNECTED
       })
     } catch {
-      proxyMap.value[proxyGroupName].all?.forEach((name) => {
+      all?.forEach((name) => {
         IPv6Map.value[getNowProxyNodeName(name)] = false
       })
     }
   }
-  await fetchProxyGroupLatencyAPI(proxyGroupName, speedtestUrl.value, timeout)
+  await fetchProxyGroupLatencyAPI(proxyGroupName, url, timeout)
   await fetchProxies()
 }
 

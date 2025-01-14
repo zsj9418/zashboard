@@ -47,7 +47,7 @@ export type Proxy = {
   now: string
   icon: string
   hidden?: boolean
-  all?: string[]
+  testUrl?: string
 }
 
 export type SubscriptionInfo = {

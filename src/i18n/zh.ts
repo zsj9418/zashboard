@@ -130,6 +130,7 @@ const zh: LANG_MESSAGE = {
   sniffHost: '嗅探主机',
   ipScreenshotTip: '截图时请确保隐藏IP',
   showStatisticsWhenSidebarCollapsed: '侧边栏折叠时显示统计',
+  overrideUrlWithConfig: '使用配置文件中的URL',
 }
 
 export default zh
