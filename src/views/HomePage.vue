@@ -11,12 +11,15 @@
     <div
       class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
     >
-      <component
+      <div
         v-if="ctrlComp && isSidebarCollapsed"
-        :is="ctrlComp"
         class="w-full bg-base-100"
-        :horizontal="true"
-      />
+      >
+        <component
+          :is="ctrlComp"
+          :horizontal="true"
+        />
+      </div>
       <div class="relative h-0 flex-1">
         <div class="absolute flex h-full w-full flex-col overflow-y-auto">
           <RouterView />
@@ -77,7 +80,7 @@
 import { isBackendAvailable } from '@/api'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
-import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
+import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
 import { useProxies } from '@/composables/proxies'

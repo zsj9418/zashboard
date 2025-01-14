@@ -65,7 +65,7 @@
 import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
-import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
+import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import { renderRoutes } from '@/helper'
