@@ -62,7 +62,7 @@
               transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
             }"
             class="cursor-pointer bg-base-100 hover:!bg-primary hover:text-primary-content"
-            @click="handlerInfo(rows[virtualRow.index].original)"
+            @click="handlerClickRow(rows[virtualRow.index])"
           >
             <td
               v-for="cell in rows[virtualRow.index].getVisibleCells()"
@@ -84,19 +84,14 @@
             >
               <template v-if="cell.column.getIsGrouped()">
                 <template v-if="rows[virtualRow.index].getCanExpand()">
-                  <button
-                    @click="() => rows[virtualRow.index].getToggleExpandedHandler()()"
-                    class="relative top-1 cursor-pointer"
-                  >
-                    <MagnifyingGlassMinusIcon
-                      v-if="rows[virtualRow.index].getIsExpanded()"
-                      class="h-4 w-4"
-                    />
-                    <MagnifyingGlassPlusIcon
-                      v-else
-                      class="h-4 w-4"
-                    />
-                  </button>
+                  <MagnifyingGlassMinusIcon
+                    v-if="rows[virtualRow.index].getIsExpanded()"
+                    class="-mt-1 mr-1 inline-block h-4 w-4"
+                  />
+                  <MagnifyingGlassPlusIcon
+                    v-else
+                    class="-mt-1 mr-1 inline-block h-4 w-4"
+                  />
                   <FlexRender
                     :render="cell.column.columnDef.cell"
                     :props="cell.getContext()"
@@ -156,6 +151,7 @@ import {
   type ColumnDef,
   type ExpandedState,
   type GroupingState,
+  type Row,
   type SortingState,
 } from '@tanstack/vue-table'
 import { useVirtualizer } from '@tanstack/vue-virtual'
@@ -409,4 +405,14 @@ const classMap = {
 const sizeOfTable = computed(() => {
   return classMap[tableSize.value]
 })
+
+const handlerClickRow = (row: Row<Connection>) => {
+  if (row.getIsGrouped()) {
+    if (row.getCanExpand()) {
+      row.getToggleExpandedHandler()()
+    }
+  } else {
+    handlerInfo(row.original)
+  }
+}
 </script>
