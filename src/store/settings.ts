@@ -105,7 +105,6 @@ export const connectionCardLines = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[][]
     [
       CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
       CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-      CONNECTIONS_TABLE_ACCESSOR_KEY.Details,
       CONNECTIONS_TABLE_ACCESSOR_KEY.Close,
     ],
   ],
