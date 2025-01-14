@@ -5,8 +5,26 @@
       :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')"
       v-if="useConnectionCard"
     >
-      <span class="shrink-0">{{ $t('sortBy') }}:</span>
       <div class="join flex-1">
+        <button
+          class="btn join-item btn-sm"
+          @click="
+            connectionSortDirection =
+              connectionSortDirection === SORT_DIRECTION.ASC
+                ? SORT_DIRECTION.DESC
+                : SORT_DIRECTION.ASC
+          "
+        >
+          {{ $t('sortBy') }}
+          <ArrowUpCircleIcon
+            class="h-4 w-4"
+            v-if="connectionSortDirection === SORT_DIRECTION.ASC"
+          />
+          <ArrowDownCircleIcon
+            class="h-4 w-4"
+            v-else
+          />
+        </button>
         <select
           class="join-item select select-bordered select-sm block flex-1"
           v-model="connectionSortType"
@@ -19,38 +37,26 @@
             {{ $t(opt) || opt }}
           </option>
         </select>
-        <button
-          class="btn join-item btn-sm w-12"
-          @click="
-            connectionSortDirection =
-              connectionSortDirection === SORT_DIRECTION.ASC
-                ? SORT_DIRECTION.DESC
-                : SORT_DIRECTION.ASC
-          "
-        >
-          <ArrowUpCircleIcon
-            class="h-4 w-4"
-            v-if="connectionSortDirection === SORT_DIRECTION.ASC"
-          />
-          <ArrowDownCircleIcon
-            class="h-4 w-4"
-            v-else
-          />
-        </button>
       </div>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
-      <span class="shrink-0"> {{ $t('quickFilter') }}: </span>
-      <input
-        type="text"
-        :class="['input input-sm join-item input-bordered w-0 flex-1', horizontal && 'md:w-48']"
-        v-model="quickFilterRegex"
-      />
-      <input
-        type="checkbox"
-        class="toggle"
-        v-model="quickFilterEnabled"
-      />
+      <div class="join flex-1">
+        <button
+          class="btn join-item btn-sm"
+          @click="quickFilterEnabled = !quickFilterEnabled"
+        >
+          {{ $t('quickFilter') }}
+          <component
+            :is="quickFilterEnabled ? MagnifyingGlassMinusIcon : MagnifyingGlassPlusIcon"
+            class="h-4 w-4"
+          />
+        </button>
+        <input
+          type="text"
+          :class="['input input-sm join-item input-bordered w-0 flex-1', horizontal && 'md:w-48']"
+          v-model="quickFilterRegex"
+        />
+      </div>
       <div
         :class="`tooltip ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
         :data-tip="$t('quickFilterTip')"
@@ -105,6 +111,8 @@ import { useConnectionCard } from '@/store/settings'
 import {
   ArrowDownCircleIcon,
   ArrowUpCircleIcon,
+  MagnifyingGlassMinusIcon,
+  MagnifyingGlassPlusIcon,
   PauseIcon,
   PlayIcon,
   QuestionMarkCircleIcon,

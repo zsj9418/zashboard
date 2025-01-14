@@ -33,3 +33,13 @@ import 'vue-json-pretty/lib/styles.css'
 
 const { infoConn, modalRef } = useConnections()
 </script>
+
+<style>
+.vjs-tree {
+  font-family: inherit !important;
+}
+.vjs-tree-node.is-highlight,
+.vjs-tree-node:hover {
+  @apply !bg-base-200;
+}
+</style>

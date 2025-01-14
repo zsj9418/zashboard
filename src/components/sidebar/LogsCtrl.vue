@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div :class="twMerge('join w-full p-2', horizontal && 'max-w-96')">
+    <div :class="twMerge('join w-full p-2', horizontal && 'max-w-screen-sm')">
       <select
         class="join-item select select-bordered select-sm"
         v-model="logLevel"

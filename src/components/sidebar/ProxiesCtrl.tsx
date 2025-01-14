@@ -5,7 +5,7 @@ import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { hideUnavailableProxies, proxySortType } from '@/store/settings'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
+import { MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -36,6 +36,10 @@ export default defineComponent({
         isUpgrading.value = false
       }
     }
+
+    const hasProviders = computed(() => {
+      return proxyProviederList.value.length > 0
+    })
 
     const modeList = computed(() => {
       return (
@@ -127,9 +131,9 @@ export default defineComponent({
           >
             <span class="shrink-0">{t('unavailableProxy')}</span>
             {hideUnavailableProxies.value ? (
-              <EyeSlashIcon class="h-4 w-4" />
+              <MagnifyingGlassMinusIcon class="h-4 w-4" />
             ) : (
-              <EyeIcon class="h-4 w-4" />
+              <MagnifyingGlassPlusIcon class="h-4 w-4" />
             )}
           </button>
         </>
@@ -139,10 +143,12 @@ export default defineComponent({
         if (isMiddleScreen.value) {
           return (
             <div class="flex flex-col gap-2 p-2">
-              <div class="flex gap-2">
-                {tabs}
-                {upgradeAll}
-              </div>
+              {hasProviders.value && (
+                <div class="flex gap-2">
+                  {tabs}
+                  {upgradeAll}
+                </div>
+              )}
               <div class="flex w-full gap-2">
                 {modeSelect}
                 {sortAndFilter}
@@ -151,8 +157,8 @@ export default defineComponent({
           )
         }
         return (
-          <div class="pr-auto flex max-w-screen-md gap-2 p-2">
-            {tabs}
+          <div class="flex gap-2 p-2">
+            {hasProviders.value && tabs}
             {upgradeAll}
             {modeSelect}
             {sortAndFilter}
@@ -163,7 +169,7 @@ export default defineComponent({
       return (
         <div class="flex flex-col gap-2 p-2">
           {upgradeAll}
-          {tabs}
+          {hasProviders.value && tabs}
           {<div class="flex flex-col">{modeSelect}</div>}
           {<div class="flex gap-2">{sortAndFilter}</div>}
         </div>

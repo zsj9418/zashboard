@@ -97,7 +97,7 @@ export const proxyLatencyTest = async (proxyName: string) => {
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
   const all = proxyNode.all ?? []
-  const timeout = Math.ceil(all.length / 20) * speedtestTimeout.value
+  const timeout = Math.ceil(all.length / 50) * speedtestTimeout.value
   const url = overrideUrlWithConfigIfExists.value
     ? proxyNode.testUrl || speedtestUrl.value
     : speedtestUrl.value
