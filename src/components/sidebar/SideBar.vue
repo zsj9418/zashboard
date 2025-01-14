@@ -17,6 +17,7 @@
         <li
           v-for="r in renderRoutes"
           :key="r"
+          @mouseenter="(e) => mouseenterHandler(e, r)"
         >
           <a
             :class="r === route.name ? 'active' : 'inactive'"
@@ -68,14 +69,26 @@ import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.vue'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/config'
 import { renderRoutes } from '@/helper'
+import { useTooltip } from '@/helper/tooltip'
 import router from '@/router'
 import { isSidebarCollapsed, showStatisticsWhenSidebarCollapsed } from '@/store/settings'
 import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import { useRoute } from 'vue-router'
 import OverviewCarousel from './OverviewCarousel.vue'
 import VerticalInfos from './VerticalInfos.vue'
+
+const { showTip } = useTooltip()
+const { t } = useI18n()
+
+const mouseenterHandler = (e: MouseEvent, r: string) => {
+  if (!isSidebarCollapsed.value) return
+  showTip(e, t(r), {
+    placement: 'right',
+  })
+}
 
 const sidebarCompMap = {
   [ROUTE_NAME.connections]: ConnectionCtrl,

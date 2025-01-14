@@ -1,15 +1,14 @@
-import tippy, { type Instance } from 'tippy.js'
+import tippy, { type Instance, type Props } from 'tippy.js'
 
 let appContent: HTMLElement
+let tippyInstance: Instance | null = null
 
 export const useTooltip = () => {
   if (!appContent) {
     appContent = document.getElementById('app-content')!
   }
 
-  let tippyInstance: Instance | null = null
-
-  const showTip = (event: Event, content: string | HTMLElement) => {
+  const showTip = (event: Event, content: string | HTMLElement, config: Partial<Props> = {}) => {
     tippyInstance?.destroy()
     tippyInstance = tippy(event.target as HTMLElement, {
       content,
@@ -21,6 +20,7 @@ export const useTooltip = () => {
         tippyInstance?.destroy()
         tippyInstance = null
       },
+      ...config,
     })
     tippyInstance.show()
   }
