@@ -14,7 +14,7 @@
 
 <script lang="ts" setup>
 import { XMarkIcon } from '@heroicons/vue/24/outline'
-import { computed, defineProps } from 'vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   label: {
