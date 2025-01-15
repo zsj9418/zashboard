@@ -1,12 +1,10 @@
 <template>
   <div class="relative flex h-28 flex-col gap-1 rounded-lg bg-base-200/40 p-2">
-    <div>
-      <span
-        class="tooltip tooltip-bottom w-16 text-left text-sm"
-        :data-tip="$t('chinaIP')"
-        >ipip.net</span
-      >
-      : {{ ipipnetIP.location }}
+    <div
+      class="tooltip tooltip-bottom text-left text-sm"
+      data-tip="ipip.net"
+    >
+      {{ $t('chinaIP') }} : {{ ipipnetIP.location }}
       <span
         class="text-xs"
         v-if="ipipnetIP.ip"
@@ -15,13 +13,11 @@
         <template v-else> (***.***.***.***) </template>
       </span>
     </div>
-    <div>
-      <span
-        class="tooltip tooltip-bottom w-16 text-left text-sm"
-        :data-tip="$t('globalIP')"
-        >api.ip.sb</span
-      >
-      : {{ ipsbIP.location }}
+    <div
+      class="tooltip tooltip-bottom text-left text-sm"
+      data-tip="api.ip.sb"
+    >
+      {{ $t('globalIP') }} : {{ ipsbIP.location }}
       <span
         class="text-xs"
         v-if="ipsbIP.ip"

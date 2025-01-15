@@ -114,7 +114,7 @@ const zh: LANG_MESSAGE = {
   autoIPCheckWhenStart: '自动检查 IP',
   autoConnectionCheckWhenStart: '自动检查连接',
   chinaIP: '中国大陆 IP',
-  globalIP: '全球 IP',
+  globalIP: '全球节点 IP',
   networkInfo: '网络信息',
   autoSwitch: '自动切换',
   customBackgroundURL: '自定义背景 URL',
