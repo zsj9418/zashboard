@@ -130,6 +130,13 @@ const en = {
   ipScreenshotTip: 'Please make sure to hide the IP when taking screenshots.',
   showStatisticsWhenSidebarCollapsed: 'Display Statistics When Sidebar Collapsed',
   overrideUrlWithConfig: 'Override Speedtest URL With Config',
+  totalConnections: 'Total Connections',
+  mostDownloadHost: 'Most Download Host',
+  mostUploadHost: 'Most Upload Host',
+  mostDownloadSourceIP: 'Most Download Source IP',
+  mostUploadSourceIP: 'Most Upload Source IP',
+  mostDownloadProxy: 'Most Download Proxy',
+  mostUploadProxy: 'Most Upload Proxy',
 }
 
 export type LANG_MESSAGE = typeof en

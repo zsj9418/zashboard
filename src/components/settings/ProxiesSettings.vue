@@ -22,15 +22,15 @@
           />
         </div>
         <div class="flex w-full items-center gap-2">
-          <span class="shrink-0"> {{ $t('speedtestUrl') }}: </span>
+          <span> {{ $t('speedtestUrl') }}: </span>
           <input
             type="text"
-            class="input input-sm input-bordered w-60 flex-1 sm:max-w-80"
+            class="input input-sm input-bordered w-36 flex-1 sm:max-w-80"
             v-model="speedtestUrl"
           />
         </div>
         <div class="flex w-full items-center gap-2">
-          <span class="shrink-0"> {{ $t('overrideUrlWithConfig') }}: </span>
+          <span> {{ $t('overrideUrlWithConfig') }}: </span>
           <input
             class="toggle"
             type="checkbox"
@@ -38,7 +38,7 @@
           />
         </div>
         <div class="flex w-full items-center gap-2">
-          <span class="shrink-0"> {{ $t('speedtestTimeout') }}: </span>
+          <span> {{ $t('speedtestTimeout') }}: </span>
           <input
             type="text"
             class="input input-sm input-bordered w-20"
@@ -47,7 +47,7 @@
           ms
         </div>
         <div class="flex items-center gap-2">
-          <span class="shrink-0"> {{ $t('lowLatencyDesc') }}: </span>
+          <span> {{ $t('lowLatencyDesc') }}: </span>
           <input
             type="number"
             class="input input-sm input-bordered w-20"
@@ -56,7 +56,7 @@
           ms
         </div>
         <div class="flex items-center gap-2">
-          <span class="shrink-0"> {{ $t('mediumLatencyDesc') }}: </span>
+          <span> {{ $t('mediumLatencyDesc') }}: </span>
           <input
             type="number"
             class="input input-sm input-bordered w-20"

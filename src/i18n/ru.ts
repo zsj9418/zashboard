@@ -133,6 +133,13 @@ const ru: LANG_MESSAGE = {
   ipScreenshotTip: 'Пожалуйста, убедитесь, что реальный IP скрыт при создании скриншотов.',
   showStatisticsWhenSidebarCollapsed: 'Показать статистику при сворачивании панели',
   overrideUrlWithConfig: 'Переопределить URL с помощью конфигурации',
+  totalConnections: 'Всего соединений',
+  mostDownloadHost: 'Самый большой хост',
+  mostUploadHost: 'Самый большой хост',
+  mostDownloadSourceIP: 'Самый большой IP-адрес',
+  mostUploadSourceIP: 'Самый большой IP-адрес',
+  mostDownloadProxy: 'Самый большой прокси',
+  mostUploadProxy: 'Самый большой прокси',
 }
 
 export default ru

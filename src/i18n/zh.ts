@@ -131,6 +131,13 @@ const zh: LANG_MESSAGE = {
   ipScreenshotTip: '截图时请确保隐藏IP',
   showStatisticsWhenSidebarCollapsed: '侧边栏折叠时显示统计',
   overrideUrlWithConfig: '使用配置文件中的URL',
+  totalConnections: '总连接数',
+  mostDownloadHost: '最多下载主机',
+  mostUploadHost: '最多上传主机',
+  mostDownloadSourceIP: '最多下载源IP',
+  mostUploadSourceIP: '最多上传源IP',
+  mostDownloadProxy: '最多下载节点',
+  mostUploadProxy: '最多上传节点',
 }
 
 export default zh

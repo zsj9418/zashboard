@@ -6,7 +6,7 @@
     class="modal"
   >
     <div class="modal-box relative p-0">
-      <div class="max-h-[70vh] overflow-y-auto p-4">
+      <div class="overflow-y-auto p-4 max-md:max-h-[70vh]">
         <VueJsonPretty :data="infoConn" />
       </div>
       <form method="dialog">
