@@ -30,6 +30,7 @@
     "echarts": "^5.6.0",
     "lodash": "^4.17.21",
     "misans": "^4.0.0",
+    "p-limit": "^6.2.0",
     "prettier-plugin-organize-imports": "^4.1.0",
     "prettier-plugin-tailwindcss": "^0.6.9",
     "pretty-bytes": "^6.1.1",

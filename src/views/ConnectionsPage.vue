@@ -36,7 +36,13 @@ const { infoConn, modalRef } = useConnections()
 
 <style>
 .vjs-tree {
-  font-family: inherit !important;
+  font-family:
+    NotoEmoji,
+    Monaco,
+    Menlo,
+    Consolas,
+    Bitstream Vera Sans Mono,
+    monospace;
 }
 .vjs-tree-node.is-highlight,
 .vjs-tree-node:hover {

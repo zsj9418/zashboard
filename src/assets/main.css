@@ -54,3 +54,12 @@
 .tippy-box[data-placement^='top'] > .tippy-arrow:before {
   @apply border-t-neutral;
 }
+.tippy-box[data-placement^='right'] > .tippy-arrow:before {
+  @apply border-r-neutral;
+}
+.tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+  @apply border-b-neutral;
+}
+.tippy-box[data-placement^='left'] > .tippy-arrow:before {
+  @apply border-l-neutral;
+}

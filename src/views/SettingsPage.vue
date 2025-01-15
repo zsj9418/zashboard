@@ -68,7 +68,7 @@
             v-model="autoConnectionCheck"
           />
         </div>
-        <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2 max-md:hidden">
           {{ $t('showStatisticsWhenSidebarCollapsed') }}:
           <input
             class="toggle"

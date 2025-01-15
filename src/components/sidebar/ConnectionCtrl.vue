@@ -40,7 +40,7 @@
       </div>
     </div>
     <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
-      <div class="join flex-1">
+      <div class="join relative flex-1">
         <button
           class="btn join-item btn-sm"
           @click="quickFilterEnabled = !quickFilterEnabled"
@@ -51,17 +51,17 @@
             class="h-4 w-4"
           />
         </button>
+        <div
+          :class="`tooltip absolute right-0 top-0 ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
+          :data-tip="$t('quickFilterTip')"
+        >
+          <QuestionMarkCircleIcon class="h-8 w-8 p-2" />
+        </div>
         <input
           type="text"
           :class="['input input-sm join-item input-bordered w-0 flex-1', horizontal && 'md:w-48']"
           v-model="quickFilterRegex"
         />
-      </div>
-      <div
-        :class="`tooltip ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
-        :data-tip="$t('quickFilterTip')"
-      >
-        <QuestionMarkCircleIcon class="h-4 w-4" />
       </div>
     </div>
     <SourceIPFilter v-if="!horizontal" />

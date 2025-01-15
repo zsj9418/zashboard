@@ -11,6 +11,7 @@ import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
 import type { Proxy, ProxyProvider } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { compact, difference, last } from 'lodash'
+import pLimit from 'p-limit'
 import { computed, ref, watch } from 'vue'
 import { activeConnections } from './connections'
 import {
@@ -71,7 +72,7 @@ export const selectProxy = async (proxyGroup: string, name: string) => {
   fetchProxies()
 }
 
-export const proxyLatencyTest = async (proxyName: string) => {
+export const proxyLatencyTest = async (proxyName: string, url = speedtestUrl.value) => {
   if (IPv6test.value) {
     try {
       const { data: ipv6LatencyResult } = await fetchProxyLatencyAPI(proxyName, IPV6_TEST_URL, 2000)
@@ -84,7 +85,7 @@ export const proxyLatencyTest = async (proxyName: string) => {
   try {
     const { data: latencyResult } = await fetchProxyLatencyAPI(
       proxyName,
-      speedtestUrl.value,
+      url,
       speedtestTimeout.value,
     )
 
@@ -97,17 +98,22 @@ export const proxyLatencyTest = async (proxyName: string) => {
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
   const all = proxyNode.all ?? []
-  const timeout = Math.ceil(all.length / 50) * speedtestTimeout.value
   const url = overrideUrlWithConfigIfExists.value
     ? proxyNode.testUrl || speedtestUrl.value
     : speedtestUrl.value
+
+  if (all.length > 50) {
+    const limiter = pLimit(5)
+
+    return await Promise.all(all.map((name) => limiter(() => proxyLatencyTest(name, url))))
+  }
 
   if (IPv6test.value) {
     try {
       const { data: ipv6LatencyResult } = await fetchProxyGroupLatencyAPI(
         proxyGroupName,
         IPV6_TEST_URL,
-        Math.max(5000, timeout),
+        Math.max(5000, speedtestTimeout.value),
       )
 
       all?.forEach((name) => {
@@ -119,7 +125,7 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
       })
     }
   }
-  await fetchProxyGroupLatencyAPI(proxyGroupName, url, timeout)
+  await fetchProxyGroupLatencyAPI(proxyGroupName, url, speedtestTimeout.value)
   await fetchProxies()
 }
 
