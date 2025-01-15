@@ -5,8 +5,10 @@
     ref="modalRef"
     class="modal"
   >
-    <div class="modal-box relative">
-      <VueJsonPretty :data="infoConn" />
+    <div class="modal-box relative p-0">
+      <div class="max-h-[70vh] overflow-y-auto p-4">
+        <VueJsonPretty :data="infoConn" />
+      </div>
       <form method="dialog">
         <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2 outline-none">
           <XMarkIcon class="h-4 w-4" />
