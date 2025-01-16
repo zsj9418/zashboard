@@ -138,6 +138,8 @@ const zh: LANG_MESSAGE = {
   mostUploadSourceIP: '最多上传源IP',
   mostDownloadProxy: '最多下载节点',
   mostUploadProxy: '最多上传节点',
+  manual: '手动',
+  tableWidthMode: '表格宽度模式',
 }
 
 export default zh

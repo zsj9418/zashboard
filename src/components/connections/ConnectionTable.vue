@@ -7,7 +7,15 @@
     @touchend.stop
   >
     <div :style="{ height: `${totalSize}px` }">
-      <table :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`">
+      <table
+        :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`"
+        :style="
+          isManualTable && {
+            tableLayout: 'fixed',
+            width: `${tanstackTable.getCenterTotalSize()}px`,
+          }
+        "
+      >
         <thead class="sticky -top-2 z-10 bg-base-100">
           <tr
             v-for="headerGroup in tanstackTable.getHeaderGroups()"
@@ -17,7 +25,13 @@
               v-for="header in headerGroup.headers"
               :key="header.id"
               :colSpan="header.colSpan"
+              class="relative"
               :class="header.column.getCanSort() ? 'cursor-pointer select-none' : ''"
+              :style="
+                isManualTable && {
+                  width: `${header.getSize()}px`,
+                }
+              "
               @click="header.column.getToggleSortingHandler()?.($event)"
             >
               <div class="flex items-center gap-1">
@@ -50,6 +64,13 @@
                   v-if="header.column.getIsSorted() === 'desc'"
                 />
               </div>
+              <div
+                v-if="isManualTable"
+                @dblclick="() => header.column.resetSize()"
+                @mousedown="(e) => header.getResizeHandler()(e)"
+                @touchstart="(e) => header.getResizeHandler()(e)"
+                class="resizer absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-neutral"
+              />
             </th>
           </tr>
         </thead>
@@ -67,22 +88,24 @@
             <td
               v-for="cell in rows[virtualRow.index].getVisibleCells()"
               :key="cell.id"
-              :class="
-                twMerge(
-                  'whitespace-nowrap text-sm',
-                  [
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
-                  ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
-                  [
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.Host,
-                    CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
-                  ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
-                    'max-w-[32rem] truncate',
-                )
-              "
+              :class="[
+                isManualTable
+                  ? 'truncate text-sm'
+                  : twMerge(
+                      'whitespace-nowrap text-sm',
+                      [
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
+                      ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
+                      [
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Host,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
+                      ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
+                        'max-w-[32rem] truncate',
+                    ),
+              ]"
             >
               <template v-if="cell.column.getIsGrouped()">
                 <template v-if="rows[virtualRow.index].getCanExpand()">
@@ -121,7 +144,12 @@
 <script setup lang="ts">
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, PROXY_CHAIN_DIRECTION, TABLE_SIZE } from '@/config'
+import {
+  CONNECTIONS_TABLE_ACCESSOR_KEY,
+  PROXY_CHAIN_DIRECTION,
+  TABLE_SIZE,
+  TABLE_WIDTH_MODE,
+} from '@/config'
 import {
   fromNow,
   getDestinationFromConnection,
@@ -131,7 +159,12 @@ import {
   prettyBytesHelper,
 } from '@/helper'
 import { renderConnections } from '@/store/connections'
-import { connectionTableColumns, proxyChainDirection, tableSize } from '@/store/settings'
+import {
+  connectionTableColumns,
+  proxyChainDirection,
+  tableSize,
+  tableWidthMode,
+} from '@/store/settings'
 import type { Connection } from '@/types'
 import {
   ArrowDownCircleIcon,
@@ -165,6 +198,26 @@ import { useI18n } from 'vue-i18n'
 import ProxyName from '../proxies/ProxyName.vue'
 
 const { handlerInfo } = useConnections()
+const columnWidthMap = useStorage('config/table-column-width', {
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Details]: 50,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: 50,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: 320,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Chains]: 320,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: 200,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: 80,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: 80,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: 80,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed]: 80,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: 100,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Process]: 100,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: 100,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: 100,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost]: 200,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.Destination]: 150,
+  [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: 100,
+} as Record<CONNECTIONS_TABLE_ACCESSOR_KEY, number>)
+
+const isManualTable = computed(() => tableWidthMode.value === TABLE_WIDTH_MODE.MANUAL)
 const { t } = useI18n()
 const columns: ColumnDef<Connection>[] = [
   {
@@ -336,6 +389,8 @@ const tanstackTable = useVueTable({
     return renderConnections.value
   },
   columns,
+  columnResizeMode: 'onChange',
+  columnResizeDirection: 'ltr',
   state: {
     get columnOrder() {
       return connectionTableColumns.value
@@ -357,6 +412,9 @@ const tanstackTable = useVueTable({
     get sorting() {
       return sorting.value
     },
+    get columnSizing() {
+      return columnWidthMap.value
+    },
   },
   onGroupingChange: (updater) => {
     if (isFunction(updater)) {
@@ -375,6 +433,16 @@ const tanstackTable = useVueTable({
       sorting.value = updater(sorting.value)
     } else {
       sorting.value = updater
+    }
+  },
+  onColumnSizingChange: (updater) => {
+    if (isFunction(updater)) {
+      columnWidthMap.value = updater(columnWidthMap.value) as Record<
+        CONNECTIONS_TABLE_ACCESSOR_KEY,
+        number
+      >
+    } else {
+      columnWidthMap.value = updater as Record<CONNECTIONS_TABLE_ACCESSOR_KEY, number>
     }
   },
   getSortedRowModel: getSortedRowModel(),
@@ -419,3 +487,12 @@ const handlerClickRow = (row: Row<Connection>) => {
   }
 }
 </script>
+
+<style>
+th .resizer {
+  @apply opacity-0;
+}
+th:hover .resizer {
+  @apply opacity-100;
+}
+</style>

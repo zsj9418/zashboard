@@ -137,6 +137,8 @@ const en = {
   mostUploadSourceIP: 'Most Upload Source IP',
   mostDownloadProxy: 'Most Download Proxy',
   mostUploadProxy: 'Most Upload Proxy',
+  manual: 'Manual',
+  tableWidthMode: 'Table Width Mode',
 }
 
 export type LANG_MESSAGE = typeof en

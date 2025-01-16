@@ -1,5 +1,20 @@
 <template>
   <div class="flex items-center gap-2">
+    <div>{{ $t('tableWidthMode') }}:</div>
+    <select
+      class="select select-bordered select-sm min-w-24"
+      v-model="tableWidthMode"
+    >
+      <option
+        v-for="opt in Object.values(TABLE_WIDTH_MODE)"
+        :key="opt"
+        :value="opt"
+      >
+        {{ $t(opt) }}
+      </option>
+    </select>
+  </div>
+  <div class="flex items-center gap-2">
     <div>{{ $t('tableSize') }}:</div>
     <select
       class="select select-bordered select-sm min-w-24"
@@ -46,8 +61,8 @@
 </template>
 
 <script setup lang="ts">
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE } from '@/config'
-import { connectionTableColumns, tableSize } from '@/store/settings'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, TABLE_SIZE, TABLE_WIDTH_MODE } from '@/config'
+import { connectionTableColumns, tableSize, tableWidthMode } from '@/store/settings'
 import { ref } from 'vue'
 import Draggable from 'vuedraggable'
 

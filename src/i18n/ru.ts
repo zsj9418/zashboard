@@ -140,6 +140,8 @@ const ru: LANG_MESSAGE = {
   mostUploadSourceIP: 'Самый большой IP-адрес',
   mostDownloadProxy: 'Самый большой прокси',
   mostUploadProxy: 'Самый большой прокси',
+  manual: 'Ручной',
+  tableWidthMode: 'Режим ширины таблицы',
 }
 
 export default ru

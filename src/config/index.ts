@@ -42,6 +42,11 @@ export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   Destination = 'destination',
 }
 
+export enum TABLE_WIDTH_MODE {
+  AUTO = 'auto',
+  MANUAL = 'manual',
+}
+
 export enum PROXY_SORT_TYPE {
   DEFAULT = 'defaultsort',
   NAME_ASC = 'nameasc',

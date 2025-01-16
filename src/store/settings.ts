@@ -7,6 +7,7 @@ import {
   PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
   TABLE_SIZE,
+  TABLE_WIDTH_MODE,
 } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { useStorage } from '@vueuse/core'
@@ -83,6 +84,7 @@ export const proxyChainDirection = useStorage(
   PROXY_CHAIN_DIRECTION.NORMAL,
 )
 export const tableSize = useStorage<TABLE_SIZE>('config/connecticon-table-size', TABLE_SIZE.SMALL)
+export const tableWidthMode = useStorage('config/table-width-mode', TABLE_WIDTH_MODE.AUTO)
 export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[]>(
   'config/connection-table-columns',
   [
