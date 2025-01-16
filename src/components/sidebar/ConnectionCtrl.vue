@@ -39,29 +39,23 @@
         </select>
       </div>
     </div>
-    <div :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')">
-      <div class="join relative flex-1">
-        <button
-          class="btn join-item btn-sm"
-          @click="quickFilterEnabled = !quickFilterEnabled"
-        >
-          {{ $t('quickFilter') }}
-          <component
-            :is="quickFilterEnabled ? MagnifyingGlassMinusIcon : MagnifyingGlassPlusIcon"
-            class="h-4 w-4"
-          />
-        </button>
-        <div
-          :class="`tooltip absolute right-0 top-0 ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
-          :data-tip="$t('quickFilterTip')"
-        >
-          <QuestionMarkCircleIcon class="h-8 w-8 p-2" />
-        </div>
-        <input
-          type="text"
-          :class="['input input-sm join-item input-bordered w-0 flex-1', horizontal && 'md:w-48']"
-          v-model="quickFilterRegex"
-        />
+    <div :class="twMerge('relative flex w-full items-center gap-1', horizontal && 'md:w-auto')">
+      {{ $t('quickFilter') }}
+      <input
+        type="checkbox"
+        class="toggle"
+        v-model="quickFilterEnabled"
+      />
+      <input
+        type="text"
+        :class="['input input-sm input-bordered w-0 flex-1', horizontal && 'md:w-48']"
+        v-model="quickFilterRegex"
+      />
+      <div
+        :class="`tooltip ${horizontal ? 'tooltip-left md:tooltip-bottom' : 'tooltip-left'}`"
+        :data-tip="$t('quickFilterTip')"
+      >
+        <QuestionMarkCircleIcon class="h-8 w-6 px-1 py-2" />
       </div>
     </div>
     <SourceIPFilter v-if="!horizontal" />
@@ -111,8 +105,6 @@ import { useConnectionCard } from '@/store/settings'
 import {
   ArrowDownCircleIcon,
   ArrowUpCircleIcon,
-  MagnifyingGlassMinusIcon,
-  MagnifyingGlassPlusIcon,
   PauseIcon,
   PlayIcon,
   QuestionMarkCircleIcon,

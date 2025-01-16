@@ -30,7 +30,7 @@
         :class="isPWA ? 'max-md:h-[5.5rem]' : 'max-md:h-14'"
       />
       <div
-        :class="`btm-nav z-30 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`"
+        :class="`btm-nav z-30 bg-base-200 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`"
         ref="swiperRef"
       >
         <button

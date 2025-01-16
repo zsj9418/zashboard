@@ -2,7 +2,7 @@
   <div :class="twMerge('card mb-1 gap-1 p-2 text-sm', !rule.payload && 'gap-0')">
     <div>
       <span class="mr-2 inline-block min-w-4 text-center">{{ index }}.</span>
-      <span class="mr-2 text-slate-500">{{ rule.type }}:</span>
+      <span class="mr-2 text-base-content/60">{{ rule.type }}:</span>
       <span
         class="mr-2 text-primary"
         v-if="rule.payload"

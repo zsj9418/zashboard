@@ -10,7 +10,7 @@
             :name="proxyGroup.name"
             size="large"
           />
-          <span class="flex-1 text-xs text-slate-400"
+          <span class="flex-1 text-xs text-base-content/60"
             >: {{ proxyGroup.type }} ({{ sortedProxies?.length }})</span
           >
         </div>
@@ -26,19 +26,16 @@
         />
       </div>
       <div
-        class="mt-[2px] flex items-center gap-2"
+        class="mt-[2px] flex items-center gap-2 text-base-content/80"
         @contextmenu.prevent.stop="handlerLatencyTest"
       >
         <div class="flex flex-1 items-center gap-1">
           <template v-if="proxyGroup.now">
             <ArrowRightCircleIcon class="h-4 w-4" />
-            <ProxyName
-              class="text-slate-500"
-              :name="proxyGroup.now"
-            />
+            <ProxyName :name="proxyGroup.now" />
           </template>
         </div>
-        <div class="shrink-0 text-xs text-slate-500">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+        <div class="shrink-0 text-xs">{{ prettyBytesHelper(downloadTotal) }}/s</div>
       </div>
     </template>
     <template v-slot:preview>

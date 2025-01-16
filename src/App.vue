@@ -70,7 +70,7 @@ onMounted(() => {
   <div
     ref="app"
     id="app-content"
-    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} custom-background-${dashboardTransparent} ${customBackgroundURL && 'custom-background bg-cover'}`"
+    :class="`flex h-dvh w-screen overflow-x-hidden bg-base-100 ${fontClassName} custom-background-${dashboardTransparent} ${customBackgroundURL && 'custom-background bg-cover bg-center'}`"
     :style="`background-image: url('${backgroundImage}');`"
   >
     <RouterView />

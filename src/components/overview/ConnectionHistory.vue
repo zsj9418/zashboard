@@ -2,7 +2,7 @@
   <div class="card card-compact w-full">
     <div class="card-title px-4 pt-4">
       {{ $t('totalConnections') }}
-      <span class="font-normal text-slate-500"> ({{ allConnections.length }}) </span>
+      <span class="font-normal text-base-content/80"> ({{ allConnections.length }}) </span>
     </div>
     <div class="card-body gap-4">
       <div class="grid grid-cols-1 gap-2 rounded-lg bg-base-200/40 px-4 py-2 lg:grid-cols-3">

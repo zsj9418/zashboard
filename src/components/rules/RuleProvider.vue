@@ -8,7 +8,7 @@
           {{ ruleProvider.ruleCount }}
         </span>
       </div>
-      <div class="flex gap-3 text-slate-500">
+      <div class="flex gap-3 text-base-content/80">
         <span>{{ ruleProvider.behavior }}</span>
         <span>{{ ruleProvider.vehicleType }}</span>
         <span>{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>

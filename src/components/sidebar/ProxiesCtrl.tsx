@@ -5,7 +5,6 @@ import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
 import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { hideUnavailableProxies, proxySortType } from '@/store/settings'
-import { MagnifyingGlassMinusIcon, MagnifyingGlassPlusIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -125,17 +124,14 @@ export default defineComponent({
               )
             })}
           </select>
-          <button
-            class="btn btn-sm"
-            onClick={() => (hideUnavailableProxies.value = !hideUnavailableProxies.value)}
-          >
+          <div class="flex items-center gap-1 text-sm">
             <span class="shrink-0">{t('unavailableProxy')}</span>
-            {hideUnavailableProxies.value ? (
-              <MagnifyingGlassMinusIcon class="h-4 w-4" />
-            ) : (
-              <MagnifyingGlassPlusIcon class="h-4 w-4" />
-            )}
-          </button>
+            <input
+              type="checkbox"
+              class="toggle"
+              v-model={hideUnavailableProxies.value}
+            />
+          </div>
         </>
       )
 

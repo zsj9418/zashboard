@@ -28,19 +28,17 @@
         :value="subscriptionInfo.percentage"
         max="100"
       />
-      <div class="flex flex-col sm:flex-row sm:gap-4">
+      <div class="flex flex-col text-base-content/80 sm:flex-row sm:gap-4">
         <template v-if="subscriptionInfo">
-          <div class="text-sm text-slate-500">
+          <div class="text-sm">
             {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} (
             {{ subscriptionInfo.percentage }}% )
           </div>
-          <div class="text-sm text-slate-500">
+          <div class="text-sm">
             {{ subscriptionInfo.expirePrefix() }}: {{ subscriptionInfo.expireStr() }}
           </div>
         </template>
-        <div class="text-sm text-slate-500">
-          {{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}
-        </div>
+        <div class="text-sm">{{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}</div>
       </div>
     </template>
     <template v-slot:preview>

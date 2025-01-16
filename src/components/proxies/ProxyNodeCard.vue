@@ -28,7 +28,7 @@
 
     <div class="flex h-4 w-full items-center justify-between">
       <span
-        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content' : 'text-slate-500'}`"
+        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content' : 'text-base-content/60'}`"
       >
         {{ typeDescription }}
       </span>
