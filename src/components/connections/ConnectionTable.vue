@@ -160,6 +160,7 @@ import dayjs from 'dayjs'
 import { twMerge } from 'tailwind-merge'
 import { computed, h, ref, type VNode } from 'vue'
 import { useI18n } from 'vue-i18n'
+import ProxyName from '../proxies/ProxyName.vue'
 
 const { handlerInfo } = useConnections()
 const { t } = useI18n()
@@ -248,12 +249,12 @@ const columns: ColumnDef<Connection>[] = [
       const chains: VNode[] = []
 
       row.original.chains.forEach((chain, index) => {
-        chains.unshift(h('span', chain))
+        chains.unshift(h(ProxyName, { name: chain, size: 'small' }))
 
         if (index < row.original.chains.length - 1) {
           chains.unshift(
             h(ArrowRightCircleIcon, {
-              class: 'h-4 w-4',
+              class: 'h-4 w-4 shrink-0',
             }),
           )
         }

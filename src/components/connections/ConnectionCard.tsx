@@ -23,6 +23,7 @@ import {
 import { first, last } from 'lodash'
 import { defineComponent } from 'vue'
 import type { JSX } from 'vue/jsx-runtime'
+import ProxyName from '../proxies/ProxyName.vue'
 
 export default defineComponent<{
   conn: Connection
@@ -76,11 +77,11 @@ export default defineComponent<{
                 'flex-row-reverse justify-end',
             ]}
           >
-            {last(conn.chains)}
+            {<ProxyName name={last(conn.chains)!} />}
             {last(conn.chains) !== first(conn.chains) && (
               <>
                 <ArrowRightCircleIcon class="h-4 w-4"></ArrowRightCircleIcon>
-                {first(conn.chains)}
+                {<ProxyName name={first(conn.chains)!} />}
               </>
             )}
           </span>
