@@ -11,7 +11,7 @@
         <div
           :class="`card-body grid grid-cols-1 gap-2 lg:grid-cols-2 ${showIPAndConnectionInfo && 'xl:grid-cols-3'}`"
         >
-          <StatisticsInfo class="bg-base-200/40 p-4" />
+          <StatisticsStats type="settings" />
           <template v-if="showIPAndConnectionInfo">
             <IPCheck />
             <ConnectionStatus />
@@ -105,11 +105,11 @@ import ConnectionStatus from '@/components/overview/ConnectionStatus.vue'
 import IPCheck from '@/components/overview/IPCheck.vue'
 import MemoryCharts from '@/components/overview/MemoryCharts.vue'
 import SpeedCharts from '@/components/overview/SpeedCharts.vue'
+import StatisticsStats from '@/components/overview/StatisticsStats.vue'
 import BackendSettings from '@/components/settings/BackendSettings.vue'
 import ConnectionsSettings from '@/components/settings/ConnectionsSettings.vue'
 import ProxiesSettings from '@/components/settings/ProxiesSettings.vue'
 import ZashboardSettings from '@/components/settings/ZashboardSettings.vue'
-import StatisticsInfo from '@/components/sidebar/StatisticsInfo.vue'
 import {
   autoConnectionCheck,
   autoIPCheck,

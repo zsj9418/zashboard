@@ -1,34 +1,72 @@
 <template>
-  <div class="grid grid-cols-2 gap-2 rounded-lg bg-base-200/40 px-4 py-2 lg:grid-cols-6">
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('connections') }}</div>
-      <div class="text-xl">{{ activeConnections.length }}</div>
-    </div>
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('memoryUsage') }}</div>
-      <div class="text-xl">{{ prettyBytesHelper(memory, { binary: true }) }}</div>
-    </div>
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('download') }}</div>
-      <div class="text-xl">{{ prettyBytesHelper(downloadTotal) }}</div>
-    </div>
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('dlSpeed') }}</div>
-      <div class="text-xl">{{ prettyBytesHelper(downloadSpeed) }}/s</div>
-    </div>
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('upload') }}</div>
-      <div class="text-xl">{{ prettyBytesHelper(uploadTotal) }}</div>
-    </div>
-    <div class="flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center">
-      <div class="text-sm lg:text-lg lg:font-bold">{{ $t('ulSpeed') }}</div>
-      <div class="text-xl">{{ prettyBytesHelper(uploadSpeed) }}/s</div>
+  <div :class="className.list">
+    <div
+      v-for="stat in order"
+      :key="stat"
+      :class="className.item"
+    >
+      <div :class="className.label">{{ $t(stat) }}</div>
+      <div :class="className.value">{{ statisticsMap[stat] }}</div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { prettyBytesHelper } from '@/helper'
-import { activeConnections, downloadTotal, uploadTotal } from '@/store/connections'
-import { downloadSpeed, memory, uploadSpeed } from '@/store/overview'
+import { STATISTICS_TYPE, statisticsMap } from '@/composables/statistics'
+import { computed } from 'vue'
+
+const props = defineProps<{
+  type: 'overview' | 'ctrl' | 'settings'
+}>()
+
+const classMap = {
+  overview: {
+    list: 'grid grid-cols-2 gap-2 rounded-lg bg-base-200/40 px-4 py-2 lg:grid-cols-6',
+    item: 'flex h-14 flex-col items-start justify-center gap-2 lg:h-24 lg:items-center',
+    label: 'text-sm lg:text-lg lg:font-bold',
+    value: 'text-xl',
+  },
+  settings: {
+    list: 'grid w-full grid-cols-3 gap-1 rounded-lg bg-base-200/40 p-3',
+    item: 'flex flex-col items-start',
+    label: 'text-sm text-base-content/70',
+    value: 'text-sm',
+  },
+  ctrl: {
+    list: 'grid w-full grid-cols-2 gap-1 rounded-lg',
+    item: 'flex gap-2 items-start',
+    label: 'text-sm',
+    value: 'text-sm',
+  },
+}
+
+const orderMap = {
+  overview: [
+    STATISTICS_TYPE.CONNECTIONS,
+    STATISTICS_TYPE.MEMORY_USAGE,
+    STATISTICS_TYPE.DOWNLOAD,
+    STATISTICS_TYPE.DL_SPEED,
+    STATISTICS_TYPE.UPLOAD,
+    STATISTICS_TYPE.UL_SPEED,
+  ],
+  settings: [
+    STATISTICS_TYPE.CONNECTIONS,
+    STATISTICS_TYPE.DOWNLOAD,
+    STATISTICS_TYPE.DL_SPEED,
+    STATISTICS_TYPE.MEMORY_USAGE,
+    STATISTICS_TYPE.UPLOAD,
+    STATISTICS_TYPE.UL_SPEED,
+  ],
+  ctrl: [
+    STATISTICS_TYPE.CONNECTIONS,
+    STATISTICS_TYPE.MEMORY_USAGE,
+    STATISTICS_TYPE.DOWNLOAD,
+    STATISTICS_TYPE.DL_SPEED,
+    STATISTICS_TYPE.UPLOAD,
+    STATISTICS_TYPE.UL_SPEED,
+  ],
+}
+
+const className = computed(() => classMap[props.type])
+const order = computed(() => orderMap[props.type])
 </script>
