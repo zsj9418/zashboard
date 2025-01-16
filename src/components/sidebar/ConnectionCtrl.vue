@@ -5,38 +5,40 @@
       :class="twMerge('flex w-full items-center gap-2', horizontal && 'md:w-auto')"
       v-if="useConnectionCard"
     >
-      <div class="join flex-1">
-        <button
-          class="btn join-item btn-sm"
-          @click="
-            connectionSortDirection =
-              connectionSortDirection === SORT_DIRECTION.ASC
-                ? SORT_DIRECTION.DESC
-                : SORT_DIRECTION.ASC
-          "
-        >
-          {{ $t('sortBy') }}
-          <ArrowUpCircleIcon
-            class="h-4 w-4"
-            v-if="connectionSortDirection === SORT_DIRECTION.ASC"
-          />
-          <ArrowDownCircleIcon
-            class="h-4 w-4"
-            v-else
-          />
-        </button>
-        <select
-          class="join-item select select-bordered select-sm block flex-1"
-          v-model="connectionSortType"
-        >
-          <option
-            v-for="opt in Object.values(SORT_TYPE)"
-            :key="opt"
-            :value="opt"
+      <div class="flex flex-1 items-center gap-1">
+        {{ $t('sortBy') }}
+        <div class="join flex-1">
+          <select
+            class="join-item select select-bordered select-sm block flex-1"
+            v-model="connectionSortType"
           >
-            {{ $t(opt) || opt }}
-          </option>
-        </select>
+            <option
+              v-for="opt in Object.values(SORT_TYPE)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ $t(opt) || opt }}
+            </option>
+          </select>
+          <button
+            class="btn join-item btn-sm"
+            @click="
+              connectionSortDirection =
+                connectionSortDirection === SORT_DIRECTION.ASC
+                  ? SORT_DIRECTION.DESC
+                  : SORT_DIRECTION.ASC
+            "
+          >
+            <ArrowUpCircleIcon
+              class="h-4 w-4"
+              v-if="connectionSortDirection === SORT_DIRECTION.ASC"
+            />
+            <ArrowDownCircleIcon
+              class="h-4 w-4"
+              v-else
+            />
+          </button>
+        </div>
       </div>
     </div>
     <div :class="twMerge('relative flex w-full items-center gap-1', horizontal && 'md:w-auto')">
