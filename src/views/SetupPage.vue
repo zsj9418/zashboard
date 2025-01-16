@@ -14,7 +14,7 @@
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
-    <div class="card w-64 gap-2 px-6 py-2 sm:gap-4">
+    <div class="card w-96 max-w-[90%] gap-2 px-6 py-2 sm:gap-4">
       <h1 class="text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control">
         <label class="label">
@@ -82,26 +82,36 @@
       >
         {{ $t('submit') }}
       </button>
-      <div class="flex flex-col gap-2">
-        <div
-          v-for="backend in backendList"
-          :key="backend.uuid"
-          class="flex items-center gap-2"
-        >
-          <button
-            class="btn btn-sm flex-1"
-            @click="selectBackend(backend.uuid)"
+      <Draggable
+        class="flex flex-1 flex-col gap-2"
+        v-model="backendList"
+        group="list"
+        :animation="150"
+        :item-key="'uuid'"
+      >
+        <template #item="{ element }">
+          <div
+            :key="element.uuid"
+            class="flex items-center gap-2"
           >
-            {{ getUrlFromBackend(backend) }}
-          </button>
-          <button
-            class="btn btn-circle btn-sm"
-            @click="() => removeBackend(backend.uuid)"
-          >
-            <MinusCircleIcon class="h-4 w-4" />
-          </button>
-        </div>
-      </div>
+            <button class="btn btn-sm cursor-grab">
+              <AdjustmentsVerticalIcon class="h-4 w-4" />
+            </button>
+            <button
+              class="btn btn-sm flex-1"
+              @click="selectBackend(element.uuid)"
+            >
+              {{ getUrlFromBackend(element) }}
+            </button>
+            <button
+              class="btn btn-circle btn-sm"
+              @click="() => removeBackend(element.uuid)"
+            >
+              <MinusCircleIcon class="h-4 w-4" />
+            </button>
+          </div>
+        </template>
+      </Draggable>
     </div>
   </div>
 </template>
@@ -113,8 +123,13 @@ import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend, importSettings } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
-import { MinusCircleIcon, QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
+import {
+  AdjustmentsVerticalIcon,
+  MinusCircleIcon,
+  QuestionMarkCircleIcon,
+} from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
+import Draggable from 'vuedraggable'
 
 const form = reactive({
   protocol: 'http',
