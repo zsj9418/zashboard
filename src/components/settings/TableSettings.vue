@@ -1,33 +1,35 @@
 <template>
-  <div class="flex items-center gap-2">
-    <div>{{ $t('tableWidthMode') }}:</div>
-    <select
-      class="select select-bordered select-sm min-w-24"
-      v-model="tableWidthMode"
-    >
-      <option
-        v-for="opt in Object.values(TABLE_WIDTH_MODE)"
-        :key="opt"
-        :value="opt"
+  <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
+    <div class="flex items-center gap-2">
+      <div>{{ $t('tableWidthMode') }}:</div>
+      <select
+        class="select select-bordered select-sm min-w-24"
+        v-model="tableWidthMode"
       >
-        {{ $t(opt) }}
-      </option>
-    </select>
-  </div>
-  <div class="flex items-center gap-2">
-    <div>{{ $t('tableSize') }}:</div>
-    <select
-      class="select select-bordered select-sm min-w-24"
-      v-model="tableSize"
-    >
-      <option
-        v-for="opt in Object.values(TABLE_SIZE)"
-        :key="opt"
-        :value="opt"
+        <option
+          v-for="opt in Object.values(TABLE_WIDTH_MODE)"
+          :key="opt"
+          :value="opt"
+        >
+          {{ $t(opt) }}
+        </option>
+      </select>
+    </div>
+    <div class="flex items-center gap-2">
+      <div>{{ $t('tableSize') }}:</div>
+      <select
+        class="select select-bordered select-sm min-w-24"
+        v-model="tableSize"
       >
-        {{ $t(opt) }}
-      </option>
-    </select>
+        <option
+          v-for="opt in Object.values(TABLE_SIZE)"
+          :key="opt"
+          :value="opt"
+        >
+          {{ $t(opt) }}
+        </option>
+      </select>
+    </div>
   </div>
   <div>{{ $t('customTableColumns') }}:</div>
   <div class="flex rounded lg:flex-col">

@@ -5,31 +5,34 @@
       {{ $t('connections') }}
     </div>
     <div class="card-body">
-      <div class="flex items-center gap-2">
-        {{ $t('proxyChainDirection') }}:
-        <select
-          class="select select-bordered select-sm w-24"
-          v-model="proxyChainDirection"
-        >
-          <option
-            v-for="opt in Object.values(PROXY_CHAIN_DIRECTION)"
-            :key="opt"
-            :value="opt"
+      <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
+        <div class="flex items-center gap-2">
+          {{ $t('connectionStyle') }}:
+          {{ $t('table') }}
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="useConnectionCard"
+          />
+          {{ $t('card') }}
+        </div>
+        <div class="flex items-center gap-2">
+          {{ $t('proxyChainDirection') }}:
+          <select
+            class="select select-bordered select-sm w-24"
+            v-model="proxyChainDirection"
           >
-            {{ $t(opt) }}
-          </option>
-        </select>
+            <option
+              v-for="opt in Object.values(PROXY_CHAIN_DIRECTION)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ $t(opt) }}
+            </option>
+          </select>
+        </div>
       </div>
-      <div class="flex items-center gap-2">
-        {{ $t('connectionStyle') }}:
-        {{ $t('table') }}
-        <input
-          class="toggle"
-          type="checkbox"
-          v-model="useConnectionCard"
-        />
-        {{ $t('card') }}
-      </div>
+
       <ConnectionCardSettings v-if="useConnectionCard" />
       <TableSettings v-else />
       <div class="divider"></div>
@@ -41,8 +44,7 @@
 <script setup lang="ts">
 import ConnectionCardSettings from '@/components/settings/ConnectionCardSettings.vue'
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
+import TableSettings from '@/components/settings/TableSettings.vue'
 import { PROXY_CHAIN_DIRECTION } from '@/config'
 import { proxyChainDirection, useConnectionCard } from '@/store/settings'
-import TableSettings from '@/components/settings/TableSettings.vue'
-
 </script>
