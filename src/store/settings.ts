@@ -73,8 +73,8 @@ export const proxyCardSize = useStorage<PROXY_CARD_SIZE>(
   PROXY_CARD_SIZE.LARGE,
 )
 export const showHiddenGroup = useStorage('config/show-hidden-group', false)
-export const iconSize = useStorage('config/icon-size', 16)
-export const iconMarginRight = useStorage('config/icon-margin-right', 4)
+export const iconSize = useStorage('config/icon-size', 14)
+export const iconMarginRight = useStorage('config/icon-margin-right', 6)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', window.innerWidth < 640)

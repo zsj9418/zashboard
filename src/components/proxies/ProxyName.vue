@@ -3,7 +3,8 @@
     <ProxyIcon
       v-if="icon"
       :icon="icon"
-      :size="size === 'large' ? 'large' : 'small'"
+      :size="size"
+      :class="size === 'large' && '-mt-[2px]'"
     />
     <span :class="size === 'large' ? 'text-lg font-medium' : 'text-sm'">{{ name }}</span>
   </div>
@@ -14,10 +15,15 @@ import { proxyMap } from '@/store/proxies'
 import { computed } from 'vue'
 import ProxyIcon from './ProxyIcon.vue'
 
-const props = defineProps<{
-  name: string
-  size?: 'small' | 'large'
-}>()
+const props = withDefaults(
+  defineProps<{
+    name: string
+    size?: 'small' | 'large'
+  }>(),
+  {
+    size: 'small',
+  },
+)
 
 const icon = computed(() => {
   return proxyMap.value[props.name]?.icon
