@@ -80,7 +80,7 @@ export default defineComponent<{
             {<ProxyName name={last(conn.chains)!} />}
             {last(conn.chains) !== first(conn.chains) && (
               <>
-                <ArrowRightCircleIcon class="h-4 w-4"></ArrowRightCircleIcon>
+                <ArrowRightCircleIcon class="h-4 w-4 shrink-0"></ArrowRightCircleIcon>
                 {<ProxyName name={first(conn.chains)!} />}
               </>
             )}

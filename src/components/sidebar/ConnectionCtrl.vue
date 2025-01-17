@@ -65,7 +65,7 @@
       <div class="join flex-1">
         <SourceIPFilter
           v-if="horizontal"
-          class="w-40"
+          class="w-32 sm:w-40"
         />
         <TextInput
           v-model="connectionFilter"

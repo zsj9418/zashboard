@@ -99,11 +99,12 @@
                         CONNECTIONS_TABLE_ACCESSOR_KEY.Upload,
                         CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
                       ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
-                      [
-                        CONNECTIONS_TABLE_ACCESSOR_KEY.Host,
-                        CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
-                      ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.Host ===
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
                         'max-w-[32rem] truncate',
+                      CONNECTIONS_TABLE_ACCESSOR_KEY.Chains ===
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
+                        'max-w-[36rem] truncate',
                     ),
               ]"
             >
