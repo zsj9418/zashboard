@@ -1,15 +1,7 @@
-import { useWindowSize } from '@vueuse/core'
-import { computed } from 'vue'
+import { useMediaQuery } from '@vueuse/core'
 
-const windowSize = useWindowSize()
-
-export const isLargeScreen = computed(() => {
-  return windowSize.width.value > 1280
-})
-
-export const isMiddleScreen = computed(() => {
-  return windowSize.width.value < 768
-})
+export const isLargeScreen = useMediaQuery('(min-width: 1280px)')
+export const isMiddleScreen = useMediaQuery('(max-width: 768px)')
 
 const BACKGROUND_IMAGE = 'background-image'
 export const LOCAL_IMAGE = 'local-image'

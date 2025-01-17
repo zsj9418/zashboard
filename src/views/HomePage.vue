@@ -9,7 +9,8 @@
     <SideBar />
 
     <div
-      class="drawer-content fixed bottom-0 flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
+      class="drawer-content flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
+      ref="swiperRef"
     >
       <div
         v-if="ctrlComp && isSidebarCollapsed"
@@ -29,10 +30,7 @@
         class="shrink-0 md:hidden"
         :class="isPWA ? 'max-md:h-[5.5rem]' : 'max-md:h-14'"
       />
-      <div
-        :class="`btm-nav z-30 bg-base-200 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`"
-        ref="swiperRef"
-      >
+      <div :class="`btm-nav z-30 bg-base-200 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`">
         <button
           v-for="r in renderRoutes"
           :key="r"

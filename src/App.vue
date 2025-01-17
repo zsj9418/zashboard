@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { XCircleIcon } from '@heroicons/vue/24/outline'
+import { useMediaQuery } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
@@ -43,6 +44,7 @@ const backgroundImage = computed(() => {
   }
   return customBackgroundURL.value + `?v=${date}`
 })
+const isPreferredDark = useMediaQuery('(prefers-color-scheme: dark)')
 
 const setThemeColor = () => {
   const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
@@ -51,6 +53,8 @@ const setThemeColor = () => {
     metaThemeColor.setAttribute('content', themeColor)
   }
 }
+
+watch(isPreferredDark, setThemeColor)
 
 onMounted(() => {
   watch(
