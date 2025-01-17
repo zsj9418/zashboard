@@ -15,12 +15,8 @@
           >
         </div>
         <LatencyTag
-          :class="
-            twMerge(
-              'z-10 bg-base-200/40 hover:shadow',
-              isLatencyTesting ? 'animate-pulse cursor-wait bg-base-300' : '',
-            )
-          "
+          :class="twMerge('z-10 bg-base-200/40 hover:shadow')"
+          :loading="isLatencyTesting"
           :name="proxyGroup.now"
           @click.stop="handlerLatencyTest"
         />

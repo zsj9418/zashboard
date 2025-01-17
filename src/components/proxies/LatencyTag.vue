@@ -7,16 +7,22 @@
       )
     "
   >
-    <BoltIcon
-      v-if="latency === NOT_CONNECTED || !latency"
-      class="h-3 w-3 text-base-content"
-    />
-    <div
-      v-show="latency !== NOT_CONNECTED"
-      ref="latencyRef"
-    >
-      {{ latency }}
-    </div>
+    <span
+      v-if="loading"
+      class="loading loading-dots loading-xs text-base-content/80"
+    ></span>
+    <template v-else>
+      <BoltIcon
+        v-if="latency === NOT_CONNECTED || !latency"
+        class="h-3 w-3 text-base-content"
+      />
+      <div
+        v-show="latency !== NOT_CONNECTED"
+        ref="latencyRef"
+      >
+        {{ latency }}
+      </div>
+    </template>
   </div>
 </template>
 
@@ -31,6 +37,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 
 const props = defineProps<{
   name?: string
+  loading?: boolean
 }>()
 const latencyRef = ref()
 const latency = computed(() => getLatencyByName(props.name ?? ''))

@@ -9,10 +9,17 @@
         <div class="flex-1" />
         <div class="flex gap-2">
           <button
-            :class="twMerge('btn btn-circle btn-sm z-30', isHealthChecking ? 'animate-pulse' : '')"
+            :class="twMerge('btn btn-circle btn-sm z-30')"
             @click.stop="healthCheckClickHandler"
           >
-            <BoltIcon class="h-4 w-4" />
+            <span
+              v-if="isHealthChecking"
+              class="loading loading-spinner loading-xs"
+            ></span>
+            <BoltIcon
+              v-else
+              class="h-4 w-4"
+            />
           </button>
           <button
             :class="twMerge('btn btn-circle btn-sm z-30', isUpdating ? 'animate-spin' : '')"
@@ -23,7 +30,7 @@
         </div>
       </div>
       <progress
-        class="progress"
+        class="progress text-slate-500"
         v-if="subscriptionInfo"
         :value="subscriptionInfo.percentage"
         max="100"

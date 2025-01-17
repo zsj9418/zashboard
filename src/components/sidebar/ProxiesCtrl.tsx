@@ -75,10 +75,14 @@ export default defineComponent({
         <>
           {proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER && (
             <button
-              class={twMerge('btn btn-sm', isUpgrading.value ? 'animate-pulse' : '')}
+              class={twMerge('btn btn-sm')}
               onClick={handlerClickUpdateAllProviders}
             >
-              {t('updateAllProviders')}
+              {isUpgrading.value ? (
+                <span class="loading loading-dots loading-md"></span>
+              ) : (
+                t('updateAllProviders')
+              )}
             </button>
           )}
         </>

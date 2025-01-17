@@ -33,8 +33,9 @@
         {{ typeDescription }}
       </span>
       <LatencyTag
-        :class="[isLatencyTesting ? 'animate-pulse cursor-wait' : '', isSmallCard && '!h-4 !w-8']"
+        :class="[isSmallCard && '!h-4 !w-8']"
         :name="node.name"
+        :loading="isLatencyTesting"
         @click.stop="handlerLatencyTest"
       />
     </div>

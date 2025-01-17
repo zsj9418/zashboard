@@ -24,10 +24,16 @@
         v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER"
       >
         <button
-          :class="twMerge('btn btn-sm', isUpgrading ? 'animate-pulse' : '')"
+          :class="twMerge('btn btn-sm')"
           @click="handlerClickUpgradeAllProviders"
         >
-          {{ $t('updateAllProviders') }}
+          <span
+            v-if="isUpgrading"
+            class="loading loading-dots loading-md"
+          ></span>
+          <template v-else>
+            {{ $t('updateAllProviders') }}
+          </template>
         </button>
       </div>
     </div>
