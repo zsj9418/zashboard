@@ -1,5 +1,5 @@
 <template>
-  <div class="grid grid-cols-1 gap-2 p-2">
+  <div class="grid grid-cols-1 gap-2 overflow-x-hidden p-2">
     <ZashboardSettings />
 
     <template v-if="!splitOverviewPage">

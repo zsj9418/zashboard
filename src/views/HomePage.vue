@@ -23,7 +23,11 @@
       </div>
       <div class="relative h-0 flex-1">
         <div class="absolute flex h-full w-full flex-col overflow-y-auto">
-          <RouterView />
+          <RouterView v-slot="{ Component, route }">
+            <Transition :name="(route.meta.transition as string) || 'fade'">
+              <Component :is="Component" />
+            </Transition>
+          </RouterView>
         </div>
       </div>
       <div

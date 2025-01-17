@@ -1,27 +1,32 @@
 <template>
-  <ConnectionCardList v-if="useConnectionCard" />
-  <ConnectionTable v-else />
-  <dialog
-    ref="modalRef"
-    class="modal"
-  >
-    <div class="modal-box relative overflow-hidden p-0">
-      <div class="max-h-[90vh] overflow-y-auto p-4 max-md:max-h-[70vh]">
-        <VueJsonPretty :data="infoConn" />
-      </div>
-      <form method="dialog">
-        <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2 outline-none">
-          <XMarkIcon class="h-4 w-4" />
-        </button>
-      </form>
-    </div>
-    <form
-      method="dialog"
-      class="modal-backdrop"
+  <div class="size-full overflow-x-hidden">
+    <ConnectionCardList
+      v-if="useConnectionCard"
+      class="overflow-x-hidden p-2"
+    />
+    <ConnectionTable v-else />
+    <dialog
+      ref="modalRef"
+      class="modal"
     >
-      <button>close</button>
-    </form>
-  </dialog>
+      <div class="modal-box relative overflow-hidden p-0">
+        <div class="max-h-[90vh] overflow-y-auto p-4 max-md:max-h-[70vh]">
+          <VueJsonPretty :data="infoConn" />
+        </div>
+        <form method="dialog">
+          <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2 outline-none">
+            <XMarkIcon class="h-4 w-4" />
+          </button>
+        </form>
+      </div>
+      <form
+        method="dialog"
+        class="modal-backdrop"
+      >
+        <button>close</button>
+      </form>
+    </dialog>
+  </div>
 </template>
 
 <script setup lang="ts">

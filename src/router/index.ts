@@ -1,4 +1,5 @@
 import { ROUTE_NAME } from '@/config'
+import { renderRoutes } from '@/helper'
 import { i18n } from '@/i18n'
 import { language } from '@/store/settings'
 import { activeBackend } from '@/store/setup'
@@ -14,6 +15,39 @@ import { useTitle } from '@vueuse/core'
 import { watch } from 'vue'
 import { createRouter, createWebHashHistory } from 'vue-router'
 
+const childrenRouter = [
+  {
+    path: 'proxies',
+    name: ROUTE_NAME.proxies,
+    component: ProxiesPage,
+  },
+  {
+    path: 'overview',
+    name: ROUTE_NAME.overview,
+    component: OverviewPage,
+  },
+  {
+    path: 'connections',
+    name: ROUTE_NAME.connections,
+    component: ConnectionsPage,
+  },
+  {
+    path: 'logs',
+    name: ROUTE_NAME.logs,
+    component: LogsPage,
+  },
+  {
+    path: 'rules',
+    name: ROUTE_NAME.rules,
+    component: RulesPage,
+  },
+  {
+    path: 'settings',
+    name: ROUTE_NAME.settings,
+    component: SettingsPage,
+  },
+]
+
 const router = createRouter({
   history: createWebHashHistory(import.meta.env.BASE_URL),
   routes: [
@@ -21,38 +55,7 @@ const router = createRouter({
       path: '/',
       redirect: ROUTE_NAME.proxies,
       component: HomePage,
-      children: [
-        {
-          path: 'proxies',
-          name: ROUTE_NAME.proxies,
-          component: ProxiesPage,
-        },
-        {
-          path: 'overview',
-          name: ROUTE_NAME.overview,
-          component: OverviewPage,
-        },
-        {
-          path: 'connections',
-          name: ROUTE_NAME.connections,
-          component: ConnectionsPage,
-        },
-        {
-          path: 'logs',
-          name: ROUTE_NAME.logs,
-          component: LogsPage,
-        },
-        {
-          path: 'rules',
-          name: ROUTE_NAME.rules,
-          component: RulesPage,
-        },
-        {
-          path: 'settings',
-          name: ROUTE_NAME.settings,
-          component: SettingsPage,
-        },
-      ],
+      children: childrenRouter,
     },
     {
       path: '/setup',
@@ -75,7 +78,18 @@ const setTitleByName = (name: string | symbol | undefined) => {
   }
 }
 
-router.beforeEach((to) => {
+router.beforeEach((to, from) => {
+  const toIndex = renderRoutes.value.findIndex((item) => item === to.name)
+  const fromIndex = renderRoutes.value.findIndex((item) => item === from.name)
+
+  if (toIndex === 0 && fromIndex === renderRoutes.value.length - 1) {
+    to.meta.transition = 'slide-left'
+  } else if (toIndex === renderRoutes.value.length - 1 && fromIndex === 0) {
+    to.meta.transition = 'slide-right'
+  } else if (toIndex !== fromIndex) {
+    to.meta.transition = toIndex < fromIndex ? 'slide-right' : 'slide-left'
+  }
+
   if (!activeBackend.value && to.name !== ROUTE_NAME.setup) {
     router.push({ name: ROUTE_NAME.setup })
   }

@@ -1,28 +1,29 @@
 <template>
-  <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
-    <div class="flex flex-col gap-1 overflow-x-hidden p-2">
+  <div
+    class="flex flex-col overflow-x-hidden"
+    :class="renderRules.length < 200 && 'p-2'"
+  >
+    <template v-if="rulesTabShow === RULE_TAB_TYPE.PROVIDER">
       <RuleProvider
         v-for="(ruleProvider, index) in renderRulesProvider"
         :key="ruleProvider.name"
         :ruleProvider="ruleProvider"
         :index="index + 1"
       />
-    </div>
-  </template>
-  <template v-else-if="renderRules.length < 200">
-    <div class="flex flex-col overflow-x-hidden p-2">
+    </template>
+    <template v-else-if="renderRules.length < 200">
       <RuleCard
         v-for="rule in renderRules"
         :key="rule.payload"
         :rule="rule"
         :index="rules.indexOf(rule) + 1"
       />
-    </div>
-  </template>
-  <template v-else>
+    </template>
     <VirtualScroller
+      v-else
       :data="renderRules"
       :size="64"
+      class="p-2"
     >
       <template v-slot="{ item: rule }: { item: Rule }">
         <RuleCard
@@ -32,7 +33,7 @@
         />
       </template>
     </VirtualScroller>
-  </template>
+  </div>
 </template>
 
 <script setup lang="ts">
