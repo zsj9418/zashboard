@@ -1,5 +1,5 @@
 <template>
-  <div class="flex items-center gap-1">
+  <div class="flex items-center gap-1 break-all">
     <ProxyIcon
       v-if="icon"
       :icon="icon"

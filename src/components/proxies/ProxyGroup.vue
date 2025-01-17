@@ -31,11 +31,13 @@
       >
         <div class="flex flex-1 items-center gap-1">
           <template v-if="proxyGroup.now">
-            <ArrowRightCircleIcon class="h-4 w-4" />
+            <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
             <ProxyName :name="proxyGroup.now" />
           </template>
         </div>
-        <div class="shrink-0 text-xs">{{ prettyBytesHelper(downloadTotal) }}/s</div>
+        <div class="min-w-12 shrink-0 text-right text-xs">
+          {{ prettyBytesHelper(downloadTotal) }}/s
+        </div>
       </div>
     </template>
     <template v-slot:preview>
