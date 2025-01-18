@@ -45,13 +45,7 @@
 <script setup lang="ts">
 import { PROXY_CARD_SIZE } from '@/config'
 import { useTooltip } from '@/helper/tooltip'
-import {
-  getIPv6ByName,
-  proxyGroupLatencyTest,
-  proxyGroupList,
-  proxyLatencyTest,
-  proxyMap,
-} from '@/store/proxies'
+import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { IPv6test, proxyCardSize, truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
@@ -96,11 +90,7 @@ const handlerLatencyTest = async () => {
 
   isLatencyTesting.value = true
   try {
-    if (proxyGroupList.value.includes(props.name)) {
-      await proxyGroupLatencyTest(props.name)
-    } else {
-      await proxyLatencyTest(props.name)
-    }
+    await proxyLatencyTest(props.name)
     isLatencyTesting.value = false
   } catch {
     isLatencyTesting.value = false

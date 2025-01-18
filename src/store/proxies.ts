@@ -105,14 +105,14 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
     ? proxyNode.testUrl || speedtestUrl.value
     : speedtestUrl.value
 
-  if (all.length > 50) {
+  if (all.length > 20) {
     const limiter = pLimit(5)
     let testDone = 0
 
     return await Promise.all(
       all.map((name) =>
         limiter(async () => {
-          await proxyLatencyTest(name, url, 2000)
+          await proxyLatencyTest(name, url, Math.min(3000, speedtestTimeout.value))
           testDone++
           showTip('testFinishedTip', {
             number: `${testDone}/${all.length}`,
