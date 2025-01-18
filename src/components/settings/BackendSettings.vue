@@ -8,7 +8,7 @@
       <BackendSwitch />
       <BackendVersion />
 
-      <template v-if="!isSingBox">
+      <template v-if="!isSingBox && configs">
         <div class="divider"></div>
         <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
           <div
@@ -60,7 +60,10 @@
         </div>
       </template>
 
-      <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
+      <div
+        class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4"
+        v-if="version"
+      >
         <template v-if="!isSingBox">
           <div class="indicator w-full">
             <span
@@ -113,6 +116,7 @@ import {
   reloadConfigsAPI,
   restartCoreAPI,
   upgradeCoreAPI,
+  version,
 } from '@/api'
 import BackendVersion from '@/components/common/BackendVersion.vue'
 import BackendSwitch from '@/components/settings/BackendSwitch.vue'
