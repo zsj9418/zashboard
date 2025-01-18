@@ -122,7 +122,7 @@ const ctrlComp = computed(() => {
 })
 
 const swiperRef = ref()
-const { direction } = useSwipe(swiperRef, { threshold: 15 })
+const { direction } = useSwipe(swiperRef, { threshold: 50 })
 
 const getNextRouteName = () => {
   const routeName = route.name as ROUTE_NAME
