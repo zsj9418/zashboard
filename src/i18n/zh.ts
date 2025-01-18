@@ -140,6 +140,7 @@ const zh: LANG_MESSAGE = {
   mostUploadProxy: '最多上传节点',
   manual: '手动',
   tableWidthMode: '表格宽度模式',
+  testFinishedTip: '{number} 测试完成',
 }
 
 export default zh

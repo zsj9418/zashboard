@@ -139,6 +139,7 @@ const en = {
   mostUploadProxy: 'Most Upload Proxy',
   manual: 'Manual',
   tableWidthMode: 'Table Width Mode',
+  testFinishedTip: '{number} Test Finished',
 }
 
 export type LANG_MESSAGE = typeof en

@@ -142,6 +142,7 @@ const ru: LANG_MESSAGE = {
   mostUploadProxy: 'Самый большой прокси',
   manual: 'Ручной',
   tableWidthMode: 'Режим ширины таблицы',
+  testFinishedTip: '{number} Тест завершен',
 }
 
 export default ru

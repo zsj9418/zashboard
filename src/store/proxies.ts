@@ -6,6 +6,7 @@ import {
   fetchProxyProviderAPI,
   selectProxyAPI,
 } from '@/api'
+import { useTip } from '@/composables/tip'
 import { IPV6_TEST_URL, NOT_CONNECTED } from '@/config'
 import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
 import type { Proxy, ProxyProvider } from '@/types'
@@ -72,7 +73,11 @@ export const selectProxy = async (proxyGroup: string, name: string) => {
   fetchProxies()
 }
 
-export const proxyLatencyTest = async (proxyName: string, url = speedtestUrl.value) => {
+export const proxyLatencyTest = async (
+  proxyName: string,
+  url = speedtestUrl.value,
+  timeout = speedtestTimeout.value,
+) => {
   if (IPv6test.value) {
     try {
       const { data: ipv6LatencyResult } = await fetchProxyLatencyAPI(proxyName, IPV6_TEST_URL, 2000)
@@ -83,17 +88,15 @@ export const proxyLatencyTest = async (proxyName: string, url = speedtestUrl.val
     }
   }
   try {
-    const { data: latencyResult } = await fetchProxyLatencyAPI(
-      proxyName,
-      url,
-      speedtestTimeout.value,
-    )
+    const { data: latencyResult } = await fetchProxyLatencyAPI(proxyName, url, timeout)
 
     latencyMap.value[getNowProxyNodeName(proxyName)] = latencyResult.delay
   } catch {
     latencyMap.value[getNowProxyNodeName(proxyName)] = NOT_CONNECTED
   }
 }
+
+const { setTipContent } = useTip()
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
@@ -104,8 +107,19 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
 
   if (all.length > 50) {
     const limiter = pLimit(5)
+    let testDone = 0
 
-    return await Promise.all(all.map((name) => limiter(() => proxyLatencyTest(name, url))))
+    return await Promise.all(
+      all.map((name) =>
+        limiter(async () => {
+          await proxyLatencyTest(name, url, 2000)
+          testDone++
+          setTipContent('testFinishedTip', {
+            number: `${testDone}/${all.length}`,
+          })
+        }),
+      ),
+    )
   }
 
   if (IPv6test.value) {
