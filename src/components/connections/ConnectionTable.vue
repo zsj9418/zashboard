@@ -303,11 +303,12 @@ const columns: ColumnDef<Connection>[] = [
     accessorFn: (original) => original.chains.join(','),
     cell: ({ row }) => {
       const chains: VNode[] = []
+      const originChains = row.original.chains
 
-      row.original.chains.forEach((chain, index) => {
-        chains.unshift(h(ProxyName, { name: chain, size: 'small' }))
+      originChains.forEach((chain, index) => {
+        chains.unshift(h(ProxyName, { name: chain, size: 'small', class: 'shrink-0' }))
 
-        if (index < row.original.chains.length - 1) {
+        if (index < originChains.length - 1) {
           chains.unshift(
             h(ArrowRightCircleIcon, {
               class: 'h-4 w-4 shrink-0',
