@@ -96,7 +96,7 @@ export const proxyLatencyTest = async (
   }
 }
 
-const { setTipContent } = useTip()
+const { showTip } = useTip()
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
@@ -114,7 +114,7 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
         limiter(async () => {
           await proxyLatencyTest(name, url, 2000)
           testDone++
-          setTipContent('testFinishedTip', {
+          showTip('testFinishedTip', {
             number: `${testDone}/${all.length}`,
           })
         }),

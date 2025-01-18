@@ -40,7 +40,7 @@ const pureDom = computed(() => {
   return DOMPurify.sanitize(props.icon.replace(DOM_STARTS_WITH, ''))
 })
 
-const cachedIcon = ref('')
+const cachedIcon = ref()
 
 const fetchAndCacheIcon = async (key: string, iconUrl: string) => {
   const response = await fetch(iconUrl)
@@ -61,10 +61,10 @@ const loadIcon = async () => {
     if (cachedData) {
       cachedIcon.value = cachedData
     } else {
+      cachedIcon.value = props.icon
       await fetchAndCacheIcon(key, key)
     }
-  } catch (error) {
-    console.error('Fallback to original icon:', error)
+  } catch {
     cachedIcon.value = props.icon
   }
 }
