@@ -26,7 +26,7 @@ export const fromNow = (timestamp: string) => {
   return dayjs(timestamp).locale(language.value).fromNow()
 }
 
-const isProxyGroup = (name: string) => {
+export const isProxyGroup = (name: string) => {
   const proxyNode = proxyMap.value[name]
 
   if (!proxyNode) {
@@ -34,8 +34,9 @@ const isProxyGroup = (name: string) => {
   }
 
   return (
-    ['direct', 'reject', 'reject-drop', 'pass'].includes(proxyNode.type.toLowerCase()) ||
-    !!proxyNode.all
+    ['dns', 'compatible', 'direct', 'reject', 'rejectdrop', 'pass'].includes(
+      proxyNode.type.toLowerCase(),
+    ) || !!proxyNode.all
   )
 }
 

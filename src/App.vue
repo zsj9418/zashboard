@@ -79,16 +79,16 @@ onMounted(() => {
   >
     <RouterView />
     <div
-      class="toast-sm toast toast-start toast-top z-50 max-w-64 whitespace-normal text-sm"
+      class="toast-sm toast toast-start toast-top z-50 max-w-64 text-sm"
       v-if="tipShowModel"
     >
-      <div class="breaks-all alert alert-warning flex w-72 whitespace-normal p-2">
+      <div class="breaks-all alert alert-warning flex whitespace-normal p-2">
         <a
           href="https://github.com/Zephyruso/zashboard/blob/main/README.md"
           target="_blank"
           class="flex-1"
         >
-          {{ $t(tipContent) }}
+          {{ tipContent }}
         </a>
         <button
           class="btn btn-circle btn-ghost btn-sm"

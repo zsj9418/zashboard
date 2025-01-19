@@ -3,8 +3,9 @@ import { useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
-import { fetchProxies, proxyProviederList } from '@/store/proxies'
+import { allProxiesLatencyTest, fetchProxies, proxyProviederList } from '@/store/proxies'
 import { hideUnavailableProxies, proxySortType } from '@/store/settings'
+import { BoltIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -21,6 +22,7 @@ export default defineComponent({
     const { t } = useI18n()
     const { proxiesTabShow } = useProxies()
     const isUpgrading = ref(false)
+    const isAllLatencyTesting = ref(false)
     const handlerClickUpdateAllProviders = async () => {
       if (isUpgrading.value) return
       isUpgrading.value = true
@@ -91,7 +93,7 @@ export default defineComponent({
         <select
           class={[
             'select select-bordered select-sm min-w-24',
-            props.horizontal && 'inline-block max-md:flex-1',
+            props.horizontal ? 'inline-block max-md:flex-1' : 'w-0 flex-1',
           ]}
           v-model={configs.value.mode}
           onChange={handlerModeChange}
@@ -139,6 +141,30 @@ export default defineComponent({
         </>
       )
 
+      const handlerClickLatencyTestAll = async () => {
+        if (isAllLatencyTesting.value) return
+        isAllLatencyTesting.value = true
+        try {
+          await allProxiesLatencyTest()
+          isAllLatencyTesting.value = false
+        } catch {
+          isAllLatencyTesting.value = false
+        }
+      }
+
+      const latencyTestAll = (
+        <button
+          class={twMerge('btn btn-circle btn-sm')}
+          onClick={handlerClickLatencyTestAll}
+        >
+          {isAllLatencyTesting.value ? (
+            <span class="loading loading-spinner loading-sm"></span>
+          ) : (
+            <BoltIcon class="h-4 w-4" />
+          )}
+        </button>
+      )
+
       if (props.horizontal) {
         if (isMiddleScreen.value) {
           return (
@@ -152,6 +178,7 @@ export default defineComponent({
               <div class="flex w-full gap-2">
                 {modeSelect}
                 {sortAndFilter}
+                {latencyTestAll}
               </div>
             </div>
           )
@@ -162,6 +189,7 @@ export default defineComponent({
             {upgradeAll}
             {modeSelect}
             {sortAndFilter}
+            {latencyTestAll}
           </div>
         )
       }
@@ -170,7 +198,12 @@ export default defineComponent({
         <div class="flex flex-col gap-2 p-2">
           {upgradeAll}
           {hasProviders.value && tabs}
-          {<div class="flex flex-col">{modeSelect}</div>}
+          {
+            <div class="flex gap-2">
+              {modeSelect}
+              {latencyTestAll}
+            </div>
+          }
           {<div class="flex gap-2">{sortAndFilter}</div>}
         </div>
       )

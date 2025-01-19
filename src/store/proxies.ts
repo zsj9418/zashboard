@@ -8,6 +8,7 @@ import {
 } from '@/api'
 import { useTip } from '@/composables/tip'
 import { IPV6_TEST_URL, NOT_CONNECTED } from '@/config'
+import { isProxyGroup } from '@/helper'
 import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
 import type { Proxy, ProxyProvider } from '@/types'
 import { useStorage } from '@vueuse/core'
@@ -96,6 +97,7 @@ export const proxyLatencyTest = async (
   }
 }
 
+const limiter = pLimit(5)
 const { showTip } = useTip()
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
@@ -106,7 +108,6 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
     : speedtestUrl.value
 
   if (all.length > 20) {
-    const limiter = pLimit(5)
     let testDone = 0
 
     return await Promise.all(
@@ -141,6 +142,23 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   }
   await fetchProxyGroupLatencyAPI(proxyGroupName, url, speedtestTimeout.value)
   await fetchProxies()
+}
+
+export const allProxiesLatencyTest = async () => {
+  const proxyNode = Object.keys(proxyMap.value).filter((proxy) => !isProxyGroup(proxy))
+  let testDone = 0
+
+  return await Promise.all(
+    proxyNode.map((name) =>
+      limiter(async () => {
+        await proxyLatencyTest(name, speedtestUrl.value, Math.min(3000, speedtestTimeout.value))
+        testDone++
+        showTip('testFinishedTip', {
+          number: `${testDone}/${proxyNode.length}`,
+        })
+      }),
+    ),
+  )
 }
 
 const getLatencyFromHistory = (proxy: Proxy) => {
