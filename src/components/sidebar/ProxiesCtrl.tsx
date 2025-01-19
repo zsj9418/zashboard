@@ -110,35 +110,36 @@ export default defineComponent({
           })}
         </select>
       )
-      const sortAndFilter = (
-        <>
-          <select
-            class={[
-              'select select-bordered select-sm',
-              props.horizontal && !isMiddleScreen.value ? 'inline-block' : 'w-0 flex-1',
-            ]}
-            v-model={proxySortType.value}
-          >
-            {Object.values(PROXY_SORT_TYPE).map((type) => {
-              return (
-                <option
-                  key={type}
-                  value={type}
-                >
-                  {t(type)}
-                </option>
-              )
-            })}
-          </select>
-          <div class="flex items-center gap-1 text-sm">
-            <span class="shrink-0">{t('unavailableProxy')}</span>
-            <input
-              type="checkbox"
-              class="toggle"
-              v-model={hideUnavailableProxies.value}
-            />
-          </div>
-        </>
+      const sort = (
+        <select
+          class={[
+            'select select-bordered select-sm',
+            props.horizontal && !isMiddleScreen.value ? 'inline-block' : 'w-0 flex-1',
+          ]}
+          v-model={proxySortType.value}
+        >
+          {Object.values(PROXY_SORT_TYPE).map((type) => {
+            return (
+              <option
+                key={type}
+                value={type}
+              >
+                {t(type)}
+              </option>
+            )
+          })}
+        </select>
+      )
+
+      const filter = (
+        <div class="flex items-center gap-1 text-sm">
+          <span class="shrink-0">{t('unavailableProxy')}</span>
+          <input
+            type="checkbox"
+            class="toggle"
+            v-model={hideUnavailableProxies.value}
+          />
+        </div>
       )
 
       const handlerClickLatencyTestAll = async () => {
@@ -177,8 +178,11 @@ export default defineComponent({
               )}
               <div class="flex w-full gap-2">
                 {modeSelect}
-                {sortAndFilter}
                 {latencyTestAll}
+              </div>
+              <div class="flex w-full gap-2">
+                {sort}
+                {filter}
               </div>
             </div>
           )
@@ -188,7 +192,8 @@ export default defineComponent({
             {hasProviders.value && tabs}
             {upgradeAll}
             {modeSelect}
-            {sortAndFilter}
+            {sort}
+            {filter}
             {latencyTestAll}
           </div>
         )
@@ -204,7 +209,12 @@ export default defineComponent({
               {latencyTestAll}
             </div>
           }
-          {<div class="flex gap-2">{sortAndFilter}</div>}
+          {
+            <div class="flex gap-2">
+              {sort}
+              {filter}
+            </div>
+          }
         </div>
       )
     }
