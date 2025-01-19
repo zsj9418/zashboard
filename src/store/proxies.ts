@@ -6,7 +6,7 @@ import {
   fetchProxyProviderAPI,
   selectProxyAPI,
 } from '@/api'
-import { useTip } from '@/composables/tip'
+import { useNotification } from '@/composables/tip'
 import { IPV6_TEST_URL, NOT_CONNECTED } from '@/config'
 import { isProxyGroup } from '@/helper'
 import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
@@ -98,7 +98,7 @@ export const proxyLatencyTest = async (
 }
 
 const limiter = pLimit(5)
-const { showTip } = useTip()
+const { showNotification } = useNotification()
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
@@ -115,8 +115,12 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
         limiter(async () => {
           await proxyLatencyTest(name, url, Math.min(3000, speedtestTimeout.value))
           testDone++
-          showTip('testFinishedTip', {
-            number: `${testDone}/${all.length}`,
+          showNotification({
+            content: 'testFinishedTip',
+            params: {
+              number: `${testDone}/${all.length}`,
+            },
+            type: testDone === all.length ? 'alert-success' : 'alert-warning',
           })
         }),
       ),
@@ -153,8 +157,12 @@ export const allProxiesLatencyTest = async () => {
       limiter(async () => {
         await proxyLatencyTest(name, speedtestUrl.value, Math.min(3000, speedtestTimeout.value))
         testDone++
-        showTip('testFinishedTip', {
-          number: `${testDone}/${proxyNode.length}`,
+        showNotification({
+          content: 'testFinishedTip',
+          params: {
+            number: `${testDone}/${proxyNode.length}`,
+          },
+          type: testDone === proxyNode.length ? 'alert-success' : 'alert-warning',
         })
       }),
     ),

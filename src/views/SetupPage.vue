@@ -118,7 +118,7 @@
 
 <script setup lang="ts">
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
-import { useTip } from '@/composables/tip'
+import { useNotification } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend, importSettings } from '@/helper'
 import router from '@/router'
@@ -139,7 +139,7 @@ const form = reactive({
   password: '',
 })
 
-const { showTip } = useTip()
+const { showNotification } = useNotification()
 
 const selectBackend = (uuid: string) => {
   activeUuid.value = uuid
@@ -169,7 +169,9 @@ const handleSubmit = async (
     !['::1', '0.0.0.0', '127.0.0.1', 'localhost'].includes(host) &&
     !quiet
   ) {
-    showTip('protocolTips')
+    showNotification({
+      content: 'protocolTips',
+    })
   }
 
   try {

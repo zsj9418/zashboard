@@ -58,7 +58,7 @@ const ru: LANG_MESSAGE = {
   noExpire: 'Нет',
   updated: 'Обновлено',
   upgradeUI: 'Обновить панель',
-  updateAllProviders: 'Обновить все провайдеры',
+  updateAllProviders: 'Обновление все провайдеры',
   reloadConfigs: 'Перезагрузить конфигурации',
   mode: 'Режим',
   proxySortType: 'Тип сортировки прокси',
@@ -143,6 +143,7 @@ const ru: LANG_MESSAGE = {
   manual: 'Ручной',
   tableWidthMode: 'Режим ширины таблицы',
   testFinishedTip: '{number} Тест завершен',
+  updateFinishedTip: '{number} Обновление завершено',
 }
 
 export default ru

@@ -56,7 +56,7 @@ const en = {
   noExpire: 'Null',
   updated: 'Updated',
   upgradeUI: 'Upgrade Dashboard',
-  updateAllProviders: 'Upgrade All Providers',
+  updateAllProviders: 'Update All Providers',
   reloadConfigs: 'Reload Configs',
   mode: 'Mode',
   proxySortType: 'Proxy Sort Type',
@@ -140,6 +140,7 @@ const en = {
   manual: 'Manual',
   tableWidthMode: 'Table Width Mode',
   testFinishedTip: '{number} Test Finished',
+  updateFinishedTip: '{number} Update Finished',
 }
 
 export type LANG_MESSAGE = typeof en
