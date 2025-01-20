@@ -129,7 +129,6 @@ const en = {
   sniffHost: 'Sniff Host',
   ipScreenshotTip: 'Please make sure to hide the IP when taking screenshots.',
   showStatisticsWhenSidebarCollapsed: 'Display Statistics When Sidebar Collapsed',
-  overrideUrlWithConfig: 'Override Speedtest URL With Config',
   totalConnections: 'Total Connections',
   mostDownloadHost: 'Most Download Host',
   mostUploadHost: 'Most Upload Host',
@@ -141,6 +140,9 @@ const en = {
   tableWidthMode: 'Table Width Mode',
   testFinishedTip: '{number} Test Finished',
   updateFinishedTip: '{number} Update Finished',
+  independentLatencyTest: 'Independent Latency Test',
+  independentLatencyTestTip:
+    "Enabling Independent Latency Test will attempt to use the URLs specified in the configuration file instead of the zashboard's URL settings during the latency test. Latency will be displayed independently based on the URLs set in the policy groups.",
 }
 
 export type LANG_MESSAGE = typeof en

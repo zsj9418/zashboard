@@ -8,7 +8,7 @@
       {{ showPrivacy ? ipipnetIP.ipWithPrivacy[0] : ipipnetIP.ip[0] }}
       <span
         class="text-xs"
-        v-if="ipipnetIP.ip"
+        v-if="ipipnetIP.ip[1]"
       >
         ({{ showPrivacy ? ipipnetIP.ipWithPrivacy[1] : ipipnetIP.ip[1] }})
       </span>
@@ -21,7 +21,7 @@
       {{ showPrivacy ? ipsbIP.ipWithPrivacy[0] : ipsbIP.ip[0] }}
       <span
         class="text-xs"
-        v-if="ipsbIP.ip"
+        v-if="ipsbIP.ip[1]"
       >
         ({{ showPrivacy ? ipsbIP.ipWithPrivacy[1] : ipsbIP.ip[1] }})
       </span>

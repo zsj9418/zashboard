@@ -136,3 +136,16 @@ export enum PROXY_CHAIN_DIRECTION {
   NORMAL = 'normal',
   REVERSE = 'reverse',
 }
+
+export enum PROXY_TYPE {
+  Direct = 'direct',
+  Reject = 'reject',
+  RejectDrop = 'rejectdrop',
+  Compatible = 'compatible',
+  Pass = 'pass',
+  Dns = 'dns',
+  Selector = 'selector',
+  Fallback = 'fallback',
+  URLTest = 'urltest',
+  LoadBalance = 'loadbalance',
+}

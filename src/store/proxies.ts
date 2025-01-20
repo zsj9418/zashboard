@@ -4,22 +4,23 @@ import {
   fetchProxyGroupLatencyAPI,
   fetchProxyLatencyAPI,
   fetchProxyProviderAPI,
+  isSingBox,
   selectProxyAPI,
 } from '@/api'
 import { useNotification } from '@/composables/tip'
-import { IPV6_TEST_URL, NOT_CONNECTED } from '@/config'
+import { IPV6_TEST_URL, NOT_CONNECTED, PROXY_TYPE } from '@/config'
 import { isProxyGroup } from '@/helper'
 import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
 import type { Proxy, ProxyProvider } from '@/types'
 import { useStorage } from '@vueuse/core'
-import { compact, difference, last } from 'lodash'
+import { compact, debounce, difference, last } from 'lodash'
 import pLimit from 'p-limit'
 import { computed, ref, watch } from 'vue'
 import { activeConnections } from './connections'
 import {
   automaticDisconnection,
+  independentLatencyTest,
   IPv6test,
-  overrideUrlWithConfigIfExists,
   speedtestTimeout,
   speedtestUrl,
 } from './settings'
@@ -27,16 +28,33 @@ import {
 export const GLOBAL = 'GLOBAL'
 export const proxyGroupList = ref<string[]>([])
 export const proxyMap = ref<Record<string, Proxy>>({})
-export const latencyMap = ref<Record<string, number>>({})
 export const IPv6Map = useStorage<Record<string, boolean>>('config/ipv6-map', {})
 export const proxyProviederList = ref<ProxyProvider[]>([])
 
-export const getLatencyByName = (proxyName: string) => {
-  return latencyMap.value[getNowProxyNodeName(proxyName)]
+export const getTestUrl = (groupName?: string) => {
+  if (!groupName) {
+    return speedtestUrl.value
+  }
+
+  const proxyNode = proxyMap.value[groupName]
+
+  return independentLatencyTest.value ? proxyNode.testUrl || speedtestUrl.value : speedtestUrl.value
 }
+
+export const getLatencyByName = (proxyName: string, groupName?: string) => {
+  const proxyNode = proxyMap.value[proxyName]
+
+  if (independentLatencyTest.value && !isSingBox.value) {
+    return getLatencyFromHistory(proxyNode.extra?.[getTestUrl(groupName)]?.history)
+  }
+
+  return getLatencyFromHistory(proxyNode.history)
+}
+
 export const getIPv6ByName = (proxyName: string) => {
   return IPv6Map.value[getNowProxyNodeName(proxyName)]
 }
+
 export const fetchProxies = async () => {
   const { data: proxyData } = await fetchProxiesAPI()
   const { data: providerData } = await fetchProxyProviderAPI()
@@ -48,15 +66,11 @@ export const fetchProxies = async () => {
     .sort((prev, next) => sortIndex.indexOf(prev.name) - sortIndex.indexOf(next.name))
     .map((proxy) => proxy.name)
 
-  latencyMap.value = Object.fromEntries(
-    Object.entries(proxyData.proxies).map(([name, proxy]) => {
-      if (IPv6test.value && getIPv6FromExtra(proxy)) {
-        IPv6Map.value[name] = true
-      }
-
-      return [name, getLatencyFromHistory(proxy)]
-    }),
-  )
+  Object.entries(proxyData.proxies).map(([name, proxy]) => {
+    if (IPv6test.value && getIPv6FromExtra(proxy)) {
+      IPv6Map.value[name] = true
+    }
+  })
   proxyProviederList.value = Object.values(providerData.providers).filter(
     (provider) => provider.name !== 'default' && provider.vehicleType !== 'Compatible',
   )
@@ -74,65 +88,74 @@ export const selectProxy = async (proxyGroup: string, name: string) => {
   fetchProxies()
 }
 
+const latencyTestForSingle = async (proxyName: string, url: string, timeout: number) => {
+  const now = getNowProxyNodeName(proxyName)
+
+  if (IPv6test.value) {
+    try {
+      const { data: ipv6LatencyResult } = await fetchProxyLatencyAPI(now, IPV6_TEST_URL, 2000)
+
+      IPv6Map.value[now] = ipv6LatencyResult.delay > NOT_CONNECTED
+    } catch {
+      IPv6Map.value[now] = false
+    }
+  }
+
+  await fetchProxyLatencyAPI(proxyName, url, timeout)
+}
+
 export const proxyLatencyTest = async (
   proxyName: string,
   url = speedtestUrl.value,
   timeout = speedtestTimeout.value,
 ) => {
-  if (IPv6test.value) {
-    try {
-      const { data: ipv6LatencyResult } = await fetchProxyLatencyAPI(proxyName, IPV6_TEST_URL, 2000)
+  await latencyTestForSingle(proxyName, url, timeout)
+  await fetchProxies()
+}
 
-      IPv6Map.value[getNowProxyNodeName(proxyName)] = ipv6LatencyResult.delay > NOT_CONNECTED
-    } catch {
-      IPv6Map.value[getNowProxyNodeName(proxyName)] = false
-    }
-  }
-  try {
-    const { data: latencyResult } = await fetchProxyLatencyAPI(proxyName, url, timeout)
-
-    latencyMap.value[getNowProxyNodeName(proxyName)] = latencyResult.delay
-  } catch {
-    latencyMap.value[getNowProxyNodeName(proxyName)] = NOT_CONNECTED
-  }
+const fetchProxiesDebounced = debounce(fetchProxies, 800)
+const proxyLatencyTestDebounced = async (
+  proxyName: string,
+  url = speedtestUrl.value,
+  timeout = speedtestTimeout.value,
+) => {
+  await latencyTestForSingle(proxyName, url, timeout)
+  await fetchProxiesDebounced()
 }
 
 const limiter = pLimit(5)
-const { showNotification } = useNotification()
 
 export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
   const proxyNode = proxyMap.value[proxyGroupName]
   const all = proxyNode.all ?? []
-  const url = overrideUrlWithConfigIfExists.value
-    ? proxyNode.testUrl || speedtestUrl.value
-    : speedtestUrl.value
+  const url = getTestUrl(proxyGroupName)
 
-  if (all.length > 20) {
+  if (
+    [PROXY_TYPE.Selector, PROXY_TYPE.LoadBalance].includes(
+      proxyNode.type.toLowerCase() as PROXY_TYPE,
+    )
+  ) {
     let testDone = 0
 
     return await Promise.all(
       all.map((name) =>
         limiter(async () => {
-          await proxyLatencyTest(name, url, Math.min(3000, speedtestTimeout.value))
+          await proxyLatencyTestDebounced(name, url, Math.min(3000, speedtestTimeout.value))
           testDone++
-          showNotification({
-            content: 'testFinishedTip',
-            params: {
-              number: `${testDone}/${all.length}`,
-            },
-            type: testDone === all.length ? 'alert-success' : 'alert-warning',
-          })
+          latencyTip(testDone, all.length)
         }),
       ),
     )
   }
+
+  const timeout = Math.max(5000, speedtestTimeout.value)
 
   if (IPv6test.value) {
     try {
       const { data: ipv6LatencyResult } = await fetchProxyGroupLatencyAPI(
         proxyGroupName,
         IPV6_TEST_URL,
-        Math.max(5000, speedtestTimeout.value),
+        timeout,
       )
 
       all?.forEach((name) => {
@@ -144,7 +167,7 @@ export const proxyGroupLatencyTest = async (proxyGroupName: string) => {
       })
     }
   }
-  await fetchProxyGroupLatencyAPI(proxyGroupName, url, speedtestTimeout.value)
+  await fetchProxyGroupLatencyAPI(proxyGroupName, url, timeout)
   await fetchProxies()
 }
 
@@ -155,28 +178,26 @@ export const allProxiesLatencyTest = async () => {
   return await Promise.all(
     proxyNode.map((name) =>
       limiter(async () => {
-        await proxyLatencyTest(name, speedtestUrl.value, Math.min(3000, speedtestTimeout.value))
+        await proxyLatencyTestDebounced(
+          name,
+          speedtestUrl.value,
+          Math.min(3000, speedtestTimeout.value),
+        )
         testDone++
-        showNotification({
-          content: 'testFinishedTip',
-          params: {
-            number: `${testDone}/${proxyNode.length}`,
-          },
-          type: testDone === proxyNode.length ? 'alert-success' : 'alert-warning',
-        })
+        latencyTip(testDone, proxyNode.length)
       }),
     ),
   )
 }
 
-const getLatencyFromHistory = (proxy: Proxy) => {
-  return last(proxy.history)?.delay ?? 0
+const getLatencyFromHistory = (history: Proxy['history']) => {
+  return last(history)?.delay ?? NOT_CONNECTED
 }
 
 const getIPv6FromExtra = (proxy: Proxy) => {
   const ipv6History = proxy.extra?.[IPV6_TEST_URL]?.history
 
-  return (last(ipv6History)?.delay ?? 0) > NOT_CONNECTED
+  return (last(ipv6History)?.delay ?? NOT_CONNECTED) > NOT_CONNECTED
 }
 
 const getNowProxyNodeName = (name: string) => {
@@ -210,3 +231,14 @@ watch(allIcons, async (values) => {
     deleteIconFromIndexedDB(icon)
   })
 })
+
+const { showNotification } = useNotification()
+const latencyTip = (finished: number, total: number) => {
+  showNotification({
+    content: 'testFinishedTip',
+    params: {
+      number: `${finished}/${total}`,
+    },
+    type: finished === total ? 'alert-success' : 'alert-warning',
+  })
+}

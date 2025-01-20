@@ -18,6 +18,7 @@
           :class="twMerge('z-10 bg-base-200/40 hover:shadow')"
           :loading="isLatencyTesting"
           :name="proxyGroup.now"
+          :group-name="proxyGroup.name"
           @click.stop="handlerLatencyTest"
         />
       </div>
@@ -50,6 +51,7 @@
           v-for="node in sortedProxies"
           :key="node"
           :name="node"
+          :group-name="proxyGroup.name"
           :active="node === proxyGroup.now"
           @click="selectProxy(proxyGroup.name, node)"
         />
@@ -78,7 +80,7 @@ const props = defineProps<{
 
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
-  return sortAndFilterProxyNodes(proxyGroup.value.all ?? [])
+  return sortAndFilterProxyNodes(proxyGroup.value.all ?? [], props.name)
 })
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {

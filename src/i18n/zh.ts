@@ -130,7 +130,6 @@ const zh: LANG_MESSAGE = {
   sniffHost: '嗅探主机',
   ipScreenshotTip: '截图时请确保隐藏IP',
   showStatisticsWhenSidebarCollapsed: '侧边栏折叠时显示统计',
-  overrideUrlWithConfig: '使用配置文件中的URL',
   totalConnections: '总连接数',
   mostDownloadHost: '最多下载主机',
   mostUploadHost: '最多上传主机',
@@ -142,6 +141,9 @@ const zh: LANG_MESSAGE = {
   tableWidthMode: '表格宽度模式',
   testFinishedTip: '{number} 测试完成',
   updateFinishedTip: '{number} 更新完成',
+  independentLatencyTest: '独立延迟测试',
+  independentLatencyTestTip:
+    '开启独立延迟测试会在测速中尽可能的使用配置文件中的url覆盖面板设置的url，并根据根据策略组设置的url独立的展示延迟。',
 }
 
 export default zh

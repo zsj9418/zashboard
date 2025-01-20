@@ -30,11 +30,15 @@
           />
         </div>
         <div class="flex w-full items-center gap-2">
-          <span> {{ $t('overrideUrlWithConfig') }}: </span>
+          <span> {{ $t('independentLatencyTest') }}: </span>
           <input
             class="toggle"
             type="checkbox"
-            v-model="overrideUrlWithConfigIfExists"
+            v-model="independentLatencyTest"
+          />
+          <QuestionMarkCircleIcon
+            class="h-4 w-4"
+            @mouseenter="independentLatencyTestTip"
           />
         </div>
         <div class="flex w-full items-center gap-2">
@@ -158,15 +162,16 @@
 <script setup lang="ts">
 import { isSingBox } from '@/api'
 import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
+import { useTooltip } from '@/helper/tooltip'
 import { proxyMap } from '@/store/proxies'
 import {
   automaticDisconnection,
   iconMarginRight,
   iconSize,
+  independentLatencyTest,
   IPv6test,
   lowLatency,
   mediumLatency,
-  overrideUrlWithConfigIfExists,
   proxyCardSize,
   proxyPreviewType,
   showGlobalProxy,
@@ -176,7 +181,15 @@ import {
   truncateProxyName,
   twoColumnProxyGroup,
 } from '@/store/settings'
+import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
+
+const { showTip } = useTooltip()
+const { t } = useI18n()
+const independentLatencyTestTip = (e: Event) => {
+  return showTip(e, t('independentLatencyTestTip'))
+}
 
 const hasIcon = computed(() => {
   return Object.values(proxyMap.value).some((proxy) => !!proxy.icon)

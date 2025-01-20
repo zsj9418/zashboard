@@ -48,6 +48,6 @@ const props = defineProps<{
 }>()
 
 const proxyNode = computed(() => proxyMap.value[props.rule.proxy])
-const latency = computed(() => getLatencyByName(props.rule.proxy))
+const latency = computed(() => getLatencyByName(props.rule.proxy, props.rule.proxy))
 const latencyColor = computed(() => getColorForLatency(Number(latency.value)))
 </script>

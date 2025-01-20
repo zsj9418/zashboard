@@ -36,10 +36,10 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 const props = defineProps<{
   name?: string
   loading?: boolean
+  groupName?: string
 }>()
 const latencyRef = ref()
-const latency = computed(() => getLatencyByName(props.name ?? ''))
-
+const latency = computed(() => getLatencyByName(props.name ?? '', props.groupName))
 let countUp: CountUp | null = null
 
 onMounted(() => {

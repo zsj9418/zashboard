@@ -36,6 +36,7 @@
         :class="[isSmallCard && '!h-4 !w-8']"
         :name="node.name"
         :loading="isLatencyTesting"
+        :group-name="groupName"
         @click.stop="handlerLatencyTest"
       />
     </div>
@@ -45,7 +46,7 @@
 <script setup lang="ts">
 import { PROXY_CARD_SIZE } from '@/config'
 import { useTooltip } from '@/helper/tooltip'
-import { getIPv6ByName, proxyLatencyTest, proxyMap } from '@/store/proxies'
+import { getIPv6ByName, getTestUrl, proxyLatencyTest, proxyMap } from '@/store/proxies'
 import { IPv6test, proxyCardSize, truncateProxyName } from '@/store/settings'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
@@ -55,6 +56,7 @@ import ProxyIcon from './ProxyIcon.vue'
 const props = defineProps<{
   name: string
   active?: boolean
+  groupName?: string
 }>()
 
 const { showTip } = useTooltip()
@@ -90,7 +92,7 @@ const handlerLatencyTest = async () => {
 
   isLatencyTesting.value = true
   try {
-    await proxyLatencyTest(props.name)
+    await proxyLatencyTest(props.name, getTestUrl(props.groupName))
     isLatencyTesting.value = false
   } catch {
     isLatencyTesting.value = false

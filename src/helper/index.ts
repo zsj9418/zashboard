@@ -1,4 +1,4 @@
-import { NOT_CONNECTED, PROXY_SORT_TYPE, ROUTE_NAME } from '@/config'
+import { NOT_CONNECTED, PROXY_SORT_TYPE, PROXY_TYPE, ROUTE_NAME } from '@/config'
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
@@ -33,28 +33,39 @@ export const isProxyGroup = (name: string) => {
     return false
   }
 
-  return (
-    ['dns', 'compatible', 'direct', 'reject', 'rejectdrop', 'pass'].includes(
-      proxyNode.type.toLowerCase(),
-    ) || !!proxyNode.all
-  )
+  return [
+    PROXY_TYPE.Dns,
+    PROXY_TYPE.Compatible,
+    PROXY_TYPE.Direct,
+    PROXY_TYPE.Reject,
+    PROXY_TYPE.RejectDrop,
+    PROXY_TYPE.Pass,
+    PROXY_TYPE.Fallback,
+    PROXY_TYPE.URLTest,
+    PROXY_TYPE.LoadBalance,
+    PROXY_TYPE.Selector,
+  ].includes(proxyNode.type.toLowerCase() as PROXY_TYPE)
 }
 
-const getLatencyForSort = (name: string) => {
-  if (isProxyGroup(name)) {
-    return -1
+export const sortAndFilterProxyNodes = (proxies: string[], groupName?: string) => {
+  const latencyMap = new Map<string, number>()
+  const getLatencyForSort = (name: string) => {
+    if (isProxyGroup(name)) {
+      return -1
+    }
+    const latency = latencyMap.get(name)!
+
+    return latency === 0 ? Infinity : latency
   }
-  const latency = getLatencyByName(name)
 
-  return latency === 0 ? Infinity : latency
-}
-
-export const sortAndFilterProxyNodes = (proxies: string[]) => {
   proxies = [...proxies]
+  proxies.forEach((name) => {
+    latencyMap.set(name, getLatencyByName(name, groupName))
+  })
 
   if (hideUnavailableProxies.value) {
     proxies = proxies.filter((name) => {
-      return isProxyGroup(name) || getLatencyByName(name) > 0
+      return isProxyGroup(name) || latencyMap.get(name)! > 0
     })
   }
   switch (proxySortType.value) {

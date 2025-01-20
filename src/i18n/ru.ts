@@ -132,7 +132,6 @@ const ru: LANG_MESSAGE = {
   sniffHost: 'Захватывать хост',
   ipScreenshotTip: 'Пожалуйста, убедитесь, что реальный IP скрыт при создании скриншотов.',
   showStatisticsWhenSidebarCollapsed: 'Показать статистику при сворачивании панели',
-  overrideUrlWithConfig: 'Переопределить URL с помощью конфигурации',
   totalConnections: 'Всего соединений',
   mostDownloadHost: 'Ресурс с наибольшим скачиванием',
   mostUploadHost: 'Ресурс с наибольшей отправкой данных',
@@ -144,6 +143,9 @@ const ru: LANG_MESSAGE = {
   tableWidthMode: 'Режим ширины таблицы',
   testFinishedTip: '{number} Тест завершен',
   updateFinishedTip: '{number} Обновление завершено',
+  independentLatencyTest: 'Независимый тест задержки',
+  independentLatencyTestTip:
+    'Включение независимого тестирования задержки попытается использовать URL-адреса, указанные в конфигурационном файле, вместо настроек URL-адресов в панели управления во время теста задержки. Задержка будет отображаться отдельно на основе URL-адресов, установленных в группах политик.',
 }
 
 export default ru
