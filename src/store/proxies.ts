@@ -42,13 +42,15 @@ export const getTestUrl = (groupName?: string) => {
 }
 
 export const getLatencyByName = (proxyName: string, groupName?: string) => {
-  const proxyNode = proxyMap.value[proxyName]
-
   if (independentLatencyTest.value && !isSingBox.value) {
+    const proxyNode = proxyMap.value[proxyName]
+
     return getLatencyFromHistory(proxyNode.extra?.[getTestUrl(groupName)]?.history)
   }
 
-  return getLatencyFromHistory(proxyNode.history)
+  const nowNode = proxyMap.value[getNowProxyNodeName(proxyName)]
+
+  return getLatencyFromHistory(nowNode.history)
 }
 
 export const getIPv6ByName = (proxyName: string) => {
