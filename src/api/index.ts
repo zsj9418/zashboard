@@ -258,10 +258,6 @@ export const fetchBackendUpdateAvailableAPI = async () => {
   return false
 }
 
-export const getIPFromSpeedtestcnAPI = () => {
-  return fetch('https://api-v3.speedtest.cn/ip')
-}
-
 export type GlobalIPType = {
   organization: string
   longitude: number
