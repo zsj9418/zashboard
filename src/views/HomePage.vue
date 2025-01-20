@@ -85,6 +85,7 @@ import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
+import { isDnding } from '@/composables/drag'
 import { useProxies } from '@/composables/proxies'
 import { rulesTabShow } from '@/composables/rules'
 import { useSettings } from '@/composables/settings'
@@ -147,6 +148,7 @@ const getPrevRouteName = () => {
 }
 
 watch(direction, () => {
+  if (isDnding.value) return
   if (direction.value === 'right') {
     router.push({ name: getPrevRouteName() })
   } else if (direction.value === 'left') {
