@@ -89,25 +89,25 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.download)}
-            <ArrowDownIcon class="h-4 w-4" />
+            <ArrowDownIcon class="h-4 w-4 text-success" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.upload)}
-            <ArrowUpIcon class="h-4 w-4" />
+            <ArrowUpIcon class="h-4 w-4 text-info" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.downloadSpeed)}/s
-            <ArrowDownCircleIcon class="h-4 w-4" />
+            <ArrowDownCircleIcon class="h-4 w-4 text-success" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.uploadSpeed)}/s
-            <ArrowUpCircleIcon class="h-4 w-4" />
+            <ArrowUpCircleIcon class="h-4 w-4 text-info" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (
