@@ -1,11 +1,17 @@
 import { updateProxyProviderAPI } from '@/api'
+import { collapsedBus } from '@/composables/bus'
 import { useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
 import { allProxiesLatencyTest, fetchProxies, proxyProviederList } from '@/store/proxies'
-import { hideUnavailableProxies, proxySortType } from '@/store/settings'
-import { BoltIcon, WrenchScrewdriverIcon } from '@heroicons/vue/24/outline'
+import { collapseGroupMap, hideUnavailableProxies, proxySortType } from '@/store/settings'
+import {
+  BoltIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  WrenchScrewdriverIcon,
+} from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
@@ -53,6 +59,28 @@ export default defineComponent({
     const handlerModeChange = (e: Event) => {
       const mode = (e.target as HTMLSelectElement).value
       updateConfigs({ mode })
+    }
+
+    const handlerClickLatencyTestAll = async () => {
+      if (isAllLatencyTesting.value) return
+      isAllLatencyTesting.value = true
+      try {
+        await allProxiesLatencyTest()
+        isAllLatencyTesting.value = false
+      } catch {
+        isAllLatencyTesting.value = false
+      }
+    }
+
+    const { renderGroups } = useProxies()
+    const hasNotCollapsed = computed(() => {
+      return renderGroups.value.some((name) => collapseGroupMap.value[name])
+    })
+
+    const handlerClickToggleCollapse = () => {
+      collapsedBus.emit({
+        open: !hasNotCollapsed.value,
+      })
     }
 
     return () => {
@@ -144,17 +172,6 @@ export default defineComponent({
         </div>
       )
 
-      const handlerClickLatencyTestAll = async () => {
-        if (isAllLatencyTesting.value) return
-        isAllLatencyTesting.value = true
-        try {
-          await allProxiesLatencyTest()
-          isAllLatencyTesting.value = false
-        } catch {
-          isAllLatencyTesting.value = false
-        }
-      }
-
       const latencyTestAll = (
         <button
           class={twMerge('btn btn-circle btn-sm')}
@@ -164,6 +181,19 @@ export default defineComponent({
             <span class="loading loading-spinner loading-sm"></span>
           ) : (
             <BoltIcon class="h-4 w-4" />
+          )}
+        </button>
+      )
+
+      const toggleCollapseAll = (
+        <button
+          class={twMerge('btn btn-circle btn-sm')}
+          onClick={handlerClickToggleCollapse}
+        >
+          {hasNotCollapsed.value ? (
+            <ChevronUpIcon class="h-4 w-4" />
+          ) : (
+            <ChevronDownIcon class="h-4 w-4" />
           )}
         </button>
       )
@@ -204,6 +234,7 @@ export default defineComponent({
               <div class="flex w-full gap-2">
                 {modeSelect}
                 {settingsModal}
+                {toggleCollapseAll}
                 {latencyTestAll}
               </div>
             </div>
@@ -216,6 +247,8 @@ export default defineComponent({
             {modeSelect}
             {sort}
             {filter}
+            <div class="flex-1"></div>
+            {toggleCollapseAll}
             {latencyTestAll}
           </div>
         )
@@ -228,6 +261,7 @@ export default defineComponent({
           {
             <div class="flex gap-2">
               {modeSelect}
+              {toggleCollapseAll}
               {latencyTestAll}
             </div>
           }
