@@ -52,43 +52,38 @@
       </div>
     </div>
 
-    <dialog
-      id="autoSwitchBackend"
-      ref="modalRef"
-      class="modal"
-    >
-      <div class="modal-box">
-        <h3 class="text-lg font-bold">{{ $t('currentBackendUnavailable') }}</h3>
-        <div class="flex justify-end gap-2">
-          <button
-            class="btn btn-sm"
-            @click="closeModal"
-          >
-            {{ $t('cancel') }}
-          </button>
-          <button
-            class="btn btn-primary btn-sm"
-            @click="autoSwitchBackend"
-          >
-            {{ $t('confirm') }}
-          </button>
-        </div>
+    <DialogWrapper v-model="autoSwitchBackendDialog">
+      <h3 class="text-lg font-bold">{{ $t('currentBackendUnavailable') }}</h3>
+      <div class="flex justify-end gap-2">
+        <button
+          class="btn btn-sm"
+          @click="autoSwitchBackendDialog = false"
+        >
+          {{ $t('cancel') }}
+        </button>
+        <button
+          class="btn btn-primary btn-sm"
+          @click="autoSwitchBackend"
+        >
+          {{ $t('confirm') }}
+        </button>
       </div>
-    </dialog>
+    </DialogWrapper>
   </div>
 </template>
 
 <script setup lang="ts">
 import { isBackendAvailable } from '@/api'
+import DialogWrapper from '@/components/common/DialogWrapper.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'
-import { isDnding } from '@/composables/drag'
 import { useProxies } from '@/composables/proxies'
 import { rulesTabShow } from '@/composables/rules'
 import { useSettings } from '@/composables/settings'
+import { useSwipeRouter } from '@/composables/swipe'
 import { useNotification } from '@/composables/tip'
 import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/config'
 import { getUrlFromBackend, renderRoutes } from '@/helper'
@@ -100,11 +95,10 @@ import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { isSidebarCollapsed } from '@/store/settings'
 import { activeBackend, activeUuid, backendList } from '@/store/setup'
-import { useDocumentVisibility, useSwipe } from '@vueuse/core'
+import { useDocumentVisibility } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
 
-const modalRef = ref<HTMLDialogElement | null>(null)
 const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
 })()
@@ -121,42 +115,8 @@ const route = useRoute()
 const ctrlComp = computed(() => {
   return ctrlsMap[route.name as keyof typeof ctrlsMap]
 })
-
-const swiperRef = ref()
-const { direction } = useSwipe(swiperRef, { threshold: 50 })
-
-const getNextRouteName = () => {
-  const routeName = route.name as ROUTE_NAME
-
-  if (routeName === ROUTE_NAME.setup) {
-    return ROUTE_NAME.proxies
-  }
-
-  return renderRoutes.value[(renderRoutes.value.indexOf(routeName) + 1) % renderRoutes.value.length]
-}
-const getPrevRouteName = () => {
-  const routeName = route.name as ROUTE_NAME
-
-  if (routeName === ROUTE_NAME.setup) {
-    return ROUTE_NAME.proxies
-  }
-
-  return renderRoutes.value[
-    (renderRoutes.value.indexOf(routeName) - 1 + renderRoutes.value.length) %
-      renderRoutes.value.length
-  ]
-}
-
-watch(direction, () => {
-  if (isDnding.value) return
-  if (direction.value === 'right') {
-    router.push({ name: getPrevRouteName() })
-  } else if (direction.value === 'left') {
-    router.push({ name: getNextRouteName() })
-  }
-})
-
 const { proxiesTabShow } = useProxies()
+const { swiperRef } = useSwipeRouter()
 
 watch(
   activeUuid,
@@ -176,15 +136,12 @@ watch(
   },
 )
 
-const closeModal = () => {
-  modalRef.value?.close()
-}
-
+const autoSwitchBackendDialog = ref(false)
 const { showNotification } = useNotification()
 const autoSwitchBackend = async () => {
   const otherEnds = backendList.value.filter((end) => end.uuid !== activeUuid.value)
 
-  closeModal()
+  autoSwitchBackendDialog.value = false
   const avaliable = (
     await Promise.all(
       otherEnds.map(async (end) => {
@@ -211,7 +168,7 @@ watch(
   async () => {
     if (
       !activeBackend.value ||
-      backendList.value.length === 0 ||
+      backendList.value.length < 2 ||
       documentVisible.value !== 'visible'
     ) {
       return
@@ -220,10 +177,10 @@ watch(
       const isAvailable = await isBackendAvailable(activeBackend.value)
 
       if (!isAvailable) {
-        modalRef.value?.showModal()
+        autoSwitchBackendDialog.value = true
       }
     } catch {
-      modalRef.value?.showModal()
+      autoSwitchBackendDialog.value = true
     }
   },
   {

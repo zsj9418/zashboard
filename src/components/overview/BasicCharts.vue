@@ -3,6 +3,9 @@
     <div
       ref="chart"
       class="h-full w-full"
+      @touchstart.stop
+      @touchmove.stop
+      @touchend.stop
     ></div>
     <span
       class="hidden border-base-content/10 bg-base-100/70 text-base-content"

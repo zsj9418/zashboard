@@ -3,6 +3,9 @@
     ref="modalRef"
     class="modal"
     @close="isOpen = false"
+    @touchstart.stop
+    @touchmove.stop
+    @touchend.stop
   >
     <div class="modal-box relative overflow-hidden p-0">
       <form method="dialog">
@@ -26,8 +29,10 @@
 <script setup lang="ts">
 import { XMarkIcon } from '@heroicons/vue/24/outline'
 import { ref, watch } from 'vue'
+
 const modalRef = ref<HTMLDialogElement>()
 const isOpen = defineModel<boolean>()
+
 watch(isOpen, (value) => {
   if (value) {
     modalRef.value?.showModal()

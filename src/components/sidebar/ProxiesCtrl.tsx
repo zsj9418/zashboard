@@ -15,7 +15,7 @@ import {
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import Dialog from '../common/DialogWrapper.vue'
+import DialogWrapper from '../common/DialogWrapper.vue'
 
 export default defineComponent({
   name: 'ProxiesCtrl',
@@ -208,7 +208,7 @@ export default defineComponent({
               >
                 <WrenchScrewdriverIcon class="h-4 w-4" />
               </button>
-              <Dialog
+              <DialogWrapper
                 modelValue={settingsModel.value}
                 onUpdate:modelValue={(v) => (settingsModel.value = v)}
               >
@@ -219,7 +219,7 @@ export default defineComponent({
                   </div>
                   <div class="flex items-center gap-2 text-sm">{filter}</div>
                 </div>
-              </Dialog>
+              </DialogWrapper>
             </>
           )
 
