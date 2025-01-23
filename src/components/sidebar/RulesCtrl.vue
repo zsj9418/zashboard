@@ -1,5 +1,5 @@
 <template>
-  <div :class="twMerge(`flex flex-col gap-2 p-2`, `${horizontal && 'flex-row'}`)">
+  <div :class="twMerge(`flex flex-col gap-2 p-2`, `${horizontal && 'md:flex-row'}`)">
     <div
       :class="twMerge('flex flex-col-reverse gap-2', horizontal && 'flex-row')"
       v-if="ruleProviderList.length"
@@ -38,7 +38,7 @@
       </div>
     </div>
     <TextInput
-      class="w-full max-w-96"
+      class="w-full md:max-w-96"
       v-model="rulesFilter"
       :placeholder="$t('search')"
     />

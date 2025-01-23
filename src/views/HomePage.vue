@@ -75,8 +75,8 @@
 <script setup lang="ts">
 import { isBackendAvailable } from '@/api'
 import DialogWrapper from '@/components/common/DialogWrapper.vue'
-import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.vue'
-import LogsCtrl from '@/components/sidebar/LogsCtrl.vue'
+import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.tsx'
+import LogsCtrl from '@/components/sidebar/LogsCtrl.tsx'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
 import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
 import SideBar from '@/components/sidebar/SideBar.vue'

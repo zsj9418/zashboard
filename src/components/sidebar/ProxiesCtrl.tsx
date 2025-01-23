@@ -124,7 +124,7 @@ export default defineComponent({
         <select
           class={[
             'select select-bordered select-sm min-w-24',
-            props.horizontal ? 'inline-block max-md:flex-1' : 'w-0 flex-1',
+            props.horizontal ? 'inline-block max-md:flex-1 md:min-w-40' : 'w-0 flex-1',
           ]}
           v-model={configs.value.mode}
           onChange={handlerModeChange}

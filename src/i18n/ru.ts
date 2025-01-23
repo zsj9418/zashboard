@@ -20,6 +20,7 @@ const ru: LANG_MESSAGE = {
   memoryUsage: 'Память',
   version: 'Версия',
   quickFilter: 'Быстрый фильтр',
+  quickFilterRegex: 'Регулярное выражение быстрого фильтра',
   noContent: 'Нет содержимого',
   flushFakeIP: 'Очистить Fake IP',
   chains: 'Цепочки',

@@ -20,6 +20,7 @@ const zh: LANG_MESSAGE = {
   memoryUsage: '内存使用',
   version: '版本',
   quickFilter: '快速过滤',
+  quickFilterRegex: '快速过滤正则表达式',
   noContent: '无内容',
   flushFakeIP: '清空Fake IP',
   chains: '代理链',
