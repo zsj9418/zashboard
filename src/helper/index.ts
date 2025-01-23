@@ -1,5 +1,7 @@
 import { proxiesFilter } from '@/composables/proxies'
+import { useNotification } from '@/composables/tip'
 import { NOT_CONNECTED, PROXY_SORT_TYPE, PROXY_TYPE, ROUTE_NAME } from '@/config'
+import { i18n } from '@/i18n'
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
@@ -178,12 +180,18 @@ export const importSettings = () => {
   const input = document.createElement('input')
   input.type = 'file'
   input.accept = '.json'
-  input.onchange = async () => {
+  input.oninput = async () => {
+    const { showNotification } = useNotification()
+
+    showNotification({
+      content: i18n.global.t('importing'),
+    })
     const file = input.files?.[0]
     if (!file) return
     const reader = new FileReader()
     reader.onload = async () => {
       const settings = JSON.parse(reader.result as string)
+
       for (const key in settings) {
         localStorage.setItem(key, settings[key])
       }

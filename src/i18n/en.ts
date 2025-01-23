@@ -146,6 +146,7 @@ const en = {
     "Enabling Independent Latency Test will attempt to use the URLs specified in the configuration file instead of the zashboard's URL settings during the latency test. Latency will be displayed independently based on the URLs set in the policy groups.",
   search: 'Search',
   all: 'All',
+  importing: 'Importing',
 }
 
 export type LANG_MESSAGE = typeof en
