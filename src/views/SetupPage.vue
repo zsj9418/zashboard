@@ -4,12 +4,7 @@
     @keydown.enter="handleSubmit(form)"
   >
     <div class="absolute right-4 top-4">
-      <button
-        class="btn btn-sm"
-        @click="importSettings"
-      >
-        {{ $t('importSettings') }}
-      </button>
+      <ImportSettings />
     </div>
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
@@ -117,10 +112,11 @@
 </template>
 
 <script setup lang="ts">
+import ImportSettings from '@/components/common/ImportSettings.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useNotification } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
-import { getUrlFromBackend, importSettings } from '@/helper'
+import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import {
