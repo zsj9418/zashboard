@@ -39,6 +39,7 @@ export default defineComponent({
         <TextInput
           v-model={logFilter.value}
           beforeClose={true}
+          class="flex-1"
           placeholder={t('search')}
         />
       )
@@ -88,7 +89,7 @@ export default defineComponent({
       if (props.horizontal) {
         return (
           <div class="flex items-center gap-2 p-2">
-            <div class="join">
+            <div class="join w-96">
               {levelSelect}
               {searchInput}
             </div>
@@ -103,7 +104,7 @@ export default defineComponent({
             {levelSelect}
             {buttons}
           </div>
-          <div>{searchInput}</div>
+          <div class="w-full">{searchInput}</div>
         </div>
       )
     }

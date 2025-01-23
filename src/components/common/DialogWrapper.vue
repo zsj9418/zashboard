@@ -9,11 +9,11 @@
   >
     <div class="modal-box relative overflow-hidden p-0">
       <form method="dialog">
-        <button class="btn btn-circle btn-ghost btn-sm absolute right-2 top-2 z-10 outline-none">
+        <button class="btn btn-circle btn-ghost btn-xs absolute right-1 top-1 z-10 outline-none">
           <XMarkIcon class="h-4 w-4" />
         </button>
       </form>
-      <div class="max-h-[90vh] min-h-32 overflow-y-auto p-4 max-md:max-h-[70vh]">
+      <div class="max-h-[90vh] overflow-y-auto p-4 max-md:max-h-[70vh]">
         <slot></slot>
       </div>
     </div>

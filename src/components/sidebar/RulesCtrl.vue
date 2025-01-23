@@ -38,7 +38,7 @@
       </div>
     </div>
     <TextInput
-      class="w-full md:max-w-96"
+      class="w-full md:max-w-80"
       v-model="rulesFilter"
       :placeholder="$t('search')"
     />

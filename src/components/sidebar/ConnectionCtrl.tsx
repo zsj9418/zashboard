@@ -59,7 +59,7 @@ export default defineComponent({
           <span class="shrink-0">{t('sortBy')}</span>
           <div class="join flex-1">
             <select
-              class="join-item select select-bordered select-sm flex-1"
+              class="join-item select select-bordered select-sm flex-1 max-md:w-0"
               v-model={connectionSortType.value}
             >
               {(Object.values(SORT_TYPE) as string[]).map((opt) => (
