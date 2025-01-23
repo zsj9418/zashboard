@@ -40,6 +40,7 @@
     <TextInput
       class="w-full max-w-96"
       v-model="rulesFilter"
+      :placeholder="$t('search')"
     />
   </div>
 </template>

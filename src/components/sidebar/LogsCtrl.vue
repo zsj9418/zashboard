@@ -17,6 +17,7 @@
       <TextInput
         type="text"
         v-model="logFilter"
+        :placeholder="$t('search')"
       />
       <button
         class="btn-bordered btn join-item btn-sm"

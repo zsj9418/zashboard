@@ -1,3 +1,4 @@
+import { proxiesFilter } from '@/composables/proxies'
 import { NOT_CONNECTED, PROXY_SORT_TYPE, PROXY_TYPE, ROUTE_NAME } from '@/config'
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
@@ -68,6 +69,13 @@ export const sortAndFilterProxyNodes = (proxies: string[], groupName?: string) =
       return isProxyGroup(name) || latencyMap.get(name)! > 0
     })
   }
+
+  if (proxiesFilter.value) {
+    proxies = proxies.filter((name) => {
+      return name.toLowerCase().includes(proxiesFilter.value.toLowerCase())
+    })
+  }
+
   switch (proxySortType.value) {
     case PROXY_SORT_TYPE.DEFAULT:
       return proxies

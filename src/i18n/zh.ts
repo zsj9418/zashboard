@@ -143,7 +143,9 @@ const zh: LANG_MESSAGE = {
   updateFinishedTip: '{number} 更新完成',
   independentLatencyTest: '独立延迟测试',
   independentLatencyTestTip:
-    '开启独立延迟测试会在测速中尽可能的使用配置文件中的url覆盖面板设置的url，并根据策略组设置的url独立的展示延迟。',
+    '开启独立延迟测试会在测速中尽可能的使用配置文件中的url覆盖面板设置的url，并展示根据策略组设置的url获取的延迟。',
+  search: '搜索',
+  all: '全部',
 }
 
 export default zh

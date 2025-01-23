@@ -1,6 +1,6 @@
 import { updateProxyProviderAPI } from '@/api'
 import { collapsedBus } from '@/composables/bus'
-import { useProxies } from '@/composables/proxies'
+import { proxiesFilter, useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
@@ -16,6 +16,7 @@ import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DialogWrapper from '../common/DialogWrapper.vue'
+import TextInput from '../common/TextInput.vue'
 
 export default defineComponent({
   name: 'ProxiesCtrl',
@@ -198,31 +199,36 @@ export default defineComponent({
         </button>
       )
 
+      const searchInput = (
+        <TextInput
+          class="w-80"
+          v-model={proxiesFilter.value}
+          placeholder={t('search')}
+        />
+      )
+
+      const settingsModal = (
+        <>
+          <button
+            class={twMerge('btn btn-circle btn-sm')}
+            onClick={() => (settingsModel.value = true)}
+          >
+            <WrenchScrewdriverIcon class="h-4 w-4" />
+          </button>
+          <DialogWrapper v-model={settingsModel.value}>
+            <div class="flex flex-col gap-4 p-2">
+              <div class="flex items-center gap-2 text-sm">
+                {t('sortBy')}
+                {sort}
+              </div>
+              <div class="flex items-center gap-2 text-sm">{filter}</div>
+            </div>
+          </DialogWrapper>
+        </>
+      )
+
       if (props.horizontal) {
         if (isMiddleScreen.value) {
-          const settingsModal = (
-            <>
-              <button
-                class={twMerge('btn btn-circle btn-sm')}
-                onClick={() => (settingsModel.value = true)}
-              >
-                <WrenchScrewdriverIcon class="h-4 w-4" />
-              </button>
-              <DialogWrapper
-                modelValue={settingsModel.value}
-                onUpdate:modelValue={(v) => (settingsModel.value = v)}
-              >
-                <div class="flex flex-col gap-4 p-2">
-                  <div class="flex items-center gap-2 text-sm">
-                    {t('sortBy')}
-                    {sort}
-                  </div>
-                  <div class="flex items-center gap-2 text-sm">{filter}</div>
-                </div>
-              </DialogWrapper>
-            </>
-          )
-
           return (
             <div class="flex flex-col gap-2 p-2">
               {hasProviders.value && (
@@ -233,6 +239,7 @@ export default defineComponent({
               )}
               <div class="flex w-full gap-2">
                 {modeSelect}
+                {searchInput}
                 {settingsModal}
                 {toggleCollapseAll}
                 {latencyTestAll}
@@ -241,13 +248,13 @@ export default defineComponent({
           )
         }
         return (
-          <div class="flex gap-2 p-2">
+          <div class="flex flex-wrap gap-2 p-2">
             {hasProviders.value && tabs}
             {upgradeAll}
             {modeSelect}
-            {sort}
-            {filter}
+            {searchInput}
             <div class="flex-1"></div>
+            {settingsModal}
             {toggleCollapseAll}
             {latencyTestAll}
           </div>
@@ -261,16 +268,12 @@ export default defineComponent({
           {
             <div class="flex gap-2">
               {modeSelect}
+              {settingsModal}
               {toggleCollapseAll}
               {latencyTestAll}
             </div>
           }
-          {
-            <div class="flex gap-2">
-              {sort}
-              {filter}
-            </div>
-          }
+          {<div class="flex gap-2">{searchInput}</div>}
         </div>
       )
     }

@@ -62,7 +62,10 @@
     </div>
     <SourceIPFilter v-if="!horizontal" />
     <div class="flex flex-1 items-center gap-2">
-      <div class="join flex-1">
+      <div
+        class="flex-1"
+        :class="horizontal && 'join'"
+      >
         <SourceIPFilter
           v-if="horizontal"
           class="w-32 sm:w-40"
@@ -70,17 +73,19 @@
         <TextInput
           v-model="connectionFilter"
           class="join-item min-w-32"
+          :placeholder="$t('search')"
+          :before-close="true"
         />
-        <button
-          class="btn join-item btn-sm"
-          @click="isPaused = !isPaused"
-        >
-          <component
-            :is="!isPaused ? PauseIcon : PlayIcon"
-            class="h-4 w-4"
-          />
-        </button>
       </div>
+      <button
+        class="btn btn-circle btn-sm"
+        @click="isPaused = !isPaused"
+      >
+        <component
+          :is="!isPaused ? PauseIcon : PlayIcon"
+          class="h-4 w-4"
+        />
+      </button>
       <button
         class="btn btn-circle btn-sm"
         @click="handlerClickCloseAll"

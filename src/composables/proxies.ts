@@ -5,6 +5,8 @@ import { GLOBAL, proxyGroupList, proxyMap, proxyProviederList } from '@/store/pr
 import { showGlobalProxy, showHiddenGroup, twoColumnProxyGroup } from '@/store/settings'
 import { computed, ref } from 'vue'
 
+export const proxiesFilter = ref('')
+
 const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 const renderGroups = computed(() => {
   if (proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER) {

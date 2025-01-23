@@ -10,7 +10,7 @@ export const useSwipeRouter = () => {
   const route = useRoute()
   const router = useRouter()
   const swiperRef = ref()
-  const { direction } = useSwipe(swiperRef, { threshold: 50 })
+  const { direction } = useSwipe(swiperRef, { threshold: 75 })
 
   const getNextRouteName = () => {
     const routeName = route.name as ROUTE_NAME

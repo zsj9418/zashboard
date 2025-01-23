@@ -23,15 +23,22 @@
   .custom-background.custom-background-$(i) {
     .bg-base-100,
     .bg-base-200,
+    .bg-primary,
     .card,
     .collapse,
     .table,
     .drawer-side,
     .tabs,
     .btm-nav,
+    .tab.tab-active,
     .table tbody tr {
       --tw-border-opacity: calc($(i) / 100);
       --tw-bg-opacity: calc($(i) / 100);
+    }
+
+    .bg-primary .latency-tag.bg-base-100 {
+      --tw-border-opacity: 1;
+      --tw-bg-opacity: 1;
     }
 
     .drawer-content.bg-base-200\/40 {
