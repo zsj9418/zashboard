@@ -149,10 +149,7 @@ export default defineComponent({
       )
       const sort = (
         <select
-          class={[
-            'select select-bordered select-sm',
-            props.horizontal && !isMiddleScreen.value ? 'inline-block' : 'w-0 flex-1',
-          ]}
+          class={['select select-bordered select-sm']}
           v-model={proxySortType.value}
         >
           {Object.values(PROXY_SORT_TYPE).map((type) => {

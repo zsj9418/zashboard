@@ -147,6 +147,7 @@ const en = {
   hideConnectionRegex: 'Hide Connection Regex',
   hideConnectionTip:
     "You can use a case-insensitive regular expression to match hosts, proxy chains, and destination IPs to hide connections that don't need to be seen.",
+  loadBalance: 'Load Balance',
 }
 
 export type LANG_MESSAGE = typeof en

@@ -149,6 +149,7 @@ const zh: LANG_MESSAGE = {
   hideConnectionRegex: '隐藏连接正则',
   hideConnectionTip:
     '可通过不区分大小写正则表达式匹配连接的主机，代理链，目的IP来隐藏不需要看到的连接',
+  loadBalance: '负载均衡',
 }
 
 export default zh

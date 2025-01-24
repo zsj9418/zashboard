@@ -23,13 +23,17 @@
         />
       </div>
       <div
-        class="mt-[2px] flex items-center gap-2 text-base-content/80"
+        class="flex items-center gap-2 text-base-content/80"
         @contextmenu.prevent.stop="handlerLatencyTest"
       >
-        <div class="flex flex-1 items-center gap-1">
+        <div class="flex flex-1 items-center gap-1 text-sm">
           <template v-if="proxyGroup.now">
             <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
             <ProxyName :name="proxyGroup.now" />
+          </template>
+          <template v-else-if="proxyGroup.type.toLowerCase() === PROXY_TYPE.LoadBalance">
+            <CheckCircleIcon class="h-4 w-4 shrink-0" />
+            {{ $t('loadBalance') }}
           </template>
         </div>
         <div class="min-w-12 shrink-0 text-right text-xs">
@@ -61,10 +65,11 @@
 </template>
 
 <script setup lang="ts">
+import { PROXY_TYPE } from '@/config'
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowRightCircleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import CollapseCard from '../common/CollapseCard.vue'
