@@ -67,7 +67,7 @@ const ru: LANG_MESSAGE = {
   latencydesc: 'Задержка по убыванию',
   latencyasc: 'Задержка по возрастанию',
   language: 'Язык',
-  automaticDisconnection: 'Автоматическое отключение',
+  automaticDisconnection: 'Автоматическое отключение при переключении узлов',
   backend: 'Бэкенд',
   tunMode: 'Режим Tun',
   upgradeCore: 'Обновить ядро',
@@ -151,6 +151,8 @@ const ru: LANG_MESSAGE = {
   hideConnectionTip:
     'Вы можете использовать регистронезависимое регулярное выражение для поиска подключенных хостов, цепочек прокси и целевых IP-адресов, чтобы скрыть соединения, которые не нужно отображать.',
   loadBalance: 'Балансировка нагрузки',
+  label: 'Метка',
+  optional: 'Необязательно',
 }
 
 export default ru

@@ -65,7 +65,7 @@ const en = {
   latencydesc: 'Latency Desc',
   latencyasc: 'Latency Asc',
   language: 'Language',
-  automaticDisconnection: 'Automatic Disconnection',
+  automaticDisconnection: 'Automatic Disconnection When Switching Nodes',
   backend: 'Backend',
   tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',
@@ -78,7 +78,7 @@ const en = {
   exportSettings: 'Export Settings',
   importSettings: 'Import Settings',
   clearIconCache: 'Clear Icon Cache',
-  unavailableProxy: 'Hide Unavailable',
+  unavailableProxy: 'Hide Unavailable Proxies',
   protocolTips:
     'You are trying to connect a http backend but the zashboard is served by https. This may cause connection error. Please allow the insecure content in your browser settings. The settings is on the left of the browser address bar.',
   global: 'Global',
@@ -148,6 +148,8 @@ const en = {
   hideConnectionTip:
     "You can use a case-insensitive regular expression to match hosts, proxy chains, and destination IPs to hide connections that don't need to be seen.",
   loadBalance: 'Load Balance',
+  label: 'Label',
+  optional: 'Optional',
 }
 
 export type LANG_MESSAGE = typeof en

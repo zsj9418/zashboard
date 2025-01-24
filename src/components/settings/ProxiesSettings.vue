@@ -5,22 +5,6 @@
     </div>
     <div class="card-body">
       <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
-        <div class="flex items-center gap-2">
-          {{ $t('automaticDisconnection') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="automaticDisconnection"
-          />
-        </div>
-        <div class="flex items-center gap-2">
-          {{ $t('ipv6Test') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="IPv6test"
-          />
-        </div>
         <div class="flex w-full items-center gap-2">
           <span> {{ $t('speedtestUrl') }}: </span>
           <input
@@ -67,6 +51,14 @@
             v-model="mediumLatency"
           />
           ms
+        </div>
+        <div class="flex items-center gap-2">
+          {{ $t('ipv6Test') }}:
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="IPv6test"
+          />
         </div>
       </div>
       <div class="divider"></div>
@@ -165,7 +157,6 @@ import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
 import { useTooltip } from '@/helper/tooltip'
 import { proxyMap } from '@/store/proxies'
 import {
-  automaticDisconnection,
   iconMarginRight,
   iconSize,
   independentLatencyTest,

@@ -226,19 +226,19 @@ export default defineComponent({
               </div>
               <div class="flex items-center gap-2">{filter}</div>
               <div class="flex items-center gap-2">
-                {t('automaticDisconnection')}:
-                <input
-                  class="toggle"
-                  type="checkbox"
-                  v-model={automaticDisconnection.value}
-                />
-              </div>
-              <div class="flex items-center gap-2">
                 {t('showHiddenGroup')}:
                 <input
                   class="toggle"
                   type="checkbox"
                   v-model={showHiddenGroup.value}
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                {t('automaticDisconnection')}:
+                <input
+                  class="toggle"
+                  type="checkbox"
+                  v-model={automaticDisconnection.value}
                 />
               </div>
             </div>

@@ -9,7 +9,7 @@
     <div class="absolute bottom-4 right-4">
       <LanguageSelect />
     </div>
-    <div class="card w-96 max-w-[90%] gap-2 px-6 py-2 sm:gap-4">
+    <div class="card w-96 max-w-[90%] gap-2 px-6 py-2">
       <h1 class="text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control">
         <label class="label">
@@ -47,7 +47,7 @@
       </div>
       <div class="form-control">
         <label class="label flex items-center justify-start gap-1">
-          <span class="label-text">{{ $t('secondaryPath') }}</span>
+          <span class="label-text">{{ $t('secondaryPath') }} ({{ $t('optional') }})</span>
           <span
             class="tooltip"
             :data-tip="$t('secondaryPathTip')"
@@ -69,6 +69,16 @@
           type="password"
           class="input input-sm input-bordered w-full"
           v-model="form.password"
+        />
+      </div>
+      <div class="form-control">
+        <label class="label">
+          <span class="label-text">{{ $t('label') }} ({{ $t('optional') }})</span>
+        </label>
+        <input
+          type="text"
+          class="input input-sm input-bordered w-full"
+          v-model="form.label"
         />
       </div>
       <button
@@ -96,7 +106,7 @@
               class="btn btn-sm flex-1"
               @click="selectBackend(element.uuid)"
             >
-              {{ getUrlFromBackend(element) }}
+              {{ element.label || getUrlFromBackend(element) }}
             </button>
             <button
               class="btn btn-circle btn-sm"
@@ -119,6 +129,7 @@ import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
+import type { Backend } from '@/types'
 import {
   AdjustmentsVerticalIcon,
   MinusCircleIcon,
@@ -133,6 +144,7 @@ const form = reactive({
   port: 9090,
   secondaryPath: '',
   password: '',
+  label: '',
 })
 
 const { showNotification } = useNotification()
@@ -142,16 +154,7 @@ const selectBackend = (uuid: string) => {
   router.push({ name: ROUTE_NAME.proxies })
 }
 
-const handleSubmit = async (
-  form: {
-    protocol: string
-    host: string
-    port: number
-    secondaryPath: string
-    password: string
-  },
-  quiet = false,
-) => {
+const handleSubmit = async (form: Omit<Backend, 'uuid'>, quiet = false) => {
   const { protocol, host, port, password } = form
 
   if (!protocol || !host || !port) {
@@ -217,6 +220,7 @@ if (query.has('hostname')) {
     host: query.get('hostname') as string,
     port: Number(query.get('port')),
     password: query.get('secret') as string,
+    label: query.get('label') as string,
   })
 } else if (backendList.value.length === 0) {
   handleSubmit(form, true)

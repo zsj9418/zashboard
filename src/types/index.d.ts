@@ -5,6 +5,7 @@ export type Backend = {
   password: string
   protocol: string
   uuid: string
+  label?: string
 }
 
 export type Config = {

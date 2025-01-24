@@ -67,7 +67,7 @@ const zh: LANG_MESSAGE = {
   latencydesc: '按延迟降序',
   latencyasc: '按延迟升序',
   language: '语言',
-  automaticDisconnection: '自动断开连接',
+  automaticDisconnection: '切换节点时自动断开连接',
   backend: '后端',
   upgradeCore: '更新核心',
   tunMode: 'Tun 模式',
@@ -80,7 +80,7 @@ const zh: LANG_MESSAGE = {
   exportSettings: '导出设置',
   importSettings: '导入设置',
   clearIconCache: '清空图标缓存',
-  unavailableProxy: '隐藏不可用',
+  unavailableProxy: '隐藏不可用节点',
   protocolTips:
     '您正在尝试连接一个http后端但zashboard是通过https提供的，这可能会导致连接错误，请在浏览器设置中允许不安全的内容，设置在浏览器地址栏左侧。',
   global: '全局',
@@ -150,6 +150,8 @@ const zh: LANG_MESSAGE = {
   hideConnectionTip:
     '可通过不区分大小写正则表达式匹配连接的主机，代理链，目的IP来隐藏不需要看到的连接',
   loadBalance: '负载均衡',
+  label: '标签',
+  optional: '可选',
 }
 
 export default zh
