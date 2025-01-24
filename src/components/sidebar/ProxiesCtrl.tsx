@@ -5,7 +5,13 @@ import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
 import { allProxiesLatencyTest, fetchProxies, proxyProviederList } from '@/store/proxies'
-import { collapseGroupMap, hideUnavailableProxies, proxySortType } from '@/store/settings'
+import {
+  automaticDisconnection,
+  collapseGroupMap,
+  hideUnavailableProxies,
+  proxySortType,
+  showHiddenGroup,
+} from '@/store/settings'
 import {
   BoltIcon,
   ChevronDownIcon,
@@ -216,12 +222,28 @@ export default defineComponent({
             <WrenchScrewdriverIcon class="h-4 w-4" />
           </button>
           <DialogWrapper v-model={settingsModel.value}>
-            <div class="flex flex-col gap-4 p-2">
-              <div class="flex items-center gap-2 text-sm">
+            <div class="flex flex-col gap-4 p-2 text-sm">
+              <div class="flex items-center gap-2">
                 {t('sortBy')}
                 {sort}
               </div>
-              <div class="flex items-center gap-2 text-sm">{filter}</div>
+              <div class="flex items-center gap-2">{filter}</div>
+              <div class="flex items-center gap-2">
+                {t('automaticDisconnection')}:
+                <input
+                  class="toggle"
+                  type="checkbox"
+                  v-model={automaticDisconnection.value}
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                {t('showHiddenGroup')}:
+                <input
+                  class="toggle"
+                  type="checkbox"
+                  v-model={showHiddenGroup.value}
+                />
+              </div>
             </div>
           </DialogWrapper>
         </>
