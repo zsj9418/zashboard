@@ -40,7 +40,7 @@ export default defineComponent<{
       const metadata = conn.metadata
       const componentMap: Record<CONNECTIONS_TABLE_ACCESSOR_KEY, JSX.Element> = {
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: (
-          <span class="w-80 grow break-all text-primary/80">
+          <span class="w-80 grow truncate text-primary/80">
             {metadata.host || metadata.sniffHost || metadata.destinationIP}:
             {metadata.destinationPort}
           </span>
@@ -49,16 +49,16 @@ export default defineComponent<{
           <span class="w-80 grow break-all">{getDestinationFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: (
-          <span class="w-80 grow break-all">{getIPLabelFromMap(metadata.sourceIP)}</span>
+          <span class="w-40 grow break-all">{getIPLabelFromMap(metadata.sourceIP)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: (
-          <span class="w-80 grow break-all">{metadata.sourcePort}</span>
+          <span class="w-10 grow break-all">{metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost]: (
           <span class="w-80 grow break-all">{metadata.sniffHost || '-'}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Type]: (
-          <span class="w-80 grow break-all">{getNetworkTypeFromConnection(conn)}</span>
+          <span class="w-60 grow break-all">{getNetworkTypeFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Rule]: (
           <span class="w-80 grow break-all">
@@ -67,7 +67,7 @@ export default defineComponent<{
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Process]: (
-          <span class="w-80 grow break-all">{getProcessFromConnection(conn)}</span>
+          <span class="w-60 grow break-all">{getProcessFromConnection(conn)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Chains]: (
           <span
