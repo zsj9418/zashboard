@@ -115,7 +115,7 @@ const en = {
   autoSwitch: 'Auto Switch',
   customBackgroundURL: 'Custom Background URL',
   splitOverviewPage: 'Split Overview Page',
-  showHiddenGroup: 'Show Hidden Group',
+  showHiddenGroup: 'Show Hidden Groups',
   showIPAndConnectionInfo: 'Show IP and Connection Info',
   transparent: 'Transparent',
   iconSize: 'Icon Size',
@@ -150,6 +150,8 @@ const en = {
   loadBalance: 'Load Balance',
   label: 'Label',
   optional: 'Optional',
+  hiddenGroupTip:
+    'The proxy group has been hidden. You can retrieve it by enabling "Show Hidden Groups" in the popup menu',
 }
 
 export type LANG_MESSAGE = typeof en

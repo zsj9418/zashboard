@@ -2,7 +2,7 @@
   <CollapseCard :name="proxyGroup.name">
     <template v-slot:title>
       <div
-        class="flex items-center gap-2 pr-5"
+        class="relative flex items-center gap-2 pr-6"
         @contextmenu.prevent.stop="handlerLatencyTest"
       >
         <div class="flex flex-1 items-center gap-1">
@@ -21,6 +21,19 @@
           :group-name="proxyGroup.name"
           @click.stop="handlerLatencyTest"
         />
+        <button
+          class="btn btn-circle btn-ghost btn-xs absolute -right-4 -top-4 z-10 flex items-center text-base-content/20 hover:text-base-content/80"
+          @click.stop="handlerGroupToggle"
+        >
+          <XMarkIcon
+            v-if="!hiddenGroupMap[proxyGroup.name]"
+            class="h-3 w-3"
+          />
+          <PlusCircleIcon
+            v-else
+            class="h-3 w-3"
+          />
+        </button>
       </div>
       <div
         class="flex items-center gap-2 text-base-content/80"
@@ -65,13 +78,20 @@
 </template>
 
 <script setup lang="ts">
+import { useNotification } from '@/composables/tip'
 import { PROXY_TYPE } from '@/config'
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
-import { proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
-import { ArrowRightCircleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
+import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import {
+  ArrowRightCircleIcon,
+  CheckCircleIcon,
+  PlusCircleIcon,
+  XMarkIcon,
+} from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import CollapseCard from '../common/CollapseCard.vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyName from './ProxyName.vue'
@@ -82,7 +102,8 @@ import ProxyPreview from './ProxyPreview.vue'
 const props = defineProps<{
   name: string
 }>()
-
+const { t } = useI18n()
+const { showNotification } = useNotification()
 const proxyGroup = computed(() => proxyMap.value[props.name])
 const sortedProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyGroup.value.all ?? [], props.name)
@@ -106,4 +127,14 @@ const downloadTotal = computed(() => {
 
   return speed
 })
+
+const handlerGroupToggle = () => {
+  hiddenGroupMap.value[props.name] = !hiddenGroupMap.value[props.name]
+
+  if (hiddenGroupMap.value[props.name]) {
+    showNotification({
+      content: t('hiddenGroupTip'),
+    })
+  }
+}
 </script>

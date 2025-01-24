@@ -165,17 +165,6 @@ export default defineComponent({
         </select>
       )
 
-      const filter = (
-        <div class="flex items-center gap-1 text-sm">
-          <span class="shrink-0">{t('unavailableProxy')}</span>
-          <input
-            type="checkbox"
-            class="toggle"
-            v-model={hideUnavailableProxies.value}
-          />
-        </div>
-      )
-
       const latencyTestAll = (
         <button
           class={twMerge('btn btn-circle btn-sm')}
@@ -224,9 +213,16 @@ export default defineComponent({
                 {t('sortBy')}
                 {sort}
               </div>
-              <div class="flex items-center gap-2">{filter}</div>
               <div class="flex items-center gap-2">
-                {t('showHiddenGroup')}:
+                {t('unavailableProxy')}
+                <input
+                  type="checkbox"
+                  class="toggle"
+                  v-model={hideUnavailableProxies.value}
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                {t('showHiddenGroup')}
                 <input
                   class="toggle"
                   type="checkbox"
@@ -234,7 +230,7 @@ export default defineComponent({
                 />
               </div>
               <div class="flex items-center gap-2">
-                {t('automaticDisconnection')}:
+                {t('automaticDisconnection')}
                 <input
                   class="toggle"
                   type="checkbox"

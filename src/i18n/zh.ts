@@ -117,7 +117,7 @@ const zh: LANG_MESSAGE = {
   autoSwitch: '自动切换',
   customBackgroundURL: '自定义背景 URL',
   splitOverviewPage: '分离概览页',
-  showHiddenGroup: '显示隐藏分组',
+  showHiddenGroup: '显示隐藏代理组',
   showIPAndConnectionInfo: '显示 IP 和连接信息',
   transparent: '透明度',
   iconSize: '图标尺寸',
@@ -152,6 +152,7 @@ const zh: LANG_MESSAGE = {
   loadBalance: '负载均衡',
   label: '标签',
   optional: '可选',
+  hiddenGroupTip: '代理组已隐藏，可在代理页弹窗菜单中打开“显示隐藏代理组”后找回',
 }
 
 export default zh

@@ -29,6 +29,7 @@ export const GLOBAL = 'GLOBAL'
 export const proxyGroupList = ref<string[]>([])
 export const proxyMap = ref<Record<string, Proxy>>({})
 export const IPv6Map = useStorage<Record<string, boolean>>('config/ipv6-map', {})
+export const hiddenGroupMap = useStorage<Record<string, boolean>>('config/hidden-group-map', {})
 export const proxyProviederList = ref<ProxyProvider[]>([])
 
 export const getTestUrl = (groupName?: string) => {
@@ -71,6 +72,9 @@ export const fetchProxies = async () => {
   Object.entries(proxyData.proxies).map(([name, proxy]) => {
     if (IPv6test.value && getIPv6FromExtra(proxy)) {
       IPv6Map.value[name] = true
+    }
+    if (proxy.hidden && !(name in hiddenGroupMap.value)) {
+      hiddenGroupMap.value[name] = true
     }
   })
   proxyProviederList.value = Object.values(providerData.providers).filter(

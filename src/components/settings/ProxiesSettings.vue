@@ -127,14 +127,6 @@
             />
           </div>
         </template>
-        <div class="flex items-center gap-2">
-          {{ $t('showHiddenGroup') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="showHiddenGroup"
-          />
-        </div>
         <div
           v-if="isSingBox"
           class="flex items-center gap-2"
@@ -166,7 +158,6 @@ import {
   proxyCardSize,
   proxyPreviewType,
   showGlobalProxy,
-  showHiddenGroup,
   speedtestTimeout,
   speedtestUrl,
   truncateProxyName,
