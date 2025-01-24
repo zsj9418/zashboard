@@ -57,7 +57,7 @@ export const speedtestUrl = useStorage<string>(
   'http://www.gstatic.com/generate_204',
 )
 export const independentLatencyTest = useStorage('config/independent-latency-test', false)
-export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 3000)
+export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
 export const proxySortType = useStorage<PROXY_SORT_TYPE>(
   'config/proxy-sort-type',
   PROXY_SORT_TYPE.DEFAULT,

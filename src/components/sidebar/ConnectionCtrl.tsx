@@ -57,7 +57,7 @@ export default defineComponent({
       const sortForCards = (
         <div class={['flex w-full items-center gap-1 text-sm', props.horizontal && 'md:w-auto']}>
           <span class="shrink-0">{t('sortBy')}</span>
-          <div class="join flex-1">
+          <div class="join flex-1 max-md:w-0">
             <select
               class="join-item select select-bordered select-sm flex-1 max-md:w-0"
               v-model={connectionSortType.value}

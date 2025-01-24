@@ -1,15 +1,15 @@
 <template>
   <div
-    class="flex h-full w-full items-center justify-center bg-base-200/40"
+    class="h-full w-full items-center justify-center overflow-auto bg-base-200/40 sm:flex"
     @keydown.enter="handleSubmit(form)"
   >
-    <div class="absolute right-4 top-4">
+    <div class="absolute right-4 top-4 max-sm:hidden">
       <ImportSettings />
     </div>
-    <div class="absolute bottom-4 right-4">
+    <div class="absolute bottom-4 right-4 max-sm:hidden">
       <LanguageSelect />
     </div>
-    <div class="card w-96 max-w-[90%] gap-2 px-6 py-2">
+    <div class="card mx-auto w-96 max-w-[90%] gap-2 px-6 py-2 max-sm:my-4">
       <h1 class="text-2xl font-semibold">{{ $t('setup') }}</h1>
       <div class="form-control">
         <label class="label">
@@ -117,6 +117,10 @@
           </div>
         </template>
       </Draggable>
+      <LanguageSelect class="mt-4 sm:hidden" />
+      <div class="absolute right-2 top-2 sm:hidden">
+        <ImportSettings />
+      </div>
     </div>
   </div>
 </template>

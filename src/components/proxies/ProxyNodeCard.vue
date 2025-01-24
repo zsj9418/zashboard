@@ -28,12 +28,13 @@
 
     <div class="flex h-4 w-full items-center justify-between">
       <span
-        :class="`whitespace-nowrap text-xs tracking-tight ${active ? 'text-primary-content' : 'text-base-content/60'}`"
+        :class="`truncate text-xs tracking-tight ${active ? 'text-primary-content' : 'text-base-content/60'}`"
+        @mouseenter="checkTruncation"
       >
         {{ typeDescription }}
       </span>
       <LatencyTag
-        :class="[isSmallCard && '!h-4 !w-8']"
+        :class="[isSmallCard && '!h-4 !w-8', 'shrink-0']"
         :name="node.name"
         :loading="isLatencyTesting"
         :group-name="groupName"
@@ -65,7 +66,9 @@ const checkTruncation = (e: Event) => {
   const { scrollWidth, clientWidth } = target
 
   if (scrollWidth > clientWidth) {
-    showTip(e, target.innerText)
+    showTip(e, target.innerText, {
+      delay: [500, 0],
+    })
   }
 }
 

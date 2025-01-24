@@ -24,7 +24,6 @@ export enum FONTS {
 }
 
 export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
-  Details = 'details',
   Close = 'close',
   Type = 'type',
   Process = 'process',
@@ -40,6 +39,7 @@ export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   SourcePort = 'sourcePort',
   SniffHost = 'sniffHost',
   Destination = 'destination',
+  Details = 'details',
 }
 
 export enum TABLE_WIDTH_MODE {

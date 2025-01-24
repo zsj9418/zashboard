@@ -10,6 +10,9 @@
       type="text"
       class="input input-sm join-item input-bordered w-full"
       :placeholder="placeholder || ''"
+      @touchstart.stop
+      @touchmove.stop
+      @touchend.stop
     />
     <XMarkIcon
       v-if="!beforeClose"
