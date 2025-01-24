@@ -19,8 +19,6 @@ const zh: LANG_MESSAGE = {
   uploadSpeed: '上传速度',
   memoryUsage: '内存使用',
   version: '版本',
-  quickFilter: '快速过滤',
-  quickFilterRegex: '快速过滤正则表达式',
   noContent: '无内容',
   flushFakeIP: '清空Fake IP',
   chains: '代理链',
@@ -87,7 +85,6 @@ const zh: LANG_MESSAGE = {
     '您正在尝试连接一个http后端但zashboard是通过https提供的，这可能会导致连接错误，请在浏览器设置中允许不安全的内容，设置在浏览器地址栏左侧。',
   global: '全局',
   direct: '直连',
-  quickFilterTip: '快速过滤使用正则表达式进行匹配，支持一键排除符合代理链、主机或目标 IP 的连接。',
   lowLatencyDesc: '黄色的阈值',
   mediumLatencyDesc: '红色的阈值',
   fonts: '字体',
@@ -148,6 +145,10 @@ const zh: LANG_MESSAGE = {
   search: '搜索',
   all: '全部',
   importing: '正在导入',
+  hideConnection: '隐藏连接',
+  hideConnectionRegex: '隐藏连接正则',
+  hideConnectionTip:
+    '可通过不区分大小写正则表达式匹配连接的主机，代理链，目的IP来隐藏不需要看到的连接',
 }
 
 export default zh

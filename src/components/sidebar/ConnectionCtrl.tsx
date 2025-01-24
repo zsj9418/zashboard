@@ -101,7 +101,7 @@ export default defineComponent({
           <DialogWrapper v-model={settingsModel.value}>
             <div class="flex flex-col gap-4 p-2 text-sm">
               <div class="flex items-center gap-2">
-                <span class="shrink-0">{t('quickFilterRegex')}</span>
+                <span class="shrink-0">{t('hideConnectionRegex')}</span>
                 <input
                   type="text"
                   class="input input-sm input-bordered w-32 max-w-64 flex-1"
@@ -109,7 +109,7 @@ export default defineComponent({
                 />
               </div>
               <div class="flex items-center gap-2">
-                {t('quickFilter')}
+                {t('hideConnection')}
                 <input
                   type="checkbox"
                   class="toggle"
@@ -117,7 +117,7 @@ export default defineComponent({
                 />
                 <div
                   onMouseenter={(e) =>
-                    showTip(e, t('quickFilterTip'), {
+                    showTip(e, t('hideConnectionTip'), {
                       appendTo: 'parent',
                     })
                   }

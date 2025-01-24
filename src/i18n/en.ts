@@ -17,8 +17,6 @@ const en = {
   uploadSpeed: 'Upload Speed',
   memoryUsage: 'Memory',
   version: 'Version',
-  quickFilter: 'Quick Filter',
-  quickFilterRegex: 'Quick Filter Regex',
   noContent: 'No Content',
   flushFakeIP: 'Flush Fake IP',
   chains: 'Chains',
@@ -85,8 +83,6 @@ const en = {
     'You are trying to connect a http backend but the zashboard is served by https. This may cause connection error. Please allow the insecure content in your browser settings. The settings is on the left of the browser address bar.',
   global: 'Global',
   direct: 'Direct',
-  quickFilterTip:
-    'Quick filtering allows one-click exclusion of connections matching proxy chains, host, or destination IPs using regular expressions.',
   lowLatencyDesc: 'Yellow threshold',
   mediumLatencyDesc: 'Red threshold',
   fonts: 'Fonts',
@@ -147,6 +143,10 @@ const en = {
   search: 'Search',
   all: 'All',
   importing: 'Importing',
+  hideConnection: 'Hide Connection',
+  hideConnectionRegex: 'Hide Connection Regex',
+  hideConnectionTip:
+    "You can use a case-insensitive regular expression to match hosts, proxy chains, and destination IPs to hide connections that don't need to be seen.",
 }
 
 export type LANG_MESSAGE = typeof en

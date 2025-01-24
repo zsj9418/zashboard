@@ -52,7 +52,7 @@ export default defineComponent<{
           <span class="w-40 grow break-all">{getIPLabelFromMap(metadata.sourceIP)}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourcePort]: (
-          <span class="w-10 grow break-all">{metadata.sourcePort}</span>
+          <span class="w-20 grow break-all">{metadata.sourcePort}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SniffHost]: (
           <span class="w-80 grow break-all">{metadata.sniffHost || '-'}</span>
