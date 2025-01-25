@@ -153,6 +153,7 @@ const zh: LANG_MESSAGE = {
   label: '标签',
   optional: '可选',
   hiddenGroupTip: '代理组已隐藏，可在代理页弹窗菜单中打开“显示隐藏代理组”后找回',
+  swipeInTabs: '滑动切换页面内的标签页',
 }
 
 export default zh

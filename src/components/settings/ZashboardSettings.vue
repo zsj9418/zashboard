@@ -92,6 +92,14 @@
               class="range max-w-64"
             />
           </div>
+          <div class="flex items-center gap-2 md:hidden">
+            {{ $t('swipeInTabs') }}:
+            <input
+              type="checkbox"
+              v-model="swipeInTabs"
+              class="toggle"
+            />
+          </div>
         </div>
       </div>
 
@@ -151,6 +159,7 @@ import {
   customBackgroundURL,
   dashboardTransparent,
   font,
+  swipeInTabs,
   theme,
 } from '@/store/settings'
 import { ArrowUpCircleIcon } from '@heroicons/vue/24/outline'

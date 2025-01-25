@@ -3,6 +3,7 @@ import { renderRoutes } from '@/helper'
 import { connectionTabShow } from '@/store/connections'
 import { proxyProviederList } from '@/store/proxies'
 import { ruleProviderList } from '@/store/rules'
+import { swipeInTabs } from '@/store/settings'
 import { useSwipe } from '@vueuse/core'
 import { flatten } from 'lodash'
 import { computed, ref, watch } from 'vue'
@@ -22,66 +23,38 @@ export const useSwipeRouter = () => {
   const swipeList = computed(() => {
     return flatten(
       renderRoutes.value.map((r) => {
-        if (r === ROUTE_NAME.proxies && proxyProviederList.value.length > 0) {
-          return [
-            [
-              () =>
-                route.name === ROUTE_NAME.proxies &&
-                proxiesTabShow.value === PROXY_TAB_TYPE.PROXIES,
-              () => {
-                router.push({ name: ROUTE_NAME.proxies })
-                proxiesTabShow.value = PROXY_TAB_TYPE.PROXIES
-              },
-            ],
-            [
-              () =>
-                route.name === ROUTE_NAME.proxies &&
-                proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER,
-              () => {
-                router.push({ name: ROUTE_NAME.proxies })
-                proxiesTabShow.value = PROXY_TAB_TYPE.PROVIDER
-              },
-            ],
-          ]
-        } else if (r === ROUTE_NAME.connections) {
-          return [
-            [
-              () =>
-                route.name === ROUTE_NAME.connections &&
-                connectionTabShow.value === CONNECTION_TAB_TYPE.ACTIVE,
-              () => {
-                router.push({ name: ROUTE_NAME.connections })
-                connectionTabShow.value = CONNECTION_TAB_TYPE.ACTIVE
-              },
-            ],
-            [
-              () =>
-                route.name === ROUTE_NAME.connections &&
-                connectionTabShow.value === CONNECTION_TAB_TYPE.CLOSED,
-              () => {
-                router.push({ name: ROUTE_NAME.connections })
-                connectionTabShow.value = CONNECTION_TAB_TYPE.CLOSED
-              },
-            ],
-          ]
-        } else if (r === ROUTE_NAME.rules && ruleProviderList.value.length > 0) {
-          return [
-            [
-              () => route.name === ROUTE_NAME.rules && rulesTabShow.value === RULE_TAB_TYPE.RULES,
-              () => {
-                router.push({ name: ROUTE_NAME.rules })
-                rulesTabShow.value = RULE_TAB_TYPE.RULES
-              },
-            ],
-            [
-              () =>
-                route.name === ROUTE_NAME.rules && rulesTabShow.value === RULE_TAB_TYPE.PROVIDER,
-              () => {
-                router.push({ name: ROUTE_NAME.rules })
-                rulesTabShow.value = RULE_TAB_TYPE.PROVIDER
-              },
-            ],
-          ]
+        if (swipeInTabs.value) {
+          if (r === ROUTE_NAME.proxies && proxyProviederList.value.length > 0) {
+            return Object.values(PROXY_TAB_TYPE).map((tab) => {
+              return [
+                () => route.name === ROUTE_NAME.proxies && proxiesTabShow.value === tab,
+                () => {
+                  router.push({ name: ROUTE_NAME.proxies })
+                  proxiesTabShow.value = tab
+                },
+              ]
+            })
+          } else if (r === ROUTE_NAME.connections) {
+            return Object.values(CONNECTION_TAB_TYPE).map((tab) => {
+              return [
+                () => route.name === ROUTE_NAME.connections && connectionTabShow.value === tab,
+                () => {
+                  router.push({ name: ROUTE_NAME.connections })
+                  connectionTabShow.value = tab
+                },
+              ]
+            })
+          } else if (r === ROUTE_NAME.rules && ruleProviderList.value.length > 0) {
+            return Object.values(RULE_TAB_TYPE).map((tab) => {
+              return [
+                () => route.name === ROUTE_NAME.rules && rulesTabShow.value === tab,
+                () => {
+                  router.push({ name: ROUTE_NAME.rules })
+                  rulesTabShow.value = tab
+                },
+              ]
+            })
+          }
         }
 
         return [[() => route.name === r, () => router.push({ name: r })]]
