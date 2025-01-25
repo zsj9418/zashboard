@@ -179,7 +179,7 @@ export default defineComponent({
                 </div>
               )}
               <div class="join w-full">
-                <SourceIPFilter class="min-w-40" />
+                <SourceIPFilter class="w-40" />
                 {searchInput}
               </div>
             </div>
@@ -189,7 +189,7 @@ export default defineComponent({
           <div class="flex flex-wrap items-center gap-2 p-2">
             <ConnectionTabs />
             {useConnectionCard.value && sortForCards}
-            <SourceIPFilter class="min-w-40" />
+            <SourceIPFilter class="w-40" />
             {searchInput}
             <div class="flex-1"></div>
             {settingsModal}
@@ -202,7 +202,7 @@ export default defineComponent({
         <div class="flex flex-wrap items-center gap-2 p-2">
           <ConnectionTabs class="w-full" />
           <div class="flex w-full items-center gap-2">
-            <SourceIPFilter class="minw-40 flex-1" />
+            <SourceIPFilter class="w-40 flex-1" />
             {settingsModal}
             {buttons}
           </div>

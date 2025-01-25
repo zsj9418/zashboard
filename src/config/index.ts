@@ -90,8 +90,8 @@ export enum SORT_DIRECTION {
 }
 
 export enum CONNECTION_TAB_TYPE {
-  ACTIVE = 'active',
-  CLOSED = 'closed',
+  ACTIVE = 'activeConnections',
+  CLOSED = 'closedConnections',
 }
 
 export enum LOG_LEVEL {
