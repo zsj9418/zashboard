@@ -102,9 +102,8 @@ export default defineComponent({
             <div class="flex flex-col gap-4 p-2 text-sm">
               <div class="flex items-center gap-2">
                 <span class="shrink-0">{t('hideConnectionRegex')}</span>
-                <input
-                  type="text"
-                  class="input input-sm input-bordered w-32 max-w-64 flex-1"
+                <TextInput
+                  class="w-32 max-w-64 flex-1"
                   v-model={quickFilterRegex.value}
                 />
               </div>

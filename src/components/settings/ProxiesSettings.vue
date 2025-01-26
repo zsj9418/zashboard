@@ -7,9 +7,8 @@
       <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div class="flex w-full items-center gap-2">
           <span> {{ $t('speedtestUrl') }}: </span>
-          <input
-            type="text"
-            class="input input-sm input-bordered w-36 flex-1 sm:max-w-80"
+          <TextInput
+            class="w-36 flex-1 sm:max-w-80"
             v-model="speedtestUrl"
           />
         </div>
@@ -28,7 +27,7 @@
         <div class="flex w-full items-center gap-2">
           <span> {{ $t('speedtestTimeout') }}: </span>
           <input
-            type="text"
+            type="number"
             class="input input-sm input-bordered w-20"
             v-model="speedtestTimeout"
           />
@@ -166,6 +165,7 @@ import {
 import { QuestionMarkCircleIcon } from '@heroicons/vue/24/outline'
 import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+import TextInput from '../common/TextInput.vue'
 
 const { showTip } = useTooltip()
 const { t } = useI18n()

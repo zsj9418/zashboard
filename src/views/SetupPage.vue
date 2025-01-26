@@ -27,9 +27,8 @@
         <label class="label">
           <span class="label-text">{{ $t('host') }}</span>
         </label>
-        <input
-          type="text"
-          class="input input-sm input-bordered w-full"
+        <TextInput
+          class="w-full"
           name="username"
           autocomplete="username"
           v-model="form.host"
@@ -39,9 +38,8 @@
         <label class="label">
           <span class="label-text">{{ $t('port') }}</span>
         </label>
-        <input
-          type="text"
-          class="input input-sm input-bordered w-full"
+        <TextInput
+          class="w-full"
           v-model="form.port"
         />
       </div>
@@ -55,9 +53,8 @@
             <QuestionMarkCircleIcon class="h-4 w-4" />
           </span>
         </label>
-        <input
-          type="text"
-          class="input input-sm input-bordered w-full"
+        <TextInput
+          class="w-full"
           v-model="form.secondaryPath"
         />
       </div>
@@ -75,9 +72,8 @@
         <label class="label">
           <span class="label-text">{{ $t('label') }} ({{ $t('optional') }})</span>
         </label>
-        <input
-          type="text"
-          class="input input-sm input-bordered w-full"
+        <TextInput
+          class="w-full"
           v-model="form.label"
         />
       </div>
@@ -127,6 +123,7 @@
 
 <script setup lang="ts">
 import ImportSettings from '@/components/common/ImportSettings.vue'
+import TextInput from '@/components/common/TextInput.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useNotification } from '@/composables/tip'
 import { ROUTE_NAME } from '@/config'
@@ -145,7 +142,7 @@ import Draggable from 'vuedraggable'
 const form = reactive({
   protocol: 'http',
   host: '127.0.0.1',
-  port: 9090,
+  port: '9090',
   secondaryPath: '',
   password: '',
   label: '',
@@ -222,7 +219,7 @@ if (query.has('hostname')) {
         : window.location.protocol.replace(':', ''),
     secondaryPath: (query.get('secondaryPath') as string) || '',
     host: query.get('hostname') as string,
-    port: Number(query.get('port')),
+    port: query.get('port') as string,
     password: query.get('secret') as string,
     label: query.get('label') as string,
   })
