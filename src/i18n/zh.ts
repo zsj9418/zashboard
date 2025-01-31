@@ -147,8 +147,7 @@ const zh: LANG_MESSAGE = {
   importing: '正在导入',
   hideConnection: '隐藏连接',
   hideConnectionRegex: '隐藏连接正则',
-  hideConnectionTip:
-    '可通过不区分大小写正则表达式匹配连接的主机，代理链，目的IP来隐藏不需要看到的连接',
+  hideConnectionTip: '可通过不区分大小写的正则表达式来匹配并隐藏不需要看到的连接',
   loadBalance: '负载均衡',
   label: '标签',
   optional: '可选',

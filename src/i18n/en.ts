@@ -146,7 +146,7 @@ const en = {
   hideConnection: 'Hide Connection',
   hideConnectionRegex: 'Hide Connection Regex',
   hideConnectionTip:
-    "You can use a case-insensitive regular expression to match hosts, proxy chains, and destination IPs to hide connections that don't need to be seen.",
+    'You can use a case-insensitive regular expression to match and hide unwanted connections.',
   loadBalance: 'Load Balance',
   label: 'Label',
   optional: 'Optional',
