@@ -2,7 +2,7 @@
   <CollapseCard :name="proxyGroup.name">
     <template v-slot:title>
       <div
-        class="relative flex items-center gap-2 pr-6"
+        class="relative flex items-center gap-2"
         @contextmenu.prevent.stop="handlerLatencyTest"
       >
         <div class="flex flex-1 items-center gap-1">
@@ -22,14 +22,14 @@
           @click.stop="handlerLatencyTest"
         />
         <button
-          class="btn btn-circle btn-ghost btn-xs absolute -right-4 -top-4 z-10 flex items-center text-base-content/20 hover:text-base-content/80"
+          class="btn btn-circle btn-ghost btn-xs absolute -left-4 -top-4 z-10 flex items-center text-base-content/20 hover:text-base-content/80"
           @click.stop="handlerGroupToggle"
         >
           <XMarkIcon
             v-if="!hiddenGroupMap[proxyGroup.name]"
             class="h-3 w-3"
           />
-          <PlusCircleIcon
+          <PlusIcon
             v-else
             class="h-3 w-3"
           />
@@ -86,7 +86,7 @@ import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/
 import {
   ArrowRightCircleIcon,
   CheckCircleIcon,
-  PlusCircleIcon,
+  PlusIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
