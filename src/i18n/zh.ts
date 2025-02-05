@@ -143,7 +143,7 @@ const zh: LANG_MESSAGE = {
   independentLatencyTestTip:
     '开启独立延迟测试会在测速中尽可能的使用配置文件中的url覆盖面板设置的url，并展示根据策略组设置的url获取的延迟。',
   search: '搜索',
-  all: '全部',
+  allSourceIP: '全部源IP',
   importing: '正在导入',
   hideConnection: '隐藏连接',
   hideConnectionRegex: '隐藏连接正则',
