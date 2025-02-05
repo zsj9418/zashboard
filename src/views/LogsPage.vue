@@ -45,12 +45,14 @@ const textColorMapForType = {
 }
 
 const renderLogs = computed(() => {
-  return logs.value.filter((log) => {
-    if (logFilter.value) {
-      return log.payload.includes(logFilter.value) || log.type.includes(logFilter.value)
-    }
+  if (logFilter.value) {
+    const regex = new RegExp(logFilter.value, 'i')
 
-    return true
-  })
+    return logs.value.filter((log) => {
+      return regex.test(log.payload) || regex.test(log.type)
+    })
+  }
+
+  return logs.value
 })
 </script>
