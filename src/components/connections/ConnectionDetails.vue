@@ -1,17 +1,16 @@
 <template>
   <DialogWrapper v-model="connectionDetailModalShow">
-    <div
-      v-if="details"
-      class="mb-2 text-sm"
-    >
-      {{ $t('connectionIP') }}: {{ details?.ip }}
-      <div class="flex gap-1">
-        {{ details?.country }}
-        {{ details?.asn_organization }}
-        AS{{ details?.asn }}
-      </div>
-    </div>
     <VueJsonPretty :data="infoConn" />
+    <div class="mt-2 h-10 text-sm">
+      <template v-if="details">
+        {{ $t('connectionIP') }} {{ details?.ip }}
+        <div class="flex gap-3">
+          {{ details?.country }}
+          {{ details?.asn_organization }}
+          ( AS{{ details?.asn }} )
+        </div>
+      </template>
+    </div>
   </DialogWrapper>
 </template>
 
