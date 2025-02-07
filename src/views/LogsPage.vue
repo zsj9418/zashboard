@@ -15,7 +15,7 @@
         <div class="card mb-1 block break-all p-2 text-sm">
           <span>{{ item.seq }}</span>
           <span class="mx-2 text-primary">
-            {{ dayjs(item.time).locale(language).format('HH:mm:ss') }}
+            {{ item.time }}
           </span>
           <span :class="textColorMapForType[item.type as keyof typeof textColorMapForType]">
             {{ item.type }}
@@ -32,9 +32,7 @@ import VirtualScroller from '@/components/common/VirtualScroller.vue'
 import { LOG_LEVEL } from '@/config'
 import { isMiddleScreen } from '@/helper/utils'
 import { logFilter, logs } from '@/store/logs'
-import { language } from '@/store/settings'
 import type { LogWithSeq } from '@/types'
-import dayjs from 'dayjs'
 import { computed } from 'vue'
 
 const textColorMapForType = {
@@ -49,7 +47,7 @@ const renderLogs = computed(() => {
     const regex = new RegExp(logFilter.value, 'i')
 
     return logs.value.filter((log) => {
-      return regex.test(log.payload) || regex.test(log.type)
+      return [log.payload, log.time, log.type].some((i) => regex.test(i))
     })
   }
 

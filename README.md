@@ -2,8 +2,7 @@
 
 ### Online zashboard
 
-1. For localhost、127.0.0.1: https://board.zash.run.place
-2. For others like router in LAN: http://board.zash.run.place
+1. http://board.zash.run.place
 
 ### Download zashboard
 
