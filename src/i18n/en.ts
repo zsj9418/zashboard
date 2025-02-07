@@ -154,6 +154,7 @@ const en = {
   hiddenGroupTip:
     'The proxy group has been hidden. You can retrieve it by enabling "Show Hidden Groups" in the popup menu',
   swipeInTabs: 'Swipe To Switch Between Tabs In Page',
+  connectionIP: 'Connection IP',
 }
 
 export type LANG_MESSAGE = typeof en
