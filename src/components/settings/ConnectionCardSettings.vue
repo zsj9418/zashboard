@@ -1,5 +1,5 @@
 <template>
-  <div>{{ $t('customCardLines') }}:</div>
+  <div>{{ $t('customCardLines') }}</div>
   <div class="relative flex flex-col rounded">
     <button
       class="btn btn-circle btn-neutral btn-sm absolute right-2 top-2"
@@ -25,13 +25,11 @@
         :animation="150"
         group="list"
         ghostClass="ghost"
-        @start="disableSwipe = true"
-        @end="disableSwipe = false"
         :item-key="(id: string) => id"
       >
         <template #item="{ element }">
           <div
-            class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content"
+            class="flex h-8 cursor-move select-none items-center rounded bg-neutral px-2 text-neutral-content"
           >
             {{ $t(element) }}
           </div>
@@ -45,12 +43,12 @@
       :animation="150"
       group="list"
       ghostClass="ghost"
-      @start="disableSwipe = true"
-      @end="disableSwipe = false"
       :item-key="(id: string) => id"
     >
       <template #item="{ element }">
-        <div class="flex h-8 cursor-move items-center rounded bg-neutral px-2 text-neutral-content">
+        <div
+          class="flex h-8 cursor-move select-none items-center rounded bg-neutral px-2 text-neutral-content"
+        >
           {{ $t(element) }}
         </div>
       </template>
@@ -59,7 +57,6 @@
 </template>
 
 <script setup lang="ts">
-import { disableSwipe } from '@/composables/swipe'
 import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
 import { connectionCardLines } from '@/store/settings'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/24/outline'

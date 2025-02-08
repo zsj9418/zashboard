@@ -26,6 +26,8 @@ import { defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DialogWrapper from '../common/DialogWrapper.vue'
 import TextInput from '../common/TextInput.vue'
+import ConnectionCardSettings from '../settings/ConnectionCardSettings.vue'
+import TableSettings from '../settings/TableSettings.vue'
 import ConnectionTabs from './ConnectionTabs.vue'
 import SourceIPFilter from './SourceIPFilter.vue'
 
@@ -124,6 +126,7 @@ export default defineComponent({
                   <QuestionMarkCircleIcon class="h-4 w-4" />
                 </div>
               </div>
+              {useConnectionCard.value ? <ConnectionCardSettings /> : <TableSettings />}
             </div>
           </DialogWrapper>
         </>

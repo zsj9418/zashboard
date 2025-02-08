@@ -3,9 +3,6 @@
     ref="modalRef"
     class="modal"
     @close="isOpen = false"
-    @touchstart.stop
-    @touchmove.stop
-    @touchend.stop
   >
     <div class="modal-box relative overflow-hidden p-0">
       <form method="dialog">
