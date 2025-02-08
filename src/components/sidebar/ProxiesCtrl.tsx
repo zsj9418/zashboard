@@ -110,23 +110,19 @@ export default defineComponent({
           })}
         </div>
       )
-      const upgradeAll = (
-        <>
-          {proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER && (
-            <button
-              class={twMerge('btn btn-sm')}
-              onClick={handlerClickUpdateAllProviders}
-            >
-              {isUpgrading.value ? (
-                <span class="loading loading-dots loading-md"></span>
-              ) : (
-                t('updateAllProviders')
-              )}
-            </button>
+      const upgradeAll = proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER && (
+        <button
+          class={twMerge('btn btn-sm')}
+          onClick={handlerClickUpdateAllProviders}
+        >
+          {isUpgrading.value ? (
+            <span class="loading loading-dots loading-md"></span>
+          ) : (
+            t('updateAllProviders')
           )}
-        </>
+        </button>
       )
-      const modeSelect = (
+      const modeSelect = configs.value && (
         <select
           class={[
             'select select-bordered select-sm min-w-24',
