@@ -7,7 +7,7 @@ import {
   SwatchIcon,
 } from '@heroicons/vue/24/outline'
 
-export const IPV6_TEST_URL = 'http://ipv6.google.com/generate_204'
+export const IPV6_TEST_URL = 'https://ipv6.google.com/generate_204'
 export const NOT_CONNECTED = 0
 export enum LANG {
   EN_US = 'en-US',

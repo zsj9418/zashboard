@@ -55,7 +55,7 @@ export const collapseGroupMap = useStorage<Record<string, boolean>>('config/coll
 export const twoColumnProxyGroup = useStorage('config/two-columns', true)
 export const speedtestUrl = useStorage<string>(
   'config/speedtest-url',
-  'http://www.gstatic.com/generate_204',
+  'https://www.gstatic.com/generate_204',
 )
 export const independentLatencyTest = useStorage('config/independent-latency-test', false)
 export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
