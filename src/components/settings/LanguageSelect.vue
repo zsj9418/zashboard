@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center gap-2">
-    {{ $t('language') }}:
+    {{ $t('language') }}
     <select
       class="select select-bordered select-sm w-48"
       v-model="language"

@@ -79,7 +79,7 @@ onMounted(() => {
   >
     <RouterView />
     <div
-      class="toast-sm toast toast-end toast-top z-50 max-w-64 translate-y-8 text-sm"
+      class="toast-sm toast toast-end toast-top z-50 max-w-64 translate-y-8 text-sm opacity-80"
       v-if="tipShowModel"
     >
       <div
@@ -94,7 +94,7 @@ onMounted(() => {
           {{ tipContent }}
         </a>
         <button
-          class="btn btn-circle btn-ghost btn-sm"
+          class="btn btn-circle btn-ghost btn-xs"
           @click="tipShowModel = false"
         >
           <XCircleIcon class="w-4 cursor-pointer" />

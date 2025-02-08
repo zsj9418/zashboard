@@ -1,5 +1,5 @@
 <template>
-  <div>{{ $t('sourceIPLabels') }}:</div>
+  <div>{{ $t('sourceIPLabels') }}</div>
   <div class="flex flex-col gap-2 p-1">
     <div
       v-for="ip in sourceIPs"
@@ -19,7 +19,7 @@
       </button>
     </div>
     <div class="flex w-full items-center gap-1">
-      <span class="shrink-0">IP :</span>
+      <span class="shrink-0">IP </span>
       <TextInput
         class="w-36 flex-1 sm:max-w-44"
         v-model="newLabelForIP.ip"

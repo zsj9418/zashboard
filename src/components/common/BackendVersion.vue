@@ -1,6 +1,6 @@
 <template>
   <div class="flex items-center gap-1">
-    {{ $t('version') }}:
+    {{ $t('version') }}
     <img
       :src="isSingBox ? SingBoxLogo : MetacubexLogo"
       class="h-4 w-4 rounded-sm"

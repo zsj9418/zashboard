@@ -21,7 +21,7 @@
       <div class="grid grid-cols-1 gap-2 xl:grid-cols-2">
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-2">
-            {{ $t('theme') }}:
+            {{ $t('theme') }}
             <select
               class="select select-bordered select-sm w-48"
               v-model="theme"
@@ -37,7 +37,7 @@
           </div>
           <LanguageSelect />
           <div class="flex items-center gap-2">
-            {{ $t('fonts') }}:
+            {{ $t('fonts') }}
             <select
               class="select select-bordered select-sm w-48"
               v-model="font"
@@ -54,7 +54,7 @@
         </div>
         <div class="flex flex-col gap-2">
           <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <span class="shrink-0"> {{ $t('customBackgroundURL') }}: </span>
+            <span class="shrink-0"> {{ $t('customBackgroundURL') }} </span>
             <div class="join">
               <TextInput
                 class="join-item flex-1"
@@ -83,7 +83,7 @@
             @touchmove.stop
             @touchend.stop
           >
-            {{ $t('transparent') }}:
+            {{ $t('transparent') }}
             <input
               type="range"
               min="0"
@@ -93,7 +93,7 @@
             />
           </div>
           <div class="flex items-center gap-2 md:hidden">
-            {{ $t('swipeInTabs') }}:
+            {{ $t('swipeInTabs') }}
             <input
               type="checkbox"
               v-model="swipeInTabs"
@@ -107,7 +107,7 @@
         class="flex items-center gap-2"
         v-if="!isSingBox"
       >
-        {{ $t('autoUpgrade') }}:
+        {{ $t('autoUpgrade') }}
         <input
           class="toggle"
           type="checkbox"

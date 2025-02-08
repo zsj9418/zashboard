@@ -8,18 +8,22 @@
       <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div class="flex items-center gap-2">
           <span class="whitespace-nowrap">
-            {{ $t('connectionStyle') }}:
-            {{ $t('table') }}
+            {{ $t('connectionStyle') }}
           </span>
-          <input
-            class="toggle"
-            type="checkbox"
+          <select
+            class="select select-bordered select-sm min-w-24"
             v-model="useConnectionCard"
-          />
-          {{ $t('card') }}
+          >
+            <option :value="false">
+              {{ $t('table') }}
+            </option>
+            <option :value="true">
+              {{ $t('card') }}
+            </option>
+          </select>
         </div>
         <div class="flex items-center gap-2">
-          {{ $t('proxyChainDirection') }}:
+          {{ $t('proxyChainDirection') }}
           <select
             class="select select-bordered select-sm w-24"
             v-model="proxyChainDirection"
@@ -39,7 +43,7 @@
         v-if="!useConnectionCard"
       >
         <div class="flex items-center gap-2">
-          <div>{{ $t('tableWidthMode') }}:</div>
+          <div>{{ $t('tableWidthMode') }}</div>
           <select
             class="select select-bordered select-sm min-w-24"
             v-model="tableWidthMode"
@@ -54,7 +58,7 @@
           </select>
         </div>
         <div class="flex items-center gap-2">
-          <div>{{ $t('tableSize') }}:</div>
+          <div>{{ $t('tableSize') }}</div>
           <select
             class="select select-bordered select-sm min-w-24"
             v-model="tableSize"

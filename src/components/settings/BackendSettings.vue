@@ -16,7 +16,7 @@
             v-for="portConfig in portList"
             :key="portConfig.key"
           >
-            <span class="shrink-0"> {{ $t(portConfig.label) }}: </span>
+            <span class="shrink-0"> {{ $t(portConfig.label) }} </span>
             <input
               class="input input-sm input-bordered w-20 sm:w-24"
               type="number"
@@ -32,7 +32,7 @@
             class="flex items-center gap-2"
             v-if="configs?.tun"
           >
-            {{ $t('tunMode') }}:
+            {{ $t('tunMode') }}
             <input
               class="toggle"
               type="checkbox"
@@ -41,7 +41,7 @@
             />
           </div>
           <div class="flex items-center gap-2">
-            {{ $t('allowLan') }}:
+            {{ $t('allowLan') }}
             <input
               class="toggle"
               type="checkbox"
@@ -50,7 +50,7 @@
             />
           </div>
           <div class="flex items-center gap-2">
-            {{ $t('autoUpgrade') }}:
+            {{ $t('autoUpgrade') }}
             <input
               class="toggle"
               type="checkbox"
