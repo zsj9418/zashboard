@@ -1,27 +1,28 @@
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-3">
     <span>{{ $t('customCardLines') }}</span>
     <div class="flex gap-2">
       <button
         class="btn btn-sm"
-        @click="connectionCardLines = SIMPLE_CARD_STYLE"
+        @click="((connectionCardLines = SIMPLE_CARD_STYLE), setRestOfColumns())"
       >
         {{ $t('simpleCardPreset') }}
       </button>
       <button
         class="btn btn-sm"
-        @click="connectionCardLines = DETAILED_CARD_STYLE"
+        @click="((connectionCardLines = DETAILED_CARD_STYLE), setRestOfColumns())"
       >
         {{ $t('detailedCardPreset') }}
       </button>
-    </div>
-    <div class="relative flex flex-col rounded">
+      <div class="flex-1"></div>
       <button
-        class="btn btn-circle btn-neutral btn-sm absolute right-2 top-2"
+        class="btn btn-circle btn-neutral btn-sm"
         @click="addLine"
       >
         <PlusCircleIcon class="h-4 w-4" />
       </button>
+    </div>
+    <div class="relative flex flex-col rounded">
       <div
         v-for="(_, index) in connectionCardLines"
         :key="index"
