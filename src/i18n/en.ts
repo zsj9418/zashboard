@@ -47,7 +47,6 @@ const en = {
   customCardLines: 'Custom Card Lines',
   close: 'Close',
   details: 'Details',
-  showGlobalProxy: 'Show Global Proxy Node',
   theme: 'Theme',
   proxyProvider: 'Proxy Provider',
   ruleProvider: 'Rule Provider',
@@ -116,7 +115,7 @@ const en = {
   autoSwitch: 'Auto Switch',
   customBackgroundURL: 'Custom Background URL',
   splitOverviewPage: 'Split Overview Page',
-  showHiddenGroup: 'Show Hidden Groups',
+  manageHiddenGroup: 'Manage Hidden Groups',
   showIPAndConnectionInfo: 'Show IP and Connection Info',
   transparent: 'Transparent',
   iconSize: 'Icon Size',
@@ -151,8 +150,6 @@ const en = {
   loadBalance: 'Load Balance',
   label: 'Label',
   optional: 'Optional',
-  hiddenGroupTip:
-    'The proxy group has been hidden. You can retrieve it by enabling "Show Hidden Groups" in the popup menu',
   swipeInTabs: 'Swipe To Switch Between Tabs In Page',
   connectionIP: 'Connection IP',
 }

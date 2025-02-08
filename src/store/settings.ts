@@ -51,7 +51,6 @@ export const showStatisticsWhenSidebarCollapsed = useStorage(
   true,
 )
 // proxies
-export const showGlobalProxy = useStorage('config/show-global-proxy', true)
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
 export const twoColumnProxyGroup = useStorage('config/two-columns', true)
 export const speedtestUrl = useStorage<string>(
@@ -75,7 +74,7 @@ export const proxyCardSize = useStorage<PROXY_CARD_SIZE>(
   'config/proxy-card-size',
   PROXY_CARD_SIZE.LARGE,
 )
-export const showHiddenGroup = ref(false)
+export const manageHiddenGroup = ref(false)
 export const iconSize = useStorage('config/icon-size', 14)
 export const iconMarginRight = useStorage('config/icon-margin-right', 6)
 

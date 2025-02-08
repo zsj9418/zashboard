@@ -126,24 +126,12 @@
             />
           </div>
         </template>
-        <div
-          v-if="isSingBox"
-          class="flex items-center gap-2"
-        >
-          {{ $t('showGlobalProxy') }}:
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="showGlobalProxy"
-          />
-        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { isSingBox } from '@/api'
 import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
 import { useTooltip } from '@/helper/tooltip'
 import { proxyMap } from '@/store/proxies'
@@ -156,7 +144,6 @@ import {
   mediumLatency,
   proxyCardSize,
   proxyPreviewType,
-  showGlobalProxy,
   speedtestTimeout,
   speedtestUrl,
   truncateProxyName,

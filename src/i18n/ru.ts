@@ -49,7 +49,6 @@ const ru: LANG_MESSAGE = {
   customCardLines: 'Пользовательские строчки карточки',
   close: 'Закрыть',
   details: 'Детали',
-  showGlobalProxy: 'Показать глобальный прокси-узел',
   theme: 'Тема',
   proxyProvider: 'Провайдер прокси',
   ruleProvider: 'Провайдер правил',
@@ -119,7 +118,7 @@ const ru: LANG_MESSAGE = {
   autoSwitch: 'Автоматическое',
   customBackgroundURL: 'Пользовательский URL фона',
   splitOverviewPage: 'Разделить страницу с обзором',
-  showHiddenGroup: 'Показать скрытые группы',
+  manageHiddenGroup: 'Управление скрытыми группами',
   showIPAndConnectionInfo: 'Показать IP и информацию о соединениях',
   transparent: 'Прозрачность',
   iconSize: 'Размер иконки',
@@ -154,8 +153,6 @@ const ru: LANG_MESSAGE = {
   loadBalance: 'Балансировка нагрузки',
   label: 'Метка',
   optional: 'Необязательно',
-  hiddenGroupTip:
-    'Прокси-группа скрыта. Вы можете восстановить ее, включив "Показать скрытые группы" в меню всплывающего окна',
   swipeInTabs: 'Свайп для переключения между вкладками на странице.',
   connectionIP: 'IP-источник соединения',
 }

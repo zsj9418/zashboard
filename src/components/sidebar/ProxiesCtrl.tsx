@@ -9,8 +9,8 @@ import {
   automaticDisconnection,
   collapseGroupMap,
   hideUnavailableProxies,
+  manageHiddenGroup,
   proxySortType,
-  showHiddenGroup,
 } from '@/store/settings'
 import {
   BoltIcon,
@@ -218,11 +218,11 @@ export default defineComponent({
                 />
               </div>
               <div class="flex items-center gap-2">
-                {t('showHiddenGroup')}
+                {t('manageHiddenGroup')}
                 <input
                   class="toggle"
                   type="checkbox"
-                  v-model={showHiddenGroup.value}
+                  v-model={manageHiddenGroup.value}
                 />
               </div>
               <div class="flex items-center gap-2">
