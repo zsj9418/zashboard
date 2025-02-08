@@ -152,6 +152,8 @@ const en = {
   optional: 'Optional',
   swipeInTabs: 'Swipe To Switch Between Tabs In Page',
   connectionIP: 'Connection IP',
+  simpleCardPreset: 'Simple Preset',
+  detailedCardPreset: 'Detailed Preset',
 }
 
 export type LANG_MESSAGE = typeof en

@@ -155,6 +155,8 @@ const ru: LANG_MESSAGE = {
   optional: 'Необязательно',
   swipeInTabs: 'Свайп для переключения между вкладками на странице.',
   connectionIP: 'IP-источник соединения',
+  simpleCardPreset: 'Простой карточки',
+  detailedCardPreset: 'Подробный карточки',
 }
 
 export default ru

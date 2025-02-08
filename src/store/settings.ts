@@ -1,5 +1,6 @@
 import {
   CONNECTIONS_TABLE_ACCESSOR_KEY,
+  DETAILED_CARD_STYLE,
   FONTS,
   LANG,
   PROXY_CARD_SIZE,
@@ -103,14 +104,7 @@ export const connectionTableColumns = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[
 )
 export const connectionCardLines = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[][]>(
   'config/connection-card-lines',
-  [
-    [CONNECTIONS_TABLE_ACCESSOR_KEY.Host, CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime],
-    [
-      CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
-      CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
-      CONNECTIONS_TABLE_ACCESSOR_KEY.Close,
-    ],
-  ],
+  DETAILED_CARD_STYLE,
 )
 export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
 

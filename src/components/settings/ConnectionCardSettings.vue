@@ -1,27 +1,60 @@
 <template>
-  <div>{{ $t('customCardLines') }}</div>
-  <div class="relative flex flex-col rounded">
-    <button
-      class="btn btn-circle btn-neutral btn-sm absolute right-2 top-2"
-      @click="addLine"
-    >
-      <PlusCircleIcon class="h-4 w-4" />
-    </button>
-    <div
-      v-for="(_, index) in connectionCardLines"
-      :key="index"
-      :class="`flex items-center gap-2 p-2 ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`"
-    >
+  <div class="flex flex-col gap-2">
+    <span>{{ $t('customCardLines') }}</span>
+    <div class="flex gap-2">
       <button
-        v-if="connectionCardLines.length > 1"
-        class="btn btn-circle btn-xs"
-        @click="removeLine(index)"
+        class="btn btn-sm"
+        @click="connectionCardLines = SIMPLE_CARD_STYLE"
       >
-        <MinusCircleIcon class="h-4 w-4" />
+        {{ $t('simpleCardPreset') }}
       </button>
+      <button
+        class="btn btn-sm"
+        @click="connectionCardLines = DETAILED_CARD_STYLE"
+      >
+        {{ $t('detailedCardPreset') }}
+      </button>
+    </div>
+    <div class="relative flex flex-col rounded">
+      <button
+        class="btn btn-circle btn-neutral btn-sm absolute right-2 top-2"
+        @click="addLine"
+      >
+        <PlusCircleIcon class="h-4 w-4" />
+      </button>
+      <div
+        v-for="(_, index) in connectionCardLines"
+        :key="index"
+        :class="`flex items-center gap-2 p-2 ${index % 2 === 0 ? 'bg-base-200' : 'bg-base-300'}`"
+      >
+        <button
+          v-if="connectionCardLines.length > 1"
+          class="btn btn-circle btn-xs"
+          @click="removeLine(index)"
+        >
+          <MinusCircleIcon class="h-4 w-4" />
+        </button>
+        <Draggable
+          class="flex flex-1 flex-wrap items-center gap-2"
+          v-model="connectionCardLines[index]"
+          :animation="150"
+          group="list"
+          ghostClass="ghost"
+          :item-key="(id: string) => id"
+        >
+          <template #item="{ element }">
+            <div
+              class="flex h-8 cursor-move select-none items-center rounded bg-neutral px-2 text-neutral-content"
+            >
+              {{ $t(element) }}
+            </div>
+          </template>
+        </Draggable>
+      </div>
+
       <Draggable
-        class="flex flex-1 flex-wrap items-center gap-2"
-        v-model="connectionCardLines[index]"
+        class="flex flex-1 flex-wrap gap-2 p-2"
+        v-model="restOfColumns"
         :animation="150"
         group="list"
         ghostClass="ghost"
@@ -36,28 +69,11 @@
         </template>
       </Draggable>
     </div>
-
-    <Draggable
-      class="flex flex-1 flex-wrap gap-2 p-2"
-      v-model="restOfColumns"
-      :animation="150"
-      group="list"
-      ghostClass="ghost"
-      :item-key="(id: string) => id"
-    >
-      <template #item="{ element }">
-        <div
-          class="flex h-8 cursor-move select-none items-center rounded bg-neutral px-2 text-neutral-content"
-        >
-          {{ $t(element) }}
-        </div>
-      </template>
-    </Draggable>
   </div>
 </template>
 
 <script setup lang="ts">
-import { CONNECTIONS_TABLE_ACCESSOR_KEY } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, DETAILED_CARD_STYLE, SIMPLE_CARD_STYLE } from '@/config'
 import { connectionCardLines } from '@/store/settings'
 import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
