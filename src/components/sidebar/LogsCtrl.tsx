@@ -41,6 +41,7 @@ export default defineComponent({
           beforeClose={true}
           class="flex-1"
           placeholder={t('search')}
+          clearable={true}
         />
       )
 

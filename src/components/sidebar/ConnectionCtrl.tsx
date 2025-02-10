@@ -136,6 +136,7 @@ export default defineComponent({
         <TextInput
           v-model={connectionFilter.value}
           placeholder={t('search')}
+          clearable={true}
           before-close={true}
           class={[props.horizontal ? 'max-md:flex-1 md:w-80' : 'flex-1']}
         />

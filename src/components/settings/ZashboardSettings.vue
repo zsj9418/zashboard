@@ -59,6 +59,7 @@
               <TextInput
                 class="join-item flex-1"
                 v-model="customBackgroundURL"
+                :clearable="true"
                 @update:modelValue="handlerBackgroundURLChange"
               />
               <button

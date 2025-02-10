@@ -41,6 +41,7 @@
       class="w-full md:max-w-80"
       v-model="rulesFilter"
       :placeholder="$t('search')"
+      :clearable="true"
     />
   </div>
 </template>

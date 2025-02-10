@@ -192,6 +192,7 @@ export default defineComponent({
           class="w-80"
           v-model={proxiesFilter.value}
           placeholder={t('search')}
+          clearable={true}
         />
       )
 

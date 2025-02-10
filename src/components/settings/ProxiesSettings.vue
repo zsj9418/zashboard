@@ -10,6 +10,7 @@
           <TextInput
             class="w-36 flex-1 sm:max-w-80"
             v-model="speedtestUrl"
+            :clearable="true"
           />
         </div>
         <div class="flex w-full items-center gap-2">
