@@ -1,12 +1,6 @@
 <template>
   <div class="overflow-x-hidden p-2">
-    <template
-      v-if="
-        (isSidebarCollapsed ? !isMiddleScreen : isLargeScreen) &&
-        twoColumnProxyGroup &&
-        renderGroups.length > 1
-      "
-    >
+    <template v-if="displayTwoColumns">
       <div class="grid grid-cols-2 gap-1">
         <div
           v-for="idx in [0, 1]"
@@ -41,7 +35,7 @@ import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
 import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { useProxies } from '@/composables/proxies'
 import { PROXY_TAB_TYPE } from '@/config'
-import { isLargeScreen, isMiddleScreen } from '@/helper/utils'
+import { twoColumn, twoColumnWithSidebar } from '@/helper/utils'
 import { fetchProxies } from '@/store/proxies'
 import { isSidebarCollapsed, twoColumnProxyGroup } from '@/store/settings'
 import { computed } from 'vue'
@@ -51,6 +45,14 @@ const { proxiesTabShow, renderGroups } = useProxies()
 const Comp = computed(() =>
   proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER ? ProxyProvider : ProxyGroup,
 )
+
+const displayTwoColumns = computed(() => {
+  return (
+    (isSidebarCollapsed.value ? twoColumn.value : twoColumnWithSidebar.value) &&
+    twoColumnProxyGroup.value &&
+    renderGroups.value.length > 1
+  )
+})
 
 const filterContent: <T>(all: T[], target: number) => T[] = (all, target) => {
   return all.filter((_, index: number) => index % 2 === target)
