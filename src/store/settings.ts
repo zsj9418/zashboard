@@ -107,6 +107,14 @@ export const connectionCardLines = useStorage<CONNECTIONS_TABLE_ACCESSOR_KEY[][]
   'config/connection-card-lines',
   DETAILED_CARD_STYLE,
 )
+
+const filterLegacyDetailsOpt = (key: string) => key !== 'details'
+
+connectionTableColumns.value = connectionTableColumns.value.filter(filterLegacyDetailsOpt)
+connectionCardLines.value = connectionCardLines.value.map((lines) =>
+  lines.filter(filterLegacyDetailsOpt),
+)
+
 export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
 
 // logs

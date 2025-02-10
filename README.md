@@ -22,14 +22,14 @@ docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 ## Tips
 
 1. The connection page has two layout styles: customizable cards and customizable tables. It is recommended to use tables on PC and cards on mobile devices.
-2. There are many customizable options in the panel settings, be sure to check them out.
+2. Click on connection row / card will display the details of connection.
 3. Right-clicking on a node / node group card will perform a speedtest for the node / node group.
 
 ## 提示
 
 1. 连接页面有两种布局样式：可自定义卡片和可自定义表格。建议在 PC 上使用表格，在移动设备上使用卡片。
-2. 在面板设置中有很多可自定义的选项，请务必去看看
-3. 右键点击节点/节点组卡片可对节点/节点组进行测速
+2. 点击整个连接行/卡片可显示连接详情。
+3. 右键点击节点/节点组卡片可对节点/节点组进行测速。
 
 ## URL params format
 

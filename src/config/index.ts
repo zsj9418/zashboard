@@ -39,7 +39,6 @@ export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   SourcePort = 'sourcePort',
   SniffHost = 'sniffHost',
   Destination = 'destination',
-  Details = 'details',
 }
 
 export enum TABLE_WIDTH_MODE {

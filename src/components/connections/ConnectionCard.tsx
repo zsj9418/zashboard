@@ -17,7 +17,6 @@ import {
   ArrowRightCircleIcon,
   ArrowUpCircleIcon,
   ArrowUpIcon,
-  InformationCircleIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { first, last } from 'lodash'
@@ -112,14 +111,6 @@ export default defineComponent<{
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (
           <div class="gap-1 whitespace-nowrap">{fromNow(conn.start)}</div>
-        ),
-        [CONNECTIONS_TABLE_ACCESSOR_KEY.Details]: (
-          <button
-            class="btn btn-circle btn-xs"
-            onClick={() => handlerInfo(conn)}
-          >
-            <InformationCircleIcon class="h-4 w-4" />
-          </button>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
           <button
