@@ -27,7 +27,7 @@
             />
           </div>
         </div>
-        <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
+        <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-4">
           <div
             class="flex items-center gap-2"
             v-if="configs?.tun"
@@ -50,6 +50,18 @@
             />
           </div>
           <div class="flex items-center gap-2">
+            {{ $t('checkUpgrade') }}
+            <input
+              class="toggle"
+              type="checkbox"
+              v-model="checkUpgradeCore"
+              @change="handlerCheckUpgradeCoreChange"
+            />
+          </div>
+          <div
+            class="flex items-center gap-2"
+            v-if="checkUpgradeCore"
+          >
             {{ $t('autoUpgrade') }}
             <input
               class="toggle"
@@ -61,7 +73,7 @@
       </template>
 
       <div
-        class="grid max-w-screen-lg grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-5"
+        class="grid max-w-screen-lg grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5"
         v-if="version"
       >
         <template v-if="!isSingBox">
@@ -131,7 +143,7 @@ import DnsQuery from '@/components/settings/DnsQuery.vue'
 import { configs, fetchConfigs, updateConfigs } from '@/store/config'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
-import { autoUpgradeCore } from '@/store/settings'
+import { autoUpgradeCore, checkUpgradeCore } from '@/store/settings'
 import type { Config } from '@/types'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
@@ -216,6 +228,13 @@ const handlerClickUpdateGeo = async () => {
     isGeoUpdating.value = false
   } catch {
     isGeoUpdating.value = false
+  }
+}
+
+const handlerCheckUpgradeCoreChange = () => {
+  if (!checkUpgradeCore.value) {
+    autoUpgradeCore.value = false
+    isCoreUpdateAvailable.value = false
   }
 }
 

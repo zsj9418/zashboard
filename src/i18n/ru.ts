@@ -90,6 +90,7 @@ const ru: LANG_MESSAGE = {
   fonts: 'Шрифты',
   unauthorizedTip: 'Не авторизован, пожалуйста, войдите снова.',
   restartCore: 'Перезапустить ядро',
+  checkUpgrade: 'Проверить обновления',
   autoUpgrade: 'Автоматическое обновление',
   secondaryPath: 'Дополнительный путь',
   secondaryPathTip: 'Если присутствует, начните с "/", в противном случае оставьте пустым.',

@@ -90,6 +90,7 @@ const zh: LANG_MESSAGE = {
   fonts: '字体',
   unauthorizedTip: '未授权，请重新登录',
   restartCore: '重启核心',
+  checkUpgrade: '检查更新',
   autoUpgrade: '自动更新',
   secondaryPath: '二级路径',
   secondaryPathTip: '如果有的话以/开头，没有则留空不填',
