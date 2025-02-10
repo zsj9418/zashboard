@@ -60,7 +60,7 @@ defineProps<{
 }>()
 
 const isUpgrading = ref(false)
-const { showNotification } = useNotification()
+const { showNotification } = useNotification(2000)
 const handlerClickUpgradeAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true
