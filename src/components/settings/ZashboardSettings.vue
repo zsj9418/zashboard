@@ -1,20 +1,24 @@
 <template>
   <!-- dashboard -->
   <div class="card card-compact">
-    <div class="card-title px-4 pt-4 text-primary">
+    <div class="card-title px-4 pt-4">
       <div class="indicator">
         <span
           v-if="isUIUpdateAvailable"
-          class="indicator-item flex"
+          class="indicator-item"
         >
           <span class="badge badge-xs absolute animate-ping bg-secondary"></span>
-          <span class="badge badge-xs bg-secondary"></span>
+          <span class="badge badge-xs absolute bg-secondary"></span>
         </span>
         <a
           href="https://github.com/Zephyruso/zashboard"
           target="_blank"
-          >zashboard v{{ zashboardVersion }}</a
         >
+          <span> zashboard </span>
+          <span class="text-sm font-normal">
+            {{ zashboardVersion }}
+          </span>
+        </a>
       </div>
     </div>
     <div class="card-body gap-4">
@@ -147,7 +151,7 @@
 import { isSingBox, upgradeUIAPI, zashboardVersion } from '@/api'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
-import { FONTS } from '@/config'
+import { FONTS } from '@/constant'
 import { exportSettings } from '@/helper'
 import {
   clearIconFromIndexedDB,

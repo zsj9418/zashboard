@@ -34,7 +34,7 @@
 import ProxyGroup from '@/components/proxies/ProxyGroup.vue'
 import ProxyProvider from '@/components/proxies/ProxyProvider.vue'
 import { useProxies } from '@/composables/proxies'
-import { PROXY_TAB_TYPE } from '@/config'
+import { PROXY_TAB_TYPE } from '@/constant'
 import { twoColumn, twoColumnWithSidebar } from '@/helper/utils'
 import { fetchProxies } from '@/store/proxies'
 import { isSidebarCollapsed, twoColumnProxyGroup } from '@/store/settings'

@@ -7,7 +7,7 @@
       class="flex items-center gap-2"
     >
       <TagIcon class="h-4 w-4 shrink-0" />
-      <span class="min-w-28 break-all">
+      <span class="min-w-24 break-all">
         {{ ip }}
       </span>
       <TextInput
@@ -18,7 +18,7 @@
         class="btn btn-circle btn-sm"
         @click="() => handlerLabelRemove(ip)"
       >
-        <MinusCircleIcon class="h-4 w-4" />
+        <XMarkIcon class="h-4 w-4" />
       </button>
     </div>
     <div class="flex w-full items-center gap-2">
@@ -26,19 +26,20 @@
         class="w-36 flex-1 sm:max-w-40"
         v-model="newLabelForIP.ip"
         @click="handlerIPInputFocus"
-        placeholder="IP"
+        placeholder="IP / eui64 / Regex"
       />
       <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
       <TextInput
         class="w-24 sm:w-32"
         v-model="newLabelForIP.label"
+        @keypress.enter="handlerLabelAdd"
         :placeholder="$t('label')"
       />
       <button
         class="btn btn-circle btn-sm"
         @click="handlerLabelAdd"
       >
-        <PlusCircleIcon class="h-4 w-4" />
+        <PlusIcon class="h-4 w-4" />
       </button>
     </div>
   </div>
@@ -48,12 +49,7 @@
 import { useTooltip } from '@/helper/tooltip'
 import { connections } from '@/store/connections'
 import { sourceIPLabelMap } from '@/store/settings'
-import {
-  ArrowRightCircleIcon,
-  MinusCircleIcon,
-  PlusCircleIcon,
-  TagIcon,
-} from '@heroicons/vue/24/outline'
+import { ArrowRightCircleIcon, PlusIcon, TagIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { uniq } from 'lodash'
 import { computed, reactive } from 'vue'
 import TextInput from '../common/TextInput.vue'
@@ -84,7 +80,7 @@ const handlerIPInputFocus = (e: Event) => {
   }
 
   showTip(e, ipMenu, {
-    placement: 'bottom',
+    placement: 'bottom-start',
     trigger: 'click',
     interactive: true,
     arrow: false,

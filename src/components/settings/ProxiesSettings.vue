@@ -133,7 +133,7 @@
 </template>
 
 <script setup lang="ts">
-import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/config'
+import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
 import { proxyMap } from '@/store/proxies'
 import {

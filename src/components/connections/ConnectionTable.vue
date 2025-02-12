@@ -8,10 +8,13 @@
   >
     <div :style="{ height: `${totalSize}px` }">
       <table
-        :class="`table table-zebra ${sizeOfTable} rounded-none shadow-md`"
+        :class="[
+          'table table-zebra rounded-none shadow-md',
+          sizeOfTable,
+          isManualTable && 'table-fixed',
+        ]"
         :style="
           isManualTable && {
-            tableLayout: 'fixed',
             width: `${tanstackTable.getCenterTotalSize()}px`,
           }
         "
@@ -149,7 +152,7 @@ import {
   PROXY_CHAIN_DIRECTION,
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
-} from '@/config'
+} from '@/constant'
 import {
   fromNow,
   getDestinationFromConnection,

@@ -1,5 +1,5 @@
 import { fetchLogsAPI } from '@/api'
-import { LOG_LEVEL } from '@/config'
+import { LOG_LEVEL } from '@/constant'
 import type { Log, LogWithSeq } from '@/types'
 import { useStorage } from '@vueuse/core'
 import dayjs from 'dayjs'

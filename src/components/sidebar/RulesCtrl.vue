@@ -50,7 +50,7 @@
 import { updateRuleProviderAPI } from '@/api'
 import { useNotification } from '@/composables/notification'
 import { rulesTabShow } from '@/composables/rules'
-import { RULE_TAB_TYPE } from '@/config'
+import { RULE_TAB_TYPE } from '@/constant'
 import { fetchRules, ruleProviderList, rulesFilter } from '@/store/rules'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'

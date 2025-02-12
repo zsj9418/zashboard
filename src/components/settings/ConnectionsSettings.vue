@@ -81,6 +81,6 @@
 
 <script setup lang="ts">
 import SourceIPLabels from '@/components/settings/SourceIPLabels.vue'
-import { PROXY_CHAIN_DIRECTION, TABLE_SIZE, TABLE_WIDTH_MODE } from '@/config'
+import { PROXY_CHAIN_DIRECTION, TABLE_SIZE, TABLE_WIDTH_MODE } from '@/constant'
 import { proxyChainDirection, tableSize, tableWidthMode, useConnectionCard } from '@/store/settings'
 </script>

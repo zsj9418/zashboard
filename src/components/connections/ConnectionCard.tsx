@@ -1,6 +1,6 @@
 import { disconnectByIdAPI } from '@/api'
 import { useConnections } from '@/composables/connections'
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, PROXY_CHAIN_DIRECTION } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, PROXY_CHAIN_DIRECTION } from '@/constant'
 import {
   fromNow,
   getDestinationFromConnection,

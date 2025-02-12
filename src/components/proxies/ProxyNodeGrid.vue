@@ -8,6 +8,6 @@
 </template>
 
 <script lang="ts" setup>
-import { PROXY_CARD_SIZE } from '@/config'
+import { PROXY_CARD_SIZE } from '@/constant'
 import { proxyCardSize } from '@/store/settings'
 </script>

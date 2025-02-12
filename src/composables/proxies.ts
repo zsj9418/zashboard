@@ -1,5 +1,5 @@
 import { isSingBox } from '@/api'
-import { PROXY_TAB_TYPE } from '@/config'
+import { PROXY_TAB_TYPE } from '@/constant'
 import { configs } from '@/store/config'
 import {
   GLOBAL,

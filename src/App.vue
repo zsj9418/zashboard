@@ -5,7 +5,7 @@ import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useNotification } from './composables/notification'
-import { FONTS } from './config'
+import { FONTS } from './constant'
 import { getBase64FromIndexedDB, LOCAL_IMAGE } from './helper/utils'
 import { customBackgroundURL, dashboardTransparent, font, theme } from './store/settings'
 

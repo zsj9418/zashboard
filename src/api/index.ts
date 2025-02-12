@@ -1,5 +1,5 @@
 import { useNotification } from '@/composables/notification'
-import { ROUTE_NAME } from '@/config'
+import { ROUTE_NAME } from '@/constant'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { autoUpgradeCore, checkUpgradeCore } from '@/store/settings'

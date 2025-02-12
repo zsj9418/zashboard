@@ -19,7 +19,7 @@
         class="btn btn-circle btn-neutral btn-sm"
         @click="addLine"
       >
-        <PlusCircleIcon class="h-4 w-4" />
+        <PlusIcon class="h-4 w-4" />
       </button>
     </div>
     <div class="relative flex flex-col rounded">
@@ -30,10 +30,10 @@
       >
         <button
           v-if="connectionCardLines.length > 1"
-          class="btn btn-circle btn-xs"
+          class="btn btn-circle btn-xs bg-base-100"
           @click="removeLine(index)"
         >
-          <MinusCircleIcon class="h-4 w-4" />
+          <XMarkIcon class="h-4 w-4" />
         </button>
         <Draggable
           class="flex flex-1 flex-wrap items-center gap-2"
@@ -74,9 +74,9 @@
 </template>
 
 <script setup lang="ts">
-import { CONNECTIONS_TABLE_ACCESSOR_KEY, DETAILED_CARD_STYLE, SIMPLE_CARD_STYLE } from '@/config'
+import { CONNECTIONS_TABLE_ACCESSOR_KEY, DETAILED_CARD_STYLE, SIMPLE_CARD_STYLE } from '@/constant'
 import { connectionCardLines } from '@/store/settings'
-import { MinusCircleIcon, PlusCircleIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import Draggable from 'vuedraggable'
 

@@ -9,7 +9,7 @@ import {
   PROXY_SORT_TYPE,
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
-} from '@/config'
+} from '@/constant'
 import { isMiddleScreen } from '@/helper/utils'
 import { useStorage } from '@vueuse/core'
 import { computed, ref } from 'vue'

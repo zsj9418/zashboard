@@ -95,7 +95,7 @@
             :key="element.uuid"
             class="flex items-center gap-2"
           >
-            <button class="btn btn-sm cursor-grab">
+            <button class="btn btn-ghost btn-sm cursor-grab">
               <AdjustmentsVerticalIcon class="h-4 w-4" />
             </button>
             <button
@@ -108,7 +108,7 @@
               class="btn btn-circle btn-sm"
               @click="() => removeBackend(element.uuid)"
             >
-              <MinusCircleIcon class="h-4 w-4" />
+              <XMarkIcon class="h-4 w-4" />
             </button>
           </div>
         </template>
@@ -126,15 +126,15 @@ import ImportSettings from '@/components/common/ImportSettings.vue'
 import TextInput from '@/components/common/TextInput.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useNotification } from '@/composables/notification'
-import { ROUTE_NAME } from '@/config'
+import { ROUTE_NAME } from '@/constant'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import type { Backend } from '@/types'
 import {
   AdjustmentsVerticalIcon,
-  MinusCircleIcon,
   QuestionMarkCircleIcon,
+  XMarkIcon,
 } from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
 import Draggable from 'vuedraggable'

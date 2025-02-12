@@ -1,5 +1,5 @@
 import { disconnectByIdAPI } from '@/api'
-import { SORT_DIRECTION, SORT_TYPE } from '@/config'
+import { SORT_DIRECTION, SORT_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
 import { isMiddleScreen } from '@/helper/utils'
 import {

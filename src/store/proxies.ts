@@ -8,7 +8,7 @@ import {
   selectProxyAPI,
 } from '@/api'
 import { useNotification } from '@/composables/notification'
-import { IPV6_TEST_URL, NOT_CONNECTED, PROXY_TYPE } from '@/config'
+import { IPV6_TEST_URL, NOT_CONNECTED, PROXY_TYPE } from '@/constant'
 import { isProxyGroup } from '@/helper'
 import { deleteIconFromIndexedDB, getAllIconKeys } from '@/helper/utils'
 import type { Proxy, ProxyProvider } from '@/types'

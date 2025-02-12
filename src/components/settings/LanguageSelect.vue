@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import { LANG } from '@/config'
+import { LANG } from '@/constant'
 import { i18n } from '@/i18n'
 import { language } from '@/store/settings'
 

@@ -1,4 +1,4 @@
-import { LOG_LEVEL } from '@/config'
+import { LOG_LEVEL } from '@/constant'
 import { isMiddleScreen } from '@/helper/utils'
 import { initLogs, isPaused, logFilter, logLevel, logs } from '@/store/logs'
 import { logRetentionLimit } from '@/store/settings'
