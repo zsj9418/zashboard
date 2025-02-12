@@ -4,7 +4,7 @@ import { useMediaQuery } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
-import { useNotification } from './composables/tip'
+import { useNotification } from './composables/notification'
 import { FONTS } from './config'
 import { getBase64FromIndexedDB, LOCAL_IMAGE } from './helper/utils'
 import { customBackgroundURL, dashboardTransparent, font, theme } from './store/settings'
@@ -79,7 +79,7 @@ onMounted(() => {
   >
     <RouterView />
     <div
-      class="toast-sm toast toast-end toast-top z-50 max-w-64 translate-y-8 text-sm opacity-80"
+      class="toast-sm toast toast-end toast-top z-50 max-w-64 text-sm opacity-80 md:translate-y-8"
       v-if="tipShowModel"
     >
       <div

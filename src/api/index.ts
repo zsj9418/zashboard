@@ -1,4 +1,4 @@
-import { useNotification } from '@/composables/tip'
+import { useNotification } from '@/composables/notification'
 import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'

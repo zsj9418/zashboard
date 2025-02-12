@@ -48,8 +48,8 @@
 
 <script setup lang="ts">
 import { updateRuleProviderAPI } from '@/api'
+import { useNotification } from '@/composables/notification'
 import { rulesTabShow } from '@/composables/rules'
-import { useNotification } from '@/composables/tip'
 import { RULE_TAB_TYPE } from '@/config'
 import { fetchRules, ruleProviderList, rulesFilter } from '@/store/rules'
 import { twMerge } from 'tailwind-merge'
@@ -61,7 +61,7 @@ defineProps<{
 }>()
 
 const isUpgrading = ref(false)
-const { showNotification } = useNotification(2000)
+const { showNotification } = useNotification()
 const handlerClickUpgradeAllProviders = async () => {
   if (isUpgrading.value) return
   isUpgrading.value = true
@@ -72,12 +72,16 @@ const handlerClickUpgradeAllProviders = async () => {
       ruleProviderList.value.map((provider) =>
         updateRuleProviderAPI(provider.name).then(() => {
           updateCount++
+
+          const isFinished = updateCount === ruleProviderList.value.length
+
           showNotification({
             content: 'updateFinishedTip',
             params: {
               number: `${updateCount}/${ruleProviderList.value.length}`,
             },
-            type: updateCount === ruleProviderList.value.length ? 'alert-success' : 'alert-warning',
+            type: isFinished ? 'alert-success' : 'alert-warning',
+            timeout: isFinished ? 2000 : 0,
           })
         }),
       ),

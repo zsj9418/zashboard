@@ -125,7 +125,7 @@
 import ImportSettings from '@/components/common/ImportSettings.vue'
 import TextInput from '@/components/common/TextInput.vue'
 import LanguageSelect from '@/components/settings/LanguageSelect.vue'
-import { useNotification } from '@/composables/tip'
+import { useNotification } from '@/composables/notification'
 import { ROUTE_NAME } from '@/config'
 import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
