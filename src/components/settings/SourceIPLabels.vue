@@ -21,7 +21,7 @@
             class="input input-sm input-bordered w-36 sm:w-64"
             :value="key"
             @input="(e) => handlerLabelKeyChange(e, id, 'key')"
-            @click="handlerIPInputFocus"
+            @click="(e) => handlerIPInputFocus(e, id)"
           />
           <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
           <input
@@ -43,9 +43,9 @@
       <TagIcon class="h-4 w-4 shrink-0" />
       <input
         class="input input-sm input-bordered w-36 sm:w-64"
-        v-model="newLabelForIP.ip"
+        v-model="newLabelForIP.key"
         @click="handlerIPInputFocus"
-        placeholder="IP / eui64 / Regex"
+        placeholder="IP | eui64 | /Regex"
       />
       <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
       <input
@@ -83,15 +83,17 @@ import Draggable from 'vuedraggable'
 
 const { showTip, destroyTip } = useTooltip()
 
-const handlerIPInputFocus = (e: Event) => {
+const handlerIPInputFocus = (e: Event, id?: string) => {
   const source = uniq(connections.value.map((conn) => conn.metadata.sourceIP))
     .filter(Boolean)
+    .filter((ip) => !sourceIPLabelList.value.find((item) => item.key === ip))
     .sort()
 
   if (!source.length) {
     return
   }
   const ipMenu = document.createElement('div')
+  const sourceItem = sourceIPLabelList.value.find((item) => item.id === id) || newLabelForIP
 
   for (const ip of source) {
     const ipItem = document.createElement('div')
@@ -100,7 +102,7 @@ const handlerIPInputFocus = (e: Event) => {
 
     ipItem.textContent = ip
     ipItem.addEventListener('click', () => {
-      newLabelForIP.ip = ip
+      sourceItem.key = ip
       destroyTip()
     })
     ipMenu.appendChild(ipItem)
@@ -115,22 +117,22 @@ const handlerIPInputFocus = (e: Event) => {
 }
 
 const newLabelForIP = reactive({
-  ip: '',
+  key: '',
   label: '',
 })
 
 const handlerLabelAdd = () => {
-  if (!newLabelForIP.ip || !newLabelForIP.label) {
+  if (!newLabelForIP.key || !newLabelForIP.label) {
     return
   }
 
   sourceIPLabelList.value.push({
-    key: newLabelForIP.ip,
+    key: newLabelForIP.key,
     label: newLabelForIP.label,
     id: uuid(),
   })
 
-  newLabelForIP.ip = ''
+  newLabelForIP.key = ''
   newLabelForIP.label = ''
 }
 

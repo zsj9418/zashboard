@@ -101,7 +101,7 @@ export const getIPLabelFromMap = (ip: string) => {
 
   for (const { key, label } of sourceIPLabelList.value) {
     if (key.startsWith('/')) {
-      const regex = new RegExp(key, 'i')
+      const regex = new RegExp(key.replace('/', ''), 'i')
 
       if (regex.test(ip)) {
         return label
