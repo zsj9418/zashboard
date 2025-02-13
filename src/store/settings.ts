@@ -11,7 +11,10 @@ import {
   TABLE_WIDTH_MODE,
 } from '@/constant'
 import { isMiddleScreen } from '@/helper/utils'
+import type { SourceIPLabel } from '@/types'
 import { useStorage } from '@vueuse/core'
+import { isEmpty } from 'lodash'
+import { v4 as uuid } from 'uuid'
 import { computed, ref } from 'vue'
 
 // global
@@ -115,7 +118,19 @@ connectionCardLines.value = connectionCardLines.value.map((lines) =>
   lines.filter(filterLegacyDetailsOpt),
 )
 
-export const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
+const sourceIPLabelMap = useStorage<Record<string, string>>('config/source-ip-label-map', {})
+
+export const sourceIPLabelList = useStorage<SourceIPLabel[]>('config/source-ip-label-list', () => {
+  const oldMap = sourceIPLabelMap.value
+
+  if (isEmpty(oldMap)) {
+    return []
+  }
+
+  return Object.entries(oldMap)
+    .sort((prev, next) => prev[0].localeCompare(next[0]))
+    .map(([key, label]) => ({ key, label, id: uuid() }))
+})
 
 // logs
 export const logRetentionLimit = useStorage<number>('config/log-retention-limit', 1000)

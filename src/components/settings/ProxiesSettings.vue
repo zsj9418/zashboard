@@ -14,18 +14,6 @@
           />
         </div>
         <div class="flex w-full items-center gap-2">
-          <span> {{ $t('independentLatencyTest') }} </span>
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="independentLatencyTest"
-          />
-          <QuestionMarkCircleIcon
-            class="h-4 w-4"
-            @mouseenter="independentLatencyTestTip"
-          />
-        </div>
-        <div class="flex w-full items-center gap-2">
           <span> {{ $t('speedtestTimeout') }} </span>
           <input
             type="number"
@@ -51,6 +39,18 @@
             v-model="mediumLatency"
           />
           ms
+        </div>
+        <div class="flex w-full items-center gap-2">
+          <span> {{ $t('independentLatencyTest') }} </span>
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="independentLatencyTest"
+          />
+          <QuestionMarkCircleIcon
+            class="h-4 w-4"
+            @mouseenter="independentLatencyTestTip"
+          />
         </div>
         <div class="flex items-center gap-2">
           {{ $t('ipv6Test') }}

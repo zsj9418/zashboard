@@ -11,6 +11,8 @@ import { useRoute, useRouter } from 'vue-router'
 import { useProxies } from './proxies'
 import { rulesTabShow } from './rules'
 
+export const disableSwipe = ref(false)
+
 export const useSwipeRouter = () => {
   const route = useRoute()
   const router = useRouter()
@@ -86,7 +88,12 @@ export const useSwipeRouter = () => {
   }
 
   watch(direction, () => {
-    if (document.querySelector('dialog:modal') || window.getSelection()?.toString()?.length) return
+    if (
+      document.querySelector('dialog:modal') ||
+      window.getSelection()?.toString()?.length ||
+      disableSwipe.value
+    )
+      return
     if (direction.value === 'right') {
       getPrevRouteName()
     } else if (direction.value === 'left') {

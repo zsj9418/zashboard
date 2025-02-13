@@ -95,9 +95,7 @@
             :key="element.uuid"
             class="flex items-center gap-2"
           >
-            <button class="btn btn-ghost btn-sm cursor-grab">
-              <AdjustmentsVerticalIcon class="h-4 w-4" />
-            </button>
+            <ChevronUpDownIcon class="h-4 w-4 cursor-grab" />
             <button
               class="btn btn-sm flex-1"
               @click="selectBackend(element.uuid)"
@@ -131,11 +129,7 @@ import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import type { Backend } from '@/types'
-import {
-  AdjustmentsVerticalIcon,
-  QuestionMarkCircleIcon,
-  XMarkIcon,
-} from '@heroicons/vue/24/outline'
+import { ChevronUpDownIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
 import Draggable from 'vuedraggable'
 
