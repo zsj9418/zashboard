@@ -30,10 +30,10 @@
             @input="(e) => handlerLabelKeyChange(e, id, 'label')"
           />
           <button
-            class="btn btn-circle btn-sm"
+            class="btn btn-circle btn-ghost btn-sm"
             @click="() => handlerLabelRemove(id)"
           >
-            <XMarkIcon class="h-4 w-4" />
+            <TrashIcon class="h-4 w-4" />
           </button>
         </div>
       </template>
@@ -74,7 +74,7 @@ import {
   ChevronUpDownIcon,
   PlusIcon,
   TagIcon,
-  XMarkIcon,
+  TrashIcon,
 } from '@heroicons/vue/24/outline'
 import { uniq } from 'lodash'
 import { v4 as uuid } from 'uuid'

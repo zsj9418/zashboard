@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-wrap gap-1 pt-2"
+    class="flex flex-wrap gap-1 pt-3"
     v-if="showDots"
   >
     <div
@@ -19,7 +19,7 @@
     </div>
   </div>
   <div
-    class="flex items-center gap-2 py-2"
+    class="flex items-center gap-2 pb-1 pt-4"
     v-else
   >
     <div class="flex flex-1 items-center justify-center overflow-hidden rounded-2xl [&>*]:h-2">

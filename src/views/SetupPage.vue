@@ -95,7 +95,9 @@
             :key="element.uuid"
             class="flex items-center gap-2"
           >
-            <ChevronUpDownIcon class="h-4 w-4 cursor-grab" />
+            <button class="btn btn-circle btn-ghost btn-sm">
+              <ChevronUpDownIcon class="h-4 w-4 cursor-grab" />
+            </button>
             <button
               class="btn btn-sm flex-1"
               @click="selectBackend(element.uuid)"
@@ -103,10 +105,10 @@
               {{ element.label || getUrlFromBackend(element) }}
             </button>
             <button
-              class="btn btn-circle btn-sm"
+              class="btn btn-circle btn-ghost btn-sm"
               @click="() => removeBackend(element.uuid)"
             >
-              <XMarkIcon class="h-4 w-4" />
+              <TrashIcon class="h-4 w-4" />
             </button>
           </div>
         </template>
@@ -129,7 +131,7 @@ import { getUrlFromBackend } from '@/helper'
 import router from '@/router'
 import { activeUuid, addBackend, backendList, removeBackend } from '@/store/setup'
 import type { Backend } from '@/types'
-import { ChevronUpDownIcon, QuestionMarkCircleIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { ChevronUpDownIcon, QuestionMarkCircleIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { reactive } from 'vue'
 import Draggable from 'vuedraggable'
 

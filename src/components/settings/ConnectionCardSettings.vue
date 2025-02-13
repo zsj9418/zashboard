@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-4">
+  <div class="flex flex-col gap-3">
     <span>{{ $t('customCardLines') }}</span>
     <div class="flex items-center gap-2">
       <button
@@ -30,10 +30,10 @@
       >
         <button
           v-if="connectionCardLines.length > 1"
-          class="btn btn-circle btn-xs bg-base-100"
+          class="btn btn-circle btn-neutral btn-sm"
           @click="removeLine(index)"
         >
-          <XMarkIcon class="h-4 w-4" />
+          <TrashIcon class="h-4 w-4" />
         </button>
         <Draggable
           class="flex flex-1 flex-wrap items-center gap-2"
@@ -76,7 +76,7 @@
 <script setup lang="ts">
 import { CONNECTIONS_TABLE_ACCESSOR_KEY, DETAILED_CARD_STYLE, SIMPLE_CARD_STYLE } from '@/constant'
 import { connectionCardLines } from '@/store/settings'
-import { PlusIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { PlusIcon, TrashIcon } from '@heroicons/vue/24/outline'
 import { ref } from 'vue'
 import Draggable from 'vuedraggable'
 
