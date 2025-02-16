@@ -26,7 +26,7 @@
       </span>
     </div>
 
-    <div class="flex h-4 w-full items-center justify-between">
+    <div class="flex h-4 w-full select-none items-center justify-between">
       <span
         :class="`truncate text-xs tracking-tight ${active ? 'text-primary-content' : 'text-base-content/60'}`"
         @mouseenter="checkTruncation"
@@ -67,7 +67,9 @@ const checkTruncation = (e: Event) => {
 
   if (scrollWidth > clientWidth) {
     showTip(e, target.innerText, {
-      delay: [500, 0],
+      delay: [1000, 0],
+      trigger: 'mouseenter',
+      touch: ['hold', 500],
     })
   }
 }

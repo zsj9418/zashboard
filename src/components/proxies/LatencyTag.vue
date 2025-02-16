@@ -2,7 +2,7 @@
   <div
     :class="
       twMerge(
-        'latency-tag flex h-5 w-10 items-center justify-center rounded-xl bg-base-100 text-xs md:hover:bg-base-200',
+        'latency-tag flex h-5 w-10 select-none items-center justify-center rounded-xl bg-base-100 text-xs md:hover:bg-base-200',
         color,
       )
     "
@@ -61,6 +61,8 @@ const handlerHistoryTip = (e: Event) => {
 
   showTip(e, historyList, {
     delay: [1000, 0],
+    trigger: 'mouseenter',
+    touch: ['hold', 500],
   })
 }
 
