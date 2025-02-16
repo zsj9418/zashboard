@@ -54,3 +54,6 @@ docker run -d -p 80:80 ghcr.io/zephyruso/zashboard:latest
 
 5. **`secret`**
    - Password for authentication.
+
+6. **`disableUpgradeCore`**
+   - Set '1' or 'true' to hide upgrade core button

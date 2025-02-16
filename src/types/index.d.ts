@@ -6,6 +6,7 @@ export type Backend = {
   protocol: string
   uuid: string
   label?: string
+  disableUpgradeCore?: boolean
 }
 
 export type Config = {

@@ -49,26 +49,28 @@
               @change="handlerAllowLanChange"
             />
           </div>
-          <div class="flex items-center gap-2">
-            {{ $t('checkUpgrade') }}
-            <input
-              class="toggle"
-              type="checkbox"
-              v-model="checkUpgradeCore"
-              @change="handlerCheckUpgradeCoreChange"
-            />
-          </div>
-          <div
-            class="flex items-center gap-2"
-            v-if="checkUpgradeCore"
-          >
-            {{ $t('autoUpgrade') }}
-            <input
-              class="toggle"
-              type="checkbox"
-              v-model="autoUpgradeCore"
-            />
-          </div>
+          <template v-if="!activeBackend?.disableUpgradeCore">
+            <div class="flex items-center gap-2">
+              {{ $t('checkUpgrade') }}
+              <input
+                class="toggle"
+                type="checkbox"
+                v-model="checkUpgradeCore"
+                @change="handlerCheckUpgradeCoreChange"
+              />
+            </div>
+            <div
+              class="flex items-center gap-2"
+              v-if="checkUpgradeCore"
+            >
+              {{ $t('autoUpgrade') }}
+              <input
+                class="toggle"
+                type="checkbox"
+                v-model="autoUpgradeCore"
+              />
+            </div>
+          </template>
         </div>
       </template>
 
@@ -77,7 +79,10 @@
         v-if="version"
       >
         <template v-if="!isSingBox">
-          <div class="indicator w-full">
+          <div
+            class="indicator w-full"
+            v-if="!activeBackend?.disableUpgradeCore"
+          >
             <span
               v-if="isCoreUpdateAvailable"
               class="indicator-item flex"
@@ -144,6 +149,7 @@ import { configs, fetchConfigs, updateConfigs } from '@/store/config'
 import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { autoUpgradeCore, checkUpgradeCore } from '@/store/settings'
+import { activeBackend } from '@/store/setup'
 import type { Config } from '@/types'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'

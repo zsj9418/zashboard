@@ -48,7 +48,8 @@ watch(
       const { data } = await fetchVersionAPI()
 
       version.value = data.version
-      if (isSingBox.value || !checkUpgradeCore.value) return
+      if (isSingBox.value || !checkUpgradeCore.value || activeBackend.value?.disableUpgradeCore)
+        return
       isCoreUpdateAvailable.value = await fetchBackendUpdateAvailableAPI()
 
       if (isCoreUpdateAvailable.value && autoUpgradeCore.value) {

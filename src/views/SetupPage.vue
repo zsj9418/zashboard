@@ -218,6 +218,8 @@ if (query.has('hostname')) {
     port: query.get('port') as string,
     password: query.get('secret') as string,
     label: query.get('label') as string,
+    disableUpgradeCore:
+      query.get('disableUpgradeCore') === '1' || query.get('disableUpgradeCore') === 'core',
   })
 } else if (backendList.value.length === 0) {
   handleSubmit(form, true)
