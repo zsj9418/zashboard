@@ -106,3 +106,7 @@
     display: none;
   }
 }
+
+div {
+  @apply scrollbar-thin;
+}

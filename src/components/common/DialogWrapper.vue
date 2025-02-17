@@ -10,12 +10,7 @@
           <XMarkIcon class="h-4 w-4" />
         </button>
       </form>
-      <div
-        :class="[
-          'max-h-[90vh] overflow-y-auto scrollbar-thin max-md:max-h-[70vh]',
-          noPadding ? 'p-0' : 'p-4',
-        ]"
-      >
+      <div :class="['max-h-[90vh] overflow-y-auto max-md:max-h-[70vh]', noPadding ? 'p-0' : 'p-4']">
         <slot></slot>
       </div>
     </div>

@@ -6,7 +6,7 @@
     <div class="flex h-full max-h-[69vh] flex-col overflow-hidden py-4 md:max-h-[89vh]">
       <VueJsonPretty
         :data="infoConn"
-        class="overflow-y-auto px-4 scrollbar-thin"
+        class="overflow-y-auto px-4"
       />
       <div
         class="h-12 px-4 pt-2 text-sm"

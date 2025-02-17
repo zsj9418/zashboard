@@ -283,7 +283,7 @@ const columns: ColumnDef<Connection>[] = [
       const originChains = row.original.chains
 
       originChains.forEach((chain, index) => {
-        chains.unshift(h(ProxyName, { name: chain, size: 'small', class: 'shrink-0' }))
+        chains.unshift(h(ProxyName, { name: chain, size: 'small' }))
 
         if (index < originChains.length - 1) {
           chains.unshift(

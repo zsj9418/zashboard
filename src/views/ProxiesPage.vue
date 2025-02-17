@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-hidden p-2">
+  <div class="h-full overflow-y-scroll p-2 sm:pr-1">
     <template v-if="displayTwoColumns">
       <div class="grid grid-cols-2 gap-1">
         <div
