@@ -1,9 +1,10 @@
 import { LOG_LEVEL } from '@/constant'
 import { isMiddleScreen } from '@/helper/utils'
 import { initLogs, isPaused, logFilter, logLevel, logs } from '@/store/logs'
-import { logRetentionLimit } from '@/store/settings'
+import { logRetentionLimit, logSearchHistory } from '@/store/settings'
 import { PauseIcon, PlayIcon, WrenchScrewdriverIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { defineComponent, ref } from 'vue'
+import { debounce } from 'lodash'
+import { defineComponent, ref, watch } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DialogWrapper from '../common/DialogWrapper.vue'
 import TextInput from '../common/TextInput.vue'
@@ -18,6 +19,19 @@ export default defineComponent({
   setup(props) {
     const { t } = useI18n()
     const settingsModel = ref(false)
+    const insertLogSearchHistory = debounce((log: string) => {
+      if (!log || logSearchHistory.value.includes(log)) {
+        return
+      }
+
+      logSearchHistory.value.unshift(log)
+      if (logSearchHistory.value.length > 5) {
+        logSearchHistory.value.pop()
+      }
+    }, 1500)
+
+    watch(logFilter, insertLogSearchHistory)
+
     return () => {
       const levelSelect = (
         <select
@@ -42,6 +56,7 @@ export default defineComponent({
           class="flex-1"
           placeholder={t('search')}
           clearable={true}
+          menus={logSearchHistory.value}
         />
       )
 

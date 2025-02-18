@@ -134,3 +134,4 @@ export const sourceIPLabelList = useStorage<SourceIPLabel[]>('config/source-ip-l
 
 // logs
 export const logRetentionLimit = useStorage<number>('config/log-retention-limit', 1000)
+export const logSearchHistory = useStorage<string[]>('config/log-search-history', [])

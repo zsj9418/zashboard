@@ -9,7 +9,12 @@
           {{ $t('overview') }}
         </div>
         <div
-          :class="`card-body grid grid-cols-1 gap-2 lg:grid-cols-2 ${showIPAndConnectionInfo ? 'xl:grid-cols-3' : '2xl:grid-cols-4'}`"
+          :class="[
+            'card-body grid grid-cols-1 gap-2',
+            isSidebarCollapsed
+              ? ['md:grid-cols-2', showIPAndConnectionInfo ? 'lg:grid-cols-3' : 'xl:grid-cols-4']
+              : ['lg:grid-cols-2', showIPAndConnectionInfo ? 'xl:grid-cols-3' : '2xl:grid-cols-4'],
+          ]"
         >
           <StatisticsStats type="settings" />
           <template v-if="showIPAndConnectionInfo">
@@ -95,6 +100,7 @@ import ZashboardSettings from '@/components/settings/ZashboardSettings.vue'
 import {
   autoConnectionCheck,
   autoIPCheck,
+  isSidebarCollapsed,
   showIPAndConnectionInfo,
   showStatisticsWhenSidebarCollapsed,
   splitOverviewPage,

@@ -10,9 +10,9 @@
             :name="proxyGroup.name"
             size="large"
           />
-          <span class="text-xs text-base-content/60"
-            >: {{ proxyGroup.type }} ({{ sortedProxies?.length }})</span
-          >
+          <span class="text-xs text-base-content/60">
+            : {{ proxyGroup.type }} ({{ sortedProxies?.length }})
+          </span>
           <button
             v-if="manageHiddenGroup"
             class="btn btn-circle btn-xs z-10 ml-1"
