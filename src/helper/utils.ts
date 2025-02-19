@@ -3,6 +3,9 @@ import { useMediaQuery } from '@vueuse/core'
 export const twoColumn = useMediaQuery('(min-width: 810px)')
 export const twoColumnWithSidebar = useMediaQuery('(min-width: 1130px)')
 export const isMiddleScreen = useMediaQuery('(max-width: 768px)')
+export const isPWA = (() => {
+  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
+})()
 
 const BACKGROUND_IMAGE = 'background-image'
 export const LOCAL_IMAGE = 'local-image'

@@ -156,6 +156,7 @@ const ru: LANG_MESSAGE = {
   connectionIP: 'IP-источник соединения',
   simpleCardPreset: 'Простой карточки',
   detailedCardPreset: 'Подробный карточки',
+  refresh: 'Обновить',
 }
 
 export default ru

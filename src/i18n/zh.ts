@@ -154,6 +154,7 @@ const zh: LANG_MESSAGE = {
   connectionIP: '连接IP',
   simpleCardPreset: '简洁预设',
   detailedCardPreset: '详细预设',
+  refresh: '刷新',
 }
 
 export default zh

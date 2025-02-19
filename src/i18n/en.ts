@@ -153,6 +153,7 @@ const en = {
   connectionIP: 'Connection IP',
   simpleCardPreset: 'Simple Preset',
   detailedCardPreset: 'Detailed Preset',
+  refresh: 'Refresh',
 }
 
 export type LANG_MESSAGE = typeof en

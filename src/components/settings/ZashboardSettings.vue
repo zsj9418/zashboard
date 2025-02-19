@@ -20,9 +20,17 @@
           </span>
         </a>
       </div>
+      <button
+        class="btn btn-sm absolute right-2 top-2"
+        @click="refreshPages"
+        v-if="isPWA"
+      >
+        {{ $t('refresh') }}
+        <ArrowPathIcon class="h-4 w-4" />
+      </button>
     </div>
     <div class="card-body gap-4">
-      <div class="grid grid-cols-1 gap-2 xl:grid-cols-2">
+      <div class="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div class="flex flex-col gap-2">
           <div class="flex items-center gap-2">
             {{ $t('theme') }}
@@ -147,7 +155,12 @@ import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/constant'
 import { exportSettings } from '@/helper'
-import { deleteBase64FromIndexedDB, LOCAL_IMAGE, saveBase64ToIndexedDB } from '@/helper/utils'
+import {
+  deleteBase64FromIndexedDB,
+  isPWA,
+  LOCAL_IMAGE,
+  saveBase64ToIndexedDB,
+} from '@/helper/utils'
 import {
   autoUpgrade,
   customBackgroundURL,
@@ -156,7 +169,7 @@ import {
   swipeInTabs,
   theme,
 } from '@/store/settings'
-import { ArrowUpCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowPathIcon, ArrowUpCircleIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { ref } from 'vue'
 import ImportSettings from '../common/ImportSettings.vue'
@@ -233,4 +246,13 @@ const themes = [
   'nord',
   'sunset',
 ]
+
+const refreshPages = async () => {
+  const registrations = await navigator.serviceWorker.getRegistrations()
+
+  for (const registration of registrations) {
+    registration.unregister()
+  }
+  window.location.reload()
+}
 </script>

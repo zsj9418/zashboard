@@ -87,6 +87,7 @@ import { useSettings } from '@/composables/settings'
 import { useSwipeRouter } from '@/composables/swipe'
 import { PROXY_TAB_TYPE, ROUTE_ICON_MAP, ROUTE_NAME, RULE_TAB_TYPE } from '@/constant'
 import { getUrlFromBackend, renderRoutes } from '@/helper'
+import { isPWA } from '@/helper/utils'
 import { fetchConfigs } from '@/store/config'
 import { initConnections } from '@/store/connections'
 import { initLogs } from '@/store/logs'
@@ -98,10 +99,6 @@ import { activeBackend, activeUuid, backendList } from '@/store/setup'
 import { useDocumentVisibility } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
-
-const isPWA = (() => {
-  return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
-})()
 
 const ctrlsMap: Record<string, Component> = {
   [ROUTE_NAME.connections]: ConnectionCtrl,
