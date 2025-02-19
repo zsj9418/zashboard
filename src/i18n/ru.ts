@@ -78,7 +78,6 @@ const ru: LANG_MESSAGE = {
   bar: 'Полоса',
   exportSettings: 'Экспорт настроек',
   importSettings: 'Импорт настроек',
-  clearIconCache: 'Очистить кэш иконок',
   unavailableProxy: 'Скрыть недоступное',
   protocolTips:
     'Вы пытаетесь подключиться к http-бэкенду, но панель управления обслуживается через https. Это может вызвать ошибку подключения. Пожалуйста, разрешите небезопасный контент в настройках браузера. Настройки находятся слева от адресной строки.',
@@ -116,7 +115,7 @@ const ru: LANG_MESSAGE = {
   globalIP: 'Мировой IP',
   networkInfo: 'Информация о сети',
   autoSwitch: 'Автоматическое',
-  customBackgroundURL: 'Пользовательский URL фона',
+  customBackgroundURL: 'URL фона',
   splitOverviewPage: 'Разделить страницу с обзором',
   manageHiddenGroup: 'Управление скрытыми группами',
   showIPAndConnectionInfo: 'Показать IP и информацию о соединениях',

@@ -57,11 +57,11 @@
           </div>
         </div>
         <div class="flex flex-col gap-2">
-          <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div class="flex items-center gap-2">
             <span class="shrink-0"> {{ $t('customBackgroundURL') }} </span>
             <div class="join">
               <TextInput
-                class="join-item flex-1"
+                class="join-item max-w-64 flex-1"
                 v-model="customBackgroundURL"
                 :clearable="true"
                 @update:modelValue="handlerBackgroundURLChange"
@@ -92,6 +92,9 @@
               max="100"
               v-model="dashboardTransparent"
               class="range max-w-64"
+              @touchstart.stop
+              @touchmove.stop
+              @touchend.stop
             />
           </div>
           <div class="flex items-center gap-2 md:hidden">
@@ -104,7 +107,6 @@
           </div>
         </div>
       </div>
-
       <div
         class="flex items-center gap-2"
         v-if="!isSingBox"
@@ -124,12 +126,7 @@
           >
             {{ $t('upgradeUI') }}
           </button>
-          <button
-            class="btn btn-sm"
-            @click="clearIconCache"
-          >
-            {{ $t('clearIconCache') }}
-          </button>
+          <div class="sm:hidden"></div>
         </template>
 
         <button
@@ -150,12 +147,7 @@ import LanguageSelect from '@/components/settings/LanguageSelect.vue'
 import { useSettings } from '@/composables/settings'
 import { FONTS } from '@/constant'
 import { exportSettings } from '@/helper'
-import {
-  clearIconFromIndexedDB,
-  deleteBase64FromIndexedDB,
-  LOCAL_IMAGE,
-  saveBase64ToIndexedDB,
-} from '@/helper/utils'
+import { deleteBase64FromIndexedDB, LOCAL_IMAGE, saveBase64ToIndexedDB } from '@/helper/utils'
 import {
   autoUpgrade,
   customBackgroundURL,
@@ -204,10 +196,6 @@ const handlerClickUpgradeUI = async () => {
   } catch {
     isUIUpgrading.value = false
   }
-}
-
-const clearIconCache = async () => {
-  clearIconFromIndexedDB()
 }
 
 const themes = [
