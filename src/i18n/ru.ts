@@ -65,7 +65,7 @@ const ru: LANG_MESSAGE = {
   latencydesc: 'Задержка по убыванию',
   latencyasc: 'Задержка по возрастанию',
   language: 'Язык',
-  automaticDisconnection: 'Автоматическое отключение при переключении узлов',
+  automaticDisconnection: 'Автоматическое отключение',
   backend: 'Бэкенд',
   tunMode: 'Режим Tun',
   upgradeCore: 'Обновить ядро',
@@ -146,19 +146,20 @@ const ru: LANG_MESSAGE = {
   allSourceIP: 'Все IP-источники',
   importing: 'Импортируется',
   hideConnection: 'Скрыть соединение',
-  hideConnectionRegex: 'Скрыть соединение по регулярному выражению',
+  hideConnectionRegex: 'Скрыть соединение Regex',
   hideConnectionTip:
     'Используйте регистронезависимое регулярное выражение, чтобы найти и скрыть нежелательные соединения.',
   loadBalance: 'Балансировка нагрузки',
   label: 'Метка',
   optional: 'Необязательно',
-  swipeInTabs: 'Свайп для переключения между вкладками на странице.',
+  swipeInTabs: 'Провести для переключения вкладок',
   connectionIP: 'IP-источник соединения',
   simpleCardPreset: 'Простой карточки',
   detailedCardPreset: 'Подробный карточки',
   refresh: 'Обновить',
   reset: 'Сбросить',
   minProxyCardWidth: 'Минимальная ширина карточки прокси',
+  displayGlobalInNonGlobalMode: 'Отображать глобальное в не глобальном режиме',
 }
 
 export default ru

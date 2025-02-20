@@ -7,7 +7,7 @@ import {
   proxyMap,
   proxyProviederList,
 } from '@/store/proxies'
-import { manageHiddenGroup } from '@/store/settings'
+import { displayGlobalInNonGlobalMode, manageHiddenGroup } from '@/store/settings'
 import { isEmpty } from 'lodash'
 import { computed, ref } from 'vue'
 
@@ -27,9 +27,17 @@ const renderGroups = computed(() => {
     return [GLOBAL]
   }
 
-  return manageHiddenGroup.value
-    ? proxyGroupList.value
-    : proxyGroupList.value.filter((name) => !hiddenGroupMap.value[name])
+  let proxyGroups = [...proxyGroupList.value]
+
+  if (!manageHiddenGroup.value) {
+    proxyGroups = proxyGroups.filter((name) => !hiddenGroupMap.value[name])
+  }
+
+  if (displayGlobalInNonGlobalMode.value) {
+    proxyGroups.push(GLOBAL)
+  }
+
+  return proxyGroups
 })
 
 export const useProxies = () => {

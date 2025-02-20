@@ -110,6 +110,14 @@
             </option>
           </select>
         </div>
+        <div class="flex items-center gap-2">
+          {{ $t('displayGlobalInNonGlobalMode') }}
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="displayGlobalInNonGlobalMode"
+          />
+        </div>
         <template v-if="hasIcon">
           <div class="flex items-center gap-2">
             {{ $t('iconSize') }}
@@ -139,6 +147,7 @@ import { useTooltip } from '@/helper/tooltip'
 import { getMinCardWidth } from '@/helper/utils'
 import { proxyMap } from '@/store/proxies'
 import {
+  displayGlobalInNonGlobalMode,
   iconMarginRight,
   iconSize,
   independentLatencyTest,

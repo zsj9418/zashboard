@@ -84,6 +84,10 @@ export const minProxyCardWidth = useStorage<number>(
   getMinCardWidth(proxyCardSize.value),
 )
 export const manageHiddenGroup = ref(false)
+export const displayGlobalInNonGlobalMode = useStorage(
+  'config/display-global-in-non-global-mode',
+  false,
+)
 export const iconSize = useStorage('config/icon-size', 14)
 export const iconMarginRight = useStorage('config/icon-margin-right', 6)
 

@@ -150,13 +150,14 @@ const zh: LANG_MESSAGE = {
   loadBalance: '负载均衡',
   label: '标签',
   optional: '可选',
-  swipeInTabs: '滑动切换页面内的标签页',
+  swipeInTabs: '滑动切换页面二级标签',
   connectionIP: '连接IP',
   simpleCardPreset: '简洁预设',
   detailedCardPreset: '详细预设',
   refresh: '刷新',
   reset: '重置',
   minProxyCardWidth: '节点卡片最小宽度',
+  displayGlobalInNonGlobalMode: '在非全局模式下显示全局',
 }
 
 export default zh

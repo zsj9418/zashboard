@@ -242,18 +242,19 @@ export default defineComponent({
               </div>
               <div class="flex items-center gap-2">
                 {t('minProxyCardWidth')}
-                <input
-                  class="input input-sm input-bordered w-20"
-                  type="number"
-                  v-model={minProxyCardWidth.value}
-                />
-                px
-                <button
-                  class="btn btn-sm"
-                  onClick={handlerResetProxyCardWidth}
-                >
-                  {t('reset')}
-                </button>
+                <div class="join">
+                  <input
+                    class="input input-sm join-item input-bordered w-20"
+                    type="number"
+                    v-model={minProxyCardWidth.value}
+                  />
+                  <button
+                    class="btn join-item btn-sm"
+                    onClick={handlerResetProxyCardWidth}
+                  >
+                    {t('reset')}
+                  </button>
+                </div>
               </div>
             </div>
           </DialogWrapper>
