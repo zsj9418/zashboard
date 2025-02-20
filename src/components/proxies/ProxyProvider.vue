@@ -4,7 +4,7 @@
       <div class="flex items-center gap-2">
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
-          <span class="text-sm"> ({{ sortedProxies.length }}) </span>
+          <span class="text-sm"> ({{ proxiesCount }}) </span>
           <span class="ml-1 text-sm text-base-content/60"
             >{{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}</span
           >
@@ -50,12 +50,12 @@
       </div>
     </template>
     <template v-slot:preview>
-      <ProxyPreview :nodes="sortedProxies" />
+      <ProxyPreview :nodes="renderProxies" />
     </template>
     <template v-slot:content>
       <ProxyNodeGrid>
         <ProxyNodeCard
-          v-for="node in sortedProxies"
+          v-for="node in renderProxies"
           :key="node"
           :name="node"
         />
@@ -66,8 +66,9 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
+import { NOT_CONNECTED } from '@/constant'
 import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
-import { fetchProxies, proxyProviederList } from '@/store/proxies'
+import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
 import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
@@ -123,9 +124,19 @@ const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
 const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
-const sortedProxies = computed(() => {
+const renderProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyProvider.value.proxies.map((node) => node.name))
 })
+const availableProxies = computed(() => {
+  return renderProxies.value.filter((proxy) => getLatencyByName(proxy) !== NOT_CONNECTED).length
+})
+const proxiesCount = computed(() => {
+  if (availableProxies.value < renderProxies.value.length) {
+    return `${availableProxies.value}/${renderProxies.value.length}`
+  }
+  return renderProxies.value.length
+})
+
 const subscriptionInfo = computed(() => {
   if (proxyProvider.value.subscriptionInfo) {
     return getSubscriptionsInfo(proxyProvider.value.subscriptionInfo)

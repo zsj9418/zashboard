@@ -155,6 +155,8 @@ const zh: LANG_MESSAGE = {
   simpleCardPreset: '简洁预设',
   detailedCardPreset: '详细预设',
   refresh: '刷新',
+  reset: '重置',
+  minProxyCardWidth: '节点卡片最小宽度',
 }
 
 export default zh

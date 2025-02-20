@@ -10,7 +10,7 @@ import {
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
 } from '@/constant'
-import { isMiddleScreen } from '@/helper/utils'
+import { getMinCardWidth, isMiddleScreen } from '@/helper/utils'
 import type { SourceIPLabel } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { isEmpty } from 'lodash'
@@ -78,6 +78,10 @@ export const IPv6test = useStorage('config/ipv6-test', false)
 export const proxyCardSize = useStorage<PROXY_CARD_SIZE>(
   'config/proxy-card-size',
   PROXY_CARD_SIZE.LARGE,
+)
+export const minProxyCardWidth = useStorage<number>(
+  'config/min-proxy-card-width',
+  getMinCardWidth(proxyCardSize.value),
 )
 export const manageHiddenGroup = ref(false)
 export const iconSize = useStorage('config/icon-size', 14)

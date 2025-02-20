@@ -1,3 +1,4 @@
+import { MIN_PROXY_CARD_WIDTH, PROXY_CARD_SIZE } from '@/constant'
 import { useMediaQuery } from '@vueuse/core'
 
 export const twoColumn = useMediaQuery('(min-width: 810px)')
@@ -6,6 +7,10 @@ export const isMiddleScreen = useMediaQuery('(max-width: 768px)')
 export const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone
 })()
+
+export const getMinCardWidth = (size: PROXY_CARD_SIZE) => {
+  return size === PROXY_CARD_SIZE.LARGE ? MIN_PROXY_CARD_WIDTH.LARGE : MIN_PROXY_CARD_WIDTH.SMALL
+}
 
 const BACKGROUND_IMAGE = 'background-image'
 export const LOCAL_IMAGE = 'local-image'

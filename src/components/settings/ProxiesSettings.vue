@@ -99,6 +99,7 @@
           <select
             class="select select-bordered select-sm min-w-24"
             v-model="proxyCardSize"
+            @change="handlerProxyCardSizeChange"
           >
             <option
               v-for="opt in Object.values(PROXY_CARD_SIZE)"
@@ -135,6 +136,7 @@
 <script setup lang="ts">
 import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
+import { getMinCardWidth } from '@/helper/utils'
 import { proxyMap } from '@/store/proxies'
 import {
   iconMarginRight,
@@ -143,6 +145,7 @@ import {
   IPv6test,
   lowLatency,
   mediumLatency,
+  minProxyCardWidth,
   proxyCardSize,
   proxyPreviewType,
   speedtestTimeout,
@@ -164,4 +167,8 @@ const independentLatencyTestTip = (e: Event) => {
 const hasIcon = computed(() => {
   return Object.values(proxyMap.value).some((proxy) => !!proxy.icon)
 })
+
+const handlerProxyCardSizeChange = () => {
+  minProxyCardWidth.value = getMinCardWidth(proxyCardSize.value)
+}
 </script>

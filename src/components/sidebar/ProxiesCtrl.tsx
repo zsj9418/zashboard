@@ -2,7 +2,7 @@ import { updateProxyProviderAPI } from '@/api'
 import { collapsedBus } from '@/composables/bus'
 import { proxiesFilter, useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/constant'
-import { isMiddleScreen } from '@/helper/utils'
+import { getMinCardWidth, isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
 import { allProxiesLatencyTest, fetchProxies, proxyProviederList } from '@/store/proxies'
 import {
@@ -10,6 +10,8 @@ import {
   collapseGroupMap,
   hideUnavailableProxies,
   manageHiddenGroup,
+  minProxyCardWidth,
+  proxyCardSize,
   proxySortType,
 } from '@/store/settings'
 import {
@@ -88,6 +90,10 @@ export default defineComponent({
       collapsedBus.emit({
         open: !hasNotCollapsed.value,
       })
+    }
+
+    const handlerResetProxyCardWidth = () => {
+      minProxyCardWidth.value = getMinCardWidth(proxyCardSize.value)
     }
 
     return () => {
@@ -233,6 +239,21 @@ export default defineComponent({
                   type="checkbox"
                   v-model={automaticDisconnection.value}
                 />
+              </div>
+              <div class="flex items-center gap-2">
+                {t('minProxyCardWidth')}
+                <input
+                  class="input input-sm input-bordered w-20"
+                  type="number"
+                  v-model={minProxyCardWidth.value}
+                />
+                px
+                <button
+                  class="btn btn-sm"
+                  onClick={handlerResetProxyCardWidth}
+                >
+                  {t('reset')}
+                </button>
               </div>
             </div>
           </DialogWrapper>

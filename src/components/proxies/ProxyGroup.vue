@@ -11,7 +11,7 @@
             size="large"
           />
           <span class="text-xs text-base-content/60">
-            : {{ proxyGroup.type }} ({{ availableProxies }}/{{ renderProxies?.length }})
+            : {{ proxyGroup.type }} ({{ proxiesCount }})
           </span>
           <button
             v-if="manageHiddenGroup"
@@ -117,6 +117,14 @@ const availableProxies = computed(() => {
     (proxy) => getLatencyByName(proxy, props.name) !== NOT_CONNECTED,
   ).length
 })
+
+const proxiesCount = computed(() => {
+  if (availableProxies.value < renderProxies.value.length) {
+    return `${availableProxies.value}/${renderProxies.value.length}`
+  }
+  return renderProxies.value.length
+})
+
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return

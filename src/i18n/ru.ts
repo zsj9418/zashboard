@@ -157,6 +157,8 @@ const ru: LANG_MESSAGE = {
   simpleCardPreset: 'Простой карточки',
   detailedCardPreset: 'Подробный карточки',
   refresh: 'Обновить',
+  reset: 'Сбросить',
+  minProxyCardWidth: 'Минимальная ширина карточки прокси',
 }
 
 export default ru

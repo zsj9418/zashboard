@@ -154,6 +154,8 @@ const en = {
   simpleCardPreset: 'Simple Preset',
   detailedCardPreset: 'Detailed Preset',
   refresh: 'Refresh',
+  reset: 'Reset',
+  minProxyCardWidth: 'Proxy Card Min Width',
 }
 
 export type LANG_MESSAGE = typeof en
