@@ -11,7 +11,7 @@
             size="large"
           />
           <span class="text-xs text-base-content/60">
-            : {{ proxyGroup.type }} ({{ sortedProxies?.length }})
+            : {{ proxyGroup.type }} ({{ availableProxies }}/{{ renderProxies?.length }})
           </span>
           <button
             v-if="manageHiddenGroup"
@@ -57,7 +57,7 @@
     </template>
     <template v-slot:preview>
       <ProxyPreview
-        :nodes="sortedProxies"
+        :nodes="renderProxies"
         :now="proxyGroup.now"
         :groupName="proxyGroup.name"
         @nodeclick="selectProxy(proxyGroup.name, $event)"
@@ -66,7 +66,7 @@
     <template v-slot:content>
       <ProxyNodeGrid>
         <ProxyNodeCard
-          v-for="node in sortedProxies"
+          v-for="node in renderProxies"
           :key="node"
           :name="node"
           :group-name="proxyGroup.name"
@@ -79,10 +79,16 @@
 </template>
 
 <script setup lang="ts">
-import { PROXY_TYPE } from '@/constant'
+import { NOT_CONNECTED, PROXY_TYPE } from '@/constant'
 import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { activeConnections } from '@/store/connections'
-import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import {
+  getLatencyByName,
+  hiddenGroupMap,
+  proxyGroupLatencyTest,
+  proxyMap,
+  selectProxy,
+} from '@/store/proxies'
 import { manageHiddenGroup } from '@/store/settings'
 import {
   ArrowRightCircleIcon,
@@ -103,8 +109,13 @@ const props = defineProps<{
   name: string
 }>()
 const proxyGroup = computed(() => proxyMap.value[props.name])
-const sortedProxies = computed(() => {
+const renderProxies = computed(() => {
   return sortAndFilterProxyNodes(proxyGroup.value.all ?? [], props.name)
+})
+const availableProxies = computed(() => {
+  return renderProxies.value.filter(
+    (proxy) => getLatencyByName(proxy, props.name) !== NOT_CONNECTED,
+  ).length
 })
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {
