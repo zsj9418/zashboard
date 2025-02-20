@@ -1,15 +1,17 @@
 <template>
   <CollapseCard :name="proxyProvider.name">
     <template v-slot:title>
-      <div class="flex items-center gap-2">
+      <div class="flex items-center justify-between gap-2">
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
-          <span class="text-sm"> ({{ proxiesCount }}) </span>
-          <span class="ml-1 text-sm text-base-content/60"
-            >{{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}</span
+          <span class="text-sm font-normal text-base-content/60"> ({{ proxiesCount }}) </span>
+          <span
+            class="text-sm font-normal text-base-content/60"
+            v-if="subscriptionInfo"
           >
+            {{ subscriptionInfo.expireStr }}
+          </span>
         </div>
-        <div class="flex-1" />
         <div class="flex gap-2">
           <button
             :class="twMerge('btn btn-circle btn-sm z-30')"
@@ -43,10 +45,11 @@
         class="flex justify-between text-sm text-base-content/60"
       >
         <div>
-          {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} (
-          {{ subscriptionInfo.percentage }}% )
+          {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} ({{
+            subscriptionInfo.percentage
+          }}%)
         </div>
-        <div>{{ subscriptionInfo.expirePrefix() }}: {{ subscriptionInfo.expireStr() }}</div>
+        <div>{{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}</div>
       </div>
     </template>
     <template v-slot:preview>
@@ -69,7 +72,6 @@ import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
 import { NOT_CONNECTED } from '@/constant'
 import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
 import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
-import type { SubscriptionInfo } from '@/types'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
 import { toFinite } from 'lodash'
@@ -85,42 +87,6 @@ const props = defineProps<{
   name: string
 }>()
 
-const getSubscriptionsInfo = (subscriptionInfo: SubscriptionInfo) => {
-  const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = subscriptionInfo
-
-  if (Download === 0 && Upload === 0 && Total === 0 && Expire === 0) {
-    return null
-  }
-
-  const total = prettyBytesHelper(Total, { binary: true })
-  const used = prettyBytesHelper(Download + Upload, { binary: true })
-  const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))
-
-  const expirePrefix = () => {
-    const { t } = useI18n()
-
-    return t('expire')
-  }
-
-  const expireStr = () => {
-    const { t } = useI18n()
-
-    if (Expire === 0) {
-      return t('noExpire')
-    }
-
-    return dayjs(Expire * 1000).format('YYYY-MM-DD')
-  }
-
-  return {
-    total,
-    used,
-    percentage,
-    expirePrefix,
-    expireStr,
-  }
-}
-
 const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
@@ -131,15 +97,39 @@ const availableProxies = computed(() => {
   return renderProxies.value.filter((proxy) => getLatencyByName(proxy) !== NOT_CONNECTED).length
 })
 const proxiesCount = computed(() => {
-  if (availableProxies.value < renderProxies.value.length) {
-    return `${availableProxies.value}/${renderProxies.value.length}`
+  const all = proxyProvider.value.proxies?.length ?? 0
+
+  if (availableProxies.value < all) {
+    return `${availableProxies.value}/${all}`
   }
-  return renderProxies.value.length
+  return all
 })
 
 const subscriptionInfo = computed(() => {
-  if (proxyProvider.value.subscriptionInfo) {
-    return getSubscriptionsInfo(proxyProvider.value.subscriptionInfo)
+  const info = proxyProvider.value.subscriptionInfo
+
+  if (info) {
+    const { Download = 0, Upload = 0, Total = 0, Expire = 0 } = info
+
+    if (Download === 0 && Upload === 0 && Total === 0 && Expire === 0) {
+      return null
+    }
+
+    const { t } = useI18n()
+    const total = prettyBytesHelper(Total, { binary: true })
+    const used = prettyBytesHelper(Download + Upload, { binary: true })
+    const percentage = toFinite((((Download + Upload) / Total) * 100).toFixed(2))
+    const expireStr =
+      Expire === 0
+        ? `${t('expire')}: ${t('noExpire')}`
+        : `${t('expire')}: ${dayjs(Expire * 1000).format('YYYY-MM-DD')}`
+
+    return {
+      total,
+      used,
+      percentage,
+      expireStr,
+    }
   }
 
   return null

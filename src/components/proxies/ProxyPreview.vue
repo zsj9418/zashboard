@@ -103,7 +103,7 @@ const nodesLatency = computed(() =>
 )
 const getBgColor = (latency: number) => {
   if (latency === NOT_CONNECTED) {
-    return 'bg-gray-500'
+    return 'bg-base-content/60'
   } else if (latency < lowLatency.value) {
     return 'bg-low-latency'
   } else if (latency < mediumLatency.value) {
