@@ -157,7 +157,7 @@ const en = {
   refresh: 'Refresh',
   reset: 'Reset',
   minProxyCardWidth: 'Proxy Card Min Width',
-  displayGlobalInNonGlobalMode: 'Display GLOBAL In Non Global Mode',
+  displayGlobalByMode: 'Display GLOBAL By Mode',
   proxyCountMode: 'Proxies Count Mode',
   filteredTotal: 'Filtered Total',
   total: 'Total',

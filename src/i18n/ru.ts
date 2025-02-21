@@ -159,7 +159,7 @@ const ru: LANG_MESSAGE = {
   refresh: 'Обновить',
   reset: 'Сбросить',
   minProxyCardWidth: 'Минимальная ширина карточки прокси',
-  displayGlobalInNonGlobalMode: 'Отображать глобальное в не глобальном режиме',
+  displayGlobalByMode: 'Отображать GLOBAL по режиму',
   proxyCountMode: 'Режим подсчета прокси',
   filteredTotal: 'Отфильтровано всего',
   total: 'Всего',

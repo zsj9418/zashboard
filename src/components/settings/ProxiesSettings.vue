@@ -102,14 +102,6 @@
           </select>
         </div>
         <div class="flex items-center gap-2">
-          {{ $t('truncateProxyName') }}
-          <input
-            class="toggle"
-            type="checkbox"
-            v-model="truncateProxyName"
-          />
-        </div>
-        <div class="flex items-center gap-2">
           {{ $t('proxyCardSize') }}
           <select
             class="select select-bordered select-sm min-w-24"
@@ -126,11 +118,19 @@
           </select>
         </div>
         <div class="flex items-center gap-2">
-          {{ $t('displayGlobalInNonGlobalMode') }}
+          {{ $t('truncateProxyName') }}
           <input
             class="toggle"
             type="checkbox"
-            v-model="displayGlobalInNonGlobalMode"
+            v-model="truncateProxyName"
+          />
+        </div>
+        <div class="flex items-center gap-2">
+          {{ $t('displayGlobalByMode') }}
+          <input
+            class="toggle"
+            type="checkbox"
+            v-model="displayGlobalByMode"
           />
         </div>
         <template v-if="hasIcon">
@@ -162,7 +162,7 @@ import { useTooltip } from '@/helper/tooltip'
 import { getMinCardWidth } from '@/helper/utils'
 import { proxyMap } from '@/store/proxies'
 import {
-  displayGlobalInNonGlobalMode,
+  displayGlobalByMode,
   iconMarginRight,
   iconSize,
   independentLatencyTest,

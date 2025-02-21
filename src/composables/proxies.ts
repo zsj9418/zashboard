@@ -7,12 +7,15 @@ import {
   proxyMap,
   proxyProviederList,
 } from '@/store/proxies'
-import { displayGlobalInNonGlobalMode, manageHiddenGroup } from '@/store/settings'
+import { displayGlobalByMode, manageHiddenGroup } from '@/store/settings'
 import { isEmpty } from 'lodash'
 import { computed, ref } from 'vue'
 
 export const proxiesFilter = ref('')
 
+const filterGroups = (all: string[]) => {
+  return manageHiddenGroup.value ? all : all.filter((name) => !hiddenGroupMap.value[name])
+}
 const proxiesTabShow = ref(PROXY_TAB_TYPE.PROXIES)
 const renderGroups = computed(() => {
   if (isEmpty(proxyMap.value)) {
@@ -23,21 +26,15 @@ const renderGroups = computed(() => {
     return proxyProviederList.value.map((group) => group.name)
   }
 
-  if (configs.value?.mode.toUpperCase() === GLOBAL) {
-    return [GLOBAL]
+  if (displayGlobalByMode.value) {
+    if (configs.value?.mode.toUpperCase() === GLOBAL) {
+      return [GLOBAL]
+    }
+
+    return filterGroups(proxyGroupList.value)
   }
 
-  let proxyGroups = [...proxyGroupList.value]
-
-  if (!manageHiddenGroup.value) {
-    proxyGroups = proxyGroups.filter((name) => !hiddenGroupMap.value[name])
-  }
-
-  if (displayGlobalInNonGlobalMode.value) {
-    proxyGroups.push(GLOBAL)
-  }
-
-  return proxyGroups
+  return filterGroups([...proxyGroupList.value, GLOBAL])
 })
 
 export const useProxies = () => {

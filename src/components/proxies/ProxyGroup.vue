@@ -14,7 +14,7 @@
             : {{ proxyGroup.type }} ({{ proxiesCount }})
           </span>
           <button
-            v-if="manageHiddenGroup && name !== GLOBAL"
+            v-if="manageHiddenGroup"
             class="btn btn-circle btn-xs z-10 ml-1"
             @click.stop="handlerGroupToggle"
           >
@@ -87,13 +87,7 @@ import { PROXY_TYPE } from '@/constant'
 import { prettyBytesHelper } from '@/helper'
 import { useTooltip } from '@/helper/tooltip'
 import { activeConnections } from '@/store/connections'
-import {
-  GLOBAL,
-  hiddenGroupMap,
-  proxyGroupLatencyTest,
-  proxyMap,
-  selectProxy,
-} from '@/store/proxies'
+import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { manageHiddenGroup } from '@/store/settings'
 import {
   ArrowRightCircleIcon,

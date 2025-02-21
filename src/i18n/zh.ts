@@ -157,7 +157,7 @@ const zh: LANG_MESSAGE = {
   refresh: '刷新',
   reset: '重置',
   minProxyCardWidth: '节点卡片最小宽度',
-  displayGlobalInNonGlobalMode: '在非全局模式下显示全局',
+  displayGlobalByMode: '根据模式显示 GLOBAL',
   proxyCountMode: '节点计数模式',
   filteredTotal: '过滤后总数',
   total: '总数',
