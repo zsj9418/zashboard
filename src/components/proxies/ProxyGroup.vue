@@ -43,7 +43,10 @@
         <div class="flex flex-1 items-center gap-1 text-sm">
           <template v-if="proxyGroup.now">
             <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
-            <ProxyName :name="proxyGroup.now" />
+            <ProxyName
+              :name="proxyGroup.now"
+              @mouseenter="tipForNow"
+            />
           </template>
           <template v-else-if="proxyGroup.type.toLowerCase() === PROXY_TYPE.LoadBalance">
             <CheckCircleIcon class="h-4 w-4 shrink-0" />
@@ -82,6 +85,7 @@
 import { useRenderProxies } from '@/composables/renderProxies'
 import { PROXY_TYPE } from '@/constant'
 import { prettyBytesHelper } from '@/helper'
+import { useTooltip } from '@/helper/tooltip'
 import { activeConnections } from '@/store/connections'
 import {
   GLOBAL,
@@ -134,5 +138,15 @@ const downloadTotal = computed(() => {
 
 const handlerGroupToggle = () => {
   hiddenGroupMap.value[props.name] = !hiddenGroupMap.value[props.name]
+}
+
+const { showTip } = useTooltip()
+const tipForNow = (e: Event) => {
+  const nowNode = proxyMap.value[proxyGroup.value.now]
+  if (!nowNode || !nowNode.now) return
+
+  showTip(e, nowNode.now, {
+    delay: [500, 0],
+  })
 }
 </script>
