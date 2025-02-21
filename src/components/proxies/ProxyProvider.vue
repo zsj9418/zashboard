@@ -69,9 +69,9 @@
 
 <script setup lang="ts">
 import { proxyProviderHealthCheckAPI, updateProxyProviderAPI } from '@/api'
-import { NOT_CONNECTED } from '@/constant'
-import { fromNow, prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
-import { fetchProxies, getLatencyByName, proxyProviederList } from '@/store/proxies'
+import { useRenderProxies } from '@/composables/renderProxies'
+import { fromNow, prettyBytesHelper } from '@/helper'
+import { fetchProxies, proxyProviederList } from '@/store/proxies'
 import { ArrowPathIcon, BoltIcon } from '@heroicons/vue/24/outline'
 import dayjs from 'dayjs'
 import { toFinite } from 'lodash'
@@ -90,20 +90,8 @@ const props = defineProps<{
 const proxyProvider = computed(
   () => proxyProviederList.value.find((group) => group.name === props.name)!,
 )
-const renderProxies = computed(() => {
-  return sortAndFilterProxyNodes(proxyProvider.value.proxies.map((node) => node.name))
-})
-const availableProxies = computed(() => {
-  return renderProxies.value.filter((proxy) => getLatencyByName(proxy) !== NOT_CONNECTED).length
-})
-const proxiesCount = computed(() => {
-  const all = proxyProvider.value.proxies?.length ?? 0
-
-  if (availableProxies.value < all) {
-    return `${availableProxies.value}/${all}`
-  }
-  return all
-})
+const allProxies = computed(() => proxyProvider.value.proxies.map((node) => node.name) ?? [])
+const { renderProxies, proxiesCount } = useRenderProxies(allProxies)
 
 const subscriptionInfo = computed(() => {
   const info = proxyProvider.value.subscriptionInfo

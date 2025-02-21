@@ -160,6 +160,10 @@ const ru: LANG_MESSAGE = {
   reset: 'Сбросить',
   minProxyCardWidth: 'Минимальная ширина карточки прокси',
   displayGlobalInNonGlobalMode: 'Отображать глобальное в не глобальном режиме',
+  proxyCountMode: 'Режим подсчета прокси',
+  filteredTotal: 'Отфильтровано всего',
+  total: 'Всего',
+  aliveTotal: 'Живых / всего',
 }
 
 export default ru

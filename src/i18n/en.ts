@@ -70,7 +70,7 @@ const en = {
   updateGeoDatabase: 'Update Geo Database',
   truncateProxyName: 'Truncate Proxy Name',
   sourceIPLabels: 'Source IP Labels',
-  proxyPreviewType: 'Proxy Preview Type',
+  proxyPreviewType: 'Proxies Preview Type',
   auto: 'Auto',
   dots: 'Dots',
   bar: 'Bar',
@@ -158,6 +158,10 @@ const en = {
   reset: 'Reset',
   minProxyCardWidth: 'Proxy Card Min Width',
   displayGlobalInNonGlobalMode: 'Display GLOBAL In Non Global Mode',
+  proxyCountMode: 'Proxies Count Mode',
+  filteredTotal: 'Filtered Total',
+  total: 'Total',
+  aliveTotal: 'Alive / Total',
 }
 
 export type LANG_MESSAGE = typeof en

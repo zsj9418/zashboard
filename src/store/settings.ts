@@ -5,6 +5,7 @@ import {
   LANG,
   PROXY_CARD_SIZE,
   PROXY_CHAIN_DIRECTION,
+  PROXY_COUNT_MODE,
   PROXY_PREVIEW_TYPE,
   PROXY_SORT_TYPE,
   TABLE_SIZE,
@@ -90,6 +91,7 @@ export const displayGlobalInNonGlobalMode = useStorage(
 )
 export const iconSize = useStorage('config/icon-size', 14)
 export const iconMarginRight = useStorage('config/icon-margin-right', 6)
+export const proxyCountMode = useStorage('config/proxies-count-mode', PROXY_COUNT_MODE.ALIVE_TOTAL)
 
 // connections
 export const useConnectionCard = useStorage('config/use-connecticon-card', window.innerWidth < 640)

@@ -70,9 +70,9 @@ const zh: LANG_MESSAGE = {
   upgradeCore: '更新核心',
   updateGeoDatabase: '更新GEO数据库',
   tunMode: 'Tun 模式',
-  truncateProxyName: '截断代理名称',
+  truncateProxyName: '截断节点名称',
   sourceIPLabels: '源IP标签',
-  proxyPreviewType: '代理预览类型',
+  proxyPreviewType: '节点预览类型',
   auto: '自动',
   dots: '点',
   bar: '条',
@@ -158,6 +158,10 @@ const zh: LANG_MESSAGE = {
   reset: '重置',
   minProxyCardWidth: '节点卡片最小宽度',
   displayGlobalInNonGlobalMode: '在非全局模式下显示全局',
+  proxyCountMode: '节点计数模式',
+  filteredTotal: '过滤后总数',
+  total: '总数',
+  aliveTotal: '可用 / 总数',
 }
 
 export default zh

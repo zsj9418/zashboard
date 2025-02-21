@@ -79,11 +79,11 @@
 </template>
 
 <script setup lang="ts">
-import { NOT_CONNECTED, PROXY_TYPE } from '@/constant'
-import { prettyBytesHelper, sortAndFilterProxyNodes } from '@/helper'
+import { useRenderProxies } from '@/composables/renderProxies'
+import { PROXY_TYPE } from '@/constant'
+import { prettyBytesHelper } from '@/helper'
 import { activeConnections } from '@/store/connections'
 import {
-  getLatencyByName,
   GLOBAL,
   hiddenGroupMap,
   proxyGroupLatencyTest,
@@ -110,24 +110,8 @@ const props = defineProps<{
   name: string
 }>()
 const proxyGroup = computed(() => proxyMap.value[props.name])
-const renderProxies = computed(() => {
-  return sortAndFilterProxyNodes(proxyGroup.value.all ?? [], props.name)
-})
-const availableProxies = computed(() => {
-  return renderProxies.value.filter(
-    (proxy) => getLatencyByName(proxy, props.name) !== NOT_CONNECTED,
-  ).length
-})
-
-const proxiesCount = computed(() => {
-  const all = proxyGroup.value.all?.length ?? 0
-
-  if (availableProxies.value < all) {
-    return `${availableProxies.value}/${all}`
-  }
-  return all
-})
-
+const allProxies = computed(() => proxyGroup.value.all ?? [])
+const { proxiesCount, renderProxies } = useRenderProxies(allProxies, props.name)
 const isLatencyTesting = ref(false)
 const handlerLatencyTest = async () => {
   if (isLatencyTesting.value) return

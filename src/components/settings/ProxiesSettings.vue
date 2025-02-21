@@ -87,6 +87,21 @@
           </select>
         </div>
         <div class="flex items-center gap-2">
+          {{ $t('proxyCountMode') }}
+          <select
+            class="select select-bordered select-sm min-w-24"
+            v-model="proxyCountMode"
+          >
+            <option
+              v-for="opt in Object.values(PROXY_COUNT_MODE)"
+              :key="opt"
+              :value="opt"
+            >
+              {{ $t(opt) }}
+            </option>
+          </select>
+        </div>
+        <div class="flex items-center gap-2">
           {{ $t('truncateProxyName') }}
           <input
             class="toggle"
@@ -142,7 +157,7 @@
 </template>
 
 <script setup lang="ts">
-import { PROXY_CARD_SIZE, PROXY_PREVIEW_TYPE } from '@/constant'
+import { PROXY_CARD_SIZE, PROXY_COUNT_MODE, PROXY_PREVIEW_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
 import { getMinCardWidth } from '@/helper/utils'
 import { proxyMap } from '@/store/proxies'
@@ -156,6 +171,7 @@ import {
   mediumLatency,
   minProxyCardWidth,
   proxyCardSize,
+  proxyCountMode,
   proxyPreviewType,
   speedtestTimeout,
   speedtestUrl,
