@@ -63,7 +63,7 @@
         :nodes="renderProxies"
         :now="proxyGroup.now"
         :groupName="proxyGroup.name"
-        @nodeclick="selectProxy(proxyGroup.name, $event)"
+        @nodeclick="handlerProxySelect($event)"
       />
     </template>
     <template v-slot:content>
@@ -74,7 +74,7 @@
           :name="node"
           :group-name="proxyGroup.name"
           :active="node === proxyGroup.now"
-          @click="selectProxy(proxyGroup.name, node)"
+          @click="handlerProxySelect(node)"
         />
       </ProxyNodeGrid>
     </template>
@@ -142,5 +142,11 @@ const tipForNow = (e: Event) => {
   showTip(e, nowNode.now, {
     delay: [500, 0],
   })
+}
+
+const handlerProxySelect = (name: string) => {
+  if (proxyGroup.value.type.toLowerCase() === PROXY_TYPE.LoadBalance) return
+
+  selectProxy(props.name, name)
 }
 </script>
