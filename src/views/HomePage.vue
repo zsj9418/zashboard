@@ -171,7 +171,12 @@ watch(
       return
     }
     try {
+      const activeBackendUuid = activeBackend.value.uuid
       const isAvailable = await isBackendAvailable(activeBackend.value)
+
+      if (activeBackendUuid !== activeUuid.value) {
+        return
+      }
 
       if (!isAvailable) {
         autoSwitchBackendDialog.value = true
