@@ -13,17 +13,16 @@
       class="card overflow-hidden will-change-[height,width,transform]"
       :class="[
         activeMode ? `fixed z-50` : 'absolute left-0 top-0 h-auto w-full',
-        modalMode && 'left-1/2 top-1/2 max-h-[70vh] w-[96vw] -translate-x-1/2 -translate-y-1/2',
+        modalMode && 'max-h-[50vh] w-[96vw]',
         transitionAll && 'transition-all duration-200',
       ]"
       :style="[
         activeMode && {
           '--tw-bg-opacity': 1,
         },
+        activeMode && styleForCard,
         activeMode &&
           !modalMode && {
-            left: initX + 'px',
-            top: initY + 'px',
             width: initWidth + 'px',
             height: initHeight + 'px',
           },
@@ -74,16 +73,17 @@
       </div>
 
       <div
-        v-if="activeMode"
+        v-if="modalMode"
         class="grid flex-1 grid-cols-2 gap-2 overflow-y-auto overflow-x-hidden p-2"
       >
         <ProxyNodeCard
-          v-for="node in renderProxies"
+          v-for="node in diplayAllContent ? renderProxies : renderProxies.slice(0, 16)"
           :key="node"
           :name="node"
           :group-name="proxyGroup.name"
           :active="node === proxyGroup.now"
           @click.stop="handlerProxySelect(node)"
+          class="max-h-14"
         />
       </div>
     </div>
@@ -97,7 +97,7 @@ import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/
 import { manageHiddenGroup } from '@/store/settings'
 import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
-import { computed, nextTick, ref } from 'vue'
+import { computed, ref } from 'vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
@@ -112,13 +112,14 @@ const isLatencyTesting = ref(false)
 
 const activeMode = ref(false)
 const modalMode = ref(activeMode.value)
+const diplayAllContent = ref(activeMode.value)
 const cardRef = ref()
 
-const initX = ref(0)
-const initY = ref(0)
 const initWidth = ref(0)
 const initHeight = ref(0)
 const transitionAll = ref(false)
+
+const styleForCard = ref<Record<string, string>>({})
 
 const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
@@ -128,31 +129,44 @@ const handlerTransitionEnd = () => {
 }
 
 const handlerGroupClick = async () => {
-  if (!activeMode.value) {
-    const { x, y, width, height } = cardRef.value.getBoundingClientRect()
-
-    initX.value = x
-    initY.value = y
-    initWidth.value = width
-    initHeight.value = height
-  }
+  const { innerHeight, innerWidth } = window
+  const { x, y, width, height } = cardRef.value.getBoundingClientRect()
+  const leftRightKey = x < innerWidth / 3 ? 'left' : 'right'
+  const topBottomKey = y < innerHeight / 2 ? 'top' : 'bottom'
+  const topBottomValue = topBottomKey === 'top' ? y : innerHeight - y - height
 
   transitionEndCallback.value = () => {}
+  diplayAllContent.value = false
+  transitionAll.value = false
 
   if (activeMode.value) {
     transitionAll.value = true
     modalMode.value = false
+    styleForCard.value = {
+      [leftRightKey]: '0.5rem',
+      [topBottomKey]: topBottomValue + 'px',
+    }
     transitionEndCallback.value = async () => {
       transitionAll.value = false
-      await nextTick()
       activeMode.value = false
     }
   } else {
-    transitionAll.value = false
+    styleForCard.value = {
+      [leftRightKey]: '0.5rem',
+      [topBottomKey]: topBottomValue + 'px',
+    }
+    initWidth.value = width
+    initHeight.value = height
     activeMode.value = true
     await sleep(50)
     transitionAll.value = true
+    if (topBottomValue < innerHeight * 0.15) {
+      styleForCard.value[topBottomKey] = innerHeight * 0.15 + 'px'
+    }
     modalMode.value = true
+    transitionEndCallback.value = () => {
+      diplayAllContent.value = true
+    }
   }
 }
 
