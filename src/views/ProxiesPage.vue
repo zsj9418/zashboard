@@ -60,7 +60,8 @@ const Comp = computed(() => {
 
 const displayTwoColumns = computed(() => {
   return (
-    (isLargeScreen.value || isSmallScreen.value) &&
+    (isLargeScreen.value ||
+      (isSmallScreen.value && proxiesTabShow.value === PROXY_TAB_TYPE.PROXIES)) &&
     twoColumnProxyGroup.value &&
     renderGroups.value.length > 1
   )

@@ -5,12 +5,6 @@
         <div class="text-lg font-medium sm:text-xl">
           {{ proxyProvider.name }}
           <span class="text-sm font-normal text-base-content/60"> ({{ proxiesCount }}) </span>
-          <span
-            class="text-sm font-normal text-base-content/60"
-            v-if="subscriptionInfo"
-          >
-            {{ subscriptionInfo.expireStr }}
-          </span>
         </div>
         <div class="flex gap-2">
           <button
@@ -34,20 +28,14 @@
           </button>
         </div>
       </div>
-      <progress
-        class="progress mt-2 text-slate-500"
-        v-if="subscriptionInfo"
-        :value="subscriptionInfo.percentage"
-        max="100"
-      />
-      <div
-        v-if="subscriptionInfo"
-        class="flex justify-between text-sm text-base-content/60"
-      >
+      <div class="flex h-10 items-end justify-between text-sm text-base-content/60">
         <div>
-          {{ subscriptionInfo.used }} / {{ subscriptionInfo.total }} ({{
-            subscriptionInfo.percentage
-          }}%)
+          <div v-if="subscriptionInfo">
+            {{ subscriptionInfo.expireStr }}
+          </div>
+          <div v-if="subscriptionInfo">
+            {{ subscriptionInfo.usageStr }}
+          </div>
         </div>
         <div>{{ $t('updated') }} {{ fromNow(proxyProvider.updatedAt) }}</div>
       </div>
@@ -112,11 +100,11 @@ const subscriptionInfo = computed(() => {
         ? `${t('expire')}: ${t('noExpire')}`
         : `${t('expire')}: ${dayjs(Expire * 1000).format('YYYY-MM-DD')}`
 
+    const usageStr = `${used} / ${total} ( ${percentage}% )`
+
     return {
-      total,
-      used,
-      percentage,
       expireStr,
+      usageStr,
     }
   }
 
