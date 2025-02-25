@@ -1,6 +1,6 @@
 <template>
   <div
-    class="relative h-20"
+    class="relative h-20 cursor-pointer"
     ref="cardRef"
     @click="handlerGroupClick"
   >
@@ -17,7 +17,6 @@
       ]"
       :style="[
         modalMode && {
-          'max-height': '50dvh',
           width: 'calc(100vw - 1rem)',
         },
         activeMode && {
@@ -79,6 +78,7 @@
       <div
         v-if="modalMode"
         class="grid flex-1 grid-cols-2 gap-2 overflow-y-auto overflow-x-hidden p-2"
+        style="max-height: calc(50dvh - 5rem)"
       >
         <ProxyNodeCard
           v-for="node in diplayAllContent ? renderProxies : renderProxies.slice(0, 16)"
@@ -87,7 +87,6 @@
           :group-name="proxyGroup.name"
           :active="node === proxyGroup.now"
           @click.stop="handlerProxySelect(node)"
-          class="max-h-14"
         />
       </div>
     </div>
