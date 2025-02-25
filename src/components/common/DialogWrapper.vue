@@ -4,13 +4,15 @@
     class="modal"
     @close="isOpen = false"
   >
-    <div class="modal-box relative max-h-[90vh] overflow-hidden p-0 max-md:max-h-[70vh]">
+    <div class="modal-box relative max-h-[90dvh] overflow-hidden p-0 max-md:max-h-[70dvh]">
       <form method="dialog">
         <button class="btn btn-circle btn-ghost btn-xs absolute right-1 top-1 z-10 outline-none">
           <XMarkIcon class="h-4 w-4" />
         </button>
       </form>
-      <div :class="['max-h-[90vh] overflow-y-auto max-md:max-h-[70vh]', noPadding ? 'p-0' : 'p-4']">
+      <div
+        :class="['max-h-[90dvh] overflow-y-auto max-md:max-h-[70dvh]', noPadding ? 'p-0' : 'p-4']"
+      >
         <slot></slot>
       </div>
     </div>

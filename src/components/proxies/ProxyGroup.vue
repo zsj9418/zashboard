@@ -87,7 +87,13 @@ import { PROXY_TYPE } from '@/constant'
 import { prettyBytesHelper } from '@/helper'
 import { useTooltip } from '@/helper/tooltip'
 import { activeConnections } from '@/store/connections'
-import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
+import {
+  getNowProxyNodeName,
+  hiddenGroupMap,
+  proxyGroupLatencyTest,
+  proxyMap,
+  selectProxy,
+} from '@/store/proxies'
 import { manageHiddenGroup } from '@/store/settings'
 import {
   ArrowRightCircleIcon,
@@ -136,10 +142,10 @@ const handlerGroupToggle = () => {
 
 const { showTip } = useTooltip()
 const tipForNow = (e: Event) => {
-  const nowNode = proxyMap.value[proxyGroup.value.now]
-  if (!nowNode || !nowNode.now) return
+  const nowNode = getNowProxyNodeName(props.name)
+  if (!nowNode || nowNode === proxyGroup.value.now) return
 
-  showTip(e, nowNode.now, {
+  showTip(e, nowNode, {
     delay: [500, 0],
   })
 }

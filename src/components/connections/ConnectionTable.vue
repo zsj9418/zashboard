@@ -112,19 +112,21 @@
             >
               <template v-if="cell.column.getIsGrouped()">
                 <template v-if="rows[virtualRow.index].getCanExpand()">
-                  <MagnifyingGlassMinusIcon
-                    v-if="rows[virtualRow.index].getIsExpanded()"
-                    class="-mt-1 mr-1 inline-block h-4 w-4"
-                  />
-                  <MagnifyingGlassPlusIcon
-                    v-else
-                    class="-mt-1 mr-1 inline-block h-4 w-4"
-                  />
-                  <FlexRender
-                    :render="cell.column.columnDef.cell"
-                    :props="cell.getContext()"
-                  />
-                  <span> ({{ rows[virtualRow.index].subRows.length }}) </span>
+                  <div class="flex items-center">
+                    <MagnifyingGlassMinusIcon
+                      v-if="rows[virtualRow.index].getIsExpanded()"
+                      class="mr-1 inline-block h-4 w-4"
+                    />
+                    <MagnifyingGlassPlusIcon
+                      v-else
+                      class="mr-1 inline-block h-4 w-4"
+                    />
+                    <FlexRender
+                      :render="cell.column.columnDef.cell"
+                      :props="cell.getContext()"
+                    />
+                    <span class="ml-1"> ({{ rows[virtualRow.index].subRows.length }}) </span>
+                  </div>
                 </template>
               </template>
               <FlexRender

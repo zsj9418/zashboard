@@ -16,7 +16,7 @@ import type { SourceIPLabel } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { isEmpty } from 'lodash'
 import { v4 as uuid } from 'uuid'
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 
 // global
 export const theme = useStorage<string>('config/theme', 'default')
@@ -84,7 +84,7 @@ export const minProxyCardWidth = useStorage<number>(
   'config/min-proxy-card-width',
   getMinCardWidth(proxyCardSize.value),
 )
-export const manageHiddenGroup = ref(false)
+export const manageHiddenGroup = useStorage('config/manage-hidden-group-mode', false)
 
 export const displayGlobalByMode = useStorage('config/display-global-by-mode', true)
 export const iconSize = useStorage('config/icon-size', 14)

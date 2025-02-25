@@ -7,16 +7,19 @@
     <div
       v-if="activeMode"
       class="fixed inset-0 z-40 transition-all duration-200"
-      :class="modalMode && 'bg-black/50'"
+      :class="modalMode && 'bg-black/30'"
     ></div>
     <div
       class="card overflow-hidden will-change-[height,width,transform]"
       :class="[
         activeMode ? `fixed z-50` : 'absolute left-0 top-0 h-auto w-full',
-        modalMode && 'max-h-[50vh] w-[96vw]',
         transitionAll && 'transition-all duration-200',
       ]"
       :style="[
+        modalMode && {
+          'max-height': '50dvh',
+          width: 'calc(100vw - 1rem)',
+        },
         activeMode && {
           '--tw-bg-opacity': 1,
         },
@@ -44,7 +47,7 @@
           {{ proxyGroup.now }}
         </div>
 
-        <div class="flex h-4 justify-between gap-1">
+        <div class="flex h-4 items-center justify-between gap-1">
           <span class="text-xs text-base-content/60">
             {{ proxyGroup.type }} ({{ proxiesCount }})
           </span>
@@ -62,6 +65,7 @@
               class="h-3 w-3"
             />
           </button>
+          <div class="flex-1"></div>
           <LatencyTag
             :class="twMerge('z-10 bg-base-200/40 hover:shadow')"
             :loading="isLatencyTesting"

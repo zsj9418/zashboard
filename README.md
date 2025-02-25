@@ -1,10 +1,12 @@
-# zashboard README
+# zashboard
 
-## 🌐 **Online**
+<img src="pc.png" height="350">   <img src="mobile.png" height="350">
+
+## **Online**
 You can access the online zashboard at the following link:
 - [Online zashboard](http://board.zash.run.place)
 
-## 📥 **Download**
+## **Download**
 For **Mihomo** users:
 The **Upgrade Dashboard** function utilizes the API from Mihomo core. Ensure you set the [configuration URL](https://wiki.metacubex.one/config/general/#_9) to the zashboard's URL.
 
@@ -12,7 +14,7 @@ You can download the zashboard files here:
 - [dist.zip (7.64MB)](https://github.com/Zephyruso/zashboard/releases/latest/download/dist.zip) – Includes better font-loading experience.
 - [dist-cdn-fonts.zip (1.27MB)](https://github.com/Zephyruso/zashboard/releases/latest/download/dist-cdn-fonts.zip) – Optimized for devices with limited storage.
 
-## 🐳 **Docker Setup**
+## **Docker Setup**
 To run zashboard via Docker, use the following command:
 
 ```

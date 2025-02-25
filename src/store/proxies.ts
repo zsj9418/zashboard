@@ -211,7 +211,7 @@ const getIPv6FromExtra = (proxy: Proxy) => {
   return (last(ipv6History)?.delay ?? NOT_CONNECTED) > NOT_CONNECTED
 }
 
-const getNowProxyNodeName = (name: string) => {
+export const getNowProxyNodeName = (name: string) => {
   let node = proxyMap.value[name]
 
   if (!name || !node) {
