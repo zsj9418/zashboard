@@ -8,7 +8,7 @@
     <div
       :class="
         twMerge(
-          'scrollbar-hidden flex h-full flex-col gap-2 overflow-x-hidden p-2 text-base-content !transition-all duration-500',
+          'flex h-full flex-col gap-2 overflow-x-hidden p-2 text-base-content !transition-all duration-500 scrollbar-hidden',
           isSidebarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
         )
       "
@@ -66,7 +66,7 @@ import CommonSidebar from '@/components/sidebar/CommonCtrl.vue'
 import ConnectionCtrl from '@/components/sidebar/ConnectionCtrl.tsx'
 import LogsCtrl from '@/components/sidebar/LogsCtrl.tsx'
 import ProxiesCtrl from '@/components/sidebar/ProxiesCtrl.tsx'
-import RulesCtrl from '@/components/sidebar/RulesCtrl.vue'
+import RulesCtrl from '@/components/sidebar/RulesCtrl.tsx'
 import { ROUTE_ICON_MAP, ROUTE_NAME } from '@/constant'
 import { renderRoutes } from '@/helper'
 import { useTooltip } from '@/helper/tooltip'

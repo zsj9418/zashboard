@@ -4,7 +4,12 @@ import { proxiesFilter, useProxies } from '@/composables/proxies'
 import { PROXY_SORT_TYPE, PROXY_TAB_TYPE } from '@/constant'
 import { getMinCardWidth, isMiddleScreen } from '@/helper/utils'
 import { configs, updateConfigs } from '@/store/config'
-import { allProxiesLatencyTest, fetchProxies, proxyProviederList } from '@/store/proxies'
+import {
+  allProxiesLatencyTest,
+  fetchProxies,
+  proxyGroupList,
+  proxyProviederList,
+} from '@/store/proxies'
 import {
   automaticDisconnection,
   collapseGroupMap,
@@ -15,6 +20,7 @@ import {
   proxySortType,
 } from '@/store/settings'
 import {
+  ArrowPathIcon,
   BoltIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -96,13 +102,24 @@ export default defineComponent({
       minProxyCardWidth.value = getMinCardWidth(proxyCardSize.value)
     }
 
+    const tabsWithNumbers = computed(() => {
+      return Object.values(PROXY_TAB_TYPE).map((type) => {
+        return {
+          type,
+          count:
+            type === PROXY_TAB_TYPE.PROXIES
+              ? proxyGroupList.value.length
+              : proxyProviederList.value.length,
+        }
+      })
+    })
     return () => {
       const tabs = (
         <div
           role="tablist"
           class="tabs-boxed tabs tabs-sm"
         >
-          {Object.values(PROXY_TAB_TYPE).map((type) => {
+          {tabsWithNumbers.value.map(({ type, count }) => {
             return (
               <a
                 role="tab"
@@ -110,7 +127,7 @@ export default defineComponent({
                 class={['tab', proxiesTabShow.value === type && 'tab-active']}
                 onClick={() => (proxiesTabShow.value = type)}
               >
-                {t(type)}
+                {t(type)} ({count})
               </a>
             )
           })}
@@ -126,6 +143,14 @@ export default defineComponent({
           ) : (
             t('updateAllProviders')
           )}
+        </button>
+      )
+      const upgradeAllIcon = proxiesTabShow.value === PROXY_TAB_TYPE.PROVIDER && (
+        <button
+          class={twMerge('btn btn-circle btn-sm')}
+          onClick={handlerClickUpdateAllProviders}
+        >
+          <ArrowPathIcon class={['h-4 w-4', isUpgrading.value && 'animate-spin']} />
         </button>
       )
       const modeSelect = configs.value && (
@@ -268,7 +293,7 @@ export default defineComponent({
               {hasProviders.value && (
                 <div class="flex gap-2">
                   {tabs}
-                  {upgradeAll}
+                  {upgradeAllIcon}
                 </div>
               )}
               <div class="flex w-full gap-2">
@@ -284,10 +309,10 @@ export default defineComponent({
         return (
           <div class="flex flex-wrap gap-2 p-2">
             {hasProviders.value && tabs}
-            {upgradeAll}
             {modeSelect}
             {searchInput}
             <div class="flex-1"></div>
+            {upgradeAllIcon}
             {settingsModal}
             {toggleCollapseAll}
             {latencyTestAll}
