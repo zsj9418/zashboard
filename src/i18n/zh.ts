@@ -162,6 +162,8 @@ const zh: LANG_MESSAGE = {
   filteredTotal: '过滤后总数',
   total: '总数',
   aliveTotal: '可用 / 总数',
+  displaySelectedNode: '显示选中节点',
+  displayLatencyNumber: '显示延迟数字',
 }
 
 export default zh

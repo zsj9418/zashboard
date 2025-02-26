@@ -162,6 +162,8 @@ const en = {
   filteredTotal: 'Filtered Total',
   total: 'Total',
   aliveTotal: 'Alive / Total',
+  displaySelectedNode: 'Display Selected Node',
+  displayLatencyNumber: 'Display Latency',
 }
 
 export type LANG_MESSAGE = typeof en

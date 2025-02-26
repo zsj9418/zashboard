@@ -164,6 +164,8 @@ const ru: LANG_MESSAGE = {
   filteredTotal: 'Отфильтровано всего',
   total: 'Всего',
   aliveTotal: 'Живых / всего',
+  displaySelectedNode: 'Отображать выбранный узел',
+  displayLatencyNumber: 'Отображать задержку',
 }
 
 export default ru

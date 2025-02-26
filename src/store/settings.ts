@@ -140,6 +140,10 @@ export const sourceIPLabelList = useStorage<SourceIPLabel[]>('config/source-ip-l
     .map(([key, label]) => ({ key, label, id: uuid() }))
 })
 
+// rules
+export const displayNowNodeInRule = useStorage('config/display-now-node-in-rule', true)
+export const displayLatencyInRule = useStorage('config/display-latency-in-rule', true)
+
 // logs
 export const logRetentionLimit = useStorage<number>('config/log-retention-limit', 1000)
 export const logSearchHistory = useStorage<string[]>('config/log-search-history', [])

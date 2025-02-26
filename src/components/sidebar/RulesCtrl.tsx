@@ -4,10 +4,12 @@ import { rulesTabShow } from '@/composables/rules'
 import { RULE_TAB_TYPE } from '@/constant'
 import { isMiddleScreen } from '@/helper/utils'
 import { fetchRules, ruleProviderList, rules, rulesFilter } from '@/store/rules'
-import { ArrowPathIcon } from '@heroicons/vue/24/outline'
+import { displayLatencyInRule, displayNowNodeInRule } from '@/store/settings'
+import { ArrowPathIcon, WrenchScrewdriverIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
+import DialogWrapper from '../common/DialogWrapper.vue'
 import TextInput from '../common/TextInput.vue'
 
 export default defineComponent({
@@ -20,6 +22,7 @@ export default defineComponent({
   },
   setup(props) {
     const { t } = useI18n()
+    const settingsModel = ref(false)
     const isUpgrading = ref(false)
     const hasProviders = computed(() => {
       return ruleProviderList.value.length > 0
@@ -116,6 +119,37 @@ export default defineComponent({
         />
       )
 
+      const settingsModal = (
+        <>
+          <button
+            class={'btn btn-circle btn-sm'}
+            onClick={() => (settingsModel.value = true)}
+          >
+            <WrenchScrewdriverIcon class="h-4 w-4" />
+          </button>
+          <DialogWrapper v-model={settingsModel.value}>
+            <div class="flex flex-col gap-4 p-2 text-sm">
+              <div class="flex items-center gap-2">
+                {t('displaySelectedNode')}
+                <input
+                  class="toggle"
+                  type="checkbox"
+                  v-model={displayNowNodeInRule.value}
+                />
+              </div>
+              <div class="flex items-center gap-2">
+                {t('displayLatencyNumber')}
+                <input
+                  class="toggle"
+                  type="checkbox"
+                  v-model={displayLatencyInRule.value}
+                />
+              </div>
+            </div>
+          </DialogWrapper>
+        </>
+      )
+
       if (props.horizontal) {
         if (isMiddleScreen.value) {
           return (
@@ -126,7 +160,10 @@ export default defineComponent({
                   {upgradeAllIcon}
                 </div>
               )}
-              <div class="flex w-full gap-2">{searchInput}</div>
+              <div class="flex w-full gap-2">
+                {searchInput}
+                {settingsModal}
+              </div>
             </div>
           )
         }
@@ -136,6 +173,7 @@ export default defineComponent({
             {searchInput}
             <div class="flex-1"></div>
             {upgradeAllIcon}
+            {settingsModal}
           </div>
         )
       }
@@ -144,7 +182,12 @@ export default defineComponent({
         <div class="flex flex-col gap-2 p-2">
           {upgradeAll}
           {hasProviders.value && tabs}
-          {<div class="flex gap-2">{searchInput}</div>}
+          {
+            <div class="flex gap-2">
+              {searchInput}
+              {settingsModal}
+            </div>
+          }
         </div>
       )
     }

@@ -21,7 +21,7 @@
         :name="rule.proxy"
         class="text-xs"
       />
-      <template v-if="proxyNode?.now">
+      <template v-if="proxyNode?.now && displayNowNodeInRule">
         <ArrowRightCircleIcon class="h-4 w-4" />
         <ProxyName
           :name="getNowProxyNodeName(rule.proxy)"
@@ -29,7 +29,7 @@
         />
       </template>
       <span
-        v-if="latency !== NOT_CONNECTED"
+        v-if="latency !== NOT_CONNECTED && displayLatencyInRule"
         :class="latencyColor"
         class="ml-1 text-xs"
       >
@@ -44,6 +44,7 @@ import { NOT_CONNECTED } from '@/constant'
 import { getColorForLatency } from '@/helper'
 import { getLatencyByName, getNowProxyNodeName, proxyMap } from '@/store/proxies'
 import { ruleProviderList } from '@/store/rules'
+import { displayLatencyInRule, displayNowNodeInRule } from '@/store/settings'
 import type { Rule } from '@/types'
 import { ArrowRightCircleIcon } from '@heroicons/vue/24/outline'
 import { computed } from 'vue'

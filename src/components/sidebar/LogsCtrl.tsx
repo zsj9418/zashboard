@@ -1,5 +1,4 @@
 import { LOG_LEVEL } from '@/constant'
-import { isMiddleScreen } from '@/helper/utils'
 import { initLogs, isPaused, logFilter, logLevel, logs } from '@/store/logs'
 import { logRetentionLimit, logSearchHistory } from '@/store/settings'
 import { PauseIcon, PlayIcon, WrenchScrewdriverIcon, XMarkIcon } from '@heroicons/vue/24/outline'
@@ -115,7 +114,7 @@ export default defineComponent({
               {levelSelect}
               {searchInput}
             </div>
-            {!isMiddleScreen.value && <div class="flex-1"></div>}
+            <div class="flex-1"></div>
             {buttons}
           </div>
         )
