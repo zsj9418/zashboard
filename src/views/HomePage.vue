@@ -96,6 +96,7 @@ import { fetchProxies } from '@/store/proxies'
 import { fetchRules } from '@/store/rules'
 import { isSidebarCollapsed } from '@/store/settings'
 import { activeBackend, activeUuid, backendList } from '@/store/setup'
+import type { Backend } from '@/types'
 import { useDocumentVisibility } from '@vueuse/core'
 import { computed, ref, watch, type Component } from 'vue'
 import { RouterView, useRoute, useRouter } from 'vue-router'
@@ -139,20 +140,27 @@ const autoSwitchBackend = async () => {
   const otherEnds = backendList.value.filter((end) => end.uuid !== activeUuid.value)
 
   autoSwitchBackendDialog.value = false
-  const avaliable = (
-    await Promise.all(
-      otherEnds.map(async (end) => {
-        return (await isBackendAvailable(end)) ? end : null
-      }),
-    )
-  ).filter((end) => end !== null)
+  const avaliable = await Promise.race<Backend>(
+    otherEnds.map((end) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject()
+        }, 10000)
+        isBackendAvailable(end).then((res) => {
+          if (res) {
+            resolve(end)
+          }
+        })
+      })
+    }),
+  )
 
-  if (avaliable.length > 0) {
-    activeUuid.value = avaliable[0].uuid
+  if (avaliable) {
+    activeUuid.value = avaliable.uuid
     showNotification({
       content: 'backendSwitchTo',
       params: {
-        backend: getUrlFromBackend(avaliable[0]),
+        backend: getUrlFromBackend(avaliable),
       },
     })
   }
