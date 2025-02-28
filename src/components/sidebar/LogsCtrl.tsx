@@ -90,7 +90,7 @@ export default defineComponent({
       )
 
       const buttons = (
-        <>
+        <div class="flex items-center gap-2">
           {settingsModal}
           <button
             class="btn btn-circle btn-sm"
@@ -104,17 +104,16 @@ export default defineComponent({
           >
             <XMarkIcon class="h-4 w-4" />
           </button>
-        </>
+        </div>
       )
 
       if (props.horizontal) {
         return (
-          <div class="flex items-center gap-2 p-2">
-            <div class="join w-96">
+          <div class="flex items-center justify-between gap-2 p-2">
+            <div class="join max-w-96 flex-1">
               {levelSelect}
               {searchInput}
             </div>
-            <div class="flex-1"></div>
             {buttons}
           </div>
         )
