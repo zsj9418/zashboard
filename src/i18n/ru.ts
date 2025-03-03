@@ -34,6 +34,7 @@ const ru: LANG_MESSAGE = {
   connectTime: 'Время',
   sourcePort: 'Исходный порт',
   destination: 'Назначение',
+  transferType: 'Тип передачи',
   inboundUser: 'Входящий пользователь',
   dl: 'Загр',
   ul: 'Отдч',

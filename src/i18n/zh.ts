@@ -34,6 +34,7 @@ const zh: LANG_MESSAGE = {
   connectTime: '连接时间',
   sourcePort: '源端口',
   destination: '目标',
+  transferType: '传递类型',
   inboundUser: '入站用户',
   dl: '下载',
   ul: '上传',

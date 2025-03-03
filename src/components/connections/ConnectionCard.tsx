@@ -7,6 +7,7 @@ import {
   getIPLabelFromMap,
   getNetworkTypeFromConnection,
   getProcessFromConnection,
+  getTransferTypeFromConnection,
   prettyBytesHelper,
 } from '@/helper'
 import { connectionCardLines, proxyChainDirection } from '@/store/settings'
@@ -111,6 +112,9 @@ export default defineComponent<{
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (
           <div class="gap-1 whitespace-nowrap">{fromNow(conn.start)}</div>
+        ),
+        [CONNECTIONS_TABLE_ACCESSOR_KEY.TransferType]: (
+          <div class="gap-1 whitespace-nowrap">{getTransferTypeFromConnection(conn)}</div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Close]: (
           <button

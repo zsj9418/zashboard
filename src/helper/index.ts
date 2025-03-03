@@ -169,6 +169,18 @@ export const getDestinationFromConnection = (connection: Connection) => {
   )
 }
 
+export const getTransferTypeFromConnection = (connection: Connection) => {
+  const destinationIP = connection.metadata.destinationIP
+
+  if (!destinationIP) {
+    return 'FQDN'
+  } else if (destinationIP.includes(':')) {
+    return 'IPv6'
+  } else {
+    return 'IPv4'
+  }
+}
+
 export const getNetworkTypeFromConnection = (connection: Connection) => {
   return `${connection.metadata.type} | ${connection.metadata.network}`
 }

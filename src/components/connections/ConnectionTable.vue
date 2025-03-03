@@ -161,6 +161,7 @@ import {
   getIPLabelFromMap,
   getNetworkTypeFromConnection,
   getProcessFromConnection,
+  getTransferTypeFromConnection,
   prettyBytesHelper,
 } from '@/helper'
 import { renderConnections } from '@/store/connections'
@@ -358,6 +359,11 @@ const columns: ColumnDef<Connection>[] = [
     header: () => t('destination'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.Destination,
     accessorFn: getDestinationFromConnection,
+  },
+  {
+    header: () => t('transferType'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.TransferType,
+    accessorFn: (original) => getTransferTypeFromConnection(original),
   },
 ]
 

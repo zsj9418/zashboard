@@ -32,6 +32,7 @@ const en = {
   connectTime: 'Time',
   sourcePort: 'Source Port',
   destination: 'Destination',
+  transferType: 'Transfer Type',
   inboundUser: 'Inbound User',
   dl: 'DL',
   ul: 'UL',
