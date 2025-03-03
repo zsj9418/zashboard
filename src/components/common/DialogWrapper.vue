@@ -6,7 +6,7 @@
   >
     <div class="modal-box relative max-h-[90dvh] overflow-hidden p-0 max-md:max-h-[70dvh]">
       <form method="dialog">
-        <button class="btn btn-circle btn-ghost btn-xs absolute right-1 top-1 z-10 outline-none">
+        <button class="btn btn-circle btn-ghost btn-xs absolute top-1 right-1 z-10 outline-hidden">
           <XMarkIcon class="h-4 w-4" />
         </button>
       </form>

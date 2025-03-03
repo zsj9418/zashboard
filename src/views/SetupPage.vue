@@ -1,12 +1,12 @@
 <template>
   <div
-    class="h-full w-full items-center justify-center overflow-auto bg-base-200/40 sm:flex"
+    class="bg-base-200/50 h-full w-full items-center justify-center overflow-auto sm:flex"
     @keydown.enter="handleSubmit(form)"
   >
-    <div class="absolute right-4 top-4 max-sm:hidden">
+    <div class="absolute top-4 right-4 max-sm:hidden">
       <ImportSettings />
     </div>
-    <div class="absolute bottom-4 right-4 max-sm:hidden">
+    <div class="absolute right-4 bottom-4 max-sm:hidden">
       <LanguageSelect />
     </div>
     <div class="card mx-auto w-96 max-w-[90%] gap-2 px-6 py-2 max-sm:my-4">
@@ -16,7 +16,7 @@
           <span class="label-text">{{ $t('protocol') }}</span>
         </label>
         <select
-          class="select select-bordered select-sm w-full"
+          class="select select-sm w-full"
           v-model="form.protocol"
         >
           <option value="http">HTTP</option>
@@ -64,7 +64,7 @@
         </label>
         <input
           type="password"
-          class="input input-sm input-bordered w-full"
+          class="input input-sm w-full"
           v-model="form.password"
         />
       </div>
@@ -114,7 +114,7 @@
         </template>
       </Draggable>
       <LanguageSelect class="mt-4 sm:hidden" />
-      <div class="absolute right-2 top-2 sm:hidden">
+      <div class="absolute top-2 right-2 sm:hidden">
         <ImportSettings />
       </div>
     </div>

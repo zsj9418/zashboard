@@ -1,26 +1,21 @@
 <template>
-  <div class="drawer-side z-30 bg-base-200 max-md:hidden">
-    <label
-      for="sidebar"
-      aria-label="close sidebar"
-      class="drawer-overlay"
-    ></label>
-    <div
-      :class="
-        twMerge(
-          'flex h-full flex-col gap-2 overflow-x-hidden p-2 text-base-content !transition-all duration-500 scrollbar-hidden',
-          isSidebarCollapsed ? 'w-18 px-0' : 'w-[21rem]',
-        )
-      "
-    >
-      <ul class="menu flex-1">
+  <div
+    class="bg-base-200 text-base-content scrollbar-hidden h-full overflow-x-hidden p-2 transition-all max-md:hidden"
+    :class="isSidebarCollapsed ? 'w-18 px-0' : 'w-[21rem]'"
+  >
+    <div :class="twMerge('flex h-full flex-col gap-2', isSidebarCollapsed ? 'w-18' : 'w-xs')">
+      <ul class="menu w-full flex-1">
         <li
           v-for="r in renderRoutes"
           :key="r"
           @mouseenter="(e) => mouseenterHandler(e, r)"
         >
           <a
-            :class="r === route.name ? 'active' : 'inactive'"
+            :class="[
+              r === route.name ? 'menu-active' : '',
+              isSidebarCollapsed && 'justify-center',
+              'h-8',
+            ]"
             @click="() => router.push({ name: r })"
           >
             <component
@@ -48,7 +43,10 @@
         </div>
       </template>
       <template v-else>
-        <OverviewCarousel v-if="route.name !== ROUTE_NAME.overview" />
+        <OverviewCarousel
+          v-if="route.name !== ROUTE_NAME.overview"
+          class="w-xs"
+        />
         <div class="card">
           <component
             v-if="sidebarComp"

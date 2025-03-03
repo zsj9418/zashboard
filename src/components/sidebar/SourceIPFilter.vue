@@ -1,7 +1,7 @@
 <template>
   <select
     v-if="!horizontal"
-    class="join-item select select-bordered select-sm"
+    class="join-item select select-sm"
     v-model="sourceIPFilter"
   >
     <option :value="null">{{ $t('allSourceIP') }}</option>

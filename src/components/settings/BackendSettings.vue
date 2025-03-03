@@ -1,6 +1,6 @@
 <template>
   <!-- backend -->
-  <div class="card card-compact">
+  <div class="card">
     <div class="card-title px-4 pt-4">
       {{ $t('backend') }}
       <BackendVersion class="text-sm font-normal" />
@@ -10,7 +10,7 @@
 
       <template v-if="!isSingBox && configs">
         <div class="divider"></div>
-        <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-3">
+        <div class="grid max-w-3xl grid-cols-2 gap-2 lg:grid-cols-3">
           <div
             class="flex items-center gap-2"
             v-for="portConfig in portList"
@@ -18,7 +18,7 @@
           >
             <span class="shrink-0"> {{ $t(portConfig.label) }} </span>
             <input
-              class="input input-sm input-bordered w-20 sm:w-24"
+              class="input input-sm w-20 sm:w-24"
               type="number"
               v-model="configs[portConfig.key as keyof Config]"
               @change="
@@ -27,7 +27,7 @@
             />
           </div>
         </div>
-        <div class="grid max-w-screen-md grid-cols-2 gap-2 lg:grid-cols-4">
+        <div class="grid max-w-3xl grid-cols-2 gap-2 lg:grid-cols-4">
           <div
             class="flex items-center gap-2"
             v-if="configs?.tun"
@@ -75,7 +75,7 @@
       </template>
 
       <div
-        class="grid max-w-screen-lg grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5"
+        class="grid max-w-4xl grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-5"
         v-if="version"
       >
         <template v-if="!isSingBox">
@@ -87,7 +87,7 @@
               v-if="isCoreUpdateAvailable"
               class="indicator-item flex"
             >
-              <span class="badge badge-xs absolute animate-ping bg-secondary"></span>
+              <span class="badge badge-xs bg-secondary absolute animate-ping"></span>
               <span class="badge badge-xs bg-secondary"></span>
             </span>
             <button

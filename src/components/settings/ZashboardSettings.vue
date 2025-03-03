@@ -1,14 +1,14 @@
 <template>
   <!-- dashboard -->
-  <div class="card card-compact">
+  <div class="card">
     <div class="card-title px-4 pt-4">
       <div class="indicator">
         <span
           v-if="isUIUpdateAvailable"
           class="indicator-item"
         >
-          <span class="badge badge-xs absolute animate-ping bg-secondary"></span>
-          <span class="badge badge-xs absolute bg-secondary"></span>
+          <span class="badge badge-xs bg-secondary absolute animate-ping"></span>
+          <span class="badge badge-xs bg-secondary absolute"></span>
         </span>
         <a
           href="https://github.com/Zephyruso/zashboard"
@@ -21,7 +21,7 @@
         </a>
       </div>
       <button
-        class="btn btn-sm absolute right-2 top-2"
+        class="btn btn-sm absolute top-2 right-2"
         @click="refreshPages"
         v-if="isPWA"
       >
@@ -35,7 +35,7 @@
           <div class="flex items-center gap-2">
             {{ $t('theme') }}
             <select
-              class="select select-bordered select-sm w-48"
+              class="select select-sm w-48"
               v-model="theme"
             >
               <option
@@ -51,7 +51,7 @@
           <div class="flex items-center gap-2">
             {{ $t('fonts') }}
             <select
-              class="select select-bordered select-sm w-48"
+              class="select select-sm w-48"
               v-model="font"
             >
               <option
@@ -126,7 +126,7 @@
           v-model="autoUpgrade"
         />
       </div>
-      <div class="grid max-w-screen-md grid-cols-2 gap-2 sm:grid-cols-4">
+      <div class="grid max-w-3xl grid-cols-2 gap-2 sm:grid-cols-4">
         <template v-if="!isSingBox">
           <button
             :class="twMerge('btn btn-primary btn-sm', isUIUpgrading ? 'animate-pulse' : '')"

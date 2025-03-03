@@ -9,7 +9,7 @@
     <div :style="{ height: `${totalSize}px` }">
       <table
         :class="[
-          'table table-zebra rounded-none shadow-md',
+          'table-zebra table rounded-none shadow-md',
           sizeOfTable,
           isManualTable && 'table-fixed',
         ]"
@@ -19,7 +19,7 @@
           }
         "
       >
-        <thead class="sticky -top-2 z-10 bg-base-100">
+        <thead class="bg-base-100 sticky -top-2 z-10">
           <tr
             v-for="headerGroup in tanstackTable.getHeaderGroups()"
             :key="headerGroup.id"
@@ -72,7 +72,7 @@
                 @dblclick="() => header.column.resetSize()"
                 @mousedown="(e) => header.getResizeHandler()(e)"
                 @touchstart="(e) => header.getResizeHandler()(e)"
-                class="resizer absolute right-0 top-0 h-full w-1 cursor-ew-resize bg-neutral"
+                class="resizer bg-neutral absolute top-0 right-0 h-full w-1 cursor-ew-resize"
               />
             </th>
           </tr>
@@ -85,7 +85,7 @@
               height: `${virtualRow.size}px`,
               transform: `translateY(${virtualRow.start - index * virtualRow.size}px)`,
             }"
-            class="cursor-pointer bg-base-100 hover:!bg-primary hover:text-primary-content"
+            class="bg-base-100 hover:bg-primary! hover:text-primary-content cursor-pointer"
             @click="handlerClickRow(rows[virtualRow.index])"
           >
             <td
@@ -95,7 +95,7 @@
                 isManualTable
                   ? 'truncate text-sm'
                   : twMerge(
-                      'whitespace-nowrap text-sm',
+                      'text-sm whitespace-nowrap',
                       [
                         CONNECTIONS_TABLE_ACCESSOR_KEY.Download,
                         CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed,
@@ -103,10 +103,9 @@
                         CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed,
                       ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Host ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-80 truncate',
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-lg truncate',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Chains ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
-                        'max-w-[36rem] truncate',
+                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xl truncate',
                     ),
               ]"
             >

@@ -1,5 +1,5 @@
 <template>
-  <div class="relative h-28 rounded-lg bg-base-200/40 p-2 text-sm">
+  <div class="bg-base-200/50 relative h-28 rounded-lg p-2 text-sm">
     <div class="flex flex-col">
       <div>
         <span class="inline-block w-28">Baidu </span>
@@ -30,7 +30,7 @@
       </div>
     </div>
     <button
-      class="btn btn-circle btn-sm absolute bottom-2 right-2"
+      class="btn btn-circle btn-sm absolute right-2 bottom-2"
       @click="getLatency"
     >
       <BoltIcon class="h-4 w-4" />

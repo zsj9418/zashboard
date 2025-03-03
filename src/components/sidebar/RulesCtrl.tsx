@@ -72,14 +72,18 @@ export default defineComponent({
       const tabs = (
         <div
           role="tablist"
-          class="tabs-boxed tabs tabs-sm"
+          class="tabs-box tabs tabs-xs"
         >
           {tabsWithNumbers.value.map(({ type, count }) => {
             return (
               <a
                 role="tab"
                 key={type}
-                class={['tab', rulesTabShow.value === type && 'tab-active']}
+                class={[
+                  'tab',
+                  rulesTabShow.value === type && 'tab-active',
+                  !props.horizontal && 'flex-1',
+                ]}
                 onClick={() => (rulesTabShow.value = type)}
               >
                 {t(type)} ({count})

@@ -40,7 +40,7 @@ export default defineComponent({
     return () => {
       const levelSelect = (
         <select
-          class={['join-item select select-bordered select-sm', !props.horizontal && 'w-full']}
+          class={['join-item select select-sm', !props.horizontal && 'w-full']}
           v-model={logLevel.value}
           onChange={initLogs}
         >
@@ -78,7 +78,7 @@ export default defineComponent({
               <div class="flex items-center gap-2">
                 {t('logRetentionLimit')}
                 <input
-                  class="input input-sm input-bordered w-20"
+                  class="input input-sm w-20"
                   type="number"
                   max="9999"
                   v-model={logRetentionLimit.value}

@@ -2,7 +2,7 @@
   <div
     ref="previewRef"
     class="flex flex-wrap"
-    :class="[showDots ? 'gap-1 pt-3' : 'gap-2 pb-1 pt-4']"
+    :class="[showDots ? 'gap-1 pt-3' : 'gap-2 pt-4 pb-1']"
   >
     <template v-if="showDots">
       <div
@@ -22,7 +22,7 @@
     </template>
     <div
       v-else
-      class="flex flex-1 items-center justify-center overflow-hidden rounded-2xl [&>*]:h-2"
+      class="flex flex-1 items-center justify-center overflow-hidden rounded-2xl *:h-2"
     >
       <div
         :class="getBgColor(lowLatency - 1)"

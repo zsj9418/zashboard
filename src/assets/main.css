@@ -1,54 +1,90 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-@font-face {
-  font-family: 'NotoEmoji';
-  src: url('./NotoColorEmoji-flagsonly.ttf') format('truetype');
+@import 'tailwindcss';
+@plugin "daisyui" {
+  themes: all;
 }
 
-@layer components {
-  .card,
-  .collapse {
-    background-color: var(--fallback-b1, oklch(var(--b1) / var(--tw-bg-opacity, 1)));
-    @apply rounded-lg shadow-md;
-  }
+@config '../../tailwind.config.ts';
 
-  .table tr {
+@utility card {
+  @apply bg-base-100 rounded-lg shadow-md;
+  .card-body {
+    @apply p-4;
+  }
+}
+
+@utility collapse {
+  @apply bg-base-100 rounded-lg shadow-md;
+}
+
+@utility select {
+  @apply w-auto;
+}
+
+@utility btn {
+  @apply border-none;
+}
+
+@utility tabs {
+  .tab {
+    @apply px-2;
+  }
+  .tab.tab-active {
+    @apply bg-primary text-primary-content;
+  }
+}
+
+@utility table {
+  & tr {
     @apply border-b-0;
+  }
+}
+
+.select.select-sm,
+.input.input-sm,
+.btn.btn-sm,
+.tabs.tabs-xs .tab {
+  @apply text-sm;
+}
+
+@layer utilities {
+  @font-face {
+    font-family: 'NotoEmoji';
+    src: url('./NotoColorEmoji-flagsonly.ttf') format('truetype');
   }
 }
 
 @for $i from 0 to 100 {
   .custom-background.custom-background-$(i) {
     .bg-base-100,
-    .bg-base-200,
     .bg-primary,
     .card,
     .collapse,
-    .table,
-    .drawer-side,
-    .tabs,
-    .btm-nav,
-    .tab.tab-active,
-    .table tbody tr {
-      --tw-border-opacity: calc($(i) / 100);
-      --tw-bg-opacity: calc($(i) / 100);
+    .tabs {
+      @apply bg-base-100/$(i);
+    }
+
+    .bg-base-200,
+    .dock,
+    .table tbody tr:nth-child(even) {
+      @apply bg-base-200/$(i);
+    }
+
+    .bg-primary:not(.tab.tab-active) {
+      @apply bg-primary/$(i);
     }
 
     .bg-primary .latency-tag.bg-base-100 {
-      --tw-border-opacity: 1;
-      --tw-bg-opacity: 1;
+      @apply bg-base-300/$(i);
     }
 
-    .drawer-content.bg-base-200\/40 {
+    .home-page.bg-base-200\/50 {
       background-color: transparent;
     }
   }
 }
 
 .tippy-box {
-  @apply z-[9999] bg-neutral text-neutral-content shadow-md;
+  @apply bg-neutral text-neutral-content z-9999 shadow-md;
 }
 
 .tippy-box[data-placement^='top'] > .tippy-arrow:before {

@@ -2,7 +2,7 @@
   <div class="flex items-center gap-1">
     <img
       :src="isSingBox ? SingBoxLogo : MetacubexLogo"
-      class="h-4 w-4 rounded-sm"
+      class="h-4 w-4 rounded-xs"
     />
     {{ version }}
   </div>

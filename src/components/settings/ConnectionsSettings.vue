@@ -1,6 +1,6 @@
 <template>
   <!-- connections -->
-  <div class="card card-compact">
+  <div class="card">
     <div class="card-title px-4 pt-4">
       {{ $t('connections') }}
     </div>
@@ -11,7 +11,7 @@
             {{ $t('connectionStyle') }}
           </span>
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="useConnectionCard"
           >
             <option :value="false">
@@ -25,7 +25,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyChainDirection') }}
           <select
-            class="select select-bordered select-sm w-24"
+            class="select select-sm w-24"
             v-model="proxyChainDirection"
           >
             <option
@@ -45,7 +45,7 @@
         <div class="flex items-center gap-2">
           <div>{{ $t('tableWidthMode') }}</div>
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="tableWidthMode"
           >
             <option
@@ -60,7 +60,7 @@
         <div class="flex items-center gap-2">
           <div>{{ $t('tableSize') }}</div>
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="tableSize"
           >
             <option

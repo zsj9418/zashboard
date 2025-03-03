@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="h-full overflow-y-scroll p-2 sm:pr-1"
-    :class="displayTwoColumns && 'max-sm:scrollbar-hidden'"
-  >
+  <div class="max-sm:scrollbar-hidden h-full overflow-y-scroll p-2 sm:pr-1">
     <template v-if="displayTwoColumns">
       <div class="grid grid-cols-2 gap-1">
         <div

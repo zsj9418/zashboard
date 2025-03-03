@@ -2,13 +2,13 @@
   <div class="relative">
     <XMarkIcon
       v-if="beforeClose && clearable"
-      class="absolute right-2 top-2 z-10 h-4 w-3 cursor-pointer hover:scale-125"
+      class="absolute top-2 right-2 z-10 h-4 w-3 cursor-pointer hover:scale-125"
       @click="clearInput"
     />
     <input
       v-model="inputValue"
       type="text"
-      :class="['input input-sm join-item input-bordered w-full', { 'pr-6': clearable }]"
+      :class="['input input-sm join-item w-full', { 'pr-6': clearable }]"
       :placeholder="placeholder || ''"
       :name="name || ''"
       :autocomplete="autocomplete || ''"
@@ -18,7 +18,7 @@
     />
     <XMarkIcon
       v-if="!beforeClose && clearable"
-      class="absolute right-2 top-2 z-10 h-4 w-3 cursor-pointer hover:scale-125"
+      class="absolute top-2 right-2 z-10 h-4 w-3 cursor-pointer hover:scale-125"
       @click="clearInput"
     />
   </div>

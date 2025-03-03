@@ -7,7 +7,7 @@
     />
     <select
       v-model="form.type"
-      class="join-item select select-bordered select-sm"
+      class="join-item select select-sm"
     >
       <option value="A">A</option>
       <option value="AAAA">AAAA</option>

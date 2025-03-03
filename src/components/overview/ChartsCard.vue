@@ -1,6 +1,6 @@
 <template>
   <!-- overview -->
-  <div class="card card-compact w-full">
+  <div class="card w-full">
     <div class="card-title px-4 pt-4">
       {{ $t('overview') }}
     </div>

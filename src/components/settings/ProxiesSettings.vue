@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-compact">
+  <div class="card">
     <div class="card-title px-4 pt-4">
       {{ $t('proxies') }}
     </div>
@@ -17,7 +17,7 @@
           <span> {{ $t('speedtestTimeout') }} </span>
           <input
             type="number"
-            class="input input-sm input-bordered w-20"
+            class="input input-sm w-20"
             v-model="speedtestTimeout"
           />
           ms
@@ -26,7 +26,7 @@
           <span> {{ $t('lowLatencyDesc') }} </span>
           <input
             type="number"
-            class="input input-sm input-bordered w-20"
+            class="input input-sm w-20"
             v-model="lowLatency"
           />
           ms
@@ -35,7 +35,7 @@
           <span> {{ $t('mediumLatencyDesc') }} </span>
           <input
             type="number"
-            class="input input-sm input-bordered w-20"
+            class="input input-sm w-20"
             v-model="mediumLatency"
           />
           ms
@@ -74,7 +74,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyPreviewType') }}
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="proxyPreviewType"
           >
             <option
@@ -89,7 +89,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyCountMode') }}
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="proxyCountMode"
           >
             <option
@@ -104,7 +104,7 @@
         <div class="flex items-center gap-2">
           {{ $t('proxyCardSize') }}
           <select
-            class="select select-bordered select-sm min-w-24"
+            class="select select-sm min-w-24"
             v-model="proxyCardSize"
             @change="handlerProxyCardSizeChange"
           >
@@ -138,7 +138,7 @@
             {{ $t('iconSize') }}
             <input
               type="number"
-              class="input input-sm input-bordered w-20"
+              class="input input-sm w-20"
               v-model="iconSize"
             />
           </div>
@@ -146,7 +146,7 @@
             {{ $t('iconMarginRight') }}
             <input
               type="number"
-              class="input input-sm input-bordered w-20"
+              class="input input-sm w-20"
               v-model="iconMarginRight"
             />
           </div>

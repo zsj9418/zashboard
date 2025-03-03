@@ -60,7 +60,7 @@ export default defineComponent({
           <span class="shrink-0">{t('sortBy')}</span>
           <div class="join flex-1 max-md:w-0">
             <select
-              class="join-item select select-bordered select-sm flex-1 max-md:w-0"
+              class="join-item select select-sm flex-1 max-md:w-0"
               v-model={connectionSortType.value}
             >
               {(Object.values(SORT_TYPE) as string[]).map((opt) => (
@@ -202,7 +202,10 @@ export default defineComponent({
 
       return (
         <div class="flex flex-wrap items-center gap-2 p-2">
-          <ConnectionTabs class="w-full" />
+          <ConnectionTabs
+            class="w-full"
+            horizental={false}
+          />
           <div class="flex w-full items-center gap-2">
             <SourceIPFilter class="w-40 flex-1" />
             {settingsModal}

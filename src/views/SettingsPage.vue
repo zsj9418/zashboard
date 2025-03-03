@@ -4,7 +4,7 @@
 
     <template v-if="!splitOverviewPage">
       <!-- overview -->
-      <div class="card card-compact">
+      <div class="card">
         <div class="card-title px-4 pt-4">
           {{ $t('overview') }}
         </div>
@@ -33,7 +33,7 @@
     <ConnectionsSettings />
 
     <!-- overview -->
-    <div class="card card-compact">
+    <div class="card">
       <div class="card-title px-4 pt-4">
         {{ $t('overview') }}
       </div>

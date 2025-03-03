@@ -3,7 +3,7 @@
     ref="cardRef"
     :class="
       twMerge(
-        'flex cursor-pointer flex-col items-start gap-[2px] rounded-md bg-base-200',
+        'bg-base-200 flex cursor-pointer flex-col items-start gap-[2px] rounded-md',
         active ? 'bg-primary text-primary-content' : 'sm:hover:bg-base-300',
         isSmallCard ? 'p-1' : 'p-2',
       )
@@ -26,7 +26,7 @@
       </span>
     </div>
 
-    <div class="flex h-4 w-full select-none items-center justify-between">
+    <div class="flex h-4 w-full items-center justify-between select-none">
       <span
         :class="`truncate text-xs tracking-tight ${active ? 'text-primary-content' : 'text-base-content/60'}`"
         @mouseenter="checkTruncation"
@@ -34,7 +34,7 @@
         {{ typeDescription }}
       </span>
       <LatencyTag
-        :class="[isSmallCard && '!h-4 !w-8', 'shrink-0']"
+        :class="[isSmallCard && 'h-4! w-8!', 'shrink-0']"
         :name="node.name"
         :loading="isLatencyTesting"
         :group-name="groupName"

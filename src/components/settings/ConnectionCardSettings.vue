@@ -22,7 +22,7 @@
         <PlusIcon class="h-4 w-4" />
       </button>
     </div>
-    <div class="relative flex flex-col rounded">
+    <div class="relative flex flex-col rounded-sm">
       <div
         v-for="(_, index) in connectionCardLines"
         :key="index"
@@ -45,7 +45,7 @@
         >
           <template #item="{ element }">
             <div
-              class="flex h-8 cursor-move select-none items-center rounded bg-neutral px-2 text-neutral-content"
+              class="bg-neutral text-neutral-content flex h-8 cursor-move items-center rounded-sm px-2 select-none"
             >
               {{ $t(element) }}
             </div>
@@ -63,7 +63,7 @@
       >
         <template #item="{ element }">
           <div
-            class="flex h-8 cursor-move select-none items-center rounded bg-base-200 px-2 text-base-content"
+            class="bg-base-200 text-base-content flex h-8 cursor-move items-center rounded-sm px-2 select-none"
           >
             {{ $t(element) }}
           </div>

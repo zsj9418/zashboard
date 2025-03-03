@@ -68,7 +68,7 @@ const en = {
   backend: 'Backend',
   tunMode: 'Tun Mode',
   upgradeCore: 'Upgrade Core',
-  updateGeoDatabase: 'Update Geo Database',
+  updateGeoDatabase: 'Update Geo',
   truncateProxyName: 'Truncate Proxy Name',
   sourceIPLabels: 'Source IP Labels',
   proxyPreviewType: 'Proxies Preview Type',

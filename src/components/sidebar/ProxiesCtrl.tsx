@@ -117,14 +117,18 @@ export default defineComponent({
       const tabs = (
         <div
           role="tablist"
-          class="tabs-boxed tabs tabs-sm"
+          class="tabs-box tabs tabs-xs"
         >
           {tabsWithNumbers.value.map(({ type, count }) => {
             return (
               <a
                 role="tab"
                 key={type}
-                class={['tab', proxiesTabShow.value === type && 'tab-active']}
+                class={[
+                  'tab',
+                  proxiesTabShow.value === type && 'tab-active',
+                  !props.horizontal && 'flex-1',
+                ]}
                 onClick={() => (proxiesTabShow.value = type)}
               >
                 {t(type)} ({count})
@@ -156,7 +160,7 @@ export default defineComponent({
       const modeSelect = configs.value && (
         <select
           class={[
-            'select select-bordered select-sm min-w-24',
+            'select select-sm min-w-24',
             props.horizontal ? 'inline-block max-md:flex-1 md:min-w-40' : 'w-0 flex-1',
           ]}
           v-model={configs.value.mode}
@@ -176,7 +180,7 @@ export default defineComponent({
       )
       const sort = (
         <select
-          class={['select select-bordered select-sm']}
+          class={['select select-sm']}
           v-model={proxySortType.value}
         >
           {Object.values(PROXY_SORT_TYPE).map((type) => {
@@ -269,7 +273,7 @@ export default defineComponent({
                 {t('minProxyCardWidth')}
                 <div class="join">
                   <input
-                    class="input input-sm join-item input-bordered w-20"
+                    class="input input-sm join-item w-20"
                     type="number"
                     v-model={minProxyCardWidth.value}
                   />

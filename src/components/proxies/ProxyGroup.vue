@@ -10,7 +10,7 @@
             :name="proxyGroup.name"
             size="large"
           />
-          <span class="text-xs text-base-content/60">
+          <span class="text-base-content/60 text-xs">
             : {{ proxyGroup.type }} ({{ proxiesCount }})
           </span>
           <button
@@ -29,7 +29,7 @@
           </button>
         </div>
         <LatencyTag
-          :class="twMerge('z-10 bg-base-200/40 hover:shadow')"
+          :class="twMerge('bg-base-200/50 z-10 hover:shadow-sm')"
           :loading="isLatencyTesting"
           :name="proxyGroup.now"
           :group-name="proxyGroup.name"
@@ -37,7 +37,7 @@
         />
       </div>
       <div
-        class="mt-[2px] flex items-center gap-2 text-base-content/80"
+        class="text-base-content/80 mt-[2px] flex items-center gap-2"
         @contextmenu.prevent.stop="handlerLatencyTest"
       >
         <div class="flex flex-1 items-center gap-1 text-sm">

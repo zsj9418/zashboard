@@ -12,15 +12,13 @@
     <div
       class="card overflow-hidden will-change-[height,width,transform]"
       :class="[
-        activeMode ? `fixed z-50` : 'absolute left-0 top-0 h-auto w-full',
+        activeMode ? `fixed z-50` : 'absolute top-0 left-0 h-auto w-full',
         transitionAll && 'transition-all duration-200',
+        modalMode && 'w-[calc(100vw-1rem)]',
       ]"
       :style="[
-        modalMode && {
-          width: 'calc(100vw - 1rem)',
-        },
         activeMode && {
-          '--tw-bg-opacity': 1,
+          background: 'var(--color-base-100)',
         },
         activeMode && styleForCard,
         activeMode &&
@@ -37,17 +35,17 @@
           v-if="proxyGroup.icon"
           :icon="proxyGroup.icon"
           size="small"
-          class="absolute right-2 top-2 z-[-1] h-10 !w-10"
+          class="absolute top-2 right-2 z-[-1] h-10 w-10!"
         />
         <div class="text-md truncate">
           {{ proxyGroup.name }}
         </div>
-        <div class="h-4 truncate text-xs text-base-content/80">
+        <div class="text-base-content/80 h-4 truncate text-xs">
           {{ proxyGroup.now }}
         </div>
 
         <div class="flex h-4 items-center justify-between gap-1">
-          <span class="text-xs text-base-content/60">
+          <span class="text-base-content/60 text-xs">
             {{ proxyGroup.type }} ({{ proxiesCount }})
           </span>
           <button
@@ -66,7 +64,7 @@
           </button>
           <div class="flex-1"></div>
           <LatencyTag
-            :class="twMerge('z-10 bg-base-200/40 hover:shadow')"
+            :class="twMerge('bg-base-200/50 z-10 hover:shadow-sm')"
             :loading="isLatencyTesting"
             :name="proxyGroup.now"
             :group-name="proxyGroup.name"
@@ -77,7 +75,7 @@
 
       <div
         v-if="modalMode"
-        class="grid flex-1 grid-cols-2 gap-2 overflow-y-auto overflow-x-hidden p-2"
+        class="grid flex-1 grid-cols-2 gap-2 overflow-x-hidden overflow-y-auto p-2"
         style="max-height: calc(50dvh - 5rem)"
       >
         <ProxyNodeCard

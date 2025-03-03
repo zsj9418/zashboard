@@ -1,20 +1,14 @@
 <template>
-  <div class="w-128 drawer md:drawer-open">
-    <input
-      id="sidebar"
-      type="checkbox"
-      class="drawer-toggle"
-    />
-
+  <div class="bg-base-200/50 home-page flex size-full">
     <SideBar />
 
     <div
-      class="drawer-content flex h-full w-full flex-col overflow-hidden bg-base-200/40 md:relative md:w-auto"
+      class="flex flex-1 flex-col overflow-hidden"
       ref="swiperRef"
     >
       <div
         v-if="ctrlComp && isSidebarCollapsed"
-        class="w-full bg-base-100"
+        class="bg-base-100 w-full"
       >
         <component
           :is="ctrlComp"
@@ -34,18 +28,18 @@
         class="shrink-0 md:hidden"
         :class="isPWA ? 'max-md:h-[5.5rem]' : 'max-md:h-14'"
       />
-      <div :class="`btm-nav z-30 bg-base-200 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`">
+      <div :class="`dock dock-sm bg-base-200 z-30 md:hidden ${isPWA ? 'h-[5.5rem] pb-8' : 'h-14'}`">
         <button
           v-for="r in renderRoutes"
           :key="r"
           @click="router.push({ name: r })"
-          :class="r === route.name ? 'active bg-inherit' : ''"
+          :class="r === route.name && 'dock-active'"
         >
           <component
             :is="ROUTE_ICON_MAP[r]"
-            class="h-5 w-5"
+            class="size-[1.2em]"
           />
-          <span class="text-xs">
+          <span class="dock-label">
             {{ $t(r) }}
           </span>
         </button>
