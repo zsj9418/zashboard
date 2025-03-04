@@ -8,6 +8,7 @@ import 'tippy.js/dist/tippy.css'
 import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
+import './assets/theme.css'
 import { i18n } from './i18n'
 import router from './router'
 

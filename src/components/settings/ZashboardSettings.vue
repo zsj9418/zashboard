@@ -215,6 +215,8 @@ const themes = [
   'default',
   'light',
   'dark',
+  'light-daisyui-v5',
+  'dark-daisyui-v5',
   'cupcake',
   'bumblebee',
   'emerald',
