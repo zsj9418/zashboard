@@ -5,6 +5,7 @@
 
 @plugin "daisyui/theme" {
   name: 'dark';
+  prefersdark: true;
   --color-primary: oklch(65.69% 0.196 275.75);
   --color-primary-content: #050617;
   --color-secondary: oklch(74.8% 0.26 342.55);
@@ -29,6 +30,7 @@
 
 @plugin "daisyui/theme" {
   name: 'light';
+  default: true;
   --color-primary: oklch(49.12% 0.3096 275.75);
   --color-primary-content: #d4dbff;
   --color-secondary: oklch(69.71% 0.329 342.55);
