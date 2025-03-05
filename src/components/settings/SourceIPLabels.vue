@@ -18,14 +18,14 @@
         >
           <ChevronUpDownIcon class="drag-handle h-4 w-4 shrink-0 cursor-grab" />
           <TextInput
-            class="w-36 sm:w-64"
+            class="w-36 max-w-64 flex-1"
             :modelValue="key"
             :menus="sourceList"
             @change="(e) => handlerLabelKeyChange(id, 'key', e)"
           />
           <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
           <TextInput
-            class="w-0 max-w-40 flex-1"
+            class="w-28 sm:w-40"
             :modelValue="label"
             @change="(e) => handlerLabelKeyChange(id, 'label', e)"
           />
@@ -42,14 +42,14 @@
     <div class="flex w-full items-center gap-2">
       <TagIcon class="h-4 w-4 shrink-0" />
       <TextInput
-        class="w-36 sm:w-64"
+        class="w-36 max-w-64 flex-1"
         :menus="sourceList"
         v-model="newLabelForIP.key"
         placeholder="IP | eui64 | /Regex"
       />
       <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
       <TextInput
-        class="w-0 max-w-40 flex-1"
+        class="w-28 sm:w-40"
         v-model="newLabelForIP.label"
         :placeholder="$t('label')"
         @keypress.enter="handlerLabelAdd"
