@@ -1,6 +1,7 @@
 import { MIN_PROXY_CARD_WIDTH, PROXY_CARD_SIZE } from '@/constant'
 import { useMediaQuery } from '@vueuse/core'
 
+export const isPreferredDark = useMediaQuery('(prefers-color-scheme: dark)')
 export const isMiddleScreen = useMediaQuery('(max-width: 768px)')
 export const isPWA = (() => {
   return window.matchMedia('(display-mode: standalone)').matches || navigator.standalone

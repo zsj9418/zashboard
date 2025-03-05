@@ -11,7 +11,7 @@ import {
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
 } from '@/constant'
-import { getMinCardWidth, isMiddleScreen } from '@/helper/utils'
+import { getMinCardWidth, isMiddleScreen, isPreferredDark } from '@/helper/utils'
 import type { SourceIPLabel } from '@/types'
 import { useStorage } from '@vueuse/core'
 import { isEmpty } from 'lodash'
@@ -19,7 +19,23 @@ import { v4 as uuid } from 'uuid'
 import { computed } from 'vue'
 
 // global
-export const theme = useStorage<string>('config/theme', 'default')
+const themeOld = useStorage<string>('config/theme', 'default')
+const isDefault = themeOld.value === 'default'
+
+export const defaultTheme = useStorage<string>(
+  'config/default-theme',
+  isDefault ? 'light' : themeOld.value,
+)
+export const darkTheme = useStorage<string>('config/dark-theme', 'dark')
+export const autoTheme = useStorage<boolean>('config/auto-theme', isDefault)
+
+export const theme = computed(() => {
+  if (autoTheme.value && isPreferredDark.value) {
+    return darkTheme.value
+  }
+  return defaultTheme.value
+})
+
 export const language = useStorage<LANG>(
   'config/language',
   Object.values(LANG).includes(navigator.language as LANG)

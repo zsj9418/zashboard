@@ -1,12 +1,11 @@
 <script setup lang="ts">
 import { XCircleIcon } from '@heroicons/vue/24/outline'
-import { useMediaQuery } from '@vueuse/core'
 import dayjs from 'dayjs'
 import { computed, onMounted, ref, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useNotification } from './composables/notification'
 import { FONTS } from './constant'
-import { getBase64FromIndexedDB, LOCAL_IMAGE } from './helper/utils'
+import { getBase64FromIndexedDB, isPreferredDark, LOCAL_IMAGE } from './helper/utils'
 import { customBackgroundURL, dashboardTransparent, font, theme } from './store/settings'
 
 const app = ref<HTMLElement>()
@@ -48,7 +47,6 @@ const backgroundImage = computed(() => {
   }
   return `background-image: url('${customBackgroundURL.value}?v=${date}');`
 })
-const isPreferredDark = useMediaQuery('(prefers-color-scheme: dark)')
 
 const setThemeColor = () => {
   const themeColor = getComputedStyle(app.value!).getPropertyValue('background-color').trim()
@@ -79,7 +77,7 @@ onMounted(() => {
     ref="app"
     id="app-content"
     :class="[
-      'flex h-dvh w-screen overflow-x-hidden bg-base-100',
+      'bg-base-100 flex h-dvh w-screen overflow-x-hidden',
       fontClassName,
       backgroundImage &&
         `custom-background-${dashboardTransparent} custom-background bg-cover bg-center`,
@@ -92,7 +90,7 @@ onMounted(() => {
       v-if="tipShowModel"
     >
       <div
-        class="breaks-all alert flex whitespace-normal p-2"
+        class="breaks-all alert flex p-2 whitespace-normal"
         :class="tipType"
       >
         <a
