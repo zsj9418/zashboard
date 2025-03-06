@@ -166,6 +166,8 @@ const en = {
   aliveTotal: 'Alive / Total',
   displaySelectedNode: 'Display Selected Node',
   displayLatencyNumber: 'Display Latency',
+  tipForFixed:
+    'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
 }
 
 export type LANG_MESSAGE = typeof en

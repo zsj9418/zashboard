@@ -168,6 +168,8 @@ const ru: LANG_MESSAGE = {
   aliveTotal: 'Живых / всего',
   displaySelectedNode: 'Отображать выбранный узел',
   displayLatencyNumber: 'Отображать задержку',
+  tipForFixed:
+    'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
 }
 
 export default ru

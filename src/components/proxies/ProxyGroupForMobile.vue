@@ -40,7 +40,12 @@
         <div class="text-md truncate">
           {{ proxyGroup.name }}
         </div>
-        <div class="text-base-content/80 h-4 truncate text-xs">
+        <div class="text-base-content/80 flex h-4 gap-1 truncate text-xs">
+          <LockClosedIcon
+            class="h-4 w-4 shrink-0"
+            v-if="proxyGroup.fixed === proxyGroup.now"
+            @mouseenter="tipForFixed"
+          />
           {{ proxyGroup.now }}
         </div>
 
@@ -94,11 +99,13 @@
 <script setup lang="ts">
 import { useRenderProxies } from '@/composables/renderProxies'
 import { PROXY_TYPE } from '@/constant'
+import { useTooltip } from '@/helper/tooltip'
 import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { manageHiddenGroup } from '@/store/settings'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/vue/24/outline'
+import { EyeIcon, EyeSlashIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import LatencyTag from './LatencyTag.vue'
 import ProxyIcon from './ProxyIcon.vue'
 import ProxyNodeCard from './ProxyNodeCard.vue'
@@ -190,5 +197,13 @@ const handlerProxySelect = (name: string) => {
   if (proxyGroup.value.type.toLowerCase() === PROXY_TYPE.LoadBalance) return
 
   selectProxy(props.name, name)
+}
+
+const { showTip } = useTooltip()
+const { t } = useI18n()
+const tipForFixed = (e: Event) => {
+  showTip(e, t('tipForFixed'), {
+    delay: [500, 0],
+  })
 }
 </script>

@@ -42,7 +42,15 @@
       >
         <div class="flex flex-1 items-center gap-1 text-sm">
           <template v-if="proxyGroup.now">
-            <ArrowRightCircleIcon class="h-4 w-4 shrink-0" />
+            <LockClosedIcon
+              class="h-4 w-4 shrink-0"
+              v-if="proxyGroup.fixed === proxyGroup.now"
+              @mouseenter="tipForFixed"
+            />
+            <ArrowRightCircleIcon
+              class="h-4 w-4 shrink-0"
+              v-else
+            />
             <ProxyName
               :name="proxyGroup.now"
               @mouseenter="tipForNow"
@@ -100,9 +108,11 @@ import {
   CheckCircleIcon,
   EyeIcon,
   EyeSlashIcon,
+  LockClosedIcon,
 } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
+import { useI18n } from 'vue-i18n'
 import CollapseCard from '../common/CollapseCard.vue'
 import LatencyTag from './LatencyTag.vue'
 import ProxyName from './ProxyName.vue'
@@ -146,6 +156,13 @@ const tipForNow = (e: Event) => {
   if (!nowNode || nowNode === proxyGroup.value.now) return
 
   showTip(e, nowNode, {
+    delay: [500, 0],
+  })
+}
+
+const { t } = useI18n()
+const tipForFixed = (e: Event) => {
+  showTip(e, t('tipForFixed'), {
     delay: [500, 0],
   })
 }

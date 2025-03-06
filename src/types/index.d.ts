@@ -47,6 +47,7 @@ export type Proxy = {
   udp: boolean
   xudp?: boolean
   now: string
+  fixed?: string
   icon: string
   hidden?: boolean
   testUrl?: string

@@ -166,6 +166,7 @@ const zh: LANG_MESSAGE = {
   aliveTotal: '可用 / 总数',
   displaySelectedNode: '显示选中节点',
   displayLatencyNumber: '显示延迟数字',
+  tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复urltest/fallback行为',
 }
 
 export default zh
