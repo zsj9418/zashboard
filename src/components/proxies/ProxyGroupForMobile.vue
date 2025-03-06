@@ -41,12 +41,18 @@
           {{ proxyGroup.name }}
         </div>
         <div class="text-base-content/80 flex h-4 gap-1 truncate text-xs">
-          <LockClosedIcon
-            class="h-4 w-4 shrink-0"
-            v-if="proxyGroup.fixed === proxyGroup.now"
-            @mouseenter="tipForFixed"
-          />
-          {{ proxyGroup.now }}
+          <template v-if="proxyGroup.now">
+            <LockClosedIcon
+              class="h-4 w-4 shrink-0"
+              v-if="proxyGroup.fixed === proxyGroup.now"
+              @mouseenter="tipForFixed"
+            />
+            {{ proxyGroup.now }}
+          </template>
+          <template v-else-if="proxyGroup.type.toLowerCase() === PROXY_TYPE.LoadBalance">
+            <CheckCircleIcon class="h-4 w-4 shrink-0" />
+            {{ $t('loadBalance') }}
+          </template>
         </div>
 
         <div class="flex h-4 items-center justify-between gap-1">
@@ -102,7 +108,7 @@ import { PROXY_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
 import { hiddenGroupMap, proxyGroupLatencyTest, proxyMap, selectProxy } from '@/store/proxies'
 import { manageHiddenGroup } from '@/store/settings'
-import { EyeIcon, EyeSlashIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
+import { CheckCircleIcon, EyeIcon, EyeSlashIcon, LockClosedIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
 import { computed, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
