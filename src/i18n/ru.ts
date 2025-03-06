@@ -170,6 +170,7 @@ const ru: LANG_MESSAGE = {
   displayLatencyNumber: 'Отображать задержку',
   tipForFixed:
     'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
+  proxyNodeAddress: 'IP-адрес узла прокси',
 }
 
 export default ru

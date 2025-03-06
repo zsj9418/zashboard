@@ -10,7 +10,7 @@
     "
     @contextmenu.stop.prevent="handlerLatencyTest"
   >
-    <div class="flex w-full flex-1 items-start gap-1">
+    <div class="flex w-full flex-1 items-center gap-1">
       <ProxyIcon
         v-if="node.icon"
         class="shrink-0"

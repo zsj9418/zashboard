@@ -168,6 +168,7 @@ const en = {
   displayLatencyNumber: 'Display Latency',
   tipForFixed:
     'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
+  proxyNodeAddress: 'Proxy Node IP',
 }
 
 export type LANG_MESSAGE = typeof en

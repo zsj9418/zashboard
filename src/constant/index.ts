@@ -39,6 +39,7 @@ export enum CONNECTIONS_TABLE_ACCESSOR_KEY {
   SourcePort = 'sourcePort',
   SniffHost = 'sniffHost',
   Destination = 'destination',
+  ProxyNodeAddress = 'proxyNodeAddress',
   TransferType = 'transferType',
 }
 

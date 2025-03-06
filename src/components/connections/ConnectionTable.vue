@@ -363,6 +363,11 @@ const columns: ColumnDef<Connection>[] = [
     accessorFn: getDestinationFromConnection,
   },
   {
+    header: () => t('proxyNodeAddress'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.ProxyNodeAddress,
+    accessorFn: (original) => original.metadata.remoteDestination,
+  },
+  {
     header: () => t('transferType'),
     id: CONNECTIONS_TABLE_ACCESSOR_KEY.TransferType,
     accessorFn: (original) => getTransferTypeFromConnection(original),

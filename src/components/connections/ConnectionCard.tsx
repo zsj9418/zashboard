@@ -40,13 +40,16 @@ export default defineComponent<{
       const metadata = conn.metadata
       const componentMap: Record<CONNECTIONS_TABLE_ACCESSOR_KEY, JSX.Element> = {
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: (
-          <span class="w-80 grow truncate text-primary/80">
+          <span class="text-primary/80 w-80 grow truncate">
             {metadata.host || metadata.sniffHost || metadata.destinationIP}:
             {metadata.destinationPort}
           </span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Destination]: (
           <span class="w-80 grow truncate break-all">{getDestinationFromConnection(conn)}</span>
+        ),
+        [CONNECTIONS_TABLE_ACCESSOR_KEY.ProxyNodeAddress]: (
+          <span class="w-80 grow truncate break-all">{conn.metadata.remoteDestination}</span>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.SourceIP]: (
           <span class="w-40 grow truncate break-all">{getIPLabelFromMap(metadata.sourceIP)}</span>
@@ -89,25 +92,25 @@ export default defineComponent<{
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Download]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.download)}
-            <ArrowDownIcon class="h-4 w-4 text-success" />
+            <ArrowDownIcon class="text-success h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Upload]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.upload)}
-            <ArrowUpIcon class="h-4 w-4 text-info" />
+            <ArrowUpIcon class="text-info h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.DlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.downloadSpeed)}/s
-            <ArrowDownCircleIcon class="h-4 w-4 text-success" />
+            <ArrowDownCircleIcon class="text-success h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.UlSpeed]: (
           <div class="flex items-center gap-1 whitespace-nowrap">
             {prettyBytesHelper(conn.uploadSpeed)}/s
-            <ArrowUpCircleIcon class="h-4 w-4 text-info" />
+            <ArrowUpCircleIcon class="text-info h-4 w-4" />
           </div>
         ),
         [CONNECTIONS_TABLE_ACCESSOR_KEY.ConnectTime]: (

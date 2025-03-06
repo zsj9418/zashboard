@@ -162,11 +162,7 @@ export const getProcessFromConnection = (connection: Connection) => {
 }
 
 export const getDestinationFromConnection = (connection: Connection) => {
-  return (
-    connection.metadata.remoteDestination ||
-    connection.metadata.destinationIP ||
-    connection.metadata.host
-  )
+  return connection.metadata.destinationIP || connection.metadata.host
 }
 
 export const getTransferTypeFromConnection = (connection: Connection) => {
