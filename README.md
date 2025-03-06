@@ -41,8 +41,7 @@ http://host:port/#/setup?hostname=ipordomain&port=9090&secret=123456
 1. **`http` / `https`**
 
    - Determines the protocol (`http` or `https`).
-   - If both are present, `https` takes precedence.
-   - Default: `http`
+   - Default: current page protocol
 
 2. **`hostname`**
 

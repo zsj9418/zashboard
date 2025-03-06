@@ -208,7 +208,11 @@ const query = new URLSearchParams(
 )
 if (query.has('hostname')) {
   handleSubmit({
-    protocol: query.get('https') ? 'https' : 'http',
+    protocol: query.get('http')
+      ? 'http'
+      : query.get('https')
+        ? 'https'
+        : window.location.protocol.replace(':', ''),
     secondaryPath: query.get('secondaryPath') || '',
     host: query.get('hostname') as string,
     port: query.get('port') as string,
