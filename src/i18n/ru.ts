@@ -34,7 +34,7 @@ const ru: LANG_MESSAGE = {
   connectTime: 'Время',
   sourcePort: 'Исходный порт',
   destination: 'Назначение',
-  transferType: 'Тип передачи',
+  destinationType: 'Тип назначения',
   inboundUser: 'Входящий пользователь',
   dl: 'Загр',
   ul: 'Отдч',
@@ -170,7 +170,7 @@ const ru: LANG_MESSAGE = {
   displayLatencyNumber: 'Отображать задержку',
   tipForFixed:
     'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
-  proxyNodeAddress: 'IP-адрес узла прокси',
+  proxyNodeAddress: 'Адрес узла прокси',
 }
 
 export default ru

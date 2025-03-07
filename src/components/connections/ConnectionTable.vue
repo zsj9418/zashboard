@@ -157,10 +157,10 @@ import {
 import {
   fromNow,
   getDestinationFromConnection,
+  getDestinationTypeFromConnection,
   getIPLabelFromMap,
   getNetworkTypeFromConnection,
   getProcessFromConnection,
-  getTransferTypeFromConnection,
   prettyBytesHelper,
 } from '@/helper'
 import { renderConnections } from '@/store/connections'
@@ -363,14 +363,14 @@ const columns: ColumnDef<Connection>[] = [
     accessorFn: getDestinationFromConnection,
   },
   {
-    header: () => t('proxyNodeAddress'),
-    id: CONNECTIONS_TABLE_ACCESSOR_KEY.ProxyNodeAddress,
-    accessorFn: (original) => original.metadata.remoteDestination,
+    header: () => t('destinationType'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.DestinationType,
+    accessorFn: getDestinationTypeFromConnection,
   },
   {
-    header: () => t('transferType'),
-    id: CONNECTIONS_TABLE_ACCESSOR_KEY.TransferType,
-    accessorFn: (original) => getTransferTypeFromConnection(original),
+    header: () => t('proxyNodeAddress'),
+    id: CONNECTIONS_TABLE_ACCESSOR_KEY.ProxyNodeAddress,
+    accessorFn: (original) => original.metadata.remoteDestination || '-',
   },
 ]
 

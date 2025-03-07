@@ -34,7 +34,7 @@ const zh: LANG_MESSAGE = {
   connectTime: '连接时间',
   sourcePort: '源端口',
   destination: '目标',
-  transferType: '传递类型',
+  destinationType: '目标类型',
   inboundUser: '入站用户',
   dl: '下载',
   ul: '上传',
@@ -167,7 +167,7 @@ const zh: LANG_MESSAGE = {
   displaySelectedNode: '显示选中节点',
   displayLatencyNumber: '显示延迟数字',
   tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复urltest/fallback行为',
-  proxyNodeAddress: '代理节点IP',
+  proxyNodeAddress: '节点地址',
 }
 
 export default zh

@@ -224,7 +224,7 @@ export default defineComponent({
 
       const searchInput = (
         <TextInput
-          class="w-80"
+          class={props.horizontal && !isMiddleScreen.value ? 'w-32 max-w-80 flex-1' : 'w-80'}
           v-model={proxiesFilter.value}
           placeholder={t('search')}
           clearable={true}
@@ -311,11 +311,10 @@ export default defineComponent({
           )
         }
         return (
-          <div class="flex flex-wrap gap-2 p-2">
+          <div class="flex gap-2 p-2">
             {hasProviders.value && tabs}
             {modeSelect}
-            {searchInput}
-            <div class="flex-1"></div>
+            <div class="flex flex-1">{searchInput}</div>
             {upgradeAllIcon}
             {settingsModal}
             {toggleCollapseAll}

@@ -1,7 +1,7 @@
 import { disconnectByIdAPI } from '@/api'
 import { SORT_DIRECTION, SORT_TYPE } from '@/constant'
 import { useTooltip } from '@/helper/tooltip'
-import { isMiddleScreen } from '@/helper/utils'
+import { isLargeScreen, isMiddleScreen } from '@/helper/utils'
 import {
   connectionFilter,
   connectionSortDirection,
@@ -21,7 +21,7 @@ import {
   WrenchScrewdriverIcon,
   XMarkIcon,
 } from '@heroicons/vue/24/outline'
-import { defineComponent, ref } from 'vue'
+import { computed, defineComponent, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import DialogWrapper from '../common/DialogWrapper.vue'
 import TextInput from '../common/TextInput.vue'
@@ -54,13 +54,17 @@ export default defineComponent({
     const settingsModel = ref(false)
     const { showTip } = useTooltip()
 
+    const isSmallScreen = computed(() => {
+      return useConnectionCard.value ? isLargeScreen.value : isMiddleScreen.value
+    })
+
     return () => {
       const sortForCards = (
-        <div class={['flex w-full items-center gap-1 text-sm', props.horizontal && 'md:w-auto']}>
+        <div class={['flex w-full items-center gap-1 text-sm', props.horizontal && 'lg:w-auto']}>
           <span class="shrink-0">{t('sortBy')}</span>
-          <div class="join flex-1 max-md:w-0">
+          <div class="join flex-1 max-lg:w-0">
             <select
-              class="join-item select select-sm flex-1 max-md:w-0"
+              class="join-item select select-sm flex-1 max-lg:w-0"
               v-model={connectionSortType.value}
             >
               {(Object.values(SORT_TYPE) as string[]).map((opt) => (
@@ -137,7 +141,7 @@ export default defineComponent({
           placeholder={t('search')}
           clearable={true}
           before-close={true}
-          class={[props.horizontal ? 'max-md:flex-1 md:w-80' : 'flex-1']}
+          class={props.horizontal && !isSmallScreen.value ? 'w-32 max-w-80 flex-1' : 'w-full'}
         />
       )
 
@@ -161,7 +165,7 @@ export default defineComponent({
       )
 
       if (props.horizontal) {
-        if (isMiddleScreen.value) {
+        if (isSmallScreen.value) {
           return (
             <div class="flex flex-wrap items-center gap-2 p-2">
               <div class="flex w-full items-center justify-between gap-2">
@@ -188,12 +192,11 @@ export default defineComponent({
           )
         }
         return (
-          <div class="flex flex-wrap items-center gap-2 p-2">
+          <div class="flex items-center gap-2 p-2">
             <ConnectionTabs />
             {useConnectionCard.value && sortForCards}
             <SourceIPFilter class="w-40" />
-            {searchInput}
-            <div class="flex-1"></div>
+            <div class="flex flex-1">{searchInput}</div>
             {settingsModal}
             {buttons}
           </div>

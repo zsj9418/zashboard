@@ -32,7 +32,7 @@ const en = {
   connectTime: 'Time',
   sourcePort: 'Source Port',
   destination: 'Destination',
-  transferType: 'Transfer Type',
+  destinationType: 'Dest Type',
   inboundUser: 'Inbound User',
   dl: 'DL',
   ul: 'UL',
@@ -168,7 +168,7 @@ const en = {
   displayLatencyNumber: 'Display Latency',
   tipForFixed:
     'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
-  proxyNodeAddress: 'Proxy Node IP',
+  proxyNodeAddress: 'Proxy Address',
 }
 
 export type LANG_MESSAGE = typeof en
