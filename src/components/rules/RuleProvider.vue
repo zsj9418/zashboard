@@ -7,11 +7,12 @@
         {{ ruleProvider.ruleCount }}
       </span>
     </div>
-    <div class="flex h-4 items-center gap-2 text-xs text-base-content/80">
+    <div class="text-base-content/80 flex h-4 items-center gap-2 text-xs">
       <span>{{ ruleProvider.behavior }}</span>
       <span>{{ ruleProvider.vehicleType }}</span>
       <span>{{ $t('updated') }} {{ fromNow(ruleProvider.updatedAt) }}</span>
       <button
+        v-if="ruleProvider.vehicleType !== 'Inline'"
         :class="twMerge('btn btn-circle btn-xs', isUpdating ? 'animate-spin' : '')"
         @click="updateRuleProviderClickHandler"
       >
