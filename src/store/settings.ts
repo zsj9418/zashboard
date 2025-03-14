@@ -100,7 +100,7 @@ export const minProxyCardWidth = useStorage<number>(
 )
 export const manageHiddenGroup = useStorage('config/manage-hidden-group-mode', false)
 
-export const displayGlobalByMode = useStorage('config/display-global-by-mode', true)
+export const displayGlobalByMode = useStorage('config/display-global-by-mode', false)
 export const iconSize = useStorage('config/icon-size', 14)
 export const iconMarginRight = useStorage('config/icon-margin-right', 6)
 export const proxyCountMode = useStorage('config/proxies-count-mode', PROXY_COUNT_MODE.ALIVE_TOTAL)

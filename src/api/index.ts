@@ -26,10 +26,8 @@ axios.interceptors.response.use(null, (error) => {
 
       showNotification({ content: 'unauthorizedTip' })
     })
-  } else if (error.status === 404) {
-    activeUuid.value = null
-    router.push({ name: ROUTE_NAME.setup })
   }
+
   return error
 })
 
