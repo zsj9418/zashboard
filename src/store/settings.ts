@@ -10,6 +10,7 @@ import {
   PROXY_SORT_TYPE,
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
+  TEST_URL,
 } from '@/constant'
 import { getMinCardWidth, isMiddleScreen, isPreferredDark } from '@/helper/utils'
 import type { SourceIPLabel } from '@/types'
@@ -75,10 +76,7 @@ export const showStatisticsWhenSidebarCollapsed = useStorage(
 // proxies
 export const collapseGroupMap = useStorage<Record<string, boolean>>('config/collapse-group-map', {})
 export const twoColumnProxyGroup = useStorage('config/two-columns', true)
-export const speedtestUrl = useStorage<string>(
-  'config/speedtest-url',
-  'https://www.gstatic.com/generate_204',
-)
+export const speedtestUrl = useStorage<string>('config/speedtest-url', TEST_URL)
 export const independentLatencyTest = useStorage('config/independent-latency-test', false)
 export const speedtestTimeout = useStorage<number>('config/speedtest-timeout', 5000)
 export const proxySortType = useStorage<PROXY_SORT_TYPE>(
