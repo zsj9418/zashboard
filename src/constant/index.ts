@@ -96,10 +96,13 @@ export enum CONNECTION_TAB_TYPE {
 }
 
 export enum LOG_LEVEL {
-  Info = 'info',
-  Error = 'error',
-  Warning = 'warning',
+  Trace = 'trace',
   Debug = 'debug',
+  Info = 'info',
+  Warning = 'warning',
+  Error = 'error',
+  Fatal = 'fatal',
+  Panic = 'panic',
   Silent = 'silent',
 }
 
