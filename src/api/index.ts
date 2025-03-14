@@ -331,10 +331,6 @@ export const getGithubLatencyAPI = () => {
   return getLatencyFromUrlAPI('https://github.githubassets.com/favicon.ico')
 }
 
-export const getOpenAILatencyAPI = () => {
-  return getLatencyFromUrlAPI('https://openai.com/favicon.ico')
-}
-
 export const getBaiduLatencyAPI = () => {
   return getLatencyFromUrlAPI('https://apps.bdimg.com/favicon.ico')
 }
