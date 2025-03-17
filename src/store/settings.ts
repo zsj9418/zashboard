@@ -30,6 +30,21 @@ export const defaultTheme = useStorage<string>(
 export const darkTheme = useStorage<string>('config/dark-theme', 'dark')
 export const autoTheme = useStorage<boolean>('config/auto-theme', isDefault)
 
+const replaceLegacyTheme = (theme: string) => {
+  if (theme === 'light-daisyui-v5') {
+    return 'light'
+  }
+
+  if (theme === 'dark-daisyui-v5') {
+    return 'dark'
+  }
+
+  return theme
+}
+
+defaultTheme.value = replaceLegacyTheme(defaultTheme.value)
+darkTheme.value = replaceLegacyTheme(darkTheme.value)
+
 export const theme = computed(() => {
   if (autoTheme.value && isPreferredDark.value) {
     return darkTheme.value
