@@ -40,7 +40,7 @@ export default defineComponent<{
       const metadata = conn.metadata
       const componentMap: Record<CONNECTIONS_TABLE_ACCESSOR_KEY, JSX.Element> = {
         [CONNECTIONS_TABLE_ACCESSOR_KEY.Host]: (
-          <span class="text-primary/80 w-80 grow truncate">
+          <span class="text-main w-80 grow truncate">
             {metadata.host || metadata.sniffHost || metadata.destinationIP}:
             {metadata.destinationPort}
           </span>
@@ -133,7 +133,7 @@ export default defineComponent<{
       }
       return (
         <div
-          class="card cursor-pointer gap-1 p-1"
+          class="card cursor-pointer gap-1 p-1 md:p-2"
           onClick={() => handlerInfo(conn)}
         >
           {connectionCardLines.value.map((line) => (

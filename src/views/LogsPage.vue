@@ -14,7 +14,7 @@
       <template v-slot="{ item }: { item: LogWithSeq }">
         <div class="card mb-1 block p-2 text-sm break-all">
           <span>{{ item.seq }}</span>
-          <span class="text-primary mx-2">
+          <span class="text-main mx-2">
             {{ item.time }}
           </span>
           <span :class="textColorMapForType[item.type as keyof typeof textColorMapForType]">

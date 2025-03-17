@@ -270,6 +270,9 @@ const themes = [
   'dim',
   'nord',
   'sunset',
+  'caramellatte',
+  'abyss',
+  'silk',
 ]
 
 const refreshPages = async () => {

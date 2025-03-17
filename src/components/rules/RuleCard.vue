@@ -2,9 +2,9 @@
   <div class="card gap-2 p-2 text-sm">
     <div>
       <span class="mr-2">{{ index }}.</span>
-      <span class="mr-2">{{ rule.type }}</span>
+      <span class="mr-2 capitalize">{{ rule.type }}</span>
       <span
-        class="text-primary mr-2"
+        class="text-main mr-2"
         v-if="rule.payload"
       >
         {{ rule.payload }}
