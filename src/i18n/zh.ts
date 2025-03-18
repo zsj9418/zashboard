@@ -167,6 +167,9 @@ const zh: LANG_MESSAGE = {
   displayLatencyNumber: '显示延迟数字',
   tipForFixed: '当前策略组被固定在了当前节点，点击测速来恢复urltest/fallback行为',
   remoteAddress: '远端地址',
+  themeName: '主题名称',
+  save: '保存',
+  moreDetails: '更多详情',
 }
 
 export default zh

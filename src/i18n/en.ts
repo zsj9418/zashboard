@@ -168,6 +168,9 @@ const en = {
   tipForFixed:
     'The current policy group is locked to the current node. Perform a speedtest to restore the urltest/fallback behavior.',
   remoteAddress: 'Remote Address',
+  themeName: 'Theme Name',
+  save: 'Save',
+  moreDetails: 'More Details',
 }
 
 export type LANG_MESSAGE = typeof en

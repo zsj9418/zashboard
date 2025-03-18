@@ -11,6 +11,7 @@ import {
   TABLE_SIZE,
   TABLE_WIDTH_MODE,
   TEST_URL,
+  type THEME,
 } from '@/constant'
 import { getMinCardWidth, isMiddleScreen, isPreferredDark } from '@/helper/utils'
 import type { SourceIPLabel } from '@/types'
@@ -51,6 +52,8 @@ export const theme = computed(() => {
   }
   return defaultTheme.value
 })
+
+export const customThemes = useStorage<THEME[]>('config/custom-themes', [])
 
 export const language = useStorage<LANG>(
   'config/language',

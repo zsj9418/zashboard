@@ -9,6 +9,7 @@ import {
 import { timeSaved } from '@/store/overview'
 import { getLatencyByName, proxyMap } from '@/store/proxies'
 import {
+  customThemes,
   hideUnavailableProxies,
   language,
   lowLatency,
@@ -260,3 +261,23 @@ export const renderRoutes = computed(() => {
     return ![ROUTE_NAME.setup, !splitOverviewPage.value && ROUTE_NAME.overview].includes(r)
   })
 })
+
+export const applyCustomThemes = () => {
+  document.querySelectorAll('.custom-theme').forEach((style) => {
+    style.remove()
+  })
+  customThemes.value.forEach((theme) => {
+    const style = document.createElement('style')
+    const styleString = Object.entries(theme)
+      .filter(([key]) => !['prefersdark', 'default', 'name', 'type', 'id'].includes(key))
+      .map(([key, value]) => `${key}:${value}`)
+      .join(';')
+
+    style.innerHTML = `[data-theme="${theme.name}"] {
+      ${styleString} 
+    }`
+
+    style.className = `custom-theme ${theme.name}`
+    document.head.appendChild(style)
+  })
+}

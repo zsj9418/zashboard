@@ -42,18 +42,27 @@
         </div>
         <div class="flex items-center gap-2">
           {{ $t('defaultTheme') }}
-          <select
-            class="select select-sm w-48"
-            v-model="defaultTheme"
-          >
-            <option
-              v-for="opt in themes"
-              :key="opt"
-              :value="opt"
+          <div class="join">
+            <select
+              class="select select-sm join-item w-48"
+              v-model="defaultTheme"
             >
-              {{ opt }}
-            </option>
-          </select>
+              <option
+                v-for="opt in themes"
+                :key="opt"
+                :value="opt"
+              >
+                {{ opt }}
+              </option>
+            </select>
+            <button
+              class="btn btn-sm join-item"
+              @click="customThemeModal = !customThemeModal"
+            >
+              <PlusIcon class="h-4 w-4" />
+            </button>
+          </div>
+          <CustomTheme v-model:value="customThemeModal" />
         </div>
         <div
           class="flex items-center gap-2"
@@ -187,17 +196,21 @@ import {
   autoTheme,
   autoUpgrade,
   customBackgroundURL,
+  customThemes,
   darkTheme,
   dashboardTransparent,
   defaultTheme,
   font,
   swipeInTabs,
 } from '@/store/settings'
-import { ArrowPathIcon, ArrowUpCircleIcon } from '@heroicons/vue/24/outline'
+import { ArrowPathIcon, ArrowUpCircleIcon, PlusIcon } from '@heroicons/vue/24/outline'
 import { twMerge } from 'tailwind-merge'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ImportSettings from '../common/ImportSettings.vue'
 import TextInput from '../common/TextInput.vue'
+import CustomTheme from './CustomTheme.vue'
+
+const customThemeModal = ref(false)
 
 const inputFileRef = ref()
 const handlerClickUpload = () => {
@@ -235,45 +248,53 @@ const handlerClickUpgradeUI = async () => {
   }
 }
 
-const themes = [
-  'light',
-  'dark',
-  'light-legacy',
-  'dark-legacy',
-  'cupcake',
-  'bumblebee',
-  'emerald',
-  'corporate',
-  'synthwave',
-  'retro',
-  'cyberpunk',
-  'valentine',
-  'halloween',
-  'garden',
-  'forest',
-  'aqua',
-  'lofi',
-  'pastel',
-  'fantasy',
-  'wireframe',
-  'black',
-  'luxury',
-  'dracula',
-  'cmyk',
-  'autumn',
-  'business',
-  'acid',
-  'lemonade',
-  'night',
-  'coffee',
-  'winter',
-  'dim',
-  'nord',
-  'sunset',
-  'caramellatte',
-  'abyss',
-  'silk',
-]
+const themes = computed(() => {
+  const all = [
+    'light',
+    'dark',
+    'light-legacy',
+    'dark-legacy',
+    'cupcake',
+    'bumblebee',
+    'emerald',
+    'corporate',
+    'synthwave',
+    'retro',
+    'cyberpunk',
+    'valentine',
+    'halloween',
+    'garden',
+    'forest',
+    'aqua',
+    'lofi',
+    'pastel',
+    'fantasy',
+    'wireframe',
+    'black',
+    'luxury',
+    'dracula',
+    'cmyk',
+    'autumn',
+    'business',
+    'acid',
+    'lemonade',
+    'night',
+    'coffee',
+    'winter',
+    'dim',
+    'nord',
+    'sunset',
+    'caramellatte',
+    'abyss',
+    'silk',
+  ]
+
+  if (customThemes.value.length) {
+    return [...all, ...customThemes.value.map((theme) => theme.name)]
+  }
+
+  return all
+})
 
 const refreshPages = async () => {
   const registrations = await navigator.serviceWorker.getRegistrations()

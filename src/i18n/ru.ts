@@ -170,6 +170,9 @@ const ru: LANG_MESSAGE = {
   tipForFixed:
     'Текущая стратегическая группа закреплена за текущим узлом. Нажмите «Тест скорости», чтобы восстановить поведение urltest/fallback.',
   remoteAddress: 'удалённый адрес',
+  themeName: 'Название темы',
+  save: 'Сохранить',
+  moreDetails: 'Подробнее',
 }
 
 export default ru

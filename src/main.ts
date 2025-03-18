@@ -9,8 +9,11 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './assets/main.css'
 import './assets/theme.css'
+import { applyCustomThemes } from './helper'
 import { i18n } from './i18n'
 import router from './router'
+
+applyCustomThemes()
 
 if (import.meta.env.MODE === 'cdn-fonts') {
   const createLink = (href: string) => {
