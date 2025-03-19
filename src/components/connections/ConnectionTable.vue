@@ -104,8 +104,11 @@
                       ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'min-w-20',
                       CONNECTIONS_TABLE_ACCESSOR_KEY.Host ===
                         (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xs truncate',
-                      CONNECTIONS_TABLE_ACCESSOR_KEY.Chains ===
-                        (cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) && 'max-w-xl truncate',
+                      [
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Chains,
+                        CONNECTIONS_TABLE_ACCESSOR_KEY.Rule,
+                      ].includes(cell.column.id as CONNECTIONS_TABLE_ACCESSOR_KEY) &&
+                        'max-w-xl truncate',
                     ),
               ]"
             >
